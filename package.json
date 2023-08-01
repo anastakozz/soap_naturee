@@ -8,7 +8,7 @@
     "build": "webpack --config ./webpack.config.js --env mode=prod",
     "serve": "webpack-dev-server",
     "lint": "eslint . --ext .ts",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "prepare": "husky install"
   },
   "repository": {
