@@ -9,6 +9,7 @@
     "serve": "webpack-dev-server",
     "lint": "eslint . --ext .ts",
     "test": "jest --passWithNoTests",
+    "format": "prettier --loglevel warn --write \"src/**/*.{jsx,js,ts,tsx}\"",
     "prepare": "husky install"
   },
   "repository": {
