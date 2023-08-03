@@ -3,7 +3,7 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
+    "prettier",
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
@@ -11,6 +11,7 @@
     "useJSXTextNode": true,
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["webpack.config.js"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "error"
   }
