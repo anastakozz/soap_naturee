@@ -1,4 +1,14 @@
-# Getting Started with Create React App
+# Soap Shop RSS 2023
+
+The project implements the final task in Rolling Scopes School Frontend Course.
+The Team is: SayYEsToJS RSS2023.
+
+Technology Stack:
+- [x] CommerceTools
+- [x] React
+- [x] TypeScript
+- [x] Tailwind
+- [x] Axios
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -39,8 +49,22 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## 'npm run lint'
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Launches Eslint for [js,jsx,ts,tsx,json] files
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 'npm run lint:fix'
+
+Launches Eslint fix for [js,jsx,ts,tsx,json] files
+
+## 'npm run format'
+
+Runs prettier and shows warning in CLI 
+
+## 'npm run prepare'
+
+Automatically anables Git hooks after install
+
+## 'npm run deploy'
+
+Deploys the project to the [gh-pages](https://github.com/anastakozz/github.io/rs-soap-shop/)
