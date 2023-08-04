@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/anastakozz/github.io/rs-soap-shop/static/css/main.b40f7400.css",
+    "main.js": "/anastakozz/github.io/rs-soap-shop/static/js/main.eedb1c6e.js",
+    "static/js/787.13cbeb8c.chunk.js": "/anastakozz/github.io/rs-soap-shop/static/js/787.13cbeb8c.chunk.js",
+    "static/media/logo.svg": "/anastakozz/github.io/rs-soap-shop/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/anastakozz/github.io/rs-soap-shop/index.html",
+    "main.b40f7400.css.map": "/anastakozz/github.io/rs-soap-shop/static/css/main.b40f7400.css.map",
+    "main.eedb1c6e.js.map": "/anastakozz/github.io/rs-soap-shop/static/js/main.eedb1c6e.js.map",
+    "787.13cbeb8c.chunk.js.map": "/anastakozz/github.io/rs-soap-shop/static/js/787.13cbeb8c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b40f7400.css",
+    "static/js/main.eedb1c6e.js"
+  ]
+}
