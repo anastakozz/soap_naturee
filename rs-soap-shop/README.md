@@ -5,10 +5,18 @@ The Team is: SayYEsToJS RSS2023.
 
 Technology Stack:
 - [x] CommerceTools
-- [x] React
+- [x] React CRA
 - [x] TypeScript
 - [x] Tailwind
 - [x] Axios
+- [x] GitHub
+- [x] Eslint, Prettier
+
+## Local Installation
+
+- clone repository to your local machine
+- run npm install
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +75,4 @@ Automatically anables Git hooks after install
 
 ## 'npm run deploy'
 
-Deploys the project to the [gh-pages](https://github.com/anastakozz/github.io/rs-soap-shop/)
+Deploys the project to the [gh-pages](https://rss-soap-shop.vercel.app/)

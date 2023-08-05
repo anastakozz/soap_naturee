@@ -11,6 +11,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <h1 className="text-5xl font-bold underline">Tailwind on board</h1>
+        <h2 className="text-3xl font-bold underline">Deploy check</h2>
         <a
           className="App-link"
           href="https://reactjs.org"

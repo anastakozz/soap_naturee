@@ -1,7 +1,6 @@
 {
   "author": "SayYesToJS team RS-School",
   "license": "ISC",
-  "homepage": "https://github.com/anastakozz/github.io/rs-soap-shop/",
   "name": "rs-soap-shop",
   "version": "0.1.0",
   "private": true,
@@ -52,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.0",
     "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.10.0",
