@@ -9,7 +9,7 @@ module.exports = {
         md: '768px',
         lg: '1024px',
         xl: '1280px',
-        '2xl': '1440px',
+        xxl: '1440px',
       },
       colors: {
         primaryColor: '#FFFFFF',
@@ -17,7 +17,7 @@ module.exports = {
         accentColor: '#77966D',
         accentDarkColor: '#626D58',
         basicColor: '#000000',
-        addotionalColor: '#F4F5F7',
+        additionalColor: '#F4F5F7',
         grayLColor: '#3A3A3A',
         grayMColor: '#898989',
         graySColor: '#B0B0B0',
