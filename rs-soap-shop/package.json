@@ -27,10 +27,10 @@
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test --passWithNoTest",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
-    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
-    "format": "prettier --log-level warn --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "prepare": "husky install"
+    "lint": "eslint src/**/*.{ts,tsx}",
+    "lint:fix": "eslint --fix 'src/**/*.{ts,tsx}'",
+    "format": "prettier --log-level warn --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}'",
+    "prepare": "cd .. && husky install rs-soap-shop/.husky"
   },
   "eslintConfig": {
     "extends": [

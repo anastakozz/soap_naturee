@@ -15,6 +15,7 @@ Technology Stack:
 ## Local Installation
 
 - clone repository to your local machine
+- run cd rs-soap-shop
 - run npm install
 
 
