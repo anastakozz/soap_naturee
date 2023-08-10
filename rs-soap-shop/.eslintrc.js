@@ -2,14 +2,9 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true,
+    jest: true
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-  ],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -27,11 +22,14 @@ module.exports = {
     camelcase: 'error',
     'spaced-comment': 'error',
     quotes: ['error', 'single'],
-    'no-duplicate-imports': 'error',
+    'no-duplicate-imports': 'error'
   },
   settings: {
     'import/resolver': {
-      typescript: {},
+      typescript: {}
     },
-  },
-};
+    react: {
+      version: 'detect'
+    }
+  }
+}
