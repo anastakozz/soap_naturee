@@ -1,28 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import logo from './logo.svg'
+import './App.css'
+import Header from './components/header'
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './pages/homePage'
+import ProductsPage from './pages/productsPage'
+import AboutPage from './pages/aboutPage'
+import CartPage from './pages/cartPage'
+import SingInPage from './pages/singInPage'
+import SignUpPage from './pages/singnUpPage'
+import ProfilePage from './pages/profilePage'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <h1 className="text-5xl font-bold underline">Tailwind on board</h1>
-        <h2 className="text-3xl font-bold underline">Deploy check</h2>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Header />
+      <Routes>
+        <Route path='/' element={<HomePage />}></Route>
+        <Route path='/our-products' element={<ProductsPage />}></Route>
+        <Route path='/about-us' element={<AboutPage />}></Route>
+        <Route path='/cart' element={<CartPage />}></Route>
+        <Route path='/sign-in' element={<SingInPage />}></Route>
+        <Route path='/sign-up' element={<SignUpPage />}></Route>
+        <Route path='/profile' element={<ProfilePage />}></Route>
+      </Routes>
+    </>
+  )
 }
 
-export default App;
+export default App
