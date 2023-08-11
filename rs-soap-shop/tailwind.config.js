@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darKMode: 'class',
+  darkMode: 'class',
   theme: {
     extend: {
       screens: {
@@ -9,7 +9,7 @@ module.exports = {
         md: '768px',
         lg: '1024px',
         xl: '1280px',
-        xxl: '1440px',
+        xxl: '1440px'
       },
       colors: {
         primaryColor: '#FFFFFF',
@@ -20,17 +20,17 @@ module.exports = {
         additionalColor: '#F4F5F7',
         grayLColor: '#3A3A3A',
         grayMColor: '#898989',
-        graySColor: '#B0B0B0',
+        graySColor: '#B0B0B0'
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        sans: ['Poppins', 'sans-serif']
       },
       fontSize: {
         base: '1rem',
         h5: '1.25rem',
         h4: '1.5rem',
         h3: '2rem',
-        h2: '3.25rem',
+        h2: '3.25rem'
       },
       padding: {
         sm: '25px',
@@ -38,18 +38,18 @@ module.exports = {
         btnX1: '25px',
         btnY1: '72px',
         btnX2: '12px',
-        btnY2: '82px',
+        btnY2: '82px'
       },
       margin: {
         esm: '25px',
         sm: '30px',
         md: '60px',
-        big: '80px',
+        big: '80px'
       },
       borderRadius: {
-        r: '10px',
-      },
-    },
+        r: '10px'
+      }
+    }
   },
-  plugins: [],
-};
+  plugins: []
+}
