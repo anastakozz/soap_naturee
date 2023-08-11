@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 function HomePage() {
-  return <>HomePage works!</>;
+  return <>HomePage works!</>
 }
 
-export default HomePage;
+export default HomePage
