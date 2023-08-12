@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
 import Header from './components/header'
 import { Route, Routes } from 'react-router-dom'
@@ -10,6 +9,7 @@ import CartPage from './pages/cartPage'
 import SingInPage from './pages/singInPage'
 import SignUpPage from './pages/singnUpPage'
 import ProfilePage from './pages/profilePage'
+import Footer from './components/footer'
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
         <Route path='/sign-up' element={<SignUpPage />}></Route>
         <Route path='/profile' element={<ProfilePage />}></Route>
       </Routes>
+      <Footer />
     </>
   )
 }

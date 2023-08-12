@@ -16,7 +16,7 @@ function Navigation() {
         Our products
       </NavLink>
       <NavLink
-        className='text-basicColor hover:text-accentColor cursor-pointer dark:text-primaryColor dark:hover:text-accentDarkColor transition'
+        className='text-basicColor hover:text-accentColor cursor-pointer dark:text-primaryColor dark:hover:text-accentColor transition'
         to={'/about-us'}
       >
         About us
