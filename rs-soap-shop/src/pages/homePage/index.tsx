@@ -1,7 +1,16 @@
-import React from 'react';
+import React from 'react'
+import NewCollectionSection from './newCollectionSection'
+import CheckoutSection from './checkoutSection'
+import SaleSection from './saleSection'
 
 function HomePage() {
-  return <>HomePage works!</>;
+  return (
+    <>
+      <NewCollectionSection />
+      <CheckoutSection />
+      <SaleSection />
+    </>
+  )
 }
 
-export default HomePage;
+export default HomePage

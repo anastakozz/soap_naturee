@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 function ProductsPage() {
-  return <>ProductsPage works!</>;
+  return <>ProductsPage works!</>
 }
 
-export default ProductsPage;
+export default ProductsPage

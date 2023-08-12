@@ -47,8 +47,12 @@ module.exports = {
         big: '80px'
       },
       borderRadius: {
-        r: '10px'
-      }
+        normal: '10px'
+      },
+      backgroundImage: {
+        'new-collection': "url('./pages/homePage/assets/candle_masked.png')",
+        'sale-section': "url('./pages/homePage/assets/massage_soap.png')"
+       }
     }
   },
   plugins: []
