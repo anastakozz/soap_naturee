@@ -24,13 +24,13 @@ function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
       ) : (
         <div className='flex flex-col'>
           <NavLink
-            className='text-basicColor hover:text-accentColor cursor-pointer dark:text-primaryColor dark:hover:text-accentDarkColor transition'
+            className='text-basicColor hover:text-accentColor cursor-pointer dark:text-primaryColor dark:hover:text-accentColor transition'
             to={'/sign-in'}
           >
             Sign in
           </NavLink>
           <NavLink
-            className='text-basicColor hover:text-accentColor cursor-pointer dark:text-primaryColor dark:hover:text-accentDarkColor transition'
+            className='text-basicColor hover:text-accentColor cursor-pointer dark:text-primaryColor dark:hover:text-accentColor transition'
             to={'/sign-up'}
           >
             Sign up
