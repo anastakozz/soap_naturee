@@ -1,30 +1,14 @@
 import ArrowIcon from '../../../../icons/arrowIcon'
-
-interface CategoryCardProps {
-  name: string
-  path: string
-}
+import { CategoryCardProps } from '../../../../lib/interfaces'
+import CategoryCard from './CategoryCard/CategoryCard'
 
 const items: CategoryCardProps[] = [
-  { name: 'Candles', path: './images/candle.png' },
-  { name: 'Soap', path: './images/soap.png' },
-  { name: 'Scrubs', path: './images/scrub.png' },
-  { name: 'Aroma sachet', path: './images/sachet.png' },
-  { name: 'Bath bombs', path: './images/bombs.png' }
+  { name: 'Candles', path: './images/candle.png', link: '/our-products' },
+  { name: 'Soap', path: './images/soap.png', link: '/our-products' },
+  { name: 'Scrubs', path: './images/scrub.png', link: '/our-products' },
+  { name: 'Aroma sachet', path: './images/sachet.png', link: '/our-products' },
+  { name: 'Bath bombs', path: './images/bombs.png', link: '/our-products' }
 ]
-
-function CategoryCard(item: CategoryCardProps) {
-  return (
-    <div className='flex flex-col content-center'>
-      <img
-        className='transition rounded-normal mb-esm brightness-110 dark:brightness-75 saturate-[0.9] hover:filter-none dark:hover:filter-none'
-        src={item.path}
-        alt=''
-      />
-      <p className='text-h4 text-center text-basicColor dark:text-secondaryColor font-semibold'>{item.name}</p>
-    </div>
-  )
-}
 
 export default function CategoryCarousel() {
   return (
