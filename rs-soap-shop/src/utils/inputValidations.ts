@@ -16,24 +16,6 @@ export const nameValidation = {
   }
 }
 
-export const descValidation = {
-  name: 'description',
-  label: 'description',
-  multiline: true,
-  id: 'description',
-  placeholder: 'write description ...',
-  validation: {
-    required: {
-      value: true,
-      message: 'required'
-    },
-    maxLength: {
-      value: 200,
-      message: '200 characters max'
-    }
-  }
-}
-
 export const passwordValidation = {
   name: 'password',
   label: 'Your password:',

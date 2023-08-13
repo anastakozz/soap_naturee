@@ -27,12 +27,14 @@ function DatePicker() {
   }
 
   return (
-    <div>
-      <h2>Date Picker</h2>
-      <input type='date' value={selectedDate} onChange={handleDateChange} required />
-      {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
-      {selectedDate && !validationError && <p>Selected Date: {selectedDate}</p>}
-      <button onClick={handleSubmit}>Submit</button>
+    <div className={'flex'}>
+      <h2 className={'font-semibold text-h4 text-grayLColor whitespace-nowrap mr-10'}>Date of birth:</h2>
+      <div>
+        <input type='date' value={selectedDate} onChange={handleDateChange} required />
+        {validationError && <p style={{ color: 'red' }}>{validationError}</p>}
+        {selectedDate && !validationError && <p>Selected Date: {selectedDate}</p>}
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
     </div>
   )
 }
