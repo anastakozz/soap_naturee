@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { DarkModeButton } from '../darkModeButton'
 import LoginArea from '../loginArea'
-import Navigation from '../navigation'
+import Navigation from '../navigation/navigationLight'
 import CartIconDark from '../../icons/cartIconDark'
 import CartIcon from '../../icons/cartIcon'
 
