@@ -1,4 +1,4 @@
-import Navigation from '../navigation'
+import Navigation from '../navigation/navigationLight'
 import SocialMediaLinks from '../socialMediaLinks'
 
 function Footer() {
