@@ -6,7 +6,7 @@ import { MdError } from 'react-icons/md'
 import { InputProps, InputErrorProps, InputErrorObject } from './interfaces'
 import { isFormInvalid } from '../utils/isFormInvalid'
 
-export const Input = ({ name, label, type, id, placeholder, validation, multiline, className }: InputProps) => {
+export const Input = ({ name, label, type, id, placeholder, validation, className }: InputProps) => {
   const {
     register,
     formState: { errors }
@@ -18,23 +18,24 @@ export const Input = ({ name, label, type, id, placeholder, validation, multilin
   const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60'
 
   return (
-    <div className={cn('flex flex-col w-full gap-2', className)}>
+    <div className={cn('flex flex-col w-full gap-2 md:flex-row', className)}>
       <div className='flex justify-between'>
-        <label htmlFor={id} className='font-semibold capitalize'>
+        <label htmlFor={id} className='font-semibold text-h4 text-grayLColor whitespace-nowrap'>
           {label}
         </label>
-        <AnimatePresence mode='wait' initial={false}>
-          {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
-        </AnimatePresence>
+        <div className={'md:hidden'}>
+          <AnimatePresence mode='wait' initial={false}>
+            {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
+          </AnimatePresence>
+        </div>
       </div>
-      {multiline ? (
-        <textarea
-          id={id}
-          className={cn(inputTailwind, 'min-h-[10rem] max-h-[20rem] resize-y')}
-          placeholder={placeholder}
-          {...register(`${name}`, validation)}
-        ></textarea>
-      ) : (
+      <div>
+        <div className={'hidden md:block w-big'}>
+          <AnimatePresence mode='wait' initial={false}>
+            {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
+          </AnimatePresence>
+        </div>
+
         <input
           id={id}
           type={type}
@@ -42,7 +43,7 @@ export const Input = ({ name, label, type, id, placeholder, validation, multilin
           placeholder={placeholder}
           {...register(name, validation)}
         />
-      )}
+      </div>
     </div>
   )
 }

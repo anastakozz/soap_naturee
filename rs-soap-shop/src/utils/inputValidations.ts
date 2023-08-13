@@ -36,10 +36,10 @@ export const descValidation = {
 
 export const passwordValidation = {
   name: 'password',
-  label: 'password',
+  label: 'Your password:',
   type: 'password',
   id: 'password',
-  placeholder: 'type password ...',
+  placeholder: 'Type your password',
   validation: {
     required: {
       value: true,
@@ -68,10 +68,10 @@ export const numValidation = {
 
 export const emailValidation = {
   name: 'email',
-  label: 'email address',
+  label: 'Your e-mail:',
   type: 'email',
   id: 'email',
-  placeholder: 'write a random email address',
+  placeholder: 'Type your email address',
   validation: {
     required: {
       value: true,

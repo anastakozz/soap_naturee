@@ -1,4 +1,4 @@
-import { Input } from './components/Input'
+import { Input } from './Input'
 import { useForm, FormProvider } from 'react-hook-form'
 import { GrMail } from 'react-icons/gr'
 import {
@@ -7,11 +7,11 @@ import {
   numValidation,
   passwordValidation,
   descValidation
-} from './utils/inputValidations'
-import DatePicker from './components/dateInput'
+} from '../utils/inputValidations'
+import DatePicker from './dateInput'
 import React from 'react'
 
-export const Form = () => {
+export const LoginForm = () => {
   const methods = useForm()
 
   const onSubmit = methods.handleSubmit(data => {
@@ -21,6 +21,7 @@ export const Form = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={e => e.preventDefault()} noValidate autoComplete='off' className='container'>
+        <h3>Sign In form:</h3>
         <div className='grid gap-5 md:grid-cols-2'>
           <Input multiline={false} className={''} {...nameValidation} />
           <Input multiline={false} className={''} {...emailValidation} />
