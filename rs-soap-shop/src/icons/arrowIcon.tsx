@@ -1,7 +1,7 @@
 export default function ArrowIcon() {
   return (
     <svg
-      className='transition stroke-current text-grayLColor hover:text-accentColor dark:text-secondaryColor dark:hover:text-accentColor active:scale-95'
+      className='block transition stroke-current text-grayLColor hover:text-accentColor dark:text-secondaryColor dark:hover:text-accentColor active:scale-95'
       width='52'
       height='52'
       viewBox='0 0 52 52'
