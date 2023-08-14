@@ -1,8 +1,8 @@
-import { Banner } from '../../../components/banner'
+import  Banner  from '../../../components/banner'
 
 export default function NewCollectionSection() {
   return (
-    <div className='bg-new-collection h-[746px] bg-no-repeat bg-left bg-cover p-big flex flex-row-reverse'>
+    <div className='bg-new-collection bg-no-repeat bg-left bg-cover p-sm md:p-big flex flex-row-reverse'>
       <Banner
         {...{
           p: 'New Arrival',
