@@ -4,6 +4,7 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      stroke: ['hover', 'focus'],
       screens: {
         sm: '320px',
         md: '768px',
@@ -52,7 +53,7 @@ module.exports = {
       backgroundImage: {
         'new-collection': "url('./pages/homePage/assets/candle_masked.png')",
         'sale-section': "url('./pages/homePage/assets/massage_soap.png')"
-       }
+      }
     }
   },
   plugins: []
