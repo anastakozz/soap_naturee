@@ -34,8 +34,9 @@ module.exports = {
       },
       width: {
         big: '100px',
-        formWidth: '550px',
-        inputWidth: '300px'
+        form: '550px',
+        inputs: '300px',
+        inputName: '250px'
       },
       padding: {
         sm: '25px',
@@ -47,6 +48,7 @@ module.exports = {
         btnY2: '82px'
       },
       margin: {
+        min: '10px',
         esm: '25px',
         sm: '30px',
         md: '60px',

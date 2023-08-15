@@ -18,18 +18,21 @@ export const Input = ({ name, label, type, id, placeholder, validation, classNam
   const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60'
 
   return (
+
     <div className={cn('flex flex-col w-full gap-2 md:flex-row md:justify-between md: mb-esm', className)}>
       <div className='flex justify-between items-end'>
         <label htmlFor={id} className='font-semibold text-h4 text-grayLColor whitespace-nowrap'>
           {label}
         </label>
+
         <div className={'md:hidden'}>
           <AnimatePresence mode='wait' initial={false}>
             {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
           </AnimatePresence>
         </div>
       </div>
-      <div className={'w-inputWidth'}>
+
+      <div className={'w-inputs'}>
         <div className={'hidden md:block w-big'}>
           <AnimatePresence mode='wait' initial={false}>
             {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
@@ -44,6 +47,7 @@ export const Input = ({ name, label, type, id, placeholder, validation, classNam
           {...register(name, validation)}
         />
       </div>
+
     </div>
   )
 }
