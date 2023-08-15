@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.42652843.css",
-    "main.js": "/static/js/main.de340ec7.js",
+    "main.css": "/static/css/main.6a76380e.css",
+    "main.js": "/static/js/main.c9826516.js",
     "static/js/27.e027729a.chunk.js": "/static/js/27.e027729a.chunk.js",
     "static/media/candle_masked.png": "/static/media/candle_masked.436a101f5d4141220b72.png",
     "static/media/massage_soap.png": "/static/media/massage_soap.eec90be27de2b52c0842.png",
@@ -9,7 +9,7 @@
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.42652843.css",
-    "static/js/main.de340ec7.js"
+    "static/css/main.6a76380e.css",
+    "static/js/main.c9826516.js"
   ]
 }
