@@ -4,7 +4,7 @@ import SocialMediaLinks from '../socialMediaLinks'
 function Footer() {
   return (
     <footer className='bg-secondaryColor dark:bg-grayLColor transition'>
-      <div className='container mx-auto flex flex-col lg:px-big py-4'>
+      <div className='max-w-[1440px] mx-auto flex flex-col lg:px-big py-4'>
         <div className='flex flex-col justify-between items-center md:flex-row'>
           <div className='hidden md:block'>
             <img src='/images/logo-light.png' width='142' height='70px' alt='logo' className='block dark:hidden ' />
