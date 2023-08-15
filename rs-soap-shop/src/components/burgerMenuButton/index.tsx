@@ -4,7 +4,7 @@ function BurgerMenuButton({ isMenuOpen, onClick }: { isMenuOpen: boolean; onClic
     <>
       <div onClick={onClick}>
         <svg
-          className='h-8 w-8 stroke-current text-grayLColor hover:text-accentColor dark:text-primaryColor dark:hover:text-accentColor transition">'
+          className='h-8 w-8 stroke-current text-grayLColor hover:text-accentColor dark:text-primaryColor dark:hover:text-accentColor transition cursor-pointer'
           viewBox='0 0 24 24'
           fill='none'
           stroke='#3A3A3A'
