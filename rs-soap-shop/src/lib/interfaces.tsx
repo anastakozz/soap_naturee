@@ -8,3 +8,14 @@ export interface CategoryCardProps {
   path: string
   link: string
 }
+
+
+export interface ProductCardProps {
+  label: string
+  description: string
+  imgSrc: string
+  link: string
+  price: number
+  sale: boolean
+  oldPrice?: number 
+}
