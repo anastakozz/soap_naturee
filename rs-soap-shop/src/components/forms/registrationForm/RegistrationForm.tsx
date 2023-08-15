@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import { Input } from './Input'
-import { emailValidation, nameValidation, numValidation, passwordValidation } from '../utils/inputValidations'
+import { Input } from '../Input'
+import { emailValidation, nameValidation, numValidation, passwordValidation } from '../../../utils/inputValidations'
 import DatePicker from './dateInput'
 import Dropdown from './dropDown'
 import React from 'react'

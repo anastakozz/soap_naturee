@@ -33,7 +33,9 @@ module.exports = {
         h2: '3.25rem'
       },
       width: {
-        big: '100px'
+        big: '100px',
+        formWidth: '550px',
+        inputWidth: '300px'
       },
       padding: {
         sm: '25px',

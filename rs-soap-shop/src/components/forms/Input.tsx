@@ -1,10 +1,10 @@
 import cn from 'classnames'
-import { findInputError } from '../utils/findInputError'
+import { findInputError } from '../../utils/findInputError'
 import { useFormContext } from 'react-hook-form'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MdError } from 'react-icons/md'
-import { InputProps, InputErrorProps, InputErrorObject } from './interfaces'
-import { isFormInvalid } from '../utils/isFormInvalid'
+import { InputProps, InputErrorProps, InputErrorObject } from '../../lib/interfaces'
+import { isFormInvalid } from '../../utils/isFormInvalid'
 
 export const Input = ({ name, label, type, id, placeholder, validation, className }: InputProps) => {
   const {
@@ -18,8 +18,8 @@ export const Input = ({ name, label, type, id, placeholder, validation, classNam
   const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60'
 
   return (
-    <div className={cn('flex flex-col w-full gap-2 md:flex-row', className)}>
-      <div className='flex justify-between'>
+    <div className={cn('flex flex-col w-full gap-2 md:flex-row md:justify-between md: mb-esm', className)}>
+      <div className='flex justify-between items-end'>
         <label htmlFor={id} className='font-semibold text-h4 text-grayLColor whitespace-nowrap'>
           {label}
         </label>
@@ -29,7 +29,7 @@ export const Input = ({ name, label, type, id, placeholder, validation, classNam
           </AnimatePresence>
         </div>
       </div>
-      <div>
+      <div className={'w-inputWidth'}>
         <div className={'hidden md:block w-big'}>
           <AnimatePresence mode='wait' initial={false}>
             {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
