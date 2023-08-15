@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom'
-import ProfileIcon from '../../icons/profileIcon'
-import ProfileIconDark from '../../icons/profileIconDark'
-import LogoutIcon from '../../icons/logoutIcon'
-import LogoutIconDark from '../../icons/logoutIconDark'
+import ProfileIcon from '../../../icons/profileIcon'
+import ProfileIconDark from '../../../icons/profileIconDark'
+import LogoutIcon from '../../../icons/logoutIcon'
+import LogoutIconDark from '../../../icons/logoutIconDark'
 
 function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (

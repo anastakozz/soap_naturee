@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 
 function Navigation() {
   return (
-    <nav className='flex mb-4 md:mb-0'>
+    <nav className='hidden mb-4 md:mb-0 md:flex'>
       <NavLink
         className='text-basicColor md:mr-md mr-4 hover:text-accentColor cursor-pointer dark:text-primaryColor dark:hover:text-accentColor transition'
         to={'/'}

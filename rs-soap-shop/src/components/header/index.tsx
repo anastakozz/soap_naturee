@@ -1,13 +1,27 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { NavLink } from 'react-router-dom'
 import { DarkModeButton } from '../darkModeButton'
-import LoginArea from '../loginArea'
+import LoginArea from '../loginArea/loginAreaDesctop'
 import Navigation from '../navigation/navigationLight'
 import CartIconDark from '../../icons/cartIconDark'
 import CartIcon from '../../icons/cartIcon'
+import BurgerMenuButton from '../burgerMenuButton'
+import NavigationModal from '../navigation/navigationModal'
 
 function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const changeWidth = () => {
+      if (window.innerWidth > 768) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('resize', changeWidth)
+  }, [])
+
   useEffect(() => {
     if (
       localStorage.theme === 'dark' ||
@@ -35,23 +49,26 @@ function Header() {
   const isLoggedIn = false
 
   return (
-    <header className='bg-primaryColor dark:bg-grayLColor transition'>
-      <div className='container mx-auto flex flex-col justify-between items-center min-h-24 lg:px-big md:flex-row'>
+    <header className='bg-primaryColor dark:bg-grayLColor transition relative'>
+      <div className='container mx-auto px-4 flex justify-between items-center h-24 lg:px-big'>
         <img src='/images/logo-light.png' width='142' height='70px' alt='logo' className='block dark:hidden' />
         <img src='/images/logo-dark.png' width='142' height='70px' alt='logo' className='hidden dark:block' />
 
         <Navigation />
-
-        <div className='flex items-center mb-4 md:mb-0'>
+        <NavigationModal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} isLoggedIn={isLoggedIn} />
+        <div className='flex items-center'>
           <DarkModeButton onChange={handleChangeMode} />
-          <NavLink
-            className='text-basicColor mr-4 hover:scale-110 transition dark:text-primaryColor transition'
-            to={'/cart'}
-          >
-            <CartIconDark />
-            <CartIcon />
-          </NavLink>
-          <LoginArea isLoggedIn={isLoggedIn} />
+          <div className='flex items-center hidden md:flex'>
+            <NavLink
+              className='text-basicColor mr-4 hover:scale-110 transition dark:text-primaryColor transition'
+              to={'/cart'}
+            >
+              <CartIconDark />
+              <CartIcon />
+            </NavLink>
+            <LoginArea isLoggedIn={isLoggedIn} />
+          </div>
+          <BurgerMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} isMenuOpen={isMenuOpen} />
         </div>
       </div>
     </header>
