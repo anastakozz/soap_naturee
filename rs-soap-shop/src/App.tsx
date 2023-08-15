@@ -10,7 +10,7 @@ import SingInPage from './pages/singInPage'
 import SignUpPage from './pages/singnUpPage'
 import ProfilePage from './pages/profilePage'
 import Footer from './components/footer'
-import PageNotFound from './pages/pageNotFound '
+import PageNotFound from './pages/pageNotFound'
 
 const AppLayout = ({ children }: { children: ReactElement }) => {
   return (
