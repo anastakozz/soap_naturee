@@ -12,9 +12,9 @@ function NavigationModal({
 }) {
   return (
     <div
-      className={`flex flex-col justify-center items-center p-4 bg-accentColor absolute z-10 top-[96px] w-[320px] transition-all ${
-        !isOpen && 'right-[-1000px]'
-      } ${isOpen && 'right-0'}`}
+      className={`flex-col justify-center items-center p-4 bg-accentColor absolute z-10 top-[96px] w-[320px] transition-all ${
+        !isOpen && 'right-[-100%] hidden'
+      } ${isOpen && 'right-0 flex'}`}
     >
       <NavLink
         onClick={onClose}
