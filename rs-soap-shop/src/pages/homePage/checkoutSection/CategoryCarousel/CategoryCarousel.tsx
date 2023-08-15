@@ -20,13 +20,11 @@ export default function CategoryCarousel() {
   const handlePrevious = () => {
     const newIndex = index - 1
     setIndex(newIndex < 0 ? length - 1 : newIndex)
-    console.log(prevIndex, index, nextIndex)
   }
 
   const handleNext = () => {
     const newIndex = index + 1
     setIndex(newIndex >= length ? 0 : newIndex)
-    console.log(prevIndex, index, nextIndex)
   }
 
   return (
