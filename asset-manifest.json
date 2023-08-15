@@ -1,13 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.38b20ba6.css",
-    "main.js": "/static/js/main.b50929fc.js",
+    "main.css": "/static/css/main.42652843.css",
+    "main.js": "/static/js/main.de340ec7.js",
     "static/js/27.e027729a.chunk.js": "/static/js/27.e027729a.chunk.js",
-    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/candle_masked.png": "/static/media/candle_masked.436a101f5d4141220b72.png",
+    "static/media/massage_soap.png": "/static/media/massage_soap.eec90be27de2b52c0842.png",
+    "static/media/bg-404.jpeg": "/static/media/bg-404.815e64f52b16c14321f9.jpeg",
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.38b20ba6.css",
-    "static/js/main.b50929fc.js"
+    "static/css/main.42652843.css",
+    "static/js/main.de340ec7.js"
   ]
 }
