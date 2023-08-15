@@ -1,10 +1,16 @@
-import { Banner } from '../../../components/banner'
+import  Banner  from '../../../components/banner'
 
 export default function NewCollectionSection() {
   return (
-    <div className='bg-new-collection h-[746px] bg-no-repeat bg-left bg-cover p-big flex flex-row-reverse'>
+    <div className='bg-new-collection xxl:min-h-[746px] bg-no-repeat bg-left bg-cover p-sm md:p-big flex flex-row-reverse'>
       <Banner
-        {...['New Arrival', 'Discover Our New Collection', 'Handmade soap in the form of flowers and food', 'BUY NOW']}
+        {...{
+          p: 'New Arrival',
+          h2: 'Discover Our New Collection',
+          h4: 'Handmade soap in the form of flowers and food',
+          buttonText: 'BUY NOW',
+          linkAdress: '/our-products'
+        }}
       />
     </div>
   )
