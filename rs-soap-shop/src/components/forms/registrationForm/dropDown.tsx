@@ -7,7 +7,7 @@ interface DropdownProps {
 
 const Dropdown = ({ control }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('');
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -24,23 +24,43 @@ const Dropdown = ({ control }: DropdownProps) => {
         name='selectedCountry'
         control={control}
         rules={{ required: 'Please select a country' }}
-        defaultValue=''
-        render={({fieldState }) => (
+        render={({ field, fieldState }) => (
           <div className='relative'>
-            <button onClick={toggleDropdown} className='font-medium rounded-md w-full border border-slate-300 bg-gray-300 hover:bg-gray-400 p-5'>
+            <button
+              onClick={toggleDropdown}
+              className='font-medium rounded-md w-full border border-slate-300 bg-gray-300 hover:bg-gray-400 p-5'
+            >
               {selectedOption || 'Select your country'}
             </button>
 
             {isOpen && (
               <ul className='absolute top-10 left-0 bg-white border border-gray-300 rounded-md shadow-md z-10'>
-                <li className='px-4 py-2 hover:bg-gray-100 cursor-pointer' onClick={() => handleOptionSelect('Germany')}>
+                <li
+                  className='px-4 py-2 hover:bg-gray-100 cursor-pointer'
+                  onClick={() => {
+                    field.onChange('Germany');
+                    handleOptionSelect('Germany');
+                  }}
+                >
                   Germany
                 </li>
-                <li className='px-4 py-2 hover:bg-gray-100 cursor-pointer' onClick={() => handleOptionSelect('Spain')}>
+                <li
+                  className='px-4 py-2 hover:bg-gray-100 cursor-pointer'
+                  onClick={() => {
+                    field.onChange('Spain');
+                    handleOptionSelect('Spain');
+                  }}
+                >
                   Spain
                 </li>
-                <li className='px-4 py-2 hover:bg-gray-100 cursor-pointer' onClick={() => handleOptionSelect('France')}>
-                  France
+                <li
+                  className='px-4 py-2 hover:bg-gray-100 cursor-pointer'
+                  onClick={() => {
+                    field.onChange('Italy');
+                    handleOptionSelect('Italy');
+                  }}
+                >
+                  Italy
                 </li>
               </ul>
             )}
@@ -49,7 +69,6 @@ const Dropdown = ({ control }: DropdownProps) => {
           </div>
         )}
       />
-
     </div>
   );
 };

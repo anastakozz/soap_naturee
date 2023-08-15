@@ -1,21 +1,30 @@
-import cn from 'classnames'
-import { findInputError } from '../../utils/findInputError'
-import { useFormContext } from 'react-hook-form'
+import React, { useState } from 'react';
+import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion'
-import { MdError } from 'react-icons/md'
-import { InputProps, InputErrorProps, InputErrorObject } from '../../lib/interfaces'
-import { isFormInvalid } from '../../utils/isFormInvalid'
+import {InputErrorObject, InputErrorProps, InputProps} from '../../lib/interfaces';
+import {findInputError} from '../../utils/findInputError';
+import {isFormInvalid} from '../../utils/isFormInvalid';
+import {useFormContext} from 'react-hook-form';
+import {ShowPassword} from '../../icons/showPassword';
+import {HidePassword} from '../../icons/hidePassword';
+import {MdError} from 'react-icons/md';
 
 export const Input = ({ name, label, type, id, placeholder, validation, className }: InputProps) => {
   const {
     register,
     formState: { errors }
-  } = useFormContext()
+  } = useFormContext();
 
-  const inputErrors = findInputError(errors, name) as InputErrorObject
-  const isInvalid = isFormInvalid(inputErrors)
+  const inputErrors = findInputError(errors, name) as InputErrorObject;
+  const isInvalid = isFormInvalid(inputErrors);
 
-  const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60'
+  const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60';
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   return (
 
@@ -38,19 +47,30 @@ export const Input = ({ name, label, type, id, placeholder, validation, classNam
             {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
           </AnimatePresence>
         </div>
+        <div className='relative'>
+          <input
+            id={id}
+            type={isPasswordVisible ? 'text' : type}
+            className={cn(inputTailwind)}
+            placeholder={placeholder}
+            {...register(name, validation)}
+          />
+          {type === 'password' && (
+            <button
+              onClick={togglePasswordVisibility}
+              className='absolute right-2 top-7 focus:outline-none'
+            >
+              {isPasswordVisible ? <HidePassword /> : <ShowPassword />}
+            </button>
+          )}
+        </div>
 
-        <input
-          id={id}
-          type={type}
-          className={cn(inputTailwind)}
-          placeholder={placeholder}
-          {...register(name, validation)}
-        />
       </div>
 
     </div>
   )
 }
+
 
 const InputError = ({ message }: InputErrorProps) => {
   return (
