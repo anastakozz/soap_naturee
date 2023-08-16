@@ -28,7 +28,7 @@ export default function CategoryCarousel() {
   }
 
   return (
-    <div className='flex justify-around flex-wrap md:m-esm md:flex-nowrap'>
+    <div className='max-w-[1440px] mx-auto flex justify-around flex-wrap p-sm md:flex-nowrap'>
       <button onClick={handlePrevious}>
         <ArrowIcon />
       </button>
