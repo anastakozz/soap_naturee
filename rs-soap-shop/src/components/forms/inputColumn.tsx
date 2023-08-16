@@ -33,7 +33,7 @@ export const InputColumn = ({ name, label, type, id, placeholder, validation, cl
       </div>
 
       <div className={'w-inputs'}>
-        <div className={'hidden md:block w-big'}>
+        <div className={'hidden md:inline-block'}>
           <AnimatePresence mode='wait' initial={false}>
             {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
           </AnimatePresence>

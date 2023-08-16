@@ -9,9 +9,9 @@ export const nameValidation = {
       value: true,
       message: 'required'
     },
-    maxLength: {
-      value: 30,
-      message: '30 characters max'
+    minLength: {
+      value: 3,
+      message: '3 characters min'
     }
   }
 }

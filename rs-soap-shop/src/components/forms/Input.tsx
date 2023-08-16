@@ -1,22 +1,13 @@
-import React, { useState } from 'react';
+import React, {ChangeEventHandler, useState} from 'react';
 import cn from 'classnames';
-import { AnimatePresence, motion } from 'framer-motion'
-import {InputErrorObject, InputErrorProps, InputProps} from '../../lib/interfaces';
-import {findInputError} from '../../lib/utils/findInputError';
-import {isFormInvalid} from '../../lib/utils/isFormInvalid';
-import {useFormContext} from 'react-hook-form';
 import {ShowPassword} from '../../icons/showPassword';
 import {HidePassword} from '../../icons/hidePassword';
-import {MdError} from 'react-icons/md';
+import {validateEmail} from './validateFunctions/e-mail';
+import {InputProps} from '../../lib/interfaces';
+import {validatePassword} from './validateFunctions/password';
 
-export const Input = ({ name, label, type, id, placeholder, validation, className }: InputProps) => {
-  const {
-    register,
-    formState: { errors }
-  } = useFormContext();
 
-  const inputErrors = findInputError(errors, name) as InputErrorObject;
-  const isInvalid = isFormInvalid(inputErrors);
+export const Input = ({label, type, placeholder }: InputProps) => {
 
   const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
 
@@ -26,37 +17,46 @@ export const Input = ({ name, label, type, id, placeholder, validation, classNam
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  const [error, setError] = useState('');
+
+  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const inputValue = event.target.value;
+    if (type === 'email') {
+      const validationError = validateEmail(inputValue);
+      setError(validationError);
+    } else if (type === 'password') {
+      const validationError = validatePassword(inputValue);
+      setError(validationError);
+    }
+  };
+
   return (
 
-    <div className={cn('flex flex-col w-full gap-2 md:flex-row md:justify-between md: mb-esm', className)}>
-      <div className='flex justify-between items-end'>
-        <label htmlFor={id} className='font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'>
+    <div className={'flex flex-col w-full gap-2 md:flex-row md:justify-between md: mb-esm'}>
+      <div className='flex flex-col md:flex-row'>
+        <label className='font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'>
           {label}
         </label>
 
-        <div className={'md:hidden'}>
-          <AnimatePresence mode='wait' initial={false}>
-            {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
-          </AnimatePresence>
+        <div className={'w-inputs md:hidden text-red-500'}>
+          {error}
         </div>
       </div>
 
       <div className={'w-inputs'}>
-        <div className={'hidden md:block w-big'}>
-          <AnimatePresence mode='wait' initial={false}>
-            {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
-          </AnimatePresence>
+        <div className={'hidden md:inline-block text-red-500'}>
+          {error}
         </div>
         <div className='relative'>
           <input
-            id={id}
             type={isPasswordVisible ? 'text' : type}
             className={cn(inputTailwind)}
             placeholder={placeholder}
-            {...register(name, validation)}
+            onChange={handleInputChange}
           />
           {type === 'password' && (
             <button
+              type='button'
               onClick={togglePasswordVisibility}
               className='absolute right-4 top-7 focus:outline-none'
             >
@@ -69,24 +69,4 @@ export const Input = ({ name, label, type, id, placeholder, validation, classNam
 
     </div>
   )
-}
-
-
-const InputError = ({ message }: InputErrorProps) => {
-  return (
-    <motion.p
-      className='flex items-center gap-1 px-2 font-semibold text-red-500 bg-red-100 rounded-md'
-      {...framerError}
-    >
-      <MdError />
-      {message}
-    </motion.p>
-  )
-}
-
-const framerError = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 10 },
-  transition: { duration: 0.2 }
 }
