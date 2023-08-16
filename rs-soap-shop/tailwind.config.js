@@ -33,15 +33,23 @@ module.exports = {
         h3: '2rem',
         h2: '3.25rem'
       },
+      width: {
+        big: '100px',
+        form: '550px',
+        inputs: '300px',
+        inputName: '250px'
+      },
       padding: {
         sm: '25px',
         big: '100px',
-        btnX1: '25px',
-        btnY1: '72px',
+        bigY: '58px',
+        btnX1: '72px',
+        btnY1: '25px',
         btnX2: '12px',
         btnY2: '82px'
       },
       margin: {
+        min: '10px',
         esm: '25px',
         sm: '30px',
         md: '60px',
