@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion'
 import {InputErrorObject, InputErrorProps, InputProps} from '../../lib/interfaces';
-import {findInputError} from '../../utils/findInputError';
-import {isFormInvalid} from '../../utils/isFormInvalid';
+import {findInputError} from '../../lib/utils/findInputError';
+import {isFormInvalid} from '../../lib/utils/isFormInvalid';
 import {useFormContext} from 'react-hook-form';
 import {ShowPassword} from '../../icons/showPassword';
 import {HidePassword} from '../../icons/hidePassword';

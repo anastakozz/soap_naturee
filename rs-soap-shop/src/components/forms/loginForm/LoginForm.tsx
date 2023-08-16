@@ -1,8 +1,8 @@
 import { Input } from '../Input'
 import { useForm, FormProvider } from 'react-hook-form'
-import { emailValidation, passwordValidation } from '../../../utils/inputValidations'
+import { emailValidation, passwordValidation } from '../../../lib/utils/inputValidations'
 import React from 'react'
-import EmptyButton from '../../buttons/emptyButton';
+import FormButton from '../formButton';
 
 export const LoginForm = () => {
   const methods = useForm()
@@ -21,11 +21,11 @@ export const LoginForm = () => {
             <Input {...passwordValidation} />
           </div>
           <div className={'my-sm'}>
-            <EmptyButton onClick={onSubmit}>SIGN IN</EmptyButton>
+            <FormButton onClick={onSubmit}>SIGN IN</FormButton>
           </div>
           <p className={'text-h4 dark:text-primaryColor font-semibold text-grayLColor'}>Don&apos;t have an account yet?</p>
           <div className={'my-sm'}>
-            <EmptyButton to={'/sign-up'}>CREATE AN ACCOUNT</EmptyButton>
+            <FormButton to={'/sign-up'}>CREATE AN ACCOUNT</FormButton>
           </div>
         </div>
       </form>

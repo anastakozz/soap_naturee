@@ -1,10 +1,10 @@
 import cn from 'classnames'
-import { findInputError } from '../../utils/findInputError'
+import { findInputError } from '../../lib/utils/findInputError'
 import { useFormContext } from 'react-hook-form'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MdError } from 'react-icons/md'
 import { InputProps, InputErrorProps, InputErrorObject } from '../../lib/interfaces'
-import { isFormInvalid } from '../../utils/isFormInvalid'
+import { isFormInvalid } from '../../lib/utils/isFormInvalid'
 
 export const InputColumn = ({ name, label, type, id, placeholder, validation, className }: InputProps) => {
   const {

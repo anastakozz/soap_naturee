@@ -1,11 +1,11 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { Input } from '../Input'
-import { emailValidation, nameValidation, numValidation, passwordValidation } from '../../../utils/inputValidations'
+import { emailValidation, nameValidation, numValidation, passwordValidation } from '../../../lib/utils/inputValidations'
 import DatePicker from './dateInput'
 import Dropdown from './dropDown'
 import React from 'react'
 import {InputColumn} from '../inputColumn';
-import EmptyButton from '../../buttons/emptyButton';
+import FormButton from '../formButton';
 
 export const RegistrationForm = () => {
   const methods = useForm()
@@ -38,11 +38,11 @@ export const RegistrationForm = () => {
             <Input {...nameValidation} label='House:' placeholder='Type your house number' />
             <Input {...numValidation} label='Postal code' placeholder='Type your postal code' />
             <div className={'my-sm'}>
-              <EmptyButton onClick={onSubmit}>CREATE AN ACCOUNT</EmptyButton>
+              <FormButton onClick={onSubmit}>CREATE AN ACCOUNT</FormButton>
             </div>
             <p className={'text-h4 font-semibold text-grayLColor dark:text-primaryColor'}>Do you already have an account?</p>
             <div className={'my-sm'}>
-              <EmptyButton to={'/sign-in'}>SIGN IN</EmptyButton>
+              <FormButton to={'/sign-in'}>SIGN IN</FormButton>
             </div>
           </div>
           </div>
