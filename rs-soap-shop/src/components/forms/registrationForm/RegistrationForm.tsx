@@ -16,9 +16,9 @@ export const RegistrationForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={e => e.preventDefault()} noValidate autoComplete='off' className='bg-secondaryColor'>
-        <div className='container px-sm py-sm md:px-big md:py-bigY'>
-          <h3 className={'text-accentColor text-h3 font-bold pb-bigY'}>Registration form:</h3>
+      <form onSubmit={e => e.preventDefault()} noValidate autoComplete='off' className='bg-secondaryColor dark:bg-grayMColor'>
+        <div className='container px-sm py-sm md:px-big md:py-bigY max-w-[1440px] mx-auto lg:px-big'>
+          <h3 className={'text-accentColor dark:text-primaryColor text-h3 font-bold pb-bigY'}>Registration form:</h3>
           <div className={'md:w-form'}>
             <div className={'md:flex justify-between'}>
               <InputColumn {...nameValidation} label='First name:' placeholder='Type your first name' />
@@ -27,9 +27,9 @@ export const RegistrationForm = () => {
             <DatePicker control={methods.control} />
             <Input {...emailValidation} />
             <Input {...passwordValidation} />
-            <h4 className={'text-h4 text-grayLColor font-bold my-sm text-center'}>Your address</h4>
+            <h4 className={'text-h4 text-grayLColor dark:text-primaryColor font-bold my-sm text-center'}>Your address</h4>
             <div className={'md:flex mb-esm justify-between'}>
-              <h4 className={'mb-min font-semibold text-h4 text-grayLColor whitespace-nowrap mr-10 md:mb-0'}>Your country:</h4>
+              <h4 className={'mb-min font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap mr-10 md:mb-0'}>Your country:</h4>
               <Dropdown control={methods.control} />
             </div>
 
@@ -40,7 +40,7 @@ export const RegistrationForm = () => {
             <div className={'my-sm'}>
               <EmptyButton onClick={onSubmit}>CREATE AN ACCOUNT</EmptyButton>
             </div>
-            <p className={'text-h4 font-semibold text-grayLColor'}>Do you already have an account?</p>
+            <p className={'text-h4 font-semibold text-grayLColor dark:text-primaryColor'}>Do you already have an account?</p>
             <div className={'my-sm'}>
               <EmptyButton to={'/sign-in'}>SIGN IN</EmptyButton>
             </div>

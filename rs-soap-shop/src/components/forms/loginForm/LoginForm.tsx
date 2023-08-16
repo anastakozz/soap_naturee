@@ -13,9 +13,9 @@ export const LoginForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={e => e.preventDefault()} noValidate autoComplete='off' className='bg-secondaryColor'>
-        <div className='container px-sm py-sm md:px-big md:py-bigY'>
-          <h3 className={'text-accentColor text-h3 font-bold pb-bigY'}>Sign In form:</h3>
+      <form onSubmit={e => e.preventDefault()} noValidate autoComplete='off' className='bg-secondaryColor dark:bg-grayMColor'>
+        <div className='container px-sm py-sm md:px-big md:py-bigY max-w-[1440px] mx-auto lg:px-big'>
+          <h3 className={'text-accentColor dark:text-primaryColor text-h3 font-bold pb-bigY'}>Sign In form:</h3>
           <div className={'md:w-form'}>
             <Input {...emailValidation} />
             <Input {...passwordValidation} />
@@ -23,7 +23,7 @@ export const LoginForm = () => {
           <div className={'my-sm'}>
             <EmptyButton onClick={onSubmit}>SIGN IN</EmptyButton>
           </div>
-          <p className={'text-h4 font-semibold text-grayLColor'}>Don&apos;t have an account yet?</p>
+          <p className={'text-h4 dark:text-primaryColor font-semibold text-grayLColor'}>Don&apos;t have an account yet?</p>
           <div className={'my-sm'}>
             <EmptyButton to={'/sign-up'}>CREATE AN ACCOUNT</EmptyButton>
           </div>

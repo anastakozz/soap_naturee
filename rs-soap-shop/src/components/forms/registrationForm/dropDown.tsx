@@ -28,7 +28,7 @@ const Dropdown = ({ control }: DropdownProps) => {
           <div className='relative'>
             <button
               onClick={toggleDropdown}
-              className='font-medium rounded-md w-full border border-slate-300 bg-gray-300 hover:bg-gray-400 p-5'
+              className='font-medium rounded-md w-inputs border border-slate-300 bg-gray-300 hover:bg-gray-400 p-5'
             >
               {selectedOption || 'Select your country'}
             </button>

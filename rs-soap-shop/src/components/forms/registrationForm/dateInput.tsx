@@ -8,11 +8,11 @@ const DatePicker = ({ control }: { control: Control }) => {
       rules={{ required: 'Date is required' }}
       render={({ field, fieldState }) => (
         <div className={'md:flex justify-between items-end mb-esm'}>
-          <h2 className={'mb-min font-semibold text-h4 text-grayLColor whitespace-nowrap mr-10'}>Date of birth:</h2>
+          <h2 className={'mb-min font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap mr-10'}>Date of birth:</h2>
           <div>
             <input
               type='date'
-              className={'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60'}
+              className={'p-5 w-inputs font-medium rounded-md border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black'}
               {...field}
               required
             />

@@ -15,13 +15,13 @@ export const InputColumn = ({ name, label, type, id, placeholder, validation, cl
   const inputErrors = findInputError(errors, name) as InputErrorObject
   const isInvalid = isFormInvalid(inputErrors)
 
-  const inputTailwind = 'p-5 font-medium rounded-md w-inputs border border-slate-300 placeholder:opacity-60 md:w-inputName'
+  const inputTailwind = 'p-5 font-medium rounded-md w-inputs border border-slate-300 placeholder:opacity-60 md:w-inputName dark:bg-graySColor dark:placeholder-black'
 
   return (
 
     <div className={cn('flex w-inputs gap-2 flex-col md:justify-between md: mb-esm', className)}>
       <div className='flex justify-between items-end'>
-        <label htmlFor={id} className='font-semibold text-h4 text-grayLColor whitespace-nowrap'>
+        <label htmlFor={id} className='font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'>
           {label}
         </label>
 

@@ -18,7 +18,7 @@ export const Input = ({ name, label, type, id, placeholder, validation, classNam
   const inputErrors = findInputError(errors, name) as InputErrorObject;
   const isInvalid = isFormInvalid(inputErrors);
 
-  const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60';
+  const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -30,7 +30,7 @@ export const Input = ({ name, label, type, id, placeholder, validation, classNam
 
     <div className={cn('flex flex-col w-full gap-2 md:flex-row md:justify-between md: mb-esm', className)}>
       <div className='flex justify-between items-end'>
-        <label htmlFor={id} className='font-semibold text-h4 text-grayLColor whitespace-nowrap'>
+        <label htmlFor={id} className='font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'>
           {label}
         </label>
 
@@ -58,7 +58,7 @@ export const Input = ({ name, label, type, id, placeholder, validation, classNam
           {type === 'password' && (
             <button
               onClick={togglePasswordVisibility}
-              className='absolute right-2 top-7 focus:outline-none'
+              className='absolute right-4 top-7 focus:outline-none'
             >
               {isPasswordVisible ? <HidePassword /> : <ShowPassword />}
             </button>
