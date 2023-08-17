@@ -7,12 +7,7 @@ export interface ButtonProps {
 export interface InputProps {
   label: string
   type: string
-  id: string
-  placeholder: string
-  validation: object
-  name: string
-  multiline?: boolean
-  className?: string
+  placeholder?: string
 }
 
 export interface InputErrorProps {

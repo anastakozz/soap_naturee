@@ -5,7 +5,10 @@ import {HidePassword} from '../../icons/hidePassword';
 import {validateEmail} from './validateFunctions/e-mail';
 import {InputProps} from '../../lib/interfaces';
 import {validatePassword} from './validateFunctions/password';
-
+import {validateDate} from './validateFunctions/date';
+import {validateStreet} from './validateFunctions/street';
+import {validateCity} from './validateFunctions/city';
+import {validatePostalCode} from './validateFunctions/postalCode';
 
 export const Input = ({label, type, placeholder }: InputProps) => {
 
@@ -21,18 +24,30 @@ export const Input = ({label, type, placeholder }: InputProps) => {
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const inputValue = event.target.value;
-    if (type === 'email') {
+    if (type === 'mail') {
       const validationError = validateEmail(inputValue);
       setError(validationError);
     } else if (type === 'password') {
       const validationError = validatePassword(inputValue);
+      setError(validationError);
+    } else if (type === 'date') {
+      const validationError = validateDate(inputValue);
+      setError(validationError);
+    } else if (type === 'street') {
+      const validationError = validateStreet(inputValue);
+      setError(validationError);
+    } else if (type === 'city') {
+      const validationError = validateCity(inputValue);
+      setError(validationError);
+    } else if (type === 'postalCode') {
+      const validationError = validatePostalCode(inputValue);
       setError(validationError);
     }
   };
 
   return (
 
-    <div className={'flex flex-col w-full gap-2 md:flex-row md:justify-between md: mb-esm'}>
+    <div className={'flex flex-col md:items-end w-full gap-2 md:flex-row md:justify-between md: mb-esm'}>
       <div className='flex flex-col md:flex-row'>
         <label className='font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'>
           {label}

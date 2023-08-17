@@ -4,16 +4,6 @@ export const nameValidation = {
   type: 'text',
   id: 'name',
   placeholder: 'write your name ...',
-  validation: {
-    required: {
-      value: true,
-      message: 'required'
-    },
-    minLength: {
-      value: 3,
-      message: '3 characters min'
-    }
-  }
 }
 
 export const passwordValidation = {
@@ -34,35 +24,36 @@ export const passwordValidation = {
   }
 }
 
-export const numValidation = {
-  name: 'num',
-  label: 'number',
-  type: 'number',
-  id: 'num',
-  placeholder: 'write a random number',
-  validation: {
-    required: {
-      value: true,
-      message: 'required'
-    }
-  }
+export const postalCodeValidation = {
+  name: 'postalCode',
+  label: 'Postal code:',
+  type: 'postalCode',
+  placeholder: 'Type your postal code'
 }
 
 export const emailValidation = {
-  name: 'email',
+  name: 'mail',
   label: 'Your e-mail:',
-  type: 'email',
-  id: 'email',
+  type: 'mail',
   placeholder: 'Type your email address',
-  validation: {
-    required: {
-      value: true,
-      message: 'required'
-    },
-    pattern: {
-      value:
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      message: 'not valid'
-    }
-  }
+}
+
+export const dateValidation = {
+  name: 'date',
+  label: 'Date of birth:',
+  type: 'date'
+}
+
+export const streetValidation = {
+  name: 'street',
+  label: 'Street:',
+  type: 'street',
+  placeholder: 'Type your street'
+}
+
+export const cityValidation = {
+  name: 'city',
+  label: 'City:',
+  type: 'city',
+  placeholder: 'Type your city'
 }

@@ -1,50 +1,53 @@
 import cn from 'classnames'
-import { findInputError } from '../../lib/utils/findInputError'
-import { useFormContext } from 'react-hook-form'
-import { AnimatePresence, motion } from 'framer-motion'
-import { MdError } from 'react-icons/md'
-import { InputProps, InputErrorProps, InputErrorObject } from '../../lib/interfaces'
-import { isFormInvalid } from '../../lib/utils/isFormInvalid'
+import { InputProps } from '../../lib/interfaces'
+import {ChangeEventHandler, useState} from 'react';
+import {validateEmail} from './validateFunctions/e-mail';
+import {validatePassword} from './validateFunctions/password';
+import {validateName} from './validateFunctions/name';
 
-export const InputColumn = ({ name, label, type, id, placeholder, validation, className }: InputProps) => {
-  const {
-    register,
-    formState: { errors }
-  } = useFormContext()
+export const InputColumn = ({ label, type, placeholder }: InputProps) => {
 
-  const inputErrors = findInputError(errors, name) as InputErrorObject
-  const isInvalid = isFormInvalid(inputErrors)
+  const inputTailwind = 'p-5 font-medium rounded-md w-inputs md:w-inputName border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
 
-  const inputTailwind = 'p-5 font-medium rounded-md w-inputs border border-slate-300 placeholder:opacity-60 md:w-inputName dark:bg-graySColor dark:placeholder-black'
+  const [error, setError] = useState('');
+
+  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const inputValue = event.target.value;
+    if (type === 'email') {
+      const validationError = validateEmail(inputValue);
+      setError(validationError);
+    } else if (type === 'password') {
+      const validationError = validatePassword(inputValue);
+      setError(validationError);
+    } else if (type === 'text') {
+      const validationError = validateName(inputValue);
+      setError(validationError);
+    }
+  };
 
   return (
 
-    <div className={cn('flex w-inputs gap-2 flex-col md:justify-between md: mb-esm', className)}>
-      <div className='flex justify-between items-end'>
-        <label htmlFor={id} className='font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'>
+    <div className={'flex w-inputs gap-2 flex-col md:justify-between md: mb-esm'}>
+      <div className='flex flex-col md:flex-row justify-between md:items-end'>
+        <label className='font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'>
           {label}
         </label>
 
-        <div className={'md:hidden'}>
-          <AnimatePresence mode='wait' initial={false}>
-            {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
-          </AnimatePresence>
+        <div className={'w-inputs md:hidden text-red-500'}>
+          {error}
         </div>
       </div>
 
       <div className={'w-inputs'}>
-        <div className={'hidden md:inline-block'}>
-          <AnimatePresence mode='wait' initial={false}>
-            {isInvalid && <InputError message={inputErrors.error.message} key={inputErrors.error.message} />}
-          </AnimatePresence>
+        <div className={'hidden md:inline-block w-inputName text-red-500'}>
+          {error}
         </div>
 
         <input
-          id={id}
           type={type}
           className={cn(inputTailwind)}
           placeholder={placeholder}
-          {...register(name, validation)}
+          onChange={handleInputChange}
         />
       </div>
 
@@ -52,21 +55,3 @@ export const InputColumn = ({ name, label, type, id, placeholder, validation, cl
   )
 }
 
-const InputError = ({ message }: InputErrorProps) => {
-  return (
-    <motion.p
-      className='flex items-center gap-1 px-2 font-semibold text-red-500 bg-red-100 rounded-md'
-      {...framerError}
-    >
-      <MdError />
-      {message}
-    </motion.p>
-  )
-}
-
-const framerError = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 10 },
-  transition: { duration: 0.2 }
-}

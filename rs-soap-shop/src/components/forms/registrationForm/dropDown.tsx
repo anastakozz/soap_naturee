@@ -27,7 +27,10 @@ const Dropdown = ({ control }: DropdownProps) => {
         render={({ field, fieldState }) => (
           <div className='relative'>
             <button
-              onClick={toggleDropdown}
+              onClick={(e) => {
+                e.preventDefault();
+                toggleDropdown();
+              }}
               className='font-medium rounded-md w-inputs border border-slate-300 bg-gray-300 hover:bg-gray-400 p-5'
             >
               {selectedOption || 'Select your country'}
@@ -37,7 +40,8 @@ const Dropdown = ({ control }: DropdownProps) => {
               <ul className='absolute top-10 left-0 bg-white border border-gray-300 rounded-md shadow-md z-10'>
                 <li
                   className='px-4 py-2 hover:bg-gray-100 cursor-pointer'
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     field.onChange('Germany');
                     handleOptionSelect('Germany');
                   }}
@@ -46,7 +50,8 @@ const Dropdown = ({ control }: DropdownProps) => {
                 </li>
                 <li
                   className='px-4 py-2 hover:bg-gray-100 cursor-pointer'
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     field.onChange('Spain');
                     handleOptionSelect('Spain');
                   }}
@@ -55,7 +60,8 @@ const Dropdown = ({ control }: DropdownProps) => {
                 </li>
                 <li
                   className='px-4 py-2 hover:bg-gray-100 cursor-pointer'
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     field.onChange('Italy');
                     handleOptionSelect('Italy');
                   }}
