@@ -1,15 +1,41 @@
 import cn from 'classnames'
 import { InputProps } from '../../lib/interfaces'
-import {ChangeEventHandler, useState} from 'react';
+import {ChangeEventHandler, useEffect, useState} from 'react';
 import {validateEmail} from './validateFunctions/e-mail';
 import {validatePassword} from './validateFunctions/password';
 import {validateName} from './validateFunctions/name';
+import {validateDate} from './validateFunctions/date';
+import {validateStreet} from './validateFunctions/street';
+import {validateCity} from './validateFunctions/city';
+import {validatePostalCode} from './validateFunctions/postalCode';
 
-export const InputColumn = ({ label, type, placeholder }: InputProps) => {
+export const InputColumn = ({ label, type, placeholder, isSubmitted }: InputProps) => {
 
   const inputTailwind = 'p-5 font-medium rounded-md w-inputs md:w-inputName border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
 
+  const [value, setValue] = useState('');
   const [error, setError] = useState('');
+
+  function determineValidationError(type: string, value: string): string {
+    switch (type) {
+      case 'mail':
+        return validateEmail(value);
+      case 'password':
+        return validatePassword(value);
+      case 'date':
+        return validateDate(value);
+      case 'street':
+        return validateStreet(value);
+      case 'city':
+        return validateCity(value);
+      case 'postalCode':
+        return validatePostalCode(value);
+      case 'text':
+        return validateName(value);
+      default:
+        return '';
+    }
+  }
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const inputValue = event.target.value;
@@ -24,6 +50,13 @@ export const InputColumn = ({ label, type, placeholder }: InputProps) => {
       setError(validationError);
     }
   };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      const validationError = determineValidationError(type, value);
+      setError(validationError);
+    }
+  }, [isSubmitted, type, value]);
 
   return (
 

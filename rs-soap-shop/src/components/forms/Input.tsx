@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, useState} from 'react';
+import React, {ChangeEventHandler, useEffect, useState} from 'react';
 import cn from 'classnames';
 import {ShowPassword} from '../../icons/showPassword';
 import {HidePassword} from '../../icons/hidePassword';
@@ -10,7 +10,7 @@ import {validateStreet} from './validateFunctions/street';
 import {validateCity} from './validateFunctions/city';
 import {validatePostalCode} from './validateFunctions/postalCode';
 
-export const Input = ({label, type, placeholder }: InputProps) => {
+export const Input = ({label, type, placeholder, isSubmitted }: InputProps) => {
 
   const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
 
@@ -20,7 +20,27 @@ export const Input = ({label, type, placeholder }: InputProps) => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  const [value, setValue] = useState('');
   const [error, setError] = useState('');
+
+  function determineValidationError(type: string, value: string): string {
+    switch (type) {
+      case 'mail':
+        return validateEmail(value);
+      case 'password':
+        return validatePassword(value);
+      case 'date':
+        return validateDate(value);
+      case 'street':
+        return validateStreet(value);
+      case 'city':
+        return validateCity(value);
+      case 'postalCode':
+        return validatePostalCode(value);
+      default:
+        return '';
+    }
+  }
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const inputValue = event.target.value;
@@ -44,6 +64,13 @@ export const Input = ({label, type, placeholder }: InputProps) => {
       setError(validationError);
     }
   };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      const validationError = determineValidationError(type, value);
+      setError(validationError);
+    }
+  }, [isSubmitted, type, value]);
 
   return (
 
