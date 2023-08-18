@@ -27,17 +27,51 @@ export const RegistrationForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [date, setDate] = useState('');
+
   const [city, setCity] = useState('');
+  const [shippingCity, setShippingCity] = useState('');
+
   const [street, setStreet] = useState('');
+  const [shippingStreet, setShippingStreet] = useState('');
+
   const [house, setHouse] = useState('');
+  const [shippingHouse, setShippingHouse] = useState('');
+
   const [postalCode, setPostalCode] = useState('');
+  const [shippingPostalCode, setShippingPostalCode] = useState('');
+
   const [firstName, setFirstName] = useState('');
   const [secondName, setSecondName] = useState('');
+
   const [selectedCountry, setSelectedCountry] = useState('');
+  const [shippingSelectedCountry, setShippingSelectedCountry] = useState('');
+
+  const [shouldCopy, setShouldCopy] = useState(false);
 
   const [selectedCountryError, setSelectedCountryError] = useState(false);
+  const [shippingCountryError, setShippingCountryError] = useState(false);
+
+  const [isShippingAddressActive, setIsShippingAddressActive] = useState(false);
 
 
+  const handleCopyClick = () => {
+    setShouldCopy(!shouldCopy);
+    setIsShippingAddressActive(!isShippingAddressActive);
+    if (shouldCopy) {
+      setShippingSelectedCountry('');
+      setShippingCity('');
+      setShippingStreet('')
+      setShippingHouse('')
+      setShippingPostalCode('')
+
+    } else {
+      setShippingSelectedCountry(selectedCountry);
+      setShippingCity(city);
+      setShippingStreet(street);
+      setShippingHouse(house);
+      setShippingPostalCode(postalCode);
+    }
+  };
 
 
   function validateAllInputs() {
@@ -61,6 +95,13 @@ export const RegistrationForm = () => {
       setSelectedCountryError(false);
     }
 
+    if (!shippingSelectedCountry) {
+      setShippingCountryError(true);
+      return;
+    } else {
+      setShippingCountryError(false);
+    }
+
     if (!emailValidationResult && !passwordValidationResult && !dateValidationResult && !cityValidationResult &&
       !streetValidationResult && !houseValidationResult && !postalCodeValidationResult && !firstNameValidationResult &&
     !secondNameValidationResult && selectedCountry
@@ -72,12 +113,23 @@ export const RegistrationForm = () => {
         email: email,
         password: password,
         date: date,
-        country: selectedCountry,
-        city: city,
-        street: street,
-        house: house,
-        postalCode: postalCode
-      }
+        billingAddress: {
+          country: selectedCountry,
+          city: city,
+          street: street,
+          house: house,
+          postalCode: postalCode,
+          isDefault: true                         // !!!!!!!
+        },
+        // shippingAddress: {
+        //     country: selectedCountryShipping,
+        //     city: cityShipping,
+        //     street: streetShipping,
+        //     house: houseShipping,
+        //     postalCode: postalCodeShipping,
+        //     isDefault: true                           // !!!!!!!!!
+        //     }
+      };
       console.log(registrationData)
     }
   }
@@ -114,13 +166,13 @@ export const RegistrationForm = () => {
                    isSubmitted={isSubmitted}
                    onChange={(newValue) => setPassword(newValue)}
             />
-            <h4 className={'text-h4 text-grayLColor dark:text-primaryColor font-bold my-sm text-center'}>Your address</h4>
+            <h4 className={'text-h4 text-grayLColor dark:text-primaryColor font-bold my-sm text-center'}>Your billing address</h4>
             <div className={'md:flex md:justify-between items-end'}>
-              <label className={'font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'} htmlFor="options">Your country:</label>
+              <label className={'font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'} htmlFor="billingOptions">Your country:</label>
               <div>
                 {selectedCountryError && <p className="error-message text-red-500">Please select your country</p>}
                 <select
-                  id={'options'}
+                  id={'billingOptions'}
                   value={selectedCountry}
                   onChange={(e) => {
                     setSelectedCountry(e.target.value);
@@ -136,9 +188,12 @@ export const RegistrationForm = () => {
               </div>
             </div>
 
+
             <Input {...cityValidation}
                    isSubmitted={isSubmitted}
-                   onChange={(newValue) => setCity(newValue)}
+                   onChange={(newValue) => {
+                     setCity(newValue)
+                   }}
             />
             <Input {...streetValidation}
                    isSubmitted={isSubmitted}
@@ -154,6 +209,74 @@ export const RegistrationForm = () => {
                    isSubmitted={isSubmitted}
                    onChange={(newValue) => setPostalCode(newValue)}
             />
+            <div className={'md:ml-[250px]'}>
+              <div className={'flex'}>
+                <input
+                  id={'setAsDefAddress'}
+                  type={'checkbox'}
+                ></input>
+                <label className={'block ml-min font-semibold text-h5 text-grayLColor dark:text-primaryColor whitespace-nowrap'} htmlFor="setAsDefAddress">Set as default address</label>
+              </div>
+              <div className={'flex'}>
+                <input
+                    id={'setAsShipAddress'}
+                    type={'checkbox'}
+                    onClick={handleCopyClick}
+                ></input>
+                <label className={'block ml-min font-semibold text-h5 text-grayLColor dark:text-primaryColor whitespace-nowrap'} htmlFor="setAsShipAddress">Set as shipping address</label>
+              </div>
+            </div>
+            <h4 className={'text-h4 text-grayLColor dark:text-primaryColor font-bold my-sm text-center'}>Your shipping address</h4>
+
+            <div className={'md:flex md:justify-between items-end'}>
+              <label className={'font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'} htmlFor="shippingOptions">Your country:</label>
+              <div>
+                {selectedCountryError && <p className="error-message text-red-500">Please select your country</p>}
+                <select
+                  id={'shippingOptions'}
+                  value={shippingSelectedCountry}
+                  onChange={(e) => {
+                    setShippingSelectedCountry(e.target.value);
+                    setSelectedCountryError(false);
+                  }}
+                  className={selectedCountryError ? 'error p-5 font-medium rounded-md w-inputs border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black' : 'p-5 font-medium rounded-md w-inputs border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black'}
+                >
+                  <option value="" disabled>Select your country</option>
+                  <option>Italy</option>
+                  <option>Spain</option>
+                  <option>Germany</option>
+                </select>
+              </div>
+            </div>
+
+            <Input {...cityValidation}
+                   isSubmitted={isSubmitted}
+                   val={shippingCity}
+                   onChange={(newValue) => setShippingCity(newValue)}
+                   disabled={isShippingAddressActive}
+            />
+
+            <Input {...streetValidation}
+                   isSubmitted={isSubmitted}
+                   val={shippingStreet}
+                   onChange={(newValue) => setStreet(newValue)}
+                   disabled={isShippingAddressActive}
+            />
+            <Input {...streetValidation}
+                   label='House:'
+                   placeholder='Type your house number'
+                   isSubmitted={isSubmitted}
+                   val={shippingHouse}
+                   onChange={(newValue) => setHouse(newValue)}
+                   disabled={isShippingAddressActive}
+            />
+            <Input {...postalCodeValidation}
+                   isSubmitted={isSubmitted}
+                   val={shippingPostalCode}
+                   onChange={(newValue) => setPostalCode(newValue)}
+                   disabled={isShippingAddressActive}
+            />
+
             <div className={'my-sm'}>
               <FormButton onClick={validateAllInputs}>CREATE AN ACCOUNT</FormButton>
             </div>

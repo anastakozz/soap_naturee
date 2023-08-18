@@ -7,9 +7,11 @@ export interface ButtonProps {
 export interface InputProps {
   label: string
   type: string
+  val?: string
   placeholder?: string
   isSubmitted?: boolean
   onChange?: (value: string) => void;
+  disabled?: boolean
 }
 
 export interface InputErrorProps {
@@ -21,3 +23,23 @@ export interface InputErrorObject {
     message: string
   }
 }
+
+export interface registrationData {
+  firstName: string
+  secondName: string
+  email: string
+  password: string
+  date: string
+  billingAddress: address
+  shippingAddress: address
+}
+
+export interface address {
+  country: string
+  city: string
+  street: string
+  house: string
+  postalCode: string
+  isDefault: boolean
+}
+

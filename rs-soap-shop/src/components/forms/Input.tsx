@@ -10,7 +10,8 @@ import {validateStreet} from './validateFunctions/street';
 import {validateCity} from './validateFunctions/city';
 import {validatePostalCode} from './validateFunctions/postalCode';
 
-export const Input = ({label, type, placeholder, isSubmitted, onChange }: InputProps) => {
+export const Input = ({label, type, placeholder, isSubmitted, onChange, val, disabled }: InputProps) => {
+  console.log(val)
 
   const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
 
@@ -20,7 +21,7 @@ export const Input = ({label, type, placeholder, isSubmitted, onChange }: InputP
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(val);
   const [error, setError] = useState('');
 
   function determineValidationError(type: string, value: string): string {
@@ -68,6 +69,10 @@ export const Input = ({label, type, placeholder, isSubmitted, onChange }: InputP
   };
 
   useEffect(() => {
+    setValue(val);
+  }, [val]);
+
+  useEffect(() => {
     if (isSubmitted) {
       const validationError = determineValidationError(type, value);
       setError(validationError);
@@ -96,7 +101,9 @@ export const Input = ({label, type, placeholder, isSubmitted, onChange }: InputP
             type={isPasswordVisible ? 'text' : type}
             className={cn(inputTailwind)}
             placeholder={placeholder}
+            value={val}
             onChange={handleInputChange}
+            disabled={disabled}
           />
           {type === 'password' && (
             <button
