@@ -46,7 +46,7 @@ export const RegistrationForm = () => {
             <p className={'text-h4 font-semibold text-grayLColor dark:text-primaryColor'}>Do you already have an account?</p>
             <div className={'my-sm'}>
               <FormButton to={'/sign-in'}>SIGN IN</FormButton>
-              <EmptyButton {...{children:'click', onClick: handleRegistration}}></EmptyButton>
+              <EmptyButton {...{children:'click', onClick: handleRegistration} }></EmptyButton>
             </div>
           </div>
           </div>
