@@ -9,6 +9,8 @@ import { handleRegistration } from '../../../services/handleRegistration'
 import ResultMessage from '../../ResultMessage'
 import { useState } from 'react'
 import { ResultProps } from '../../../lib/interfaces'
+import EmptyButton from '../../buttons/emptyButton';
+import {handleRegistration} from '../../../services/handleRegistration'
 
 export const RegistrationForm = () => {
   const methods = useForm()
@@ -69,6 +71,7 @@ export const RegistrationForm = () => {
             </p>
             <div className={'my-sm'}>
               <FormButton to={'/sign-in'}>SIGN IN</FormButton>
+              <EmptyButton {...{children:'click', onClick: handleRegistration}}></EmptyButton>
             </div>
           </div>
           <ResultMessage {...submitResult}></ResultMessage>
