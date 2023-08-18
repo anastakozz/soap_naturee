@@ -71,7 +71,7 @@ export const RegistrationForm = () => {
             </p>
             <div className={'my-sm'}>
               <FormButton to={'/sign-in'}>SIGN IN</FormButton>
-              <EmptyButton {...{children:'click', onClick: handleRegistration}}></EmptyButton>
+              <EmptyButton {...{children:'click', onClick: handleRegistration} }></EmptyButton>
             </div>
           </div>
           <ResultMessage {...submitResult}></ResultMessage>
