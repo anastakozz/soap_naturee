@@ -1,11 +1,18 @@
 import axios from 'axios'
 
-// interface RegistrationData {
-//   email: string
-//   firstName: string
-//   lastNAme: string
-//   password: string
-// }
+interface RegistrationData {
+  email: string
+  firstName: string
+  lastNAme: string
+  password: string
+}
+
+const testData: RegistrationData = {
+  email: '999@999.com',
+  firstName: 'Johnny',
+  lastNAme: 'Depp',
+  password: 'lalala'
+}
 
 const authUrl = process.env.REACT_APP_CTP_AUTH_URL
 const apiUrl = process.env.REACT_APP_CTP_API_URL
@@ -37,15 +44,15 @@ async function getCustomers() {
   })
 }
 
-async function createCustomer() {
+async function createCustomer(data: RegistrationData) {
   return await axios({
     method: 'post',
     url: `${apiUrl}/${projectKey}/customers`,
     data: {
-      email: '333@333.com',
-      firstName: 'Hey',
-      lastName: 'Joe',
-      password: 'olala'
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastNAme,
+      password: data.password
     },
     headers: { Authorization: `Bearer ${accessKey}` }
   })
@@ -63,5 +70,8 @@ async function getCustomerToken(username: string, password: string) {
 }
 
 export async function handleRegistration() {
-  getBasicToken()
+  // getBasicToken()
+  // createCustomer(testData)
+  console.log(await getCustomers())
+  
 }
