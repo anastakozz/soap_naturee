@@ -6,11 +6,14 @@ import Dropdown from './dropDown'
 import React from 'react'
 import {InputColumn} from '../inputColumn';
 import FormButton from '../formButton';
+import EmptyButton from '../../buttons/emptyButton';
+import {handleRegistration} from '../../../services/handleRegistration'
 
 export const RegistrationForm = () => {
   const methods = useForm()
 
   const onSubmit = methods.handleSubmit(data => {
+    handleRegistration()
     console.log(data)
   })
 
@@ -43,6 +46,7 @@ export const RegistrationForm = () => {
             <p className={'text-h4 font-semibold text-grayLColor dark:text-primaryColor'}>Do you already have an account?</p>
             <div className={'my-sm'}>
               <FormButton to={'/sign-in'}>SIGN IN</FormButton>
+              <EmptyButton {...{children:'click', onClick: handleRegistration}}></EmptyButton>
             </div>
           </div>
           </div>
