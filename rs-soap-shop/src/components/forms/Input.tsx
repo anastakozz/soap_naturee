@@ -10,7 +10,7 @@ import {validateStreet} from './validateFunctions/street';
 import {validateCity} from './validateFunctions/city';
 import {validatePostalCode} from './validateFunctions/postalCode';
 
-export const Input = ({label, type, placeholder, isSubmitted }: InputProps) => {
+export const Input = ({label, type, placeholder, isSubmitted, onChange }: InputProps) => {
 
   const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
 
@@ -44,6 +44,8 @@ export const Input = ({label, type, placeholder, isSubmitted }: InputProps) => {
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const inputValue = event.target.value;
+    setValue(inputValue);
+    onChange(inputValue);
     if (type === 'mail') {
       const validationError = validateEmail(inputValue);
       setError(validationError);

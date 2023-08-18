@@ -44,6 +44,12 @@ export const dateValidation = {
   type: 'date'
 }
 
+export const dropdownValidation = {
+  name: 'dropdown',
+  label: 'Your country:',
+  type: 'select'
+}
+
 export const streetValidation = {
   name: 'street',
   label: 'Street:',

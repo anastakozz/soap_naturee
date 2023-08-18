@@ -9,6 +9,7 @@ export interface InputProps {
   type: string
   placeholder?: string
   isSubmitted?: boolean
+  onChange?: (value: string) => void;
 }
 
 export interface InputErrorProps {
