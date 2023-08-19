@@ -2,12 +2,12 @@ import axios from 'axios'
 
 const BASE_AUTH_URL = process.env.REACT_APP_CTP_AUTH_URL
 
-const clientID = process.env.REACT_APP_CTP_CLIENT_ADMIN_ID
+const clientID = process.env.REACT_APP_CTP_CLIENT_ID
 const projectKey = process.env.REACT_APP_CTP_PROJECT_KEY
-const secretAdmin = process.env.REACT_APP_CTP_ADMIN_SECRET
+const secret = process.env.REACT_APP_CTP_CLIENT_SECRET
 
 const HEADERS = {
-  Authorization: 'Basic ' + btoa(`${clientID}:${secretAdmin}`),
+  Authorization: 'Basic ' + btoa(`${clientID}:${secret}`),
   'Content-Type': 'application/x-www-form-urlencoded'
 }
 
