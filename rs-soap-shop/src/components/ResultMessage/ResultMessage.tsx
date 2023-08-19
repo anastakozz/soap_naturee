@@ -5,7 +5,7 @@ import ErrorMessage from './errorMessage.tsx'
 export default function ResultMessage(result: ResultProps) {
   if (result.isVisible) {
     return <div>
-        {!result.isSuccess ? (<SuccessMessage />) : (<ErrorMessage message={result.message}/>)}
+        {result.isSuccess ? (<SuccessMessage />) : (<ErrorMessage message={result.message}/>)}
     </div>
   } 
 }
