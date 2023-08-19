@@ -50,3 +50,4 @@ export async function handleRegistration(): Promise<ResultProps> {
   const result = await createCustomer(data)
   return result
 }
+

@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import { RegistrationData, Address, ResultProps } from '../lib/interfaces'
+import { RegistrationData, ResultProps } from '../lib/interfaces'
 
 const authUrl = process.env.REACT_APP_CTP_AUTH_URL
 const apiUrl = process.env.REACT_APP_CTP_API_URL
@@ -23,15 +23,10 @@ export async function getBasicToken() {
   }
 }
 
-export async function getCustomers() {
-  return await axios({
-    method: 'get',
-    url: `${apiUrl}/${projectKey}/customers`,
-    headers: { Authorization: `Bearer ${accessKey}` }
-  })
-}
-
 export async function createCustomer(data: Partial<RegistrationData>): Promise<ResultProps> {
+  const billingDefaultIndex = data.billingAddress.isDefault ? 0 : undefined
+  const shippingDefaultIndex = data.shippingAddress.isDefault ? 1 : undefined
+  
   try {
     const response = await axios({
       method: 'post',
@@ -40,51 +35,37 @@ export async function createCustomer(data: Partial<RegistrationData>): Promise<R
         email: data.email,
         firstName: data.firstName,
         lastName: data.secondName,
-        password: data.password
+        password: data.password,
+        dateOfBirth: data.date,
+        addresses: [
+          {
+            country: data.billingAddress.country,
+            city: data.billingAddress.city,
+            streetName: data.billingAddress.street,
+            postalCode: data.billingAddress.postalCode,
+            building: data.billingAddress.house
+          },
+          {
+            country: data.shippingAddress.country,
+            city: data.shippingAddress.city,
+            streetName: data.shippingAddress.street,
+            postalCode: data.shippingAddress.postalCode,
+            building: data.shippingAddress.house
+          }
+        ],
+        billingAddresses: [0],
+        shippingAddresses: [1],
+        defaultBillingAddress: billingDefaultIndex,
+        defaultShippingAddress: shippingDefaultIndex
       },
       headers: { Authorization: `Bearer ${accessKey}` }
     })
     return { isSuccess: true, message: response.data.customer.id }
   } catch (error) {
+    console.log(error)
     if (error instanceof AxiosError) {
       return { isSuccess: false, message: error.response.data.message }
     }
   }
 }
 
-export async function setDateOfBirth(id: string, data: Partial<RegistrationData>) {
-  try {
-    const response = await axios({
-      method: 'post',
-      url: `${apiUrl}/${projectKey}/customers/${id}`,
-      data: {
-        version: 1,
-        actions: [
-          {
-            action: 'setDateOfBirth',
-            dateOfBirth: data.date
-          }
-        ]
-      },
-      headers: { Authorization: `Bearer ${accessKey}` }
-    })
-    return response
-  } catch (error) {
-    console.log(error)
-    return error
-  }
-}
-
-// async function setShippingAddress(id: string, data: Partial<RegistrationData>) {
-// }
-
-export async function getCustomerToken(username: string, password: string) {
-  const response: void = await axios({
-    method: 'post',
-    url: `${authUrl}/oauth/${projectKey}/customers/token?grant_type=password&username=${username}&password=${password}`,
-    headers: {
-      Authorization: 'Basic ' + btoa(`${clientId}:${secret}`)
-    }
-  })
-  console.log(response)
-}
