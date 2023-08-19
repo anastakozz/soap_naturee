@@ -77,7 +77,7 @@ export const RegistrationForm = () => {
   };
 
 
-  function validateAllInputs(): void {
+  function validateAllInputs(): RegistrationData {
 
     setIsSubmitted(true);
 
@@ -103,9 +103,18 @@ export const RegistrationForm = () => {
       setShippingCountryError(false);
     }
 
-    if (!emailValidationResult && !passwordValidationResult && !dateValidationResult && !cityValidationResult &&
-      !streetValidationResult && !houseValidationResult && !postalCodeValidationResult && !firstNameValidationResult &&
-    !secondNameValidationResult && selectedCountry && shippingSelectedCountry
+    if (
+      !emailValidationResult &&
+      !passwordValidationResult &&
+      !dateValidationResult &&
+      !cityValidationResult &&
+      !streetValidationResult &&
+      !houseValidationResult &&
+      !postalCodeValidationResult &&
+      !firstNameValidationResult &&
+      !secondNameValidationResult &&
+      selectedCountry &&
+      shippingSelectedCountry
     ) {
 
       const registrationData: RegistrationData = {
@@ -131,6 +140,7 @@ export const RegistrationForm = () => {
             isDefault: isDefaultShippingAddress
             }
       };
+      return registrationData;
     }
   }
 
@@ -280,7 +290,6 @@ export const RegistrationForm = () => {
               <input
                 id={'setAsDefAddress2'}
                 type={'checkbox'}
-                disabled={isShippingAddressActive}
                 onChange={() => setIsDefaultShippingAddress(!isDefaultShippingAddress)}
               ></input>
               <label className={'block ml-min font-semibold text-h5 text-grayLColor dark:text-primaryColor whitespace-nowrap'} htmlFor="setAsDefAddress2">Set as default address</label>

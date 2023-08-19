@@ -11,7 +11,7 @@ export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function validateAllInputs(): void {
+  function validateAllInputs(): LoginData {
     setIsSubmitted(true);
     const emailValidationResult: string | undefined = validateEmail(email);
     const passwordValidationResult: string | undefined = validatePassword(password);
@@ -22,7 +22,7 @@ export const LoginForm = () => {
         email: email,
         password: password
       }
-      console.log(loginData)
+      return loginData;
     }
   }
 
