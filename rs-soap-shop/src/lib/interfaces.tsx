@@ -13,6 +13,7 @@ export interface InputProps {
   name: string
   multiline?: boolean
   className?: string
+  onChange?: () => void
 }
 
 export interface InputErrorProps {
@@ -31,7 +32,6 @@ export interface CategoryCardProps {
   link: string
 }
 
-
 export interface ProductCardProps {
   label: string
   description: string
@@ -39,5 +39,5 @@ export interface ProductCardProps {
   link: string
   price: number
   sale: boolean
-  oldPrice?: number 
+  oldPrice?: number
 }
