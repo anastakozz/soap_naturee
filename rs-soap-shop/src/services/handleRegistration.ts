@@ -2,26 +2,31 @@ import { RegistrationData, ResultProps } from '../lib/interfaces'
 import { createCustomer } from './registration.service'
 
 const testData: RegistrationData = {
-  email: '27@2.com',
-  firstName: 'A',
-  secondName: 'A',
-  password: 'lalala',
-  date: '1950-09-09',
-  billingAddress: {
-    country: 'Germany',
-    city: 'Milan',
-    street: 'AAA',
-    house: '111',
-    postalCode: '111',
-    isDefault: false
-  },
-  shippingAddress: {
-    country: 'Italy',
-    city: 'Milan',
-    street: 'AAA',
-    house: '111',
-    postalCode: '111',
-    isDefault: true
+  email: '999@999.com',
+  firstName: 'Johnny',
+  lastNAme: 'Depp',
+  password: 'lalala'
+}
+
+const authUrl = process.env.REACT_APP_CTP_AUTH_URL
+const apiUrl = process.env.REACT_APP_CTP_API_URL
+const projectKey = process.env.REACT_APP_CTP_PROJECT_KEY
+const clientId = process.env.REACT_APP_CTP_CLIENT_ID
+const secret = process.env.REACT_APP_CTP_CLIENT_SECRET
+const accessKey = await getBasicToken()
+
+async function getBasicToken() {
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${authUrl}/oauth/token?grant_type=client_credentials`,
+      headers: {
+        Authorization: 'Basic ' + btoa(`${clientId}:${secret}`)
+      }
+    })
+    return response.data.access_token
+  } catch (error) {
+    console.error(error)
   }
 }
 

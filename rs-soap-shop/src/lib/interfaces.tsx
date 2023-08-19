@@ -57,5 +57,30 @@ export interface ProductCardProps {
   link: string
   price: number
   sale: boolean
-  oldPrice?: number 
+  oldPrice?: number
+}
+
+export interface RegistrationData {
+  firstName: string
+  secondName: string
+  email: string
+  password: string
+  date: string
+  billingAddress: Address
+  shippingAddress: Address
+}
+
+export interface Address {
+  country: string
+  city: string
+  street: string
+  house: string
+  postalCode: string
+  isDefault: boolean
+}
+
+export interface ResultProps {
+  isSuccess?: boolean | null
+  message: string
+  isVisible?: boolean
 }
