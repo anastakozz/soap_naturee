@@ -1,14 +1,14 @@
 import React, {ChangeEventHandler, useEffect, useState} from 'react';
 import cn from 'classnames';
-import {ShowPassword} from '../../icons/showPassword';
-import {HidePassword} from '../../icons/hidePassword';
-import {validateEmail} from './validateFunctions/e-mail';
-import {InputProps} from '../../lib/interfaces';
-import {validatePassword} from './validateFunctions/password';
-import {validateDate} from './validateFunctions/date';
-import {validateStreet} from './validateFunctions/street';
-import {validateCity} from './validateFunctions/city';
-import {validatePostalCode} from './validateFunctions/postalCode';
+import {ShowPassword} from '../../../icons/showPassword';
+import {HidePassword} from '../../../icons/hidePassword';
+import {validateEmail} from '../validateFunctions/e-mail';
+import {InputProps} from '../../../lib/interfaces';
+import {validatePassword} from '../validateFunctions/password';
+import {validateDate} from '../validateFunctions/date';
+import {validateStreet} from '../validateFunctions/street';
+import {validateCity} from '../validateFunctions/city';
+import {validatePostalCode} from '../validateFunctions/postalCode';
 
 export const Input = ({label, type, placeholder, isSubmitted, onChange, val, disabled }: InputProps) => {
 
@@ -16,7 +16,7 @@ export const Input = ({label, type, placeholder, isSubmitted, onChange, val, dis
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const togglePasswordVisibility = () => {
+  const togglePasswordVisibility = (): void => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
@@ -42,38 +42,38 @@ export const Input = ({label, type, placeholder, isSubmitted, onChange, val, dis
     }
   }
 
-  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    const inputValue = event.target.value;
+  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event): void => {
+    const inputValue: string = event.target.value;
     setValue(inputValue);
     onChange(inputValue);
     if (type === 'mail') {
-      const validationError = validateEmail(inputValue);
+      const validationError: string = validateEmail(inputValue);
       setError(validationError);
     } else if (type === 'password') {
-      const validationError = validatePassword(inputValue);
+      const validationError: string = validatePassword(inputValue);
       setError(validationError);
     } else if (type === 'date') {
-      const validationError = validateDate(inputValue);
+      const validationError: string = validateDate(inputValue);
       setError(validationError);
     } else if (type === 'street') {
-      const validationError = validateStreet(inputValue);
+      const validationError: string = validateStreet(inputValue);
       setError(validationError);
     } else if (type === 'city') {
-      const validationError = validateCity(inputValue);
+      const validationError: string = validateCity(inputValue);
       setError(validationError);
     } else if (type === 'postalCode') {
-      const validationError = validatePostalCode(inputValue);
+      const validationError: string = validatePostalCode(inputValue);
       setError(validationError);
     }
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     setValue(val);
   }, [val]);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (isSubmitted) {
-      const validationError = determineValidationError(type, value);
+      const validationError: string = determineValidationError(type, value);
       setError(validationError);
     }
   }, [isSubmitted, type, value]);

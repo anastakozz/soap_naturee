@@ -1,4 +1,4 @@
-export function validatePassword(password: string) {
+export function validatePassword(password: string): string | undefined {
   const uppercaseRegex = /[A-ZА-Я]/;
   const lowercaseRegex = /[a-zа-я]/;
   const numberRegex = /[0-9]/;

@@ -1,9 +1,9 @@
-export function validateDate(dateString: string) {
-  const today = new Date();
-  const inputDate = new Date(dateString);
-  const minDate = new Date();
+export function validateDate(dateString: string): string | undefined {
+  const today: Date = new Date();
+  const inputDate: Date = new Date(dateString);
+  const minDate: Date = new Date();
   minDate.setFullYear(today.getFullYear() - 13);
-  const minAllowedDate = new Date('1900-01-01');
+  const minAllowedDate: Date = new Date('1900-01-01');
 
   if (isNaN(inputDate.getTime())) {
     return 'Enter the correct date.';

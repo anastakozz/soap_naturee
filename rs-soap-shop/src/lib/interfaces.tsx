@@ -4,6 +4,11 @@ export interface ButtonProps {
   to?: string
 }
 
+export interface LoginData {
+  email: string
+  password: string
+}
+
 export interface InputProps {
   label: string
   type: string
@@ -14,27 +19,23 @@ export interface InputProps {
   disabled?: boolean
 }
 
-export interface InputErrorProps {
-  message: string
-}
-
 export interface InputErrorObject {
   error: {
     message: string
   }
 }
 
-export interface registrationData {
+export interface RegistrationData {
   firstName: string
   secondName: string
   email: string
   password: string
   date: string
-  billingAddress: address
-  shippingAddress: address
+  billingAddress: Address
+  shippingAddress: Address
 }
 
-export interface address {
+export interface Address {
   country: string
   city: string
   street: string

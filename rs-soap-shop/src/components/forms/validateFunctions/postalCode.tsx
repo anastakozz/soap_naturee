@@ -1,4 +1,4 @@
-export function validatePostalCode(code: string) {
+export function validatePostalCode(code: string): string | undefined {
   const numericRegex = /^[0-9]+$/;
 
   if (!numericRegex.test(code)) {

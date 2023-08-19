@@ -7,18 +7,19 @@ import {
   passwordValidation,
   postalCodeValidation,
   streetValidation
-} from '../../../lib/utils/inputValidations'
+} from '../../lib/utils/inputValidations'
 import React, {useState} from 'react'
-import {InputColumn} from '../inputColumn';
-import FormButton from '../formButton';
-import {Input} from '../Input';
-import {validateEmail} from '../validateFunctions/e-mail';
-import {validatePassword} from '../validateFunctions/password';
-import {validateDate} from '../validateFunctions/date';
-import {validateCity} from '../validateFunctions/city';
-import {validateStreet} from '../validateFunctions/street';
-import {validatePostalCode} from '../validateFunctions/postalCode';
-import {validateName} from '../validateFunctions/name';
+import {InputColumn} from './inputs/inputColumn';
+import ButtonForm from './buttonForm';
+import {Input} from './inputs/Input';
+import {validateEmail} from './validateFunctions/e-mail';
+import {validatePassword} from './validateFunctions/password';
+import {validateDate} from './validateFunctions/date';
+import {validateCity} from './validateFunctions/city';
+import {validateStreet} from './validateFunctions/street';
+import {validatePostalCode} from './validateFunctions/postalCode';
+import {validateName} from './validateFunctions/name';
+import {RegistrationData} from '../../lib/interfaces';
 
 export const RegistrationForm = () => {
   const methods = useForm()
@@ -56,7 +57,7 @@ export const RegistrationForm = () => {
   const [isDefaultShippingAddress, setIsDefaultShippingAddress] = useState(false);
 
 
-  const handleCopyClick = () => {
+  const handleCopyClick = (): void => {
     setShouldCopy(!shouldCopy);
     setIsShippingAddressActive(!isShippingAddressActive);
     if (shouldCopy) {
@@ -76,40 +77,38 @@ export const RegistrationForm = () => {
   };
 
 
-  function validateAllInputs() {
+  function validateAllInputs(): void {
 
     setIsSubmitted(true);
 
-    const emailValidationResult = validateEmail(email);
-    const passwordValidationResult = validatePassword(password);
-    const dateValidationResult = validateDate(date);
-    const cityValidationResult = validateCity(city);
-    const streetValidationResult = validateStreet(street);
-    const houseValidationResult = validateStreet(house);
-    const postalCodeValidationResult = validatePostalCode(postalCode);
-    const firstNameValidationResult = validateName(firstName);
-    const secondNameValidationResult = validateName(secondName);
+    const emailValidationResult: string | undefined = validateEmail(email);
+    const passwordValidationResult: string | undefined = validatePassword(password);
+    const dateValidationResult: string | undefined = validateDate(date);
+    const cityValidationResult: string | undefined = validateCity(city);
+    const streetValidationResult: string | undefined = validateStreet(street);
+    const houseValidationResult: string | undefined = validateStreet(house);
+    const postalCodeValidationResult: string | undefined = validatePostalCode(postalCode);
+    const firstNameValidationResult: string | undefined = validateName(firstName);
+    const secondNameValidationResult: string | undefined = validateName(secondName);
 
     if (!selectedCountry) {
       setSelectedCountryError(true);
-      return;
     } else {
       setSelectedCountryError(false);
     }
 
     if (!shippingSelectedCountry) {
       setShippingCountryError(true);
-      return;
     } else {
       setShippingCountryError(false);
     }
 
     if (!emailValidationResult && !passwordValidationResult && !dateValidationResult && !cityValidationResult &&
       !streetValidationResult && !houseValidationResult && !postalCodeValidationResult && !firstNameValidationResult &&
-    !secondNameValidationResult && selectedCountry
+    !secondNameValidationResult && selectedCountry && shippingSelectedCountry
     ) {
 
-      const registrationData = {
+      const registrationData: RegistrationData = {
         firstName: firstName,
         secondName: secondName,
         email: email,
@@ -132,7 +131,6 @@ export const RegistrationForm = () => {
             isDefault: isDefaultShippingAddress
             }
       };
-      console.log(registrationData)
     }
   }
 
@@ -147,26 +145,26 @@ export const RegistrationForm = () => {
                            label='First name:'
                            placeholder='Type your first name'
                            isSubmitted={isSubmitted}
-                           onChange={(newValue) => setFirstName(newValue)}
+                           onChange={(newValue: string) => setFirstName(newValue)}
               />
               <InputColumn {...nameValidation}
                            label='Second name:'
                            placeholder='Type your second name'
                            isSubmitted={isSubmitted}
-                           onChange={(newValue) => setSecondName(newValue)}
+                           onChange={(newValue: string) => setSecondName(newValue)}
               />
             </div>
             <Input {...dateValidation}
                    isSubmitted={isSubmitted}
-                   onChange={(newValue) => setDate(newValue)}
+                   onChange={(newValue: string) => setDate(newValue)}
             />
             <Input {...emailValidation}
                    isSubmitted={isSubmitted}
-                   onChange={(newValue) => setEmail(newValue)}
+                   onChange={(newValue: string) => setEmail(newValue)}
             />
             <Input {...passwordValidation}
                    isSubmitted={isSubmitted}
-                   onChange={(newValue) => setPassword(newValue)}
+                   onChange={(newValue: string) => setPassword(newValue)}
             />
             <h4 className={'text-h4 text-grayLColor dark:text-primaryColor font-bold my-sm text-center'}>Your billing address</h4>
             <div className={'md:flex md:justify-between items-end'}>
@@ -193,21 +191,21 @@ export const RegistrationForm = () => {
 
             <Input {...cityValidation}
                    isSubmitted={isSubmitted}
-                   onChange={(newValue) => setCity(newValue)}
+                   onChange={(newValue: string) => setCity(newValue)}
             />
             <Input {...streetValidation}
                    isSubmitted={isSubmitted}
-                   onChange={(newValue) => setStreet(newValue)}
+                   onChange={(newValue: string) => setStreet(newValue)}
             />
             <Input {...streetValidation}
                    label='House:'
                    placeholder='Type your house number'
                    isSubmitted={isSubmitted}
-                   onChange={(newValue) => setHouse(newValue)}
+                   onChange={(newValue: string) => setHouse(newValue)}
             />
             <Input {...postalCodeValidation}
                    isSubmitted={isSubmitted}
-                   onChange={(newValue) => setPostalCode(newValue)}
+                   onChange={(newValue: string) => setPostalCode(newValue)}
             />
             <div className={'md:ml-[250px]'}>
               <div className={'flex'}>
@@ -232,16 +230,16 @@ export const RegistrationForm = () => {
             <div className={'md:flex md:justify-between items-end'}>
               <label className={'font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'} htmlFor="shippingOptions">Your country:</label>
               <div>
-                {selectedCountryError && <p className="error-message text-red-500">Please select your country</p>}
+                {shippingCountryError && <p className="error-message text-red-500">Please select your country</p>}
                 <select
                   id={'shippingOptions'}
                   value={shippingSelectedCountry}
                   disabled={isShippingAddressActive}
-                  onChange={(e) => {
+                  onChange={(e): void => {
                     setShippingSelectedCountry(e.target.value);
-                    setSelectedCountryError(false);
+                    setShippingCountryError(false);
                   }}
-                  className={selectedCountryError ? 'error p-5 font-medium rounded-md w-inputs border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black' : 'p-5 font-medium rounded-md w-inputs border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black'}
+                  className={shippingCountryError ? 'error p-5 font-medium rounded-md w-inputs border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black' : 'p-5 font-medium rounded-md w-inputs border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black'}
                 >
                   <option value="" disabled>Select your country</option>
                   <option>Italy</option>
@@ -254,14 +252,14 @@ export const RegistrationForm = () => {
             <Input {...cityValidation}
                    isSubmitted={isSubmitted}
                    val={shippingCity}
-                   onChange={(newValue) => setShippingCity(newValue)}
+                   onChange={(newValue: string) => setShippingCity(newValue)}
                    disabled={isShippingAddressActive}
             />
 
             <Input {...streetValidation}
                    isSubmitted={isSubmitted}
                    val={shippingStreet}
-                   onChange={(newValue) => setShippingStreet(newValue)}
+                   onChange={(newValue: string) => setShippingStreet(newValue)}
                    disabled={isShippingAddressActive}
             />
             <Input {...streetValidation}
@@ -269,13 +267,13 @@ export const RegistrationForm = () => {
                    placeholder='Type your house number'
                    isSubmitted={isSubmitted}
                    val={shippingHouse}
-                   onChange={(newValue) => setShippingHouse(newValue)}
+                   onChange={(newValue: string) => setShippingHouse(newValue)}
                    disabled={isShippingAddressActive}
             />
             <Input {...postalCodeValidation}
                    isSubmitted={isSubmitted}
                    val={shippingPostalCode}
-                   onChange={(newValue) => setShippingPostalCode(newValue)}
+                   onChange={(newValue: string) => setShippingPostalCode(newValue)}
                    disabled={isShippingAddressActive}
             />
             <div className={'flex md:ml-[250px]'}>
@@ -288,11 +286,11 @@ export const RegistrationForm = () => {
               <label className={'block ml-min font-semibold text-h5 text-grayLColor dark:text-primaryColor whitespace-nowrap'} htmlFor="setAsDefAddress2">Set as default address</label>
             </div>
             <div className={'my-sm'}>
-              <FormButton onClick={validateAllInputs}>CREATE AN ACCOUNT</FormButton>
+              <ButtonForm onClick={validateAllInputs}>CREATE AN ACCOUNT</ButtonForm>
             </div>
             <p className={'text-h4 font-semibold text-grayLColor dark:text-primaryColor'}>Do you already have an account?</p>
             <div className={'my-sm'}>
-              <FormButton to={'/sign-in'}>SIGN IN</FormButton>
+              <ButtonForm to={'/sign-in'}>SIGN IN</ButtonForm>
             </div>
           </div>
           </div>

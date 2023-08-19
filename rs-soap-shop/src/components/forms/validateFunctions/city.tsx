@@ -1,4 +1,4 @@
-export function validateCity(city: string) {
+export function validateCity(city: string): string | undefined {
   const specialCharsAndNumbersRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?0-9]/;
 
   if (city) {

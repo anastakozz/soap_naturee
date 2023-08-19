@@ -1,4 +1,4 @@
-export function validateEmail(email: string) {
+export function validateEmail(email: string): string | undefined {
   if (!email) {
     return 'The e-mail cannot be empty.';
   } else if (email.includes(' ')) {

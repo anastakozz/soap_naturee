@@ -1,13 +1,13 @@
 import cn from 'classnames'
-import { InputProps } from '../../lib/interfaces'
+import { InputProps } from '../../../lib/interfaces'
 import {ChangeEventHandler, useEffect, useState} from 'react';
-import {validateEmail} from './validateFunctions/e-mail';
-import {validatePassword} from './validateFunctions/password';
-import {validateName} from './validateFunctions/name';
-import {validateDate} from './validateFunctions/date';
-import {validateStreet} from './validateFunctions/street';
-import {validateCity} from './validateFunctions/city';
-import {validatePostalCode} from './validateFunctions/postalCode';
+import {validateEmail} from '../validateFunctions/e-mail';
+import {validatePassword} from '../validateFunctions/password';
+import {validateName} from '../validateFunctions/name';
+import {validateDate} from '../validateFunctions/date';
+import {validateStreet} from '../validateFunctions/street';
+import {validateCity} from '../validateFunctions/city';
+import {validatePostalCode} from '../validateFunctions/postalCode';
 
 export const InputColumn = ({ label, type, placeholder, isSubmitted, onChange }: InputProps) => {
 
@@ -37,25 +37,25 @@ export const InputColumn = ({ label, type, placeholder, isSubmitted, onChange }:
     }
   }
 
-  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    const inputValue = event.target.value;
+  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event): void => {
+    const inputValue: string = event.target.value;
     setValue(inputValue);
     onChange(inputValue);
     if (type === 'email') {
-      const validationError = validateEmail(inputValue);
+      const validationError: string = validateEmail(inputValue);
       setError(validationError);
     } else if (type === 'password') {
-      const validationError = validatePassword(inputValue);
+      const validationError: string = validatePassword(inputValue);
       setError(validationError);
     } else if (type === 'text') {
-      const validationError = validateName(inputValue);
+      const validationError: string = validateName(inputValue);
       setError(validationError);
     }
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     if (isSubmitted) {
-      const validationError = determineValidationError(type, value);
+      const validationError: string = determineValidationError(type, value);
       setError(validationError);
     }
   }, [isSubmitted, type, value]);
