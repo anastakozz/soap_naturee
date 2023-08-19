@@ -52,6 +52,8 @@ export const RegistrationForm = () => {
   const [shippingCountryError, setShippingCountryError] = useState(false);
 
   const [isShippingAddressActive, setIsShippingAddressActive] = useState(false);
+  const [isDefaultBillingAddress, setIsDefaultBillingAddress] = useState(false);
+  const [isDefaultShippingAddress, setIsDefaultShippingAddress] = useState(false);
 
 
   const handleCopyClick = () => {
@@ -119,16 +121,16 @@ export const RegistrationForm = () => {
           street: street,
           house: house,
           postalCode: postalCode,
-          isDefault: true                         // !!!!!!!
+          isDefault: isDefaultBillingAddress
         },
-        // shippingAddress: {
-        //     country: selectedCountryShipping,
-        //     city: cityShipping,
-        //     street: streetShipping,
-        //     house: houseShipping,
-        //     postalCode: postalCodeShipping,
-        //     isDefault: true                           // !!!!!!!!!
-        //     }
+        shippingAddress: {
+            country: shippingSelectedCountry,
+            city: shippingCity,
+            street: shippingStreet,
+            house: shippingHouse,
+            postalCode: shippingPostalCode,
+            isDefault: isDefaultShippingAddress
+            }
       };
       console.log(registrationData)
     }
@@ -191,9 +193,7 @@ export const RegistrationForm = () => {
 
             <Input {...cityValidation}
                    isSubmitted={isSubmitted}
-                   onChange={(newValue) => {
-                     setCity(newValue)
-                   }}
+                   onChange={(newValue) => setCity(newValue)}
             />
             <Input {...streetValidation}
                    isSubmitted={isSubmitted}
@@ -214,6 +214,7 @@ export const RegistrationForm = () => {
                 <input
                   id={'setAsDefAddress'}
                   type={'checkbox'}
+                  onChange={() => setIsDefaultBillingAddress(!isDefaultBillingAddress)}
                 ></input>
                 <label className={'block ml-min font-semibold text-h5 text-grayLColor dark:text-primaryColor whitespace-nowrap'} htmlFor="setAsDefAddress">Set as default address</label>
               </div>
@@ -235,6 +236,7 @@ export const RegistrationForm = () => {
                 <select
                   id={'shippingOptions'}
                   value={shippingSelectedCountry}
+                  disabled={isShippingAddressActive}
                   onChange={(e) => {
                     setShippingSelectedCountry(e.target.value);
                     setSelectedCountryError(false);
@@ -259,7 +261,7 @@ export const RegistrationForm = () => {
             <Input {...streetValidation}
                    isSubmitted={isSubmitted}
                    val={shippingStreet}
-                   onChange={(newValue) => setStreet(newValue)}
+                   onChange={(newValue) => setShippingStreet(newValue)}
                    disabled={isShippingAddressActive}
             />
             <Input {...streetValidation}
@@ -267,16 +269,24 @@ export const RegistrationForm = () => {
                    placeholder='Type your house number'
                    isSubmitted={isSubmitted}
                    val={shippingHouse}
-                   onChange={(newValue) => setHouse(newValue)}
+                   onChange={(newValue) => setShippingHouse(newValue)}
                    disabled={isShippingAddressActive}
             />
             <Input {...postalCodeValidation}
                    isSubmitted={isSubmitted}
                    val={shippingPostalCode}
-                   onChange={(newValue) => setPostalCode(newValue)}
+                   onChange={(newValue) => setShippingPostalCode(newValue)}
                    disabled={isShippingAddressActive}
             />
-
+            <div className={'flex md:ml-[250px]'}>
+              <input
+                id={'setAsDefAddress2'}
+                type={'checkbox'}
+                disabled={isShippingAddressActive}
+                onChange={() => setIsDefaultShippingAddress(!isDefaultShippingAddress)}
+              ></input>
+              <label className={'block ml-min font-semibold text-h5 text-grayLColor dark:text-primaryColor whitespace-nowrap'} htmlFor="setAsDefAddress2">Set as default address</label>
+            </div>
             <div className={'my-sm'}>
               <FormButton onClick={validateAllInputs}>CREATE AN ACCOUNT</FormButton>
             </div>

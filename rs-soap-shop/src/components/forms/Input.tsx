@@ -11,7 +11,6 @@ import {validateCity} from './validateFunctions/city';
 import {validatePostalCode} from './validateFunctions/postalCode';
 
 export const Input = ({label, type, placeholder, isSubmitted, onChange, val, disabled }: InputProps) => {
-  console.log(val)
 
   const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
 
