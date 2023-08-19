@@ -1,16 +1,11 @@
 import { Input } from '../Input'
 import { useForm, FormProvider } from 'react-hook-form'
 import { emailValidation, passwordValidation } from '../../../lib/utils/inputValidations'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import FormButton from '../formButton'
 import login from '../../../services/login.service'
 import { useNavigate } from 'react-router-dom'
-// import { type } from 'os'
-
-type FormDataType = {
-  email: string
-  password: string
-}
+import { FormDataType } from '../../../lib/utils/types'
 
 export const LoginForm = () => {
   const [error, setError] = useState(null)
@@ -24,7 +19,7 @@ export const LoginForm = () => {
         .then(resp => {
           console.log(resp.data)
           const userData = resp.data
-          localStorage.setItem('token', JSON.stringify(resp.data))
+          localStorage.setItem('token', JSON.stringify(userData))
           navegate('/')
         })
         .catch(err => {

@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const BASE_AUTH_URL = 'https://auth.europe-west1.gcp.commercetools.com'
+const BASE_AUTH_URL = process.env.REACT_APP_CTP_AUTH_URL
 
-const clientID = 'qo5oN-bfH-JUcVqaRvVydZlF'
-const projectKey = 'soap-shop'
-const secretAdmin = 'PUS0VIOX7B3xr5Ud5OCtrunNZOnuPvXu'
+const clientID = process.env.REACT_APP_CTP_CLIENT_ADMIN_ID
+const projectKey = process.env.REACT_APP_CTP_PROJECT_KEY
+const secretAdmin = process.env.REACT_APP_CTP_ADMIN_SECRET
 
 const HEADERS = {
   Authorization: 'Basic ' + btoa(`${clientID}:${secretAdmin}`),
@@ -20,8 +20,3 @@ function login(username: string, password: string) {
 }
 
 export default login
-
-// POST https://{auth_host}/oauth/{projectKey}/in-store/key={storeKey}/customers/token
-
-// grant_type=password&username={email}&password={password}&scope={scope}
-//

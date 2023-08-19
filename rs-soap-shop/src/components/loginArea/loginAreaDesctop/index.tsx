@@ -1,10 +1,15 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import ProfileIcon from '../../../icons/profileIcon'
 import ProfileIconDark from '../../../icons/profileIconDark'
 import LogoutIcon from '../../../icons/logoutIcon'
 import LogoutIconDark from '../../../icons/logoutIconDark'
 
 function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    localStorage.clear()
+    navigate('/sign-in')
+  }
   return (
     <>
       {isLoggedIn ? (
@@ -16,7 +21,7 @@ function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
             </NavLink>
           </div>
 
-          <div className='cursor-pointer'>
+          <div onClick={handleLogout} className='cursor-pointer'>
             <LogoutIcon />
             <LogoutIconDark />
           </div>
