@@ -57,5 +57,5 @@ export interface ProductCardProps {
   link: string
   price: number
   sale: boolean
-  oldPrice?: number 
+  oldPrice?: number
 }
