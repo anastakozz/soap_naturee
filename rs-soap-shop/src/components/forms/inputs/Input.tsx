@@ -1,100 +1,95 @@
-import React, {ChangeEventHandler, useEffect, useState} from 'react';
-import cn from 'classnames';
-import {ShowPassword} from '../../../icons/showPassword';
-import {HidePassword} from '../../../icons/hidePassword';
-import {validateEmail} from '../validateFunctions/e-mail';
-import {InputProps} from '../../../lib/interfaces';
-import {validatePassword} from '../validateFunctions/password';
-import {validateDate} from '../validateFunctions/date';
-import {validateStreet} from '../validateFunctions/street';
-import {validateCity} from '../validateFunctions/city';
-import {validatePostalCode} from '../validateFunctions/postalCode';
+import React, { ChangeEventHandler, useEffect, useState } from 'react'
+import cn from 'classnames'
+import { ShowPassword } from '../../../icons/showPassword'
+import { HidePassword } from '../../../icons/hidePassword'
+import { validateEmail } from '../validateFunctions/e-mail'
+import { InputProps } from '../../../lib/interfaces'
+import { validatePassword } from '../validateFunctions/password'
+import { validateDate } from '../validateFunctions/date'
+import { validateStreet } from '../validateFunctions/street'
+import { validateCity } from '../validateFunctions/city'
+import { validatePostalCode } from '../validateFunctions/postalCode'
 
-export const Input = ({label, type, placeholder, isSubmitted, onChange, val, disabled }: InputProps) => {
+export const Input = ({ label, type, placeholder, isSubmitted, onChange, val, disabled }: InputProps) => {
+  const inputTailwind =
+    'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black'
 
-  const inputTailwind = 'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
-
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   const togglePasswordVisibility = (): void => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
+    setIsPasswordVisible(!isPasswordVisible)
+  }
 
-  const [value, setValue] = useState(val);
-  const [error, setError] = useState('');
+  const [value, setValue] = useState(val)
+  const [error, setError] = useState('')
 
   function determineValidationError(type: string, value: string): string {
     switch (type) {
       case 'mail':
-        return validateEmail(value);
+        return validateEmail(value)
       case 'password':
-        return validatePassword(value);
+        return validatePassword(value)
       case 'date':
-        return validateDate(value);
+        return validateDate(value)
       case 'street':
-        return validateStreet(value);
+        return validateStreet(value)
       case 'city':
-        return validateCity(value);
+        return validateCity(value)
       case 'postalCode':
-        return validatePostalCode(value);
+        return validatePostalCode(value)
       default:
-        return '';
+        return ''
     }
   }
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event): void => {
-    const inputValue: string = event.target.value;
-    setValue(inputValue);
-    onChange(inputValue);
+    const inputValue: string = event.target.value
+    setValue(inputValue)
+    onChange(inputValue)
     if (type === 'mail') {
-      const validationError: string = validateEmail(inputValue);
-      setError(validationError);
+      const validationError: string = validateEmail(inputValue)
+      setError(validationError)
     } else if (type === 'password') {
-      const validationError: string = validatePassword(inputValue);
-      setError(validationError);
+      const validationError: string = validatePassword(inputValue)
+      setError(validationError)
     } else if (type === 'date') {
-      const validationError: string = validateDate(inputValue);
-      setError(validationError);
+      const validationError: string = validateDate(inputValue)
+      setError(validationError)
     } else if (type === 'street') {
-      const validationError: string = validateStreet(inputValue);
-      setError(validationError);
+      const validationError: string = validateStreet(inputValue)
+      setError(validationError)
     } else if (type === 'city') {
-      const validationError: string = validateCity(inputValue);
-      setError(validationError);
+      const validationError: string = validateCity(inputValue)
+      setError(validationError)
     } else if (type === 'postalCode') {
-      const validationError: string = validatePostalCode(inputValue);
-      setError(validationError);
+      const validationError: string = validatePostalCode(inputValue)
+      setError(validationError)
     }
-  };
+  }
 
   useEffect((): void => {
-    setValue(val);
-  }, [val]);
+    setValue(val)
+  }, [val])
 
   useEffect((): void => {
     if (isSubmitted) {
-      const validationError: string = determineValidationError(type, value);
-      setError(validationError);
+      const validationError: string = determineValidationError(type, value)
+      setError(validationError)
     }
-  }, [isSubmitted, type, value]);
+  }, [isSubmitted, type, value])
 
   return (
-
     <div className={'flex flex-col md:items-end w-full gap-2 md:flex-row md:justify-between md: mb-esm'}>
       <div className='flex flex-col md:flex-row'>
         <label className='font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'>
           {label}
         </label>
 
-        <div className={'w-inputs md:hidden text-red-500'}>
-          {error}
-        </div>
+        <div className={'w-inputs md:hidden text-red-500'}>{error}</div>
       </div>
 
       <div className={'w-inputs'}>
-        <div className={'hidden md:inline-block text-red-500'}>
-          {error}
-        </div>
+        <div className={'hidden md:inline-block text-red-500'}>{error}</div>
         <div className='relative'>
           <input
             type={isPasswordVisible ? 'text' : type}
@@ -114,9 +109,7 @@ export const Input = ({label, type, placeholder, isSubmitted, onChange, val, dis
             </button>
           )}
         </div>
-
       </div>
-
     </div>
   )
 }

@@ -1,8 +1,12 @@
 import React from 'react'
-import {RegistrationForm} from '../../components/forms/RegistrationForm';
+import { RegistrationForm } from '../../components/forms/RegistrationForm'
 
 function SignUpPage() {
-  return <RegistrationForm />
+  return (
+    <>
+      <RegistrationForm />
+    </>
+  )
 }
 
 export default SignUpPage
