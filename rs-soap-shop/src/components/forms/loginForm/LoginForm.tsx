@@ -3,32 +3,33 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { emailValidation, passwordValidation } from '../../../lib/utils/inputValidations'
 import React, { useState } from 'react'
 import FormButton from '../formButton'
-import login from '../../../services/login.service'
+import { getToken, login } from '../../../services/login.service'
 import { useNavigate } from 'react-router-dom'
 import { FormDataType } from '../../../lib/utils/types'
 
 export const LoginForm = () => {
   const [error, setError] = useState(null)
   const methods = useForm()
-  const navegate = useNavigate()
+  const navigate = useNavigate()
 
   const onSubmit = methods.handleSubmit((data: FormDataType) => {
-    console.log(data)
-    if (data && data?.email && data?.password) {
-      login(data.email, data.password)
-        .then(resp => {
-          console.log(resp.data)
+    getToken(data.email, data.password)
+      .then(resp => {
+        console.log(resp.data)
+        const authData = resp.data
+        localStorage.setItem('token', JSON.stringify(authData))
+        login(data.email, data.password).then(resp => {
           const userData = resp.data
-          localStorage.setItem('token', JSON.stringify(userData))
-          navegate('/')
+          localStorage.setItem('user', JSON.stringify(userData))
+          navigate('/')
         })
-        .catch(err => {
-          console.error(err)
-          if (err.response.data.error == 'invalid_customer_account_credentials') {
-            setError(err.response.data.error_description)
-          }
-        })
-    }
+      })
+      .catch(err => {
+        console.error(err)
+        if (err.response.data.error == 'invalid_customer_account_credentials') {
+          setError(err.response.data.error_description)
+        }
+      })
   })
 
   return (
