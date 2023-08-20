@@ -64,11 +64,21 @@ export const LoginForm = () => {
           </div>
         )}
         <div className={'md:w-form'}>
-          <Input {...emailValidation} isSubmitted={isSubmitted} onChange={(newValue: string) => setEmail(newValue)} />
+          <Input
+            {...emailValidation}
+            isSubmitted={isSubmitted}
+            onChange={(newValue: string) => {
+              setEmail(newValue)
+              setError(null)
+            }}
+          />
           <Input
             {...passwordValidation}
             isSubmitted={isSubmitted}
-            onChange={(newValue: string) => setPassword(newValue)}
+            onChange={(newValue: string) => {
+              setPassword(newValue)
+              setError(null)
+            }}
           />
         </div>
         <div className={'my-sm'}>
