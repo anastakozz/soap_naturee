@@ -1,5 +1,5 @@
 import { RegistrationData, ResultProps } from '../lib/interfaces'
-import { createCustomer } from './registration.service.ts'
+import { createCustomer } from './registration.service'
 
 const testData: RegistrationData = {
   email: '27@2.com',
