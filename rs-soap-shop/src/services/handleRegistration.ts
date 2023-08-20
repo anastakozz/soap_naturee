@@ -1,5 +1,5 @@
 import { RegistrationData, ResultProps } from '../lib/interfaces'
-import { createCustomer } from './registration.service.ts'
+import { createCustomer } from './registration.service'
 
 const testData: Partial<RegistrationData> = {
   email: '26@2.com',
