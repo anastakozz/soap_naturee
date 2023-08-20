@@ -367,6 +367,7 @@ export const RegistrationForm = () => {
             <div className={'my-sm'}>
               <ButtonForm onClick={onSubmit}>CREATE AN ACCOUNT</ButtonForm>
             </div>
+            <ResultMessage {...submitResult}></ResultMessage>
             <p className={'text-h4 font-semibold text-grayLColor dark:text-primaryColor'}>
               Do you already have an account?
             </p>
@@ -374,7 +375,7 @@ export const RegistrationForm = () => {
               <ButtonForm to={'/sign-in'}>SIGN IN</ButtonForm>
             </div>
           </div>
-          <ResultMessage {...submitResult}></ResultMessage>
+          
         </div>
       </form>
     </FormProvider>
