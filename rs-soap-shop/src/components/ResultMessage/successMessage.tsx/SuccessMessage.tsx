@@ -1,9 +1,13 @@
+import { useNavigate } from 'react-router-dom'
+
 export default function SuccessMessage() {
+  const navigate = useNavigate()
+
   return (
     <>
       <button
         onClick={() => {
-          console.log('login and redirect')
+          navigate('/')
         }}
       >
         <div className='w-full h-full bg-grayLColor opacity-30 fixed z-10 top-0 left-0'></div>
@@ -15,4 +19,3 @@ export default function SuccessMessage() {
     </>
   )
 }
-
