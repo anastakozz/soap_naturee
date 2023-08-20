@@ -26,7 +26,7 @@ export async function getBasicToken() {
 export async function createCustomer(data: Partial<RegistrationData>): Promise<ResultProps> {
   const billingDefaultIndex = data.billingAddress.isDefault ? 0 : undefined
   const shippingDefaultIndex = data.shippingAddress.isDefault ? 1 : undefined
-  
+
   try {
     const response = await axios({
       method: 'post',
@@ -68,4 +68,3 @@ export async function createCustomer(data: Partial<RegistrationData>): Promise<R
     }
   }
 }
-

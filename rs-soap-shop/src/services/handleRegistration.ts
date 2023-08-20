@@ -11,7 +11,6 @@ function dataAdapter(data: RegistrationData): RegistrationData {
   try {
     const billingKey = data.billingAddress.country as keyof typeof countryId
     const shippingKey = data.shippingAddress.country as keyof typeof countryId
-
     data.billingAddress.country = countryId[billingKey]
     data.shippingAddress.country = countryId[shippingKey]
     return data
