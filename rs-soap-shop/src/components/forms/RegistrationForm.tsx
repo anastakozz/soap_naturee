@@ -202,6 +202,7 @@ export const RegistrationForm = () => {
                   onChange={e => {
                     setSelectedCountry(e.target.value)
                     setSelectedCountryError(false)
+                    if (shouldCopy) setShippingSelectedCountry(e.target.value)
                   }}
                   className={
                     selectedCountryError
@@ -218,24 +219,39 @@ export const RegistrationForm = () => {
                 </select>
               </div>
             </div>
-
-            <Input {...cityValidation} isSubmitted={isSubmitted} onChange={(newValue: string) => setCity(newValue)} />
+            <Input
+              {...cityValidation}
+              isSubmitted={isSubmitted}
+              onChange={(newValue: string) => {
+                setCity(newValue)
+                if (shouldCopy) setShippingCity(newValue)
+              }}
+            />
             <Input
               {...streetValidation}
               isSubmitted={isSubmitted}
-              onChange={(newValue: string) => setStreet(newValue)}
+              onChange={(newValue: string) => {
+                setStreet(newValue)
+                if (shouldCopy) setShippingStreet(newValue)
+              }}
             />
             <Input
               {...streetValidation}
               label='House:'
               placeholder='Type your house number'
               isSubmitted={isSubmitted}
-              onChange={(newValue: string) => setHouse(newValue)}
+              onChange={(newValue: string) => {
+                setHouse(newValue)
+                if (shouldCopy) setShippingHouse(newValue)
+              }}
             />
             <Input
               {...postalCodeValidation}
               isSubmitted={isSubmitted}
-              onChange={(newValue: string) => setPostalCode(newValue)}
+              onChange={(newValue: string) => {
+                setPostalCode(newValue)
+                if (shouldCopy) setShippingPostalCode(newValue)
+              }}
             />
             <div className={'md:ml-[250px]'}>
               <div className={'flex'}>
