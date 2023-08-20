@@ -19,7 +19,9 @@ import { validateCity } from './validateFunctions/city'
 import { validateStreet } from './validateFunctions/street'
 import { validatePostalCode } from './validateFunctions/postalCode'
 import { validateName } from './validateFunctions/name'
-import { RegistrationData } from '../../lib/interfaces'
+import { RegistrationData, ResultProps } from '../../lib/interfaces'
+import { handleRegistration } from '../../services/handleRegistration'
+import ResultMessage from '../ResultMessage'
 
 export const RegistrationForm = () => {
   const methods = useForm()
@@ -72,6 +74,20 @@ export const RegistrationForm = () => {
       setShippingHouse(house)
       setShippingPostalCode(postalCode)
     }
+  }
+
+  const [submitResult, setSubmitResult] = useState<ResultProps>({
+    isSuccess: false,
+    message: '',
+    isVisible: false
+  })
+
+  const onSubmit = async () => {
+    const data = validateAllInputs()
+    const result = await handleRegistration(data)
+    result.isVisible = true
+    console.log(result)
+    setSubmitResult(result)
   }
 
   function validateAllInputs(): RegistrationData {
@@ -203,7 +219,6 @@ export const RegistrationForm = () => {
                 </select>
               </div>
             </div>
-
             <Input
               {...cityValidation}
               isSubmitted={isSubmitted}
@@ -350,7 +365,7 @@ export const RegistrationForm = () => {
               </label>
             </div>
             <div className={'my-sm'}>
-              <ButtonForm onClick={validateAllInputs}>CREATE AN ACCOUNT</ButtonForm>
+              <ButtonForm onClick={onSubmit}>CREATE AN ACCOUNT</ButtonForm>
             </div>
             <p className={'text-h4 font-semibold text-grayLColor dark:text-primaryColor'}>
               Do you already have an account?
@@ -359,6 +374,7 @@ export const RegistrationForm = () => {
               <ButtonForm to={'/sign-in'}>SIGN IN</ButtonForm>
             </div>
           </div>
+          <ResultMessage {...submitResult}></ResultMessage>
         </div>
       </form>
     </FormProvider>

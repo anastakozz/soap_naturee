@@ -8,7 +8,7 @@ export function validateEmail(email: string): string | undefined {
   } else {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
     if (!email.match(emailPattern)) {
-      return "Email address must contain an '@' symbol separating local part and domain name."
+      return 'Email address must contain an "@" symbol separating local part and domain name.'
     }
   }
 }
