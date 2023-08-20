@@ -1,7 +1,7 @@
 import { ButtonProps } from '../../lib/interfaces'
 import {Link} from 'react-router-dom';
 
-export default function FormButton({ children, to, onClick }: ButtonProps): JSX.Element {
+export default function ButtonForm({ children, to, onClick }: ButtonProps): JSX.Element {
   return (
     <Link
       onClick={onClick}
