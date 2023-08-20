@@ -1,3 +1,4 @@
+import React from 'react'
 import { ButtonProps } from '../../../lib/interfaces'
 
 export default function HeavyButton({ children, onClick }: ButtonProps): JSX.Element {
