@@ -74,6 +74,3 @@ Runs prettier and shows warning in CLI
 
 Automatically anables Git hooks after install
 
-## 'npm run deploy'
-
-Deploys the project to the [gh-pages](https://rss-soap-shop.vercel.app/)

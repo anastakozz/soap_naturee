@@ -4,26 +4,44 @@ export interface ButtonProps {
   to?: string
 }
 
+export interface LoginData {
+  email: string
+  password: string
+}
+
 export interface InputProps {
   label: string
   type: string
-  id: string
-  placeholder: string
-  validation: object
-  name: string
-  multiline?: boolean
-  className?: string
-  onChange?: () => void
-}
-
-export interface InputErrorProps {
-  message: string
+  val?: string
+  placeholder?: string
+  isSubmitted?: boolean
+  onChange?: (value: string) => void
+  disabled?: boolean
 }
 
 export interface InputErrorObject {
   error: {
     message: string
   }
+}
+
+export interface RegistrationData {
+  firstName: string
+  secondName: string
+  email: string
+  password: string
+  date: string
+  billingAddress: Address
+  shippingAddress: Address
+}
+
+export interface Address {
+  country: string
+  city: string
+  street: string
+  house: string
+  postalCode: string
+  isDefault: boolean
 }
 
 export interface CategoryCardProps {
