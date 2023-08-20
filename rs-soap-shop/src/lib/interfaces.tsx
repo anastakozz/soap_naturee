@@ -15,7 +15,7 @@ export interface InputProps {
   val?: string
   placeholder?: string
   isSubmitted?: boolean
-  onChange?: (value: string) => void;
+  onChange?: (value: string) => void
   disabled?: boolean
 }
 
@@ -57,5 +57,5 @@ export interface ProductCardProps {
   link: string
   price: number
   sale: boolean
-  oldPrice?: number 
+  oldPrice?: number
 }
