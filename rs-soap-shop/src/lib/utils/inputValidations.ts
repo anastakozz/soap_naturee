@@ -3,7 +3,7 @@ export const nameValidation = {
   label: 'name',
   type: 'text',
   id: 'name',
-  placeholder: 'write your name ...',
+  placeholder: 'write your name ...'
 }
 
 export const passwordValidation = {
@@ -35,7 +35,7 @@ export const emailValidation = {
   name: 'mail',
   label: 'Your e-mail:',
   type: 'mail',
-  placeholder: 'Type your email address',
+  placeholder: 'Type your email address'
 }
 
 export const dateValidation = {

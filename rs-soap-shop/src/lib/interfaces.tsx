@@ -15,7 +15,7 @@ export interface InputProps {
   val?: string
   placeholder?: string
   isSubmitted?: boolean
-  onChange?: (value: string) => void;
+  onChange?: (value: string) => void
   disabled?: boolean
 }
 

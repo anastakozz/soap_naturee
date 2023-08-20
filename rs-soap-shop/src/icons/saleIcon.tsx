@@ -1,6 +1,13 @@
 export default function SaleIcon() {
   return (
-    <svg className='mr-sm fill-current inline' width='37' height='36' viewBox='0 0 37 36' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg
+      className='mr-sm fill-current inline'
+      width='37'
+      height='36'
+      viewBox='0 0 37 36'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
       <path
         fillRule='evenodd'
         clipRule='evenodd'
