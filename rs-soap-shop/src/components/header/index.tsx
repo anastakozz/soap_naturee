@@ -46,7 +46,7 @@ function Header() {
     }
   }
 
-  const isLoggedIn = false
+  const isLoggedIn = !!localStorage.getItem('token')
 
   return (
     <header className='bg-primaryColor dark:bg-grayLColor transition relative'>
