@@ -1,7 +1,19 @@
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 export default function SuccessMessage() {
   const navigate = useNavigate()
+
+  const handleKeyPress = () => {
+    navigate('/')
+  }
+
+  useEffect(() => {
+    document.addEventListener('keyup', handleKeyPress)
+    return () => {
+      document.removeEventListener('keyup', handleKeyPress)
+    }
+  }, [])
 
   return (
     <div
