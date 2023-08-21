@@ -28,8 +28,8 @@ export default function CategoryCarousel() {
   }
 
   return (
-    <div className='flex justify-around flex-wrap md:m-esm md:flex-nowrap'>
-      <button onClick={handlePrevious}>
+    <div data-testid='carousel' className='flex justify-around flex-wrap md:m-esm md:flex-nowrap'>
+      <button data-testid='prev-button' onClick={handlePrevious}>
         <ArrowIcon />
       </button>
       <div className='flex justify-around w-full order-first md:order-none'>
@@ -43,7 +43,7 @@ export default function CategoryCarousel() {
           <CategoryCard {...items[nextIndex]} />
         </div>
       </div>
-      <button onClick={handleNext} className='transform rotate-180'>
+      <button data-testid='next-button' onClick={handleNext} className='transform rotate-180'>
         <ArrowIcon />
       </button>
     </div>

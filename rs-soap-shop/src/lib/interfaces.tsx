@@ -84,3 +84,11 @@ export interface ResultProps {
   message: string
   isVisible?: boolean
 }
+
+export interface BannerProps {
+  p: string
+  h2: string
+  h4: string
+  buttonText: string
+  linkAdress: string
+}
