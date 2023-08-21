@@ -3,7 +3,7 @@ import SocialMediaLinks from '../socialMediaLinks'
 
 function Footer() {
   return (
-    <footer className='bg-secondaryColor dark:bg-grayLColor transition'>
+    <footer data-testid='footer' className='bg-secondaryColor dark:bg-grayLColor transition'>
       <div className='max-w-[1440px] mx-auto px-4 flex flex-col lg:px-big py-4'>
         <div className='flex flex-col justify-between items-center md:flex-row'>
           <div className='hidden md:block'>

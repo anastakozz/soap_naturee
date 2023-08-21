@@ -49,7 +49,7 @@ function Header() {
   const isLoggedIn = !!localStorage.getItem('token')
 
   return (
-    <header className='bg-primaryColor dark:bg-grayLColor transition relative'>
+    <header data-testid='header' className='bg-primaryColor dark:bg-grayLColor transition relative'>
       <div className='max-w-[1440px] mx-auto px-4 flex justify-between items-center h-24 lg:px-big'>
         <img src='/images/logo-light.png' width='142' height='70px' alt='logo' className='block dark:hidden' />
         <img src='/images/logo-dark.png' width='142' height='70px' alt='logo' className='hidden dark:block' />

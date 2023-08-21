@@ -9,7 +9,7 @@ describe('DarkModeButton', () => {
     const { container } = render(<DarkModeButton onChange={onChangeMock} />)
 
     const button = container.querySelector('.change-mode-button')
-    fireEvent.click(button!)
+    if (button) fireEvent.click(button)
 
     expect(onChangeMock).toHaveBeenCalled()
   })

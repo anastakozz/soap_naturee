@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react'
-import HomePage from '.'
+import PageNotFound from '.'
 import { BrowserRouter } from 'react-router-dom'
 
-it('renders home page in DOM', () => {
+it('renders 404 page', () => {
   const component = render(
     <BrowserRouter>
-      <HomePage />
+      <PageNotFound />
     </BrowserRouter>
   )
-  expect(component.getByTestId('home-page')).toBeInTheDocument()
+  expect(component.getByTestId('page-not-found')).toBeInTheDocument()
 })
