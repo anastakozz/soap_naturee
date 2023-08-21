@@ -23,7 +23,7 @@ function dataAdapter(data: RegistrationData): RegistrationData {
 export async function handleRegistration(data: RegistrationData): Promise<ResultProps> {
   const dataAdapted = dataAdapter(data)
   const result = await createCustomer(dataAdapted)
-  if(result) {
+  if (result) {
     handleLogin(data.email, data.password)
   }
   return result

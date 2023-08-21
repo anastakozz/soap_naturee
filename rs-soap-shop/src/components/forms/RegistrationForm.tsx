@@ -375,7 +375,6 @@ export const RegistrationForm = () => {
               <ButtonForm to={'/sign-in'}>SIGN IN</ButtonForm>
             </div>
           </div>
-          
         </div>
       </form>
     </FormProvider>
