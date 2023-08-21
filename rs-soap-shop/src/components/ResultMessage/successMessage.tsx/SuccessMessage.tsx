@@ -17,6 +17,7 @@ export default function SuccessMessage() {
 
   return (
     <div
+      data-testid='reg-success-message'
       onClick={() => {
         navigate('/')
       }}
