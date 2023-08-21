@@ -1,4 +1,5 @@
 import { RegistrationData, ResultProps } from '../lib/interfaces'
+import handleLogin from './handleLogin'
 import { createCustomer } from './registration.service'
 
 const countryId = {
@@ -22,5 +23,8 @@ function dataAdapter(data: RegistrationData): RegistrationData {
 export async function handleRegistration(data: RegistrationData): Promise<ResultProps> {
   const dataAdapted = dataAdapter(data)
   const result = await createCustomer(dataAdapted)
+  if(result) {
+    handleLogin(data.email, data.password)
+  }
   return result
 }
