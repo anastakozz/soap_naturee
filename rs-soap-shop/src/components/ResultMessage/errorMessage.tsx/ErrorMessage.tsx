@@ -10,4 +10,3 @@ export default function ErrorMessage({ message }: MessageProps) {
     </div>
   )
 }
-
