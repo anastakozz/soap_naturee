@@ -7,7 +7,7 @@ import NavigationDark from '../../components/navigation/navigationDark'
 function PageNotFound() {
   const navigate = useNavigate()
   return (
-    <div className='bg-[url("assets/bg-404.jpeg")] bg-no-repeat bg-cover h-screen flex flex-col justify-center items-center p-4'>
+    <div data-testid='page-not-found' className='bg-[url("assets/bg-404.jpeg")] bg-no-repeat bg-cover h-screen flex flex-col justify-center items-center p-4'>
       <div className='bg-primaryColor opacity-75 p-4 flex flex-col items-center mb-32'>
         <h2 className='text-[100px] text-accentColor font-bold md:text-[200px]'>404</h2>
         <p className='mb-4'>

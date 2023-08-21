@@ -8,7 +8,7 @@ const countryId = {
   Germany: 'DE'
 }
 
-function dataAdapter(data: RegistrationData): RegistrationData {
+export function dataAdapter(data: RegistrationData): RegistrationData {
   try {
     const billingKey = data.billingAddress.country as keyof typeof countryId
     const shippingKey = data.shippingAddress.country as keyof typeof countryId

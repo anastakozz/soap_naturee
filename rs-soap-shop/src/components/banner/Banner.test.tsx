@@ -19,5 +19,3 @@ it('renders a banner in DOM', () => {
   )
   expect(component.getByTestId('banner')).toBeInTheDocument()
 })
-
-

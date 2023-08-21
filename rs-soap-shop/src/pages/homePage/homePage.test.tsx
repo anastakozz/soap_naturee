@@ -3,6 +3,10 @@ import HomePage from '.'
 import { BrowserRouter } from 'react-router-dom'
 
 it('renders home page in DOM', () => {
-  const component = render(<BrowserRouter><HomePage /></BrowserRouter>)
+  const component = render(
+    <BrowserRouter>
+      <HomePage />
+    </BrowserRouter>
+  )
   expect(component.getByTestId('home-page')).toBeInTheDocument()
 })
