@@ -7,13 +7,13 @@ import RandomCardsSection from './randomCardsSection/RandomCardsSection'
 
 function HomePage() {
   return (
-    <>
+    <div data-testid='home-page'>
       <NewCollectionSection />
       <CheckoutSection />
       <SaleSection />
       <Promocode />
       <RandomCardsSection />
-    </>
+    </div>
   )
 }
 
