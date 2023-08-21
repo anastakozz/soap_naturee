@@ -1,0 +1,1 @@
+console.log("husky lint-staged commit test")
