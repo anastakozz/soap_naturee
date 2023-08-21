@@ -11,8 +11,10 @@ describe('BurgerMenuButton', () => {
     const closedMenuIcon = container.querySelector('.HAMBURGER-ICON')
     expect(closedMenuIcon).toBeInTheDocument()
 
-    const lines = closedMenuIcon!.querySelectorAll('.bg-grayLColor')
-    expect(lines.length).toBe(3)
+    if (closedMenuIcon) {
+      const lines = closedMenuIcon.querySelectorAll('.bg-grayLColor')
+      expect(lines.length).toBe(3)
+    }
   })
 
   it('should render the open menu icon when isMenuOpen is true', () => {
@@ -22,8 +24,10 @@ describe('BurgerMenuButton', () => {
     const openMenuIcon = container.querySelector('svg')
     expect(openMenuIcon).toBeInTheDocument()
 
-    const lines = openMenuIcon!.querySelectorAll('line')
-    expect(lines.length).toBe(2)
+    if (openMenuIcon) {
+      const lines = openMenuIcon.querySelectorAll('line')
+      expect(lines.length).toBe(2)
+    }
   })
 
   it('should call the onClick function when clicked', () => {
@@ -31,7 +35,10 @@ describe('BurgerMenuButton', () => {
     const { container } = render(<BurgerMenuButton isMenuOpen={false} onClick={onClickMock} />)
 
     const closedMenuIcon = container.querySelector('.HAMBURGER-ICON')
-    fireEvent.click(closedMenuIcon!)
+
+    if (closedMenuIcon) {
+      fireEvent.click(closedMenuIcon)
+    }
 
     expect(onClickMock).toHaveBeenCalled()
   })
