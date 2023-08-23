@@ -1,11 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import { RegistrationData, ResultProps } from '../lib/interfaces'
+import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants'
 
-const authUrl = process.env.REACT_APP_CTP_AUTH_URL
-const apiUrl = process.env.REACT_APP_CTP_API_URL
-const projectKey = process.env.REACT_APP_CTP_PROJECT_KEY
-const clientId = process.env.REACT_APP_CTP_CLIENT_ID
-const secret = process.env.REACT_APP_CTP_CLIENT_SECRET
 const accessKey = await getBasicToken()
 
 export async function getBasicToken() {
