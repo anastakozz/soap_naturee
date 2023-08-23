@@ -11,6 +11,7 @@ import SignUpPage from './pages/singnUpPage'
 import ProfilePage from './pages/profilePage'
 import Footer from './components/footer'
 import PageNotFound from './pages/pageNotFound'
+import DetailedProductPage from './pages/detailedProductPage'
 
 const AppLayout = ({ children }: { children: ReactElement }) => {
   return (
@@ -79,6 +80,14 @@ function App() {
           element={
             <AppLayout>
               <ProfilePage />
+            </AppLayout>
+          }
+        ></Route>
+        <Route
+          path='/product/:id'
+          element={
+            <AppLayout>
+              <DetailedProductPage />
             </AppLayout>
           }
         ></Route>
