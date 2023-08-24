@@ -1,3 +1,5 @@
+import { Category, Keyword, ProductAttributes, ProductImage } from './types'
+
 export interface ButtonProps {
   children: string
   onClick?: VoidFunction
@@ -54,9 +56,9 @@ export interface ProductCardProps {
   label: string
   description: string
   imgSrc: string
-  link: string
+  link?: string
   price: number
-  sale: boolean
+  isOnSale: boolean
   oldPrice?: number
 }
 
@@ -91,4 +93,53 @@ export interface BannerProps {
   h4: string
   buttonText: string
   linkAdress: string
+}
+
+export interface Product {
+  id: string
+  version: string
+  productType: {
+    typeId: string
+    id: string
+  }
+  name: {
+    'en-US': string
+  }
+  description: {
+    'en-US': string
+  }
+  categories: Category[]
+  // categoryOrderHints: {
+  //   [categoryID: string]: string
+  // }
+  // variants: []
+  slug: {
+    'en-US': string
+  }
+  masterVariant: {
+    attributes: ProductAttributes[]
+    // assets: []
+    images: ProductImage[]
+    // prices: []
+    id: number
+  }
+  metaTitle: {
+    'en-US': string
+  }
+  metaDescription: {
+    'en-US': string
+  }
+  searchKeywords: {
+    'en-US': Keyword[]
+  }
+  hasStagedChanges: boolean
+  published: boolean
+  key: string
+  taxCategory: {
+    typeId: string
+    id: string
+  }
+  priceMode: string
+  createdAt: string
+  lastModifiedAt: string
 }

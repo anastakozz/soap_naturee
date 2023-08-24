@@ -8,7 +8,7 @@ const propsData: ProductCardProps = {
   imgSrc: 'C',
   link: 'D',
   price: 1,
-  sale: true,
+  isOnSale: true,
   oldPrice: 2
 }
 
