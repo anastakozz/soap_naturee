@@ -1,4 +1,4 @@
-import { apiUrl, projectKey} from '../lib/constants'
+import { apiUrl, projectKey } from '../lib/constants'
 import { getBasicToken } from './registration.service'
 import axios from 'axios'
 
@@ -10,9 +10,8 @@ export async function getProductsList() {
         Authorization: `Bearer ${accessToken}`
       }
     })
-    console.log(response.data.results[0])
-    return response.data
+    return response.data.results
   } catch (error) {
-    console.error(error)
+    return undefined
   }
 }
