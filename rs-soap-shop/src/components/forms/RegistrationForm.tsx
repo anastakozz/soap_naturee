@@ -85,9 +85,18 @@ export const RegistrationForm = () => {
   const onSubmit = async () => {
     const data = validateAllInputs()
     const result = await handleRegistration(data)
-    result.isVisible = true
-    console.log(result)
-    setSubmitResult(result)
+    if (result) {
+      result.isVisible = true
+      console.log(result)
+      setSubmitResult(result)
+    } else {
+      const errorResult = {
+        isSuccess: false,
+        message: 'Ooops. Something went wrong. Please, check if all fields are filled properly ',
+        isVisible: true
+      }
+      setSubmitResult(errorResult)
+    }
   }
 
   function validateAllInputs(): RegistrationData {
