@@ -16,15 +16,17 @@ export function dataAdapter(data: RegistrationData): RegistrationData {
     data.shippingAddress.country = countryId[shippingKey]
     return data
   } catch (error) {
-    console.log(error)
+    console.log('address lacks data')
   }
 }
 
 export async function handleRegistration(data: RegistrationData): Promise<ResultProps> {
-  const dataAdapted = dataAdapter(data)
-  const result = await createCustomer(dataAdapted)
-  if (result) {
-    handleLogin(data.email, data.password)
+  if (data) {
+    const dataAdapted = dataAdapter(data)
+    const result = await createCustomer(dataAdapted)
+    if (result) {
+      handleLogin(data.email, data.password)
+    }
+    return result
   }
-  return result
 }
