@@ -1,5 +1,3 @@
-import { type } from 'os'
-
 export type Category = {
   typeId: string
   id: string
@@ -21,4 +19,15 @@ export type ProductImage = {
 export type ProductAttributes = {
   name: string
   value: string[]
+}
+
+export type Price = {
+  country: string
+  id: string
+  value: {
+    centAmount: number
+    currencyCode: string
+    fractionDigits: number
+    type: string
+  }
 }

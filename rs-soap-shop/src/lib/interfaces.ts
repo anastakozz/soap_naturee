@@ -1,4 +1,4 @@
-import { Category, Keyword, ProductAttributes, ProductImage } from './types'
+import { Category, Keyword, Price, ProductAttributes, ProductImage } from './types'
 
 export interface ButtonProps {
   children: string
@@ -103,10 +103,10 @@ export interface Product {
     id: string
   }
   name: {
-    'en-US': string
+    'en': string
   }
   description: {
-    'en-US': string
+    'en': string
   }
   categories: Category[]
   // categoryOrderHints: {
@@ -114,23 +114,23 @@ export interface Product {
   // }
   // variants: []
   slug: {
-    'en-US': string
+    'en': string
   }
   masterVariant: {
     attributes: ProductAttributes[]
     // assets: []
     images: ProductImage[]
-    // prices: []
+    prices: Price[]
     id: number
   }
   metaTitle: {
-    'en-US': string
+    'en': string
   }
   metaDescription: {
-    'en-US': string
+    'en': string
   }
   searchKeywords: {
-    'en-US': Keyword[]
+    'en': Keyword[]
   }
   hasStagedChanges: boolean
   published: boolean

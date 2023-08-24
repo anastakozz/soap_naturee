@@ -9,7 +9,7 @@ const defaultCardProps: ProductCardProps = {
   imgSrc: '/images/candle-footage.jpg',
   link: './our-products',
   price: 999,
-  sale: true,
+  isOnSale: true,
   oldPrice: 1000
 }
 

@@ -1,7 +1,2 @@
-import React from 'react'
-
-function ProductsPage() {
-  return <>ProductsPage works!</>
-}
-
+import ProductsPage from './ProductsPage'
 export default ProductsPage
