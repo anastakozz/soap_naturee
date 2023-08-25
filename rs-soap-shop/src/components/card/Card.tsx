@@ -19,7 +19,7 @@ export default function Card(item: ProductCardProps) {
     <div
       onClick={handleClick}
       data-testid='card'
-      className='cursor-pointer relative transition w-[278px] mb-sm mx-4 hover:scale-[1.02] hover:drop-shadow-lg active:scale-100 active:drop-shadow-none'
+      className='cursor-pointer relative transition w-[280px] hover:scale-[1.02] hover:drop-shadow-lg active:scale-100 active:drop-shadow-none'
     >
       <img className='object-cover h-[300px] w-full ' src={item.imgSrc} alt=''></img>
       <div className='z-20 w-full absolute -translate-y-[30px]'>
