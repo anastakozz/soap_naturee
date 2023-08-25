@@ -7,9 +7,9 @@ const propsData: ProductCardProps = {
   description: 'B',
   imgSrc: 'C',
   link: 'D',
-  price: 1,
+  price: '2',
   isOnSale: true,
-  oldPrice: 2
+  newPrice: 1
 }
 
 it('renders a card in DOM', () => {

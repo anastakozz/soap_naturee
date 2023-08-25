@@ -57,9 +57,9 @@ export interface ProductCardProps {
   description: string
   imgSrc: string
   link?: string
-  price: number
+  price: string
   isOnSale: boolean
-  oldPrice?: number
+  newPrice?: number
 }
 
 export interface RegistrationData {

@@ -8,9 +8,9 @@ const defaultCardProps: ProductCardProps = {
   description: 'Description',
   imgSrc: '/images/candle-footage.jpg',
   link: './our-products',
-  price: 999,
+  price: '999',
   isOnSale: true,
-  oldPrice: 1000
+  newPrice: 1000
 }
 
 export default function RandomCardsSection() {
