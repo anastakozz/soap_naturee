@@ -1,7 +1,7 @@
 export default function SaleIcon() {
   return (
     <svg
-      className='mr-sm fill-current inline'
+      className='align-middle fill-current inline'
       width='37'
       height='36'
       viewBox='0 0 37 36'
