@@ -2,8 +2,6 @@ import axios, { AxiosError } from 'axios'
 import { RegistrationData, ResultProps } from '../lib/interfaces'
 import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants'
 
-const accessKey = await getBasicToken()
-
 export async function getBasicToken() {
   try {
     const response = await axios({
@@ -20,6 +18,7 @@ export async function getBasicToken() {
 }
 
 export async function createCustomer(data: Partial<RegistrationData>): Promise<ResultProps> {
+  const accessKey = await getBasicToken()
   const billingDefaultIndex = data.billingAddress.isDefault ? 0 : undefined
   const shippingDefaultIndex = data.shippingAddress.isDefault ? 1 : undefined
 
