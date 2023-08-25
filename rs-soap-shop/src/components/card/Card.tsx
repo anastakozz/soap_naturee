@@ -24,25 +24,25 @@ export default function Card(item: ProductCardProps) {
       <div className='z-20 w-full absolute -translate-y-[30px]'>
         <SmallButton {...{ children: 'Add to Cart' }}></SmallButton>
       </div>
-      <div className='h-[125px] bg-additionalColor dark:bg-graySColor text-left p-4'>
-        <h4 className='text-h4 font-semibold text-grayLColor dark:text-secondaryColor object-scale-down whitespace-nowrap'>
-          {item.label}
-        </h4>
-        <p className='text-grayMColor dark:text-additionalColor truncate'>{item.description}</p>
-        <div className='flex justify-between items-end'>
-          {item.isOnSale ? (
-            <>
-              <p className='text-h5 font-semibold text-grayLColor'>{item.newPrice}</p>
-              <p className='line-through text-graySColor dark:text-grayMColor'>{item.price}</p>
-              <div className='font-bold absolute z-10 top-[25px] right-0 bg-red-500/90 p-2 pr-sm align-middle text-primaryColor'>
-                SALE
-              </div>
-            </>
-          ) : (
-            <>
-              <p className='text-h5 font-semibold text-grayLColor'>{item.price}</p>
-            </>
-          )}
+      <div className='h-[130px] bg-additionalColor dark:bg-graySColor text-left p-4 flex flex-col justify-between'>
+        <p className='leading-5 w-full text-h5 font-semibold text-grayLColor dark:text-secondaryColor'>{item.label}</p>
+        <div>
+          <p className='text-grayMColor dark:text-additionalColor truncate'>{item.description}</p>
+          <div className='flex justify-between items-end'>
+            {item.isOnSale ? (
+              <>
+                <p className='text-h5 font-semibold text-grayLColor'>{item.newPrice}</p>
+                <p className='line-through text-graySColor dark:text-grayMColor'>{item.price}</p>
+                <div className='font-bold absolute z-10 top-[25px] right-0 bg-red-500/90 p-2 pr-sm align-middle text-primaryColor'>
+                  SALE
+                </div>
+              </>
+            ) : (
+              <>
+                <p className='text-h5 font-semibold text-grayLColor'>{item.price}</p>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ export default function toCardAdapter(data: Product): ProductCardProps {
   const dataForCard: ProductCardProps = {
     productId: data.id,
     label: data.name['en'],
-    description: data.searchKeywords['en'][0].text,
+    description: `Natural ${data.searchKeywords['en'][0].text}`,
     imgSrc: variant.images[0].url,
     link: `/product/${data.slug['en']}`,
     price: `${variant.prices[0].value.centAmount / 100} ${variant.prices[0].value.currencyCode}`,
