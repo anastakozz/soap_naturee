@@ -59,7 +59,8 @@ export interface ProductCardProps {
   link?: string
   price: string
   isOnSale: boolean
-  newPrice?: number
+  newPrice?: string
+  productId: string
 }
 
 export interface RegistrationData {

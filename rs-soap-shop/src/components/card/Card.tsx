@@ -1,5 +1,4 @@
 import { ProductCardProps } from '../../lib/interfaces'
-import SaleIcon from '../../icons/saleIcon'
 import { useNavigate } from 'react-router-dom'
 import SmallButton from '../buttons/smallButton'
 import { MouseEvent } from 'react'
@@ -35,8 +34,8 @@ export default function Card(item: ProductCardProps) {
             <>
               <p className='text-h5 font-semibold text-grayLColor'>{item.newPrice}</p>
               <p className='line-through text-graySColor dark:text-grayMColor'>{item.price}</p>
-              <div className='absolute z-10 top-[25px] right-0 text-accentColor'>
-                <SaleIcon></SaleIcon>
+              <div className='font-bold absolute z-10 top-[25px] right-0 bg-red-500/90 p-2 pr-sm align-middle text-primaryColor'>
+                SALE
               </div>
             </>
           ) : (
