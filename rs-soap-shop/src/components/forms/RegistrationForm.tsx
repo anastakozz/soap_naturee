@@ -87,7 +87,6 @@ export const RegistrationForm = () => {
     const result = await handleRegistration(data)
     if (result) {
       result.isVisible = true
-      console.log(result)
       setSubmitResult(result)
     } else {
       const errorResult = {
