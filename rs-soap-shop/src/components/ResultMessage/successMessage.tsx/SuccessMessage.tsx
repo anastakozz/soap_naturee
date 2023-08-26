@@ -1,25 +1,25 @@
-import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function SuccessMessage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleKeyPress = () => {
-    navigate('/')
-  }
+    navigate('/');
+  };
 
   useEffect(() => {
-    document.addEventListener('keyup', handleKeyPress)
+    document.addEventListener('keyup', handleKeyPress);
     return () => {
-      document.removeEventListener('keyup', handleKeyPress)
-    }
-  }, [])
+      document.removeEventListener('keyup', handleKeyPress);
+    };
+  }, []);
 
   return (
     <div
       data-testid='reg-success-message'
       onClick={() => {
-        navigate('/')
+        navigate('/');
       }}
     >
       <div className='w-full h-full bg-grayLColor opacity-30 fixed z-10 top-0 left-0'></div>
@@ -28,5 +28,5 @@ export default function SuccessMessage() {
         <p>Your account has been succefully created!</p>
       </div>
     </div>
-  )
+  );
 }

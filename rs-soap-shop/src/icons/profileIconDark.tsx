@@ -22,7 +22,7 @@ function ProfileIconDark() {
         strokeLinejoin='round'
       />
     </svg>
-  )
+  );
 }
 
-export default ProfileIconDark
+export default ProfileIconDark;

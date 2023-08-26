@@ -7,5 +7,5 @@ export function validateCity(city: string): string | undefined {
     } else if (specialCharsAndNumbersRegex.test(city)) {
       return 'The string must not contain special characters or numbers.';
     }
-  } else return 'The string must contain at least one character.'
+  } else return 'The string must contain at least one character.';
 }

@@ -23,7 +23,7 @@ function ProfileIcon() {
         strokeLinejoin='round'
       />
     </svg>
-  )
+  );
 }
 
-export default ProfileIcon
+export default ProfileIcon;

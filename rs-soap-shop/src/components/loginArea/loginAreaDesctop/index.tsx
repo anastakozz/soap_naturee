@@ -1,15 +1,15 @@
-import { NavLink, useNavigate } from 'react-router-dom'
-import ProfileIcon from '../../../icons/profileIcon'
-import ProfileIconDark from '../../../icons/profileIconDark'
-import LogoutIcon from '../../../icons/logoutIcon'
-import LogoutIconDark from '../../../icons/logoutIconDark'
+import { NavLink, useNavigate } from 'react-router-dom';
+import ProfileIcon from '../../../icons/profileIcon';
+import ProfileIconDark from '../../../icons/profileIconDark';
+import LogoutIcon from '../../../icons/logoutIcon';
+import LogoutIconDark from '../../../icons/logoutIconDark';
 
 function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.clear()
-    navigate('/sign-in')
-  }
+    localStorage.clear();
+    navigate('/sign-in');
+  };
   return (
     <>
       {isLoggedIn ? (
@@ -43,7 +43,7 @@ function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default LoginArea
+export default LoginArea;

@@ -1,4 +1,4 @@
-import { ButtonProps } from '../../../lib/interfaces'
+import { ButtonProps } from '../../../lib/interfaces';
 
 export default function EmptyButton({ children, onClick }: ButtonProps): JSX.Element {
   return (
@@ -9,5 +9,5 @@ export default function EmptyButton({ children, onClick }: ButtonProps): JSX.Ele
     >
       {children}
     </button>
-  )
+  );
 }

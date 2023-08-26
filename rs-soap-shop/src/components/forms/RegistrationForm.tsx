@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form';
 import {
   cityValidation,
   dateValidation,
@@ -7,120 +7,120 @@ import {
   passwordValidation,
   postalCodeValidation,
   streetValidation
-} from '../../lib/utils/inputValidations'
-import React, { useState } from 'react'
-import { InputColumn } from './inputs/inputColumn'
-import ButtonForm from './buttonForm'
-import { Input } from './inputs/Input'
-import { validateEmail } from './validateFunctions/e-mail'
-import { validatePassword } from './validateFunctions/password'
-import { validateDate } from './validateFunctions/date'
-import { validateCity } from './validateFunctions/city'
-import { validateStreet } from './validateFunctions/street'
-import { validatePostalCode } from './validateFunctions/postalCode'
-import { validateName } from './validateFunctions/name'
-import { RegistrationData, ResultProps } from '../../lib/interfaces'
-import { handleRegistration } from '../../services/handleRegistration'
-import ResultMessage from '../ResultMessage'
+} from '../../lib/utils/inputValidations';
+import React, { useState } from 'react';
+import { InputColumn } from './inputs/inputColumn';
+import ButtonForm from './buttonForm';
+import { Input } from './inputs/Input';
+import { validateEmail } from './validateFunctions/e-mail';
+import { validatePassword } from './validateFunctions/password';
+import { validateDate } from './validateFunctions/date';
+import { validateCity } from './validateFunctions/city';
+import { validateStreet } from './validateFunctions/street';
+import { validatePostalCode } from './validateFunctions/postalCode';
+import { validateName } from './validateFunctions/name';
+import { RegistrationData, ResultProps } from '../../lib/interfaces';
+import { handleRegistration } from '../../services/handleRegistration';
+import ResultMessage from '../ResultMessage';
 
 export const RegistrationForm = () => {
-  const methods = useForm()
+  const methods = useForm();
 
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [date, setDate] = useState('')
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [date, setDate] = useState('');
 
-  const [city, setCity] = useState('')
-  const [shippingCity, setShippingCity] = useState('')
+  const [city, setCity] = useState('');
+  const [shippingCity, setShippingCity] = useState('');
 
-  const [street, setStreet] = useState('')
-  const [shippingStreet, setShippingStreet] = useState('')
+  const [street, setStreet] = useState('');
+  const [shippingStreet, setShippingStreet] = useState('');
 
-  const [house, setHouse] = useState('')
-  const [shippingHouse, setShippingHouse] = useState('')
+  const [house, setHouse] = useState('');
+  const [shippingHouse, setShippingHouse] = useState('');
 
-  const [postalCode, setPostalCode] = useState('')
-  const [shippingPostalCode, setShippingPostalCode] = useState('')
+  const [postalCode, setPostalCode] = useState('');
+  const [shippingPostalCode, setShippingPostalCode] = useState('');
 
-  const [firstName, setFirstName] = useState('')
-  const [secondName, setSecondName] = useState('')
+  const [firstName, setFirstName] = useState('');
+  const [secondName, setSecondName] = useState('');
 
-  const [selectedCountry, setSelectedCountry] = useState('')
-  const [shippingSelectedCountry, setShippingSelectedCountry] = useState('')
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [shippingSelectedCountry, setShippingSelectedCountry] = useState('');
 
-  const [shouldCopy, setShouldCopy] = useState(false)
+  const [shouldCopy, setShouldCopy] = useState(false);
 
-  const [selectedCountryError, setSelectedCountryError] = useState(false)
-  const [shippingCountryError, setShippingCountryError] = useState(false)
+  const [selectedCountryError, setSelectedCountryError] = useState(false);
+  const [shippingCountryError, setShippingCountryError] = useState(false);
 
-  const [isShippingAddressActive, setIsShippingAddressActive] = useState(false)
-  const [isDefaultBillingAddress, setIsDefaultBillingAddress] = useState(false)
-  const [isDefaultShippingAddress, setIsDefaultShippingAddress] = useState(false)
+  const [isShippingAddressActive, setIsShippingAddressActive] = useState(false);
+  const [isDefaultBillingAddress, setIsDefaultBillingAddress] = useState(false);
+  const [isDefaultShippingAddress, setIsDefaultShippingAddress] = useState(false);
 
   const handleCopyClick = (): void => {
-    setShouldCopy(!shouldCopy)
-    setIsShippingAddressActive(!isShippingAddressActive)
+    setShouldCopy(!shouldCopy);
+    setIsShippingAddressActive(!isShippingAddressActive);
     if (shouldCopy) {
-      setShippingSelectedCountry('')
-      setShippingCity('')
-      setShippingStreet('')
-      setShippingHouse('')
-      setShippingPostalCode('')
+      setShippingSelectedCountry('');
+      setShippingCity('');
+      setShippingStreet('');
+      setShippingHouse('');
+      setShippingPostalCode('');
     } else {
-      setShippingSelectedCountry(selectedCountry)
-      setShippingCity(city)
-      setShippingStreet(street)
-      setShippingHouse(house)
-      setShippingPostalCode(postalCode)
+      setShippingSelectedCountry(selectedCountry);
+      setShippingCity(city);
+      setShippingStreet(street);
+      setShippingHouse(house);
+      setShippingPostalCode(postalCode);
     }
-  }
+  };
 
   const [submitResult, setSubmitResult] = useState<ResultProps>({
     isSuccess: false,
     message: '',
     isVisible: false
-  })
+  });
 
   const onSubmit = async () => {
-    const data = validateAllInputs()
-    const result = await handleRegistration(data)
+    const data = validateAllInputs();
+    const result = await handleRegistration(data);
     if (result) {
-      result.isVisible = true
-      setSubmitResult(result)
+      result.isVisible = true;
+      setSubmitResult(result);
     } else {
       const errorResult = {
         isSuccess: false,
         message: 'Ooops. Something went wrong. Please, check if all fields are filled properly ',
         isVisible: true
-      }
-      setSubmitResult(errorResult)
+      };
+      setSubmitResult(errorResult);
     }
-  }
+  };
 
   function validateAllInputs(): RegistrationData {
-    setIsSubmitted(true)
+    setIsSubmitted(true);
 
-    const emailValidationResult: string | undefined = validateEmail(email)
-    const passwordValidationResult: string | undefined = validatePassword(password)
-    const dateValidationResult: string | undefined = validateDate(date)
-    const cityValidationResult: string | undefined = validateCity(city)
-    const streetValidationResult: string | undefined = validateStreet(street)
-    const houseValidationResult: string | undefined = validateStreet(house)
-    const postalCodeValidationResult: string | undefined = validatePostalCode(postalCode)
-    const firstNameValidationResult: string | undefined = validateName(firstName)
-    const secondNameValidationResult: string | undefined = validateName(secondName)
+    const emailValidationResult: string | undefined = validateEmail(email);
+    const passwordValidationResult: string | undefined = validatePassword(password);
+    const dateValidationResult: string | undefined = validateDate(date);
+    const cityValidationResult: string | undefined = validateCity(city);
+    const streetValidationResult: string | undefined = validateStreet(street);
+    const houseValidationResult: string | undefined = validateStreet(house);
+    const postalCodeValidationResult: string | undefined = validatePostalCode(postalCode);
+    const firstNameValidationResult: string | undefined = validateName(firstName);
+    const secondNameValidationResult: string | undefined = validateName(secondName);
 
     if (!selectedCountry) {
-      setSelectedCountryError(true)
+      setSelectedCountryError(true);
     } else {
-      setSelectedCountryError(false)
+      setSelectedCountryError(false);
     }
 
     if (!shippingSelectedCountry) {
-      setShippingCountryError(true)
+      setShippingCountryError(true);
     } else {
-      setShippingCountryError(false)
+      setShippingCountryError(false);
     }
 
     if (
@@ -158,8 +158,8 @@ export const RegistrationForm = () => {
           postalCode: shippingPostalCode,
           isDefault: isDefaultShippingAddress
         }
-      }
-      return registrationData
+      };
+      return registrationData;
     }
   }
 
@@ -208,9 +208,9 @@ export const RegistrationForm = () => {
                   id={'billingOptions'}
                   value={selectedCountry}
                   onChange={e => {
-                    setSelectedCountry(e.target.value)
-                    setSelectedCountryError(false)
-                    if (shouldCopy) setShippingSelectedCountry(e.target.value)
+                    setSelectedCountry(e.target.value);
+                    setSelectedCountryError(false);
+                    if (shouldCopy) setShippingSelectedCountry(e.target.value);
                   }}
                   className={
                     selectedCountryError
@@ -231,16 +231,16 @@ export const RegistrationForm = () => {
               {...cityValidation}
               isSubmitted={isSubmitted}
               onChange={(newValue: string) => {
-                setCity(newValue)
-                if (shouldCopy) setShippingCity(newValue)
+                setCity(newValue);
+                if (shouldCopy) setShippingCity(newValue);
               }}
             />
             <Input
               {...streetValidation}
               isSubmitted={isSubmitted}
               onChange={(newValue: string) => {
-                setStreet(newValue)
-                if (shouldCopy) setShippingStreet(newValue)
+                setStreet(newValue);
+                if (shouldCopy) setShippingStreet(newValue);
               }}
             />
             <Input
@@ -249,16 +249,16 @@ export const RegistrationForm = () => {
               placeholder='Type your house number'
               isSubmitted={isSubmitted}
               onChange={(newValue: string) => {
-                setHouse(newValue)
-                if (shouldCopy) setShippingHouse(newValue)
+                setHouse(newValue);
+                if (shouldCopy) setShippingHouse(newValue);
               }}
             />
             <Input
               {...postalCodeValidation}
               isSubmitted={isSubmitted}
               onChange={(newValue: string) => {
-                setPostalCode(newValue)
-                if (shouldCopy) setShippingPostalCode(newValue)
+                setPostalCode(newValue);
+                if (shouldCopy) setShippingPostalCode(newValue);
               }}
             />
             <div className={'md:ml-[250px]'}>
@@ -307,8 +307,8 @@ export const RegistrationForm = () => {
                   value={shippingSelectedCountry}
                   disabled={isShippingAddressActive}
                   onChange={(e): void => {
-                    setShippingSelectedCountry(e.target.value)
-                    setShippingCountryError(false)
+                    setShippingSelectedCountry(e.target.value);
+                    setShippingCountryError(false);
                   }}
                   className={
                     shippingCountryError
@@ -386,5 +386,5 @@ export const RegistrationForm = () => {
         </div>
       </form>
     </FormProvider>
-  )
-}
+  );
+};

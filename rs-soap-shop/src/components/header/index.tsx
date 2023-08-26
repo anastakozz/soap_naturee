@@ -1,52 +1,52 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
-import { NavLink } from 'react-router-dom'
-import { DarkModeButton } from '../darkModeButton'
-import LoginArea from '../loginArea/loginAreaDesctop'
-import Navigation from '../navigation/navigationLight'
-import CartIconDark from '../../icons/cartIconDark'
-import CartIcon from '../../icons/cartIcon'
-import BurgerMenuButton from '../burgerMenuButton'
-import NavigationModal from '../navigation/navigationModal'
+import { NavLink } from 'react-router-dom';
+import { DarkModeButton } from '../darkModeButton';
+import LoginArea from '../loginArea/loginAreaDesctop';
+import Navigation from '../navigation/navigationLight';
+import CartIconDark from '../../icons/cartIconDark';
+import CartIcon from '../../icons/cartIcon';
+import BurgerMenuButton from '../burgerMenuButton';
+import NavigationModal from '../navigation/navigationModal';
 
 function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const changeWidth = () => {
       if (window.innerWidth > 768) {
-        setIsMenuOpen(false)
+        setIsMenuOpen(false);
       }
-    }
+    };
 
-    window.addEventListener('resize', changeWidth)
-  }, [])
+    window.addEventListener('resize', changeWidth);
+  }, []);
 
   useEffect(() => {
     if (
       localStorage.theme === 'dark' ||
       (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove('dark');
     }
-  }, [])
+  }, []);
 
   const handleChangeMode = () => {
     if (
       localStorage.theme === 'dark' ||
       (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
-      document.documentElement.classList.remove('dark')
-      localStorage.theme = 'light'
+      document.documentElement.classList.remove('dark');
+      localStorage.theme = 'light';
     } else {
-      document.documentElement.classList.add('dark')
-      localStorage.theme = 'dark'
+      document.documentElement.classList.add('dark');
+      localStorage.theme = 'dark';
     }
-  }
+  };
 
-  const isLoggedIn = !!localStorage.getItem('token')
+  const isLoggedIn = !!localStorage.getItem('token');
 
   return (
     <header data-testid='header' className='bg-primaryColor dark:bg-grayLColor transition relative'>
@@ -72,7 +72,7 @@ function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

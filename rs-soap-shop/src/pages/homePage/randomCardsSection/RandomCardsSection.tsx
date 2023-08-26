@@ -1,27 +1,27 @@
-import { Link } from 'react-router-dom'
-import EmptyButton from '../../../components/buttons/emptyButton'
-import Card from '../../../components/card'
-import { Product, ProductCardProps } from '../../../lib/interfaces'
-import { getProductsList } from '../../../services/product.service'
-import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter'
-import { ReactNode } from 'react'
+import { Link } from 'react-router-dom';
+import EmptyButton from '../../../components/buttons/emptyButton';
+import Card from '../../../components/card';
+import { Product, ProductCardProps } from '../../../lib/interfaces';
+import { getProductsList } from '../../../services/product.service';
+import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
+import { ReactNode } from 'react';
 
 async function getCardsData(): Promise<ProductCardProps[]> {
-  const data: Product[] = await getProductsList()
+  const data: Product[] = await getProductsList();
   if (data) {
-    const shuffledData = shuffleProducts(data).slice(0, 6)
-    const dataAdapted = shuffledData.map((product: Product) => toCardAdapter(product))
-    return dataAdapted
+    const shuffledData = shuffleProducts(data).slice(0, 6);
+    const dataAdapted = shuffledData.map((product: Product) => toCardAdapter(product));
+    return dataAdapted;
   }
 }
 
 function shuffleProducts(data: Product[]): Product[] {
-  const random = data.map(Math.random)
-  data.sort((a, b) => random[data.indexOf(a)] - random[data.indexOf(b)])
-  return data
+  const random = data.map(Math.random);
+  data.sort((a, b) => random[data.indexOf(a)] - random[data.indexOf(b)]);
+  return data;
 }
 
-const items = await getCardsData()
+const items = await getCardsData();
 
 export default function RandomCardsSection() {
   return (
@@ -35,7 +35,7 @@ export default function RandomCardsSection() {
                 <div key={index} className='mb-sm mx-4'>
                   <Card {...item} />
                 </div>
-              )
+              );
             })}
           </div>
           <Link to={'./our-products'}>
@@ -46,5 +46,5 @@ export default function RandomCardsSection() {
         <></>
       )}
     </>
-  )
+  );
 }

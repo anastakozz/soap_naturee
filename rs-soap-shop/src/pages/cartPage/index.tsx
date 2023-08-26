@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function CartPage() {
-  return <>CartPage works!</>
+  return <>CartPage works!</>;
 }
 
-export default CartPage
+export default CartPage;

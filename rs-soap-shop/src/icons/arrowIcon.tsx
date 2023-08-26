@@ -15,5 +15,5 @@ export default function ArrowIcon() {
         strokeLinejoin='round'
       />
     </svg>
-  )
+  );
 }

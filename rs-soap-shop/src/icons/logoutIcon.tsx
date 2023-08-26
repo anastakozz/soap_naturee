@@ -15,7 +15,7 @@ function LogoutIcon() {
         strokeLinejoin='round'
       />
     </svg>
-  )
+  );
 }
 
-export default LogoutIcon
+export default LogoutIcon;

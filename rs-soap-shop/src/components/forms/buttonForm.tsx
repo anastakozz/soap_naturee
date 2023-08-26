@@ -1,5 +1,5 @@
-import { ButtonProps } from '../../lib/interfaces'
-import { Link } from 'react-router-dom'
+import { ButtonProps } from '../../lib/interfaces';
+import { Link } from 'react-router-dom';
 
 export default function ButtonForm({ children, to, onClick }: ButtonProps): JSX.Element {
   return (
@@ -10,5 +10,5 @@ export default function ButtonForm({ children, to, onClick }: ButtonProps): JSX.
     >
       {children}
     </Link>
-  )
+  );
 }

@@ -1,5 +1,5 @@
 interface MessageProps {
-  message: string
+  message: string;
 }
 
 export default function ErrorMessage({ message }: MessageProps) {
@@ -8,5 +8,5 @@ export default function ErrorMessage({ message }: MessageProps) {
       <img src='/images/attention-circle-svgrepo-com.svg' alt='' width='24px' className='mr-4' />
       <p>{message}</p>
     </div>
-  )
+  );
 }

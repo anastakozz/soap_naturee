@@ -23,7 +23,7 @@ function BurgerMenuButton({ isMenuOpen, onClick }: { isMenuOpen: boolean; onClic
       <span className='block h-0.5 w-8 bg-grayLColor group-hover:bg-accentColor dark:bg-primaryColor transition'></span>
       <span className='block h-0.5 w-8 bg-grayLColor group-hover:bg-accentColor dark:bg-primaryColor transition'></span>
     </div>
-  )
+  );
 }
 
-export default BurgerMenuButton
+export default BurgerMenuButton;

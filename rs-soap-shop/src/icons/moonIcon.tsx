@@ -1,5 +1,5 @@
 function MoonIcon() {
-  return <></>
+  return <></>;
 }
 
-export default MoonIcon
+export default MoonIcon;

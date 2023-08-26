@@ -1,5 +1,5 @@
-import React from 'react'
-import { ButtonProps } from '../../../lib/interfaces'
+import React from 'react';
+import { ButtonProps } from '../../../lib/interfaces';
 
 export default function SmallButton({ children, onClick }: ButtonProps): JSX.Element {
   return (
@@ -9,5 +9,5 @@ export default function SmallButton({ children, onClick }: ButtonProps): JSX.Ele
     >
       {children}
     </button>
-  )
+  );
 }

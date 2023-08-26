@@ -16,7 +16,7 @@ function FacebookIcon() {
         strokeWidth='0.00064'
       />
     </svg>
-  )
+  );
 }
 
-export default FacebookIcon
+export default FacebookIcon;

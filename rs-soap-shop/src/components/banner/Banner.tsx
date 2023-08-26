@@ -1,9 +1,9 @@
-import HeavyButton from '../buttons/heavyButton'
-import { Link } from 'react-router-dom'
-import { BannerProps } from '../../lib/interfaces'
+import HeavyButton from '../buttons/heavyButton';
+import { Link } from 'react-router-dom';
+import { BannerProps } from '../../lib/interfaces';
 
 export function Banner(content: BannerProps) {
-  const { label, title, description, buttonText, linkAdress } = content
+  const { label, title, description, buttonText, linkAdress } = content;
   return (
     <div
       data-testid='banner'
@@ -18,5 +18,5 @@ export function Banner(content: BannerProps) {
         <HeavyButton>{buttonText}</HeavyButton>
       </Link>
     </div>
-  )
+  );
 }

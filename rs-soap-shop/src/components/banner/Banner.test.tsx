@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react'
-import { Banner } from './Banner'
-import { BannerProps } from '../../lib/interfaces'
-import { BrowserRouter } from 'react-router-dom'
+import { render } from '@testing-library/react';
+import { Banner } from './Banner';
+import { BannerProps } from '../../lib/interfaces';
+import { BrowserRouter } from 'react-router-dom';
 
 const propsData: BannerProps = {
   label: 'A',
@@ -9,13 +9,13 @@ const propsData: BannerProps = {
   description: 'C',
   buttonText: 'text',
   linkAdress: 'adress'
-}
+};
 
 it('renders a banner in DOM', () => {
   const component = render(
     <BrowserRouter>
       <Banner {...propsData} />
     </BrowserRouter>
-  )
-  expect(component.getByTestId('banner')).toBeInTheDocument()
-})
+  );
+  expect(component.getByTestId('banner')).toBeInTheDocument();
+});

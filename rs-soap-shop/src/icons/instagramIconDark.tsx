@@ -24,7 +24,7 @@ function InstagramIconDark() {
         fill='#fff'
       />
     </svg>
-  )
+  );
 }
 
-export default InstagramIconDark
+export default InstagramIconDark;

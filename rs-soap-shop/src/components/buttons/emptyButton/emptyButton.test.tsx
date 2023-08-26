@@ -1,16 +1,16 @@
-import { render, fireEvent } from '@testing-library/react'
-import EmptyButton from '.'
-import { ButtonProps } from '../../../lib/interfaces'
+import { render, fireEvent } from '@testing-library/react';
+import EmptyButton from '.';
+import { ButtonProps } from '../../../lib/interfaces';
 
-const mockedCallback = jest.fn()
+const mockedCallback = jest.fn();
 
 const props: ButtonProps = {
   children: 'text',
   onClick: mockedCallback
-}
+};
 
 it('fires a function click', async () => {
-  const component = render(<EmptyButton {...props} />)
-  fireEvent.click(component.getByTestId('empty-button'))
-  expect(mockedCallback).toBeCalled
-})
+  const component = render(<EmptyButton {...props} />);
+  fireEvent.click(component.getByTestId('empty-button'));
+  expect(mockedCallback).toBeCalled;
+});

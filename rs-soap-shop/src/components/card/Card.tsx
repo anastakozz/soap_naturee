@@ -1,16 +1,16 @@
-import { ProductCardProps } from '../../lib/interfaces'
-import { useNavigate } from 'react-router-dom'
-import SmallButton from '../buttons/smallButton'
-import { MouseEvent } from 'react'
+import { ProductCardProps } from '../../lib/interfaces';
+import { useNavigate } from 'react-router-dom';
+import SmallButton from '../buttons/smallButton';
+import { MouseEvent } from 'react';
 
 export default function Card(item: ProductCardProps) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   function handleClick(event: MouseEvent) {
-    const target = event.target as HTMLElement
+    const target = event.target as HTMLElement;
     if (!target.classList.contains('cart-button')) {
-      navigate(`${item.link}`)
+      navigate(`${item.link}`);
     } else {
-      console.log('add product to cart')
+      console.log('add product to cart');
     }
   }
 
@@ -46,5 +46,5 @@ export default function Card(item: ProductCardProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
