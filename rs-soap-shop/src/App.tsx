@@ -84,7 +84,7 @@ function App() {
           }
         ></Route>
         <Route
-          path='/product/:id'
+          path='/product/:key'
           element={
             <AppLayout>
               <DetailedProductPage />

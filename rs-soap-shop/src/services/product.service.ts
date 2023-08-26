@@ -15,3 +15,17 @@ export async function getProductsList() {
     return undefined;
   }
 }
+
+export async function getProductByKey(key: string) {
+  const accessToken = await getBasicToken()
+  try {
+    const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/key=${key}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    return response.data
+  } catch (error) {
+    return undefined
+  }
+}
