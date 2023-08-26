@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
 import Card from '../../../components/card';
-import {items} from '../../homePage/randomCardsSection/RandomCardsSection';
+import {items} from '../../../lib/utils/shuffleCards';
 
 export default function Cards() {
   return (

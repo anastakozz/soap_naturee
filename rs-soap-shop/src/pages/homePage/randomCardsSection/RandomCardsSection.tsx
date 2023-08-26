@@ -1,27 +1,8 @@
-import { Link } from 'react-router-dom';
-import EmptyButton from '../../../components/buttons/emptyButton';
-import Card from '../../../components/card';
-import { Product, ProductCardProps } from '../../../lib/interfaces';
-import { getProductsList } from '../../../services/product.service';
-import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
-import { ReactNode } from 'react';
-
-async function getCardsData(): Promise<ProductCardProps[]> {
-  const data: Product[] = await getProductsList();
-  if (data) {
-    const shuffledData = shuffleProducts(data).slice(0, 6);
-    const dataAdapted = shuffledData.map((product: Product) => toCardAdapter(product));
-    return dataAdapted;
-  }
-}
-
-function shuffleProducts(data: Product[]): Product[] {
-  const random = data.map(Math.random);
-  data.sort((a, b) => random[data.indexOf(a)] - random[data.indexOf(b)]);
-  return data;
-}
-
-export const items = await getCardsData()
+import { Link } from 'react-router-dom'
+import EmptyButton from '../../../components/buttons/emptyButton'
+import Card from '../../../components/card'
+import { ReactNode } from 'react'
+import {items} from '../../../lib/utils/shuffleCards';
 
 export default function RandomCardsSection() {
   return (
