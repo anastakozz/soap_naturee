@@ -57,7 +57,7 @@ export const LoginForm = () => {
       <div className='container px-sm py-sm md:px-big md:py-bigY max-w-[1440px] mx-auto lg:px-big'>
         <h3 className={'text-accentColor dark:text-primaryColor text-h3 font-bold pb-bigY'}>Sign In form:</h3>
         {error && (
-          <div className='bg-red-500/50 p-4 rounded-md mb-8 flex'>
+          <div className='bg-errorColor p-4 rounded-md mb-8 flex'>
             <img src='/images/attention-circle-svgrepo-com.svg' alt='' width='24px' className='mr-4' />
             <p>{error}</p>
           </div>

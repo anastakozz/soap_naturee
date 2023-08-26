@@ -89,7 +89,7 @@ export const Input = ({ label, type, placeholder, isSubmitted, onChange, val, di
       </div>
 
       <div className={'w-inputs'}>
-        <div className={'hidden md:inline-block text-red-500'}>{error}</div>
+        <div className={'hidden md:inline-block text-errorColor'}>{error}</div>
         <div className='relative'>
           <input
             type={isPasswordVisible ? 'text' : type}

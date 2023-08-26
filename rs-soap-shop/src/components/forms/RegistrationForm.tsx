@@ -203,7 +203,7 @@ export const RegistrationForm = () => {
                 Your country:
               </label>
               <div>
-                {selectedCountryError && <p className='error-message text-red-500'>Please select your country</p>}
+                {selectedCountryError && <p className='error-message text-errorColor'>Please select your country</p>}
                 <select
                   id={'billingOptions'}
                   value={selectedCountry}
@@ -301,7 +301,7 @@ export const RegistrationForm = () => {
                 Your country:
               </label>
               <div>
-                {shippingCountryError && <p className='error-message text-red-500'>Please select your country</p>}
+                {shippingCountryError && <p className='error-message text-errorColor'>Please select your country</p>}
                 <select
                   id={'shippingOptions'}
                   value={shippingSelectedCountry}

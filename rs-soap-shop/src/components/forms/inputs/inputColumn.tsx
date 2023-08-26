@@ -67,11 +67,11 @@ export const InputColumn = ({ label, type, placeholder, isSubmitted, onChange }:
           {label}
         </label>
 
-        <div className={'w-inputs md:hidden text-red-500'}>{error}</div>
+        <div className={'w-inputs md:hidden text-errorColor'}>{error}</div>
       </div>
 
       <div className={'w-inputs'}>
-        <div className={'hidden md:inline-block w-inputName text-red-500'}>{error}</div>
+        <div className={'hidden md:inline-block w-inputName text-errorColor'}>{error}</div>
 
         <input type={type} className={cn(inputTailwind)} placeholder={placeholder} onChange={handleInputChange} />
       </div>
