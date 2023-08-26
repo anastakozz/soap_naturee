@@ -16,7 +16,7 @@ function FacebookIconDark() {
         strokeWidth='0.00064'
       />
     </svg>
-  )
+  );
 }
 
-export default FacebookIconDark
+export default FacebookIconDark;

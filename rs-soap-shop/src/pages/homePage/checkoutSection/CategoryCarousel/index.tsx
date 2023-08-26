@@ -1,2 +1,2 @@
-import CategoryCarousel from './CategoryCarousel'
-export default CategoryCarousel
+import CategoryCarousel from './CategoryCarousel';
+export default CategoryCarousel;

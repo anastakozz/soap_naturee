@@ -24,7 +24,7 @@ function InstagramIcon() {
         fill='#3A3A3A'
       />
     </svg>
-  )
+  );
 }
 
-export default InstagramIcon
+export default InstagramIcon;

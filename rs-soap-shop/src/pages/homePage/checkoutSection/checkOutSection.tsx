@@ -1,4 +1,4 @@
-import CategoryCarousel from './CategoryCarousel'
+import CategoryCarousel from './CategoryCarousel';
 
 export default function CheckoutSection() {
   return (
@@ -8,5 +8,5 @@ export default function CheckoutSection() {
       </h3>
       <CategoryCarousel />
     </div>
-  )
+  );
 }

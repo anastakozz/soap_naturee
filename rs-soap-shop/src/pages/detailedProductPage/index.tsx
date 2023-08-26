@@ -1,2 +1,2 @@
-import DetailedProductPage from './detailedProductPage'
-export default DetailedProductPage
+import DetailedProductPage from './detailedProductPage';
+export default DetailedProductPage;

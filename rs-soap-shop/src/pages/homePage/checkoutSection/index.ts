@@ -1,2 +1,2 @@
-import CheckoutSection from './checkOutSection'
-export default CheckoutSection
+import CheckoutSection from './checkOutSection';
+export default CheckoutSection;

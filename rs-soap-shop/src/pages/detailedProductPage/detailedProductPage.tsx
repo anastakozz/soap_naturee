@@ -1,11 +1,11 @@
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 
 function DetailedProductPage() {
-  const { id } = useParams()
+  const { id } = useParams();
 
-  console.log(id)
+  console.log(id);
 
-  return <>DetailedProductPage works!</>
+  return <>DetailedProductPage works!</>;
 }
 
-export default DetailedProductPage
+export default DetailedProductPage;

@@ -14,5 +14,5 @@ export function ShowPassword() {
         fill='black'
       />
     </svg>
-  )
+  );
 }

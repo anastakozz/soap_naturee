@@ -15,7 +15,7 @@ function VkIcon() {
         strokeLinejoin='round'
       />
     </svg>
-  )
+  );
 }
 
-export default VkIcon
+export default VkIcon;

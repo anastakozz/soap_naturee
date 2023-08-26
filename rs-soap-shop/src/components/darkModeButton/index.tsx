@@ -21,5 +21,5 @@ export function DarkModeButton({ onChange }: { onChange: () => void }) {
         />
       </svg>
     </div>
-  )
+  );
 }

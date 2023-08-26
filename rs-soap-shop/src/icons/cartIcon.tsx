@@ -9,7 +9,7 @@ function CartIcon() {
         strokeLinejoin='round'
       />
     </svg>
-  )
+  );
 }
 
-export default CartIcon
+export default CartIcon;

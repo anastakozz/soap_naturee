@@ -1,2 +1,2 @@
-import RandomCardsSection from './RandomCardsSection'
-export default RandomCardsSection
+import RandomCardsSection from './RandomCardsSection';
+export default RandomCardsSection;

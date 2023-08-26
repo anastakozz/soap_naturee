@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import { CategoryCardProps } from '../../../../../lib/interfaces'
+import { Link } from 'react-router-dom';
+import { CategoryCardProps } from '../../../../../lib/interfaces';
 
 export default function CategoryCard(item: CategoryCardProps) {
   return (
@@ -14,5 +14,5 @@ export default function CategoryCard(item: CategoryCardProps) {
       />
       <p className='text-h4 text-center  font-semibold'>{item.name}</p>
     </Link>
-  )
+  );
 }

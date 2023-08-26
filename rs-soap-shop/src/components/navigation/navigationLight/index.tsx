@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 function Navigation() {
   return (
@@ -22,7 +22,7 @@ function Navigation() {
         About us
       </NavLink>
     </nav>
-  )
+  );
 }
 
-export default Navigation
+export default Navigation;
