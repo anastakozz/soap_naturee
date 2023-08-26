@@ -21,7 +21,7 @@ function shuffleProducts(data: Product[]): Product[] {
   return data;
 }
 
-const items = await getCardsData();
+export const items = await getCardsData()
 
 export default function RandomCardsSection() {
   return (

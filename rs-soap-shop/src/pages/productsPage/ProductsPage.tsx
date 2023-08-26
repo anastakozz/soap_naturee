@@ -1,5 +1,15 @@
+import Cards from './cardsSection/Cards';
+import {Navigation} from './navigation/navigation';
+
+
 function ProductsPage() {
-  return <div>Product page</div>;
+
+  return (
+    <>
+      <Navigation />
+      <Cards />
+    </>
+  )
 }
 
 export default ProductsPage;

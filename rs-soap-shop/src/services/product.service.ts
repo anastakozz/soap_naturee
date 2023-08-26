@@ -15,3 +15,17 @@ export async function getProductsList() {
     return undefined;
   }
 }
+
+export async function getProductsOfCategory(id: string) {
+  const accessToken = await getBasicToken()
+  try {
+    const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/search?filter=categories.id:"${id}"`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    return response.data.results
+  } catch (error) {
+    return undefined
+  }
+}
