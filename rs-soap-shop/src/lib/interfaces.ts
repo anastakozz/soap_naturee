@@ -89,9 +89,9 @@ export interface ResultProps {
 }
 
 export interface BannerProps {
-  p: string
-  h2: string
-  h4: string
+  label: string
+  title: string
+  description: string
   buttonText: string
   linkAdress: string
 }
