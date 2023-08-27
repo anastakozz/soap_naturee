@@ -1,15 +1,13 @@
-import Cards from './cardsSection/Cards';
-import {Navigation} from './navigation/navigation';
-
+import OurProductsCards from './cardsSection/OurProductsCards';
+import { Navigation } from './navigation/navigation';
 
 function ProductsPage() {
-
   return (
     <>
       <Navigation />
-      <Cards />
+      <OurProductsCards />
     </>
-  )
+  );
 }
 
 export default ProductsPage;
