@@ -1,2 +1,2 @@
-import NewCollectionSection from './NewCollectionSection'
-export default NewCollectionSection
+import NewCollectionSection from './NewCollectionSection';
+export default NewCollectionSection;

@@ -1,2 +1,2 @@
-import SaleSection from './saleSection'
-export default SaleSection
+import SaleSection from './saleSection';
+export default SaleSection;

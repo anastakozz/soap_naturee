@@ -1,27 +1,27 @@
-import React, { ReactElement } from 'react'
-import './App.css'
-import Header from './components/header'
-import { Route, Routes } from 'react-router-dom'
-import HomePage from './pages/homePage'
-import ProductsPage from './pages/productsPage'
-import AboutPage from './pages/aboutPage'
-import CartPage from './pages/cartPage'
-import SingInPage from './pages/singInPage'
-import SignUpPage from './pages/singnUpPage'
-import ProfilePage from './pages/profilePage'
-import Footer from './components/footer'
-import PageNotFound from './pages/pageNotFound'
-import DetailedProductPage from './pages/detailedProductPage'
+import React, { ReactElement } from 'react';
+import './App.css';
+import Header from './components/header';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './pages/homePage';
+import ProductsPage from './pages/productsPage';
+import AboutPage from './pages/aboutPage';
+import CartPage from './pages/cartPage';
+import SingInPage from './pages/singInPage';
+import SignUpPage from './pages/singnUpPage';
+import ProfilePage from './pages/profilePage';
+import Footer from './components/footer';
+import PageNotFound from './pages/pageNotFound';
+import DetailedProductPage from './pages/detailedProductPage';
 
 const AppLayout = ({ children }: { children: ReactElement }) => {
   return (
     <>
       <Header />
-      {children}
+        {children}
       <Footer />
     </>
-  )
-}
+  );
+};
 
 function App() {
   return (
@@ -94,7 +94,7 @@ function App() {
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

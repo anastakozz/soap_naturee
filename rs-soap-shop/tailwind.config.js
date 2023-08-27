@@ -21,7 +21,8 @@ module.exports = {
         additionalColor: '#F4F5F7',
         grayLColor: '#3A3A3A',
         grayMColor: '#898989',
-        graySColor: '#B0B0B0'
+        graySColor: '#B0B0B0',
+        errorColor: '#b82323',
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif']

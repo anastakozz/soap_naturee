@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { getAccountData } from '../../services/account.service'
-import { AddressCardI } from '../../lib/interfaces'
-import EmptyButton from '../../components/buttons/emptyButton'
-import BannerPageName from '../../components/bannerPageName'
-import AddressCard from '../../components/addressCard'
-import EditIcon from '../../icons/editIcon'
+import React, { useEffect, useState } from 'react';
+import { getAccountData } from '../../services/account.service';
+import { AddressCardI } from '../../lib/interfaces';
+import EmptyButton from '../../components/buttons/emptyButton';
+import BannerPageName from '../../components/bannerPageName';
+import AddressCard from '../../components/addressCard';
+import EditIcon from '../../icons/editIcon';
 
 const countries = [
   {
@@ -19,29 +19,29 @@ const countries = [
     code: 'DE',
     country: 'Germany'
   }
-]
+];
 
 export function dataAdapterToFullName(code: string): string {
-  return countries.find(el => el.code == code).country
+  return countries.find(el => el.code == code).country;
 }
 
 function ProfilePage() {
-  const [account, setAccount] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [account, setAccount] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     getAccountData()
       .then(resp => {
-        setLoading(false)
-        setAccount(resp.data)
+        setLoading(false);
+        setAccount(resp.data);
       })
       .catch(err => {
-        console.error(err)
-        setLoading(false)
-      })
-  }, [])
-  console.log(account)
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+  console.log(account);
   return (
     <>
       {loading ? (
@@ -80,7 +80,7 @@ function ProfilePage() {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default ProfilePage
+export default ProfilePage;

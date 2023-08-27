@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 function NavigationDark() {
   return (
@@ -22,7 +22,7 @@ function NavigationDark() {
         About us
       </NavLink>
     </nav>
-  )
+  );
 }
 
-export default NavigationDark
+export default NavigationDark;
