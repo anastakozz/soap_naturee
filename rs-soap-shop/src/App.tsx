@@ -17,7 +17,7 @@ const AppLayout = ({ children }: { children: ReactElement }) => {
   return (
     <>
       <Header />
-        {children}
+      {children}
       <Footer />
     </>
   );
