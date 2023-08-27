@@ -144,3 +144,21 @@ export interface Product {
   createdAt: string;
   lastModifiedAt: string;
 }
+
+export interface AddressCardI {
+  id: string;
+  country: string;
+  city: string;
+  streetName: string;
+  building: string;
+  postalCode: string;
+  billingAddressIds: string[];
+  shippingAddressIds: string[];
+}
+export interface pageNameProp {
+  children: string | JSX.Element | JSX.Element[];
+}
+
+export interface pageNameProp {
+  children: string | JSX.Element | JSX.Element[];
+}
