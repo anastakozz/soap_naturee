@@ -15,7 +15,6 @@ function DetailedProductPage() {
       const product = await getProductByKey(key);
       const adaptedProduct = toDetailsAdapter(product);
       initProductData(adaptedProduct);
-      console.log(adaptedProduct);
     };
     fetchData().catch(e => {
       console.log(e);
@@ -28,7 +27,7 @@ function DetailedProductPage() {
         <>
           <div className=''>
             
-              <h1 className='text-3xl py-4 text-center text-accentColor dark:text-primaryColor'>{data.name}</h1>
+              <h1 className='text-5xl py-4 text-center text-accentColor dark:text-primaryColor'>{data.name}</h1>
               <div className='max-w-[400px] mx-auto h-[400px]'><CarouselDefault {...{ paths: data.imgSources }}></CarouselDefault></div>
               <p className='text-h4'>{data.description}</p>
             
