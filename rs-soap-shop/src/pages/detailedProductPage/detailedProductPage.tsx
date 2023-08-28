@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { DetailsProps } from '../../lib/interfaces';
 import CarouselDefault from '../../components/carousel';
 import toDetailsAdapter from '../../lib/utils/productDataAdapters.ts/toDetailsAdapter';
-import HeavyButton from '../../components/buttons/heavyButton';
+import EmptyButton from '../../components/buttons/emptyButton';
 
 function DetailedProductPage() {
   const [data, initProductData] = useState<DetailsProps | null>(null);
@@ -22,19 +22,37 @@ function DetailedProductPage() {
   }, []);
 
   return (
-    <div className='max-w-[1440px] mx-auto px-4 flex flex-col lg:px-big py-4 bg-secondaryColor dark:bg-grayMColor'>
+    <div className='bg-primaryColor dark:bg-grayMColor'>
       {data ? (
-        <>
-          <div className=''>
-            
-              <h1 className='text-5xl py-4 text-center text-accentColor dark:text-primaryColor'>{data.name}</h1>
-              <div className='max-w-[400px] mx-auto h-[400px]'><CarouselDefault {...{ paths: data.imgSources }}></CarouselDefault></div>
-              <p className='text-h4'>{data.description}</p>
-            
-            
-          </div>{' '}
-          <HeavyButton {...{ children: 'Add to Cart' }}></HeavyButton>
-        </>
+        <div className='max-w-[1440px] mx-auto px-8 lg:px-big py-4'>
+          <h1 className='text-h2 md:text-h2 py-4 text-center md:text-left text-accentColor dark:text-primaryColor'>
+            {data.name}
+          </h1>
+          <div className='flex items-center flex-col md:flex-row md:justify-between md:items-start'>
+            <div className='max-w-[400px] mx-auto h-[400px] md:mx-0 md:ml-10 mb-10'>
+              <CarouselDefault {...{ paths: data.imgSources }}></CarouselDefault>
+            </div>
+            <div className='max-w-[400px] md:max-w-[60%] md:order-first'>
+              <p className='text-h5'>{data.description}</p>
+              <div className='flex items-center w-full justify-between mb-4 '>
+                {data.isOnSale ? (
+                  <>
+                    <div className='text-h3 md:text-h2 whitespace-nowrap'>{data.newPrice}</div>
+                    <div className='flex items-center'>
+                      <div className='text-h5 md:text-h2 line-through text-graySColor dark:text-grayMColor ml-8 whitespace-nowrap'>
+                        {data.price}
+                      </div>
+                      <div className='h-min bg-red-500/90 text-primaryColor font-bold px-4 ml-8'>SALE</div>
+                    </div>
+                  </>
+                ) : (
+                  <div className='text-h2 whitespace-nowrap'>{data.price}</div>
+                )}
+              </div>
+              <EmptyButton {...{ children: 'Add to Cart' }}></EmptyButton>
+            </div>
+          </div>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
