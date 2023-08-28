@@ -149,6 +149,7 @@ export interface DetailsProps {
   price: string;
   isOnSale: boolean;
   newPrice: string | null;
+  keyWords: string[]
 }
 
 export interface AddressCardI {
