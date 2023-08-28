@@ -20,6 +20,20 @@ export async function getProductsList(limit: cardsPerPage) {
   }
 }
 
+export async function getProductByKey(key: string) {
+  const accessToken = await getBasicToken()
+  try {
+    const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/key=${key}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    return response.data
+  } catch (error) {
+    return undefined
+  }
+}
+
 export async function getProductsOfCategory(id: string) {
   const accessToken = await getBasicToken();
   try {
@@ -34,19 +48,5 @@ export async function getProductsOfCategory(id: string) {
     return response.data.results;
   } catch (error) {
     return undefined;
-  }
-}
-
-export async function getProductByKey(key: string) {
-  const accessToken = await getBasicToken()
-  try {
-    const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/key=${key}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    })
-    return response.data
-  } catch (error) {
-    return undefined
   }
 }
