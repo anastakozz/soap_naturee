@@ -36,3 +36,17 @@ export async function getProductsOfCategory(id: string) {
     return undefined;
   }
 }
+
+export async function getProductsOfCategoryByKey(key: string) {
+  const accessToken = await getBasicToken();
+  try {
+    const response = await axios.get(`${apiUrl}/${projectKey}/categories/key=${key}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    return response.data.id;
+  } catch (error) {
+    return undefined;
+  }
+}

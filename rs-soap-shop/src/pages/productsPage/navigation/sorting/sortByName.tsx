@@ -1,5 +1,5 @@
-import { SortABC } from '../../../icons/sortABC';
-import { SortZYX } from '../../../icons/sortZYX';
+import { SortABC } from '../../../../icons/sortABC';
+import { SortZYX } from '../../../../icons/sortZYX';
 
 export function SortByName() {
   return (

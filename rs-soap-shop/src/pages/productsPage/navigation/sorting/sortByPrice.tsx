@@ -1,5 +1,5 @@
-import { SortPriceUp } from '../../../icons/sortPriceUp';
-import { SortPriceDown } from '../../../icons/sortPriceDown';
+import { SortPriceUp } from '../../../../icons/sortPriceUp';
+import { SortPriceDown } from '../../../../icons/sortPriceDown';
 
 export function SortByPrice() {
   return (

@@ -1,28 +1,31 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import Card from '../../../components/card';
-import { Product, ProductCardProps } from '../../../lib/interfaces';
+import { OurProductsCardsProps, Product, ProductCardProps } from '../../../lib/interfaces';
 import { getProductsList } from '../../../services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
 import { cardsPerPage } from '../../../lib/enums';
 
-const items = await getCardsData();
+export const items: ProductCardProps[] = await getCardsData();
 
 async function getCardsData(): Promise<ProductCardProps[]> {
   const data: Product[] = await getProductsList(cardsPerPage.catalog);
   if (data) {
-    const dataAdapted = data.map((product: Product) => toCardAdapter(product));
-    return dataAdapted;
+    return data.map((product: Product) => toCardAdapter(product));
   }
 }
 
-export default function OurProductsCards() {
+export default function OurProductsCards({ products }: OurProductsCardsProps) {
   return (
     <>
-      {items ? (
+      {products ? (
         <div className='bg-primaryColor dark:bg-grayMColor h-auto p-sm text-center px-big flex flex-col items-center'>
           <h3 className='text-basicColor dark:text-secondaryColor text-h3 text-center font-bold'>Our products</h3>
-          <div className='flex flex-wrap justify-around mt-sm max-w-[1245px] pb-sm '>
-            {items.map((item, index): ReactNode => {
+          <div className='flex flex-wrap justify-between mt-sm max-w-[1245px] pb-sm '>
+            {products.map((item: ProductCardProps | Product, index): ReactNode => {
+              if ('priceMode' in item) {
+                item = toCardAdapter(item);
+              }
+              console.log(item);
               return (
                 <div key={index} className='mb-sm mx-4'>
                   <Card {...item} />
