@@ -25,12 +25,14 @@ function DetailedProductPage() {
     <div className='bg-primaryColor dark:bg-grayMColor'>
       {data ? (
         <div className='max-w-[1440px] mx-auto px-8 lg:px-big py-4'>
-          <h1 className='text-h2 py-4 text-center md:text-left text-accentColor dark:text-primaryColor'>
-            {data.name}
-          </h1>
+          <h1 className='text-h2 py-4 text-center md:text-left text-accentColor dark:text-primaryColor'>{data.name}</h1>
           <div className='flex items-center flex-col md:flex-row md:justify-between md:items-start'>
             <div className='max-w-[400px] mx-auto h-[400px] md:mx-0 md:ml-10 mb-10'>
-              <CarouselDefault {...{ paths: data.imgSources }}></CarouselDefault>
+              {data.imgSources.length === 1 ? (
+                <img className='rounded-xl object-cover h-full w-full overflow-hidde' src={data.imgSources[0]}></img>
+              ) : (
+                <CarouselDefault {...{ paths: data.imgSources }}></CarouselDefault>
+              )}
             </div>
             <div className='max-w-[400px] md:max-w-[60%] md:order-first'>
               <p className='text-h5 dark:text-primaryColor mb-sm'>{data.description}</p>
@@ -52,10 +54,15 @@ function DetailedProductPage() {
               <EmptyButton {...{ children: 'Add to Cart' }}></EmptyButton>
               <div className='flex my-sm'>
                 <div className='mr-sm'>Tags:</div>
-                <div>{data.keyWords.map((item, index)=> {
-                  return <span className='ml-4' key={`key-${index}`}>{item}</span>
-                })}</div>
-                
+                <div>
+                  {data.keyWords.map((item, index) => {
+                    return (
+                      <span className='ml-4' key={`key-${index}`}>
+                        {item}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

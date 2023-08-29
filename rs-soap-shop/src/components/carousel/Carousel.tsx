@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 export default function CarouselDefault(prop: { paths: string[] }) {
   return (
-    <Carousel className='rounded-xl '>
+    <Carousel className='rounded-xl'>
       {prop.paths.map((item, index): ReactNode => {
         return (
           <img
