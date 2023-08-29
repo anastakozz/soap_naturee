@@ -3,16 +3,15 @@ import { getBasicToken } from './registration.service';
 import axios from 'axios';
 import { cardsPerPage } from '../lib/enums';
 
-export async function getProductsList(limit: cardsPerPage) {
+export async function getProductsList(limit?: cardsPerPage) {
   const accessToken = await getBasicToken();
+  const Params = limit ? {limit: limit} : {}
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/search`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       },
-      params: {
-        limit: limit
-      }
+      params: Params
     });
     return response.data.results;
   } catch (error) {
