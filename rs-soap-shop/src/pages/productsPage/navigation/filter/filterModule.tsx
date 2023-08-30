@@ -20,17 +20,17 @@ export function FilterModule() {
       <div className={isOn ? 'visible' : 'invisible'}>
         <div
           className={
-            'drop-shadow-lg bg-secondaryColor absolute z-40 right-0 top-10 flex flex-col justify-between py-[10px] px-sm border rounded-normal border-solid border-black border-1'
+            'text-xs drop-shadow-lg bg-additionalColor absolute z-40 right-0 top-8 flex flex-col justify-between py-[10px] px-sm border rounded-normal '
           }
         >
-          <div className={'text-h4'}>Filter settings</div>
-          <div className={'flex gap-[20px] '}>
-            <div className={'flex flex-col justify-between'}>
+          <div className={'text-h5 my-4'}>Filter settings</div>
+          <div className={'flex gap-[1rem] flex-wrap md:flex-nowrap'}>
+            <div className={'flex flex-col'}>
               <Radiobuttons />
               <NewCollection />
             </div>
             <PriceFilter />
-            <div className={'h-[100px] flex flex-col justify-between'}>
+            <div className={'flex flex-col justify-between gap-[1rem]'}>
               <FilterButton
                 onClick={() => {
                   setFilter(true);

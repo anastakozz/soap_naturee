@@ -29,7 +29,7 @@ export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
   }
 
   return (
-    <div className='flex'>
+    <div className='flex flex-wrap'>
       <div className='relative mr-8'>
         <div>
           <button
