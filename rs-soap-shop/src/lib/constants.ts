@@ -5,5 +5,5 @@ export const clientId = process.env.REACT_APP_CTP_CLIENT_ID;
 export const secret = process.env.REACT_APP_CTP_CLIENT_SECRET;
 
 
-export const iconClassesNormal = 'p-2 rounded-normal w-[37px] h-[37px] flex justify-senter items-center bg-grayLColor/30';
-export const iconClassesActive = 'p-2 rounded-normal w-[37px] h-[37px] flex justify-senter items-center bg-grayLColor/90';
+export const iconClassesNormal = ' cursor-pointer p-2 rounded-normal w-[37px] h-[37px] flex justify-senter items-center bg-grayLColor/30';
+export const iconClassesActive = ' cursor-pointer p-2 rounded-normal w-[37px] h-[37px] flex justify-senter items-center bg-grayLColor/90';

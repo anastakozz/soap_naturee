@@ -1,12 +1,12 @@
-import { Radiobuttons } from './radiobuttons';
-import { NewCollection } from './newCollection';
-import { PriceFilter } from './PriceFilter';
-import FilterButton from './filterButton';
+import { Radiobuttons } from './components/radiobuttons';
+import { NewCollection } from './components/newCollection';
+import { PriceFilter } from './components/PriceFilter';
+import FilterButton from './components/filterButton';
 import { useState } from 'react';
 import FilterIcon from '../../../../icons/filterIcon';
 import { iconClassesActive, iconClassesNormal } from '../../../../lib/constants';
 
-export function FilterModule() {
+export default function FilterView() {
   const [isOn, setIsOn] = useState(false);
   const [isFiltered, setFilter] = useState(false);
 

@@ -36,10 +36,10 @@ export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
             type='button'
             className={classNames(
               'inline-flex justify-between',
-              'w-[170px] px-2 py-2',
+              'w-[170px] px-2 py-2 h-[37px]',
               'text-sm font-medium text-gray-700',
               'bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50',
-              'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+              'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentDarkColor dark:focus:ring-accentColor'
             )}
             onClick={toggleDropdown}
           >
