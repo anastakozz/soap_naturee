@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+
+import withMT from '@material-tailwind/react/utils/withMT';
+
+module.exports = withMT({
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'class',
   theme: {
@@ -22,7 +25,7 @@ module.exports = {
         grayLColor: '#3A3A3A',
         grayMColor: '#898989',
         graySColor: '#B0B0B0',
-        errorColor: '#b82323',
+        errorColor: '#b82323'
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif']
@@ -66,4 +69,4 @@ module.exports = {
     }
   },
   plugins: []
-}
+});

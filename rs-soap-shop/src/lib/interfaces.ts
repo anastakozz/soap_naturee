@@ -109,16 +109,11 @@ export interface Product {
     en: string;
   };
   categories: Category[];
-  // categoryOrderHints: {
-  //   [categoryID: string]: string
-  // }
-  // variants: []
   slug: {
     en: string;
   };
   masterVariant: {
     attributes: ProductAttributes[];
-    // assets: []
     images: ProductImage[];
     prices: Price[];
     id: number;
@@ -142,4 +137,34 @@ export interface Product {
   priceMode: string;
   createdAt: string;
   lastModifiedAt: string;
+}
+
+export interface DetailsProps {
+  productId: string;
+  name: string;
+  description: string;
+  imgSources: string[];
+  link: string;
+  price: string;
+  isOnSale: boolean;
+  newPrice: string | null;
+  keyWords: string[]
+}
+
+export interface AddressCardI {
+  id: string;
+  country: string;
+  city: string;
+  streetName: string;
+  building: string;
+  postalCode: string;
+  billingAddressIds: string[];
+  shippingAddressIds: string[];
+}
+export interface pageNameProp {
+  children: string | JSX.Element | JSX.Element[];
+}
+
+export interface pageNameProp {
+  children: string | JSX.Element | JSX.Element[];
 }
