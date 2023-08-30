@@ -13,7 +13,7 @@ function ProductsPage() {
 
   return (
     <>
-<BannerPageName {...{children: 'OUR PRODUCTS'}}></BannerPageName>
+      <BannerPageName {...{ children: 'OUR PRODUCTS' }}></BannerPageName>
       <Navigation changeContent={changeContent} />
       <OurProductsCards products={products} />
     </>
