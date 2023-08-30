@@ -6,7 +6,7 @@ export default function ResultMessage({ isSuccess, isVisible, message }: ResultP
   if (!isVisible) {
     return null;
   }
-
+  
   return (
     <div data-testid='reg-result-message'>{isSuccess ? <SuccessMessage /> : <ErrorMessage message={message} />}</div>
   );
