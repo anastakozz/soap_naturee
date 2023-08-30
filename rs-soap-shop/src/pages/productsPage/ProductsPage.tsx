@@ -6,7 +6,7 @@ import { ProductCardProps } from '../../lib/interfaces';
 function ProductsPage() {
   const [products, setProducts] = useState(items);
 
-  function changeContent(categoryProducts: ProductCardProps[]) {
+  function changeContent(categoryProducts: ProductCardProps[]): void {
     setProducts(categoryProducts);
   }
 

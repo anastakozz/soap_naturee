@@ -25,7 +25,6 @@ export default function OurProductsCards({ products }: OurProductsCardsProps) {
               if ('priceMode' in item) {
                 item = toCardAdapter(item);
               }
-              console.log(item);
               return (
                 <div key={index} className='mb-sm mx-4'>
                   <Card {...item} />

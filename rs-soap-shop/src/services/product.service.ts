@@ -37,7 +37,7 @@ export async function getProductsOfCategory(id: string) {
   }
 }
 
-export async function getProductsOfCategoryByKey(key: string) {
+export async function getCategoryId(key: string) {
   const accessToken = await getBasicToken();
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/categories/key=${key}`, {

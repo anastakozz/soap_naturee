@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DropdownIcon } from '../../../icons/dropdownIcon';
 import classNames from 'classnames';
-import { getProductsOfCategory, getProductsOfCategoryByKey } from '../../../services/product.service';
+import { getProductsOfCategory, getCategoryId } from '../../../services/product.service';
 import { OurProductsCardsProps } from '../../../lib/interfaces';
 
 export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
@@ -19,7 +19,7 @@ export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
     setIsOpen(false);
 
     try {
-      const productsByKey = await getProductsOfCategoryByKey(option);
+      const productsByKey = await getCategoryId(option);
       const response = await getProductsOfCategory(productsByKey);
       changeContent(response);
     } catch (error) {
@@ -52,7 +52,7 @@ export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
             {options.map((option: string) => (
               <button
                 key={option}
-                onClick={async () => {
+                onClick={async (): Promise<void> => {
                   await selectOption(option);
                 }}
                 className='block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100'
