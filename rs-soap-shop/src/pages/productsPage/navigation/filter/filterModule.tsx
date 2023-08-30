@@ -3,6 +3,8 @@ import { NewCollection } from './newCollection';
 import { PriceFilter } from './PriceFilter';
 import FilterButton from './filterButton';
 import { useState } from 'react';
+import FilterIcon from '../../../../icons/filterIcon';
+import { iconClassesActive, iconClassesNormal } from '../../../../lib/constants';
 
 export function FilterModule() {
   const [isOn, setIsOn] = useState(false);
@@ -13,14 +15,21 @@ export function FilterModule() {
   }
 
   return (
-    <div className='relative text-basicColor '>
-      <div className='text-primaryColor cursor-pointer hover:underline active:scale-95' onClick={toggleFilterMenu}>
-        {isFiltered ? <div className='underline'>Filtered</div> : <div>Filter</div>}
+    <div className='relative text-basicColor'>
+      <div
+        className='transition flex items-center gap-[0.5rem] text-primaryColor cursor-pointer hover:text-basicColor active:scale-95'
+        onClick={toggleFilterMenu}
+      >
+        <div className={isFiltered ? `${iconClassesActive}` : `${iconClassesNormal}`}>
+          <FilterIcon />
+        </div>
+
+        <div className='hidden md:block'>Filter</div>
       </div>
       <div className={isOn ? 'visible' : 'invisible'}>
         <div
           className={
-            'text-xs drop-shadow-lg bg-additionalColor absolute z-40 right-0 top-8 flex flex-col justify-between py-[10px] px-sm border rounded-normal '
+            'text-xs drop-shadow-lg bg-additionalColor absolute z-40 right-0 top-10 flex flex-col justify-between py-[10px] px-sm border rounded-normal '
           }
         >
           <div className={'text-h5 my-4'}>Filter settings</div>

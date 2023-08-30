@@ -3,7 +3,7 @@ import { SortByPrice } from './sortByPrice';
 
 export function SortingModule() {
   return (
-    <div className={'w-big h-[100px] flex flex-col justify-center'}>
+    <div className={'flex gap-[0.5rem]'}>
       <SortByName />
       <SortByPrice />
     </div>

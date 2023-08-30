@@ -24,7 +24,6 @@ const AppLayout = ({ children }: { children: ReactElement }) => {
 };
 
 function App() {
-  {console.log('hello')}
   return (
     <>
       <Routes>
