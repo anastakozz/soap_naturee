@@ -1,21 +1,31 @@
 import React, { useState } from 'react';
 import { DropdownIcon } from '../../../icons/dropdownIcon';
 import classNames from 'classnames';
+import { getProductsOfCategory, getCategoryId } from '../../../services/product.service';
+import { OurProductsCardsProps } from '../../../lib/interfaces';
 
-export const Dropdown = () => {
+export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
 
-  const options: string[] = ['Soap', 'Aroma-sashet', 'Bath bombs', 'candles', 'Scrub'];
+  const options: string[] = ['Soap', 'Aroma-sashet', 'Bath-bombs', 'Candles', 'Scrub'];
 
   const toggleDropdown = (): void => {
     setIsOpen(!isOpen);
   };
 
-  const selectOption = (option: string): void => {
+  async function selectOption(option: string): Promise<void> {
     setSelectedCategory(option);
     setIsOpen(false);
-  };
+
+    try {
+      const productsByKey = await getCategoryId(option);
+      const response = await getProductsOfCategory(productsByKey);
+      changeContent(response);
+    } catch (error) {
+      console.error('Error loading products:', error);
+    }
+  }
 
   return (
     <div className='relative'>
@@ -42,9 +52,8 @@ export const Dropdown = () => {
             {options.map((option: string) => (
               <button
                 key={option}
-                onClick={() => {
-                  selectOption(option);
-                  console.log(option);
+                onClick={async (): Promise<void> => {
+                  await selectOption(option);
                 }}
                 className='block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100'
                 role='menuitem'

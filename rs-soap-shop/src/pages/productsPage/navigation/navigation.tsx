@@ -1,10 +1,15 @@
-import { Dropdown } from './dropDown';
+import { SelectCategory } from './selectCategory';
+import { SortingModule } from './sorting/sortingModule';
+import { FilterModule } from './filter/filterModule';
+import { OurProductsCardsProps } from '../../../lib/interfaces';
 
-export function Navigation() {
+export function Navigation({ changeContent }: OurProductsCardsProps) {
   return (
-    <div className='bg-accentColor dark:bg-accentDarkColor'>
-      <div className='flex items-center max-w-[1440px] mx-auto h-24 lg:px-big'>
-        <Dropdown />
+    <div className='bg-graySColor dark:bg-greyLColor'>
+      <div className='flex flex-wrap justify-between items-center max-w-[1440px] py-sm mx-auto lg:px-big'>
+        <SelectCategory changeContent={changeContent} />
+        <SortingModule />
+        <FilterModule />
       </div>
     </div>
   );

@@ -21,10 +21,9 @@ export interface InputProps {
   disabled?: boolean;
 }
 
-export interface InputErrorObject {
-  error: {
-    message: string;
-  };
+export interface OurProductsCardsProps {
+  products?: ProductCardProps[] | null;
+  changeContent?: (categoryProducts: ProductCardProps[]) => void;
 }
 
 export interface RegistrationData {
