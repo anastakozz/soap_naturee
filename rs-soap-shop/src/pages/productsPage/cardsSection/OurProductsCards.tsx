@@ -19,7 +19,6 @@ export default function OurProductsCards({ products }: OurProductsCardsProps) {
     <>
       {products ? (
         <div className='bg-primaryColor dark:bg-grayMColor h-auto p-sm text-center px-big flex flex-col items-center'>
-          <h3 className='text-basicColor dark:text-secondaryColor text-h3 text-center font-bold'>Our products</h3>
           <div className='flex flex-wrap justify-between mt-sm max-w-[1245px] pb-sm '>
             {products.map((item: ProductCardProps | Product, index): ReactNode => {
               if ('priceMode' in item) {
