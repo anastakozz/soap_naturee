@@ -13,7 +13,7 @@ export function NavigationView({ changeContent }: OurProductsCardsProps) {
         <SelectCategory changeContent={changeContent} />
         <Breadcrumb></Breadcrumb>
         <SortingView />
-        <FilterModule />
+        <FilterModule changeContent={changeContent}/>
         <SearchView />
       </div>
     </div>
