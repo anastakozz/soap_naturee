@@ -1,4 +1,4 @@
-import { SelectCategory } from './selectCategory';
+import { SelectCategory } from './selectCategory/selectCategory';
 import { SortingModule } from './sorting/sortingModule';
 import { FilterModule } from './filter/filterModule';
 import { OurProductsCardsProps } from '../../../lib/interfaces';

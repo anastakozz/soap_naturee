@@ -1,4 +1,5 @@
 import { Category, Keyword, Price, ProductAttributes, ProductImage } from './types';
+import React from 'react';
 
 export interface ButtonProps {
   children: string;
@@ -142,4 +143,27 @@ export interface Product {
   priceMode: string;
   createdAt: string;
   lastModifiedAt: string;
+}
+
+export interface CategoryData {
+  name: {
+    en: string;
+  };
+}
+
+export interface parentCategoryProps {
+  option: string;
+  setIsDropdownOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  isDropdownOpened: boolean;
+  setOpenedCategory: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface CategoryDropdownArrowProps {
+  isDropdownOpened: boolean;
+  option: string;
+}
+
+export interface SubCategoryProps {
+  isDropdownOpened: boolean;
+  openedCategory: string;
 }
