@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { getAccountData } from '../../services/account.service';
+import { getAccountData, updateAccountData } from '../../services/account.service';
 import { AddressCardI } from '../../lib/interfaces';
 import EmptyButton from '../../components/buttons/emptyButton';
 import BannerPageName from '../../components/bannerPageName';
 import AddressCard from '../../components/addressCard';
 import EditIcon from '../../icons/editIcon';
+import AdditionalButton from '../../components/buttons/additionalButton';
+import { Input } from '../../components/forms/inputs/Input';
+import { dateValidation, emailValidation, nameValidation } from '../../lib/utils/inputValidations';
+import SuccessMessage from '../../components/ResultMessage/successMessage.tsx';
+import ErrorMessage from '../../components/ResultMessage/errorMessage.tsx';
 
 const countries = [
   {
@@ -27,7 +32,52 @@ export function dataAdapterToFullName(code: string): string {
 
 function ProfilePage() {
   const [account, setAccount] = useState(null);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [editMainData, setEditMainData] = useState(false);
+  const [dataUpdated, setDataUpdated] = useState(false);
+  const [mainDataForm, setMainDataForm] = useState({
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    email: ''
+  });
+
+  const [actions, setActions] = useState([]);
+
+  const handleEdit = () => {
+    setEditMainData(true);
+    setMainDataForm({
+      firstName: account?.firstName,
+      lastName: account?.lastName,
+      dateOfBirth: account?.dateOfBirth,
+      email: account?.email
+    });
+  };
+  const handleChangeInput = (actionKey: string, key: string, newValue: string) => {
+    setActions(
+      actions.find(el => el.action == actionKey)
+        ? actions.map(el => (el.action == actionKey ? { ...el, [key]: newValue } : el))
+        : [...actions, { action: actionKey, [key]: newValue }]
+    );
+    setMainDataForm({ ...mainDataForm, [key]: newValue });
+  };
+  const handleSave = () => {
+    setEditMainData(false);
+    updateAccountData(account?.id, account?.version, actions)
+      .then(resp => {
+        setAccount(resp.data);
+        setDataUpdated(true);
+      })
+      .catch(error => {
+        console.error(error);
+        setError('Something went wrong');
+      });
+  };
+
+  const handleCancel = () => {
+    setEditMainData(false);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -49,25 +99,96 @@ function ProfilePage() {
       ) : (
         <div className='bg-secondaryColor dark:bg-grayMColor'>
           <BannerPageName>My Profile</BannerPageName>
+          <div onClick={() => setDataUpdated(false)} data-testid='reg-result-message'>
+            {dataUpdated && <SuccessMessage disableRedirect={true} text={'Account data has been updated'} />}
+            {error && <ErrorMessage message={error} />}
+          </div>
+          <div className=''></div>
           <div className='py-sm px-sm max-w-[1440px] mx-auto lg:px-big'>
             <div>
               <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
                 <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold'>My personal information</h3>
-                <EditIcon />
+                {editMainData ? (
+                  <div className='flex flex-col md:flex-row items-center justify-center'>
+                    <AdditionalButton onClick={handleSave}>Save</AdditionalButton>
+                    <AdditionalButton onClick={handleCancel}>Cancel</AdditionalButton>
+                  </div>
+                ) : (
+                  <button onClick={handleEdit}>
+                    <EditIcon />
+                  </button>
+                )}
               </div>
-              <h4 className='text-h4 text-accentColor dark:text-basicColor'>First Name:</h4>
-              <p className='italic'>{account?.firstName}</p>
-              <h4 className='text-h4 text-accentColor dark:text-basicColor'>Last Name:</h4>
-              <p className='italic'>{account?.lastName}</p>
-              <h4 className='text-h4 text-accentColor dark:text-basicColor'>Date of birth:</h4>
-              <p className='italic'>{account?.dateOfBirth}</p>
-              <h4 className='text-h4 text-accentColor dark:text-basicColor'>E-mail:</h4>
-              <p className='italic'>{account?.email}</p>
+              <div>
+                <h4 className='text-h4 text-accentColor dark:text-basicColor'>First Name:</h4>
+                {editMainData ? (
+                  <Input
+                    {...nameValidation}
+                    label=''
+                    isColumn={true}
+                    placeholder='Type your first name'
+                    val={mainDataForm.firstName}
+                    onChange={(newValue: string) => {
+                      handleChangeInput('setFirstName', 'firstName', newValue);
+                    }}
+                  />
+                ) : (
+                  <p className='italic'>{account?.firstName}</p>
+                )}
+                <h4 className='text-h4 text-accentColor dark:text-basicColor'>Last Name:</h4>
+                {editMainData ? (
+                  <Input
+                    {...nameValidation}
+                    label=''
+                    isColumn={true}
+                    placeholder='Type your second name'
+                    val={mainDataForm.lastName}
+                    onChange={(newValue: string) => {
+                      handleChangeInput('setLastName', 'lastName', newValue);
+                    }}
+                  />
+                ) : (
+                  <p className='italic'>{account?.lastName}</p>
+                )}
+
+                <h4 className='text-h4 text-accentColor dark:text-basicColor'>Date of birth:</h4>
+                {editMainData ? (
+                  <Input
+                    {...dateValidation}
+                    label=''
+                    isColumn={true}
+                    val={mainDataForm.dateOfBirth}
+                    onChange={(newValue: string) => {
+                      handleChangeInput('setDateOfBirth', 'dateOfBirth', newValue);
+                    }}
+                  />
+                ) : (
+                  <p className='italic'>{account?.dateOfBirth}</p>
+                )}
+
+                <h4 className='text-h4 text-accentColor dark:text-basicColor'>E-mail:</h4>
+                {editMainData ? (
+                  <Input
+                    {...emailValidation}
+                    label=''
+                    isColumn={true}
+                    val={mainDataForm.email}
+                    onChange={(newValue: string) => {
+                      handleChangeInput('changeEmail', 'email', newValue);
+                    }}
+                  />
+                ) : (
+                  <p className='italic'>{account?.email}</p>
+                )}
+              </div>
+              <div></div>
             </div>
             <div>
               <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
                 <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold'>My list of addresses</h3>
-                <EditIcon />
+                <button>
+                  <EditIcon />
+                </button>
               </div>
               <div className='flex flex-col justify-between items-center md:flex-row flex-wrap'>
                 {account?.addresses.map((address: AddressCardI) => (

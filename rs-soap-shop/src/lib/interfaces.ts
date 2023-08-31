@@ -15,6 +15,7 @@ export interface InputProps {
   label: string;
   type: string;
   val?: string;
+  isColumn?: boolean;
   placeholder?: string;
   isSubmitted?: boolean;
   onChange?: (value: string) => void;
@@ -148,7 +149,7 @@ export interface DetailsProps {
   price: string;
   isOnSale: boolean;
   newPrice: string | null;
-  keyWords: string[]
+  keyWords: string[];
 }
 
 export interface AddressCardI {
@@ -161,10 +162,14 @@ export interface AddressCardI {
   billingAddressIds: string[];
   shippingAddressIds: string[];
 }
-export interface pageNameProp {
+export interface PageNameProp {
   children: string | JSX.Element | JSX.Element[];
 }
 
-export interface pageNameProp {
-  children: string | JSX.Element | JSX.Element[];
+export interface IAction {
+  action: string;
+  firstName?: string;
+  lastName?: string;
+  dateOfBirth?: string;
+  email?: string;
 }

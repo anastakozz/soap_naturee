@@ -9,8 +9,9 @@ import { validateDate } from '../validateFunctions/date';
 import { validateStreet } from '../validateFunctions/street';
 import { validateCity } from '../validateFunctions/city';
 import { validatePostalCode } from '../validateFunctions/postalCode';
+import { validateName } from '../validateFunctions/name';
 
-export const Input = ({ label, type, placeholder, isSubmitted, onChange, val, disabled }: InputProps) => {
+export const Input = ({ label, type, placeholder, isSubmitted, onChange, val, disabled, isColumn }: InputProps) => {
   const inputTailwind =
     'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
 
@@ -37,6 +38,8 @@ export const Input = ({ label, type, placeholder, isSubmitted, onChange, val, di
         return validateCity(value);
       case 'postalCode':
         return validatePostalCode(value);
+      case 'text':
+        return validateName(value);
       default:
         return '';
     }
@@ -64,6 +67,9 @@ export const Input = ({ label, type, placeholder, isSubmitted, onChange, val, di
     } else if (type === 'postalCode') {
       const validationError: string = validatePostalCode(inputValue);
       setError(validationError);
+    } else if (type === 'text') {
+      const validationError: string = validateName(inputValue);
+      setError(validationError);
     }
   };
 
@@ -79,7 +85,11 @@ export const Input = ({ label, type, placeholder, isSubmitted, onChange, val, di
   }, [isSubmitted, type, value]);
 
   return (
-    <div className={'flex flex-col md:items-end w-full gap-2 md:flex-row md:justify-between md: mb-esm'}>
+    <div
+      className={`flex flex-col w-full gap-2 md:justify-between md: mb-esm ${
+        isColumn ? 'md:flex-col' : ' md:flex-row md:items-end'
+      }`}
+    >
       <div className='flex flex-col md:flex-row'>
         <label className='font-semibold text-h4 text-grayLColor dark:text-primaryColor whitespace-nowrap'>
           {label}

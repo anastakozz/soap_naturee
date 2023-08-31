@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { apiUrl, projectKey } from '../lib/constants';
+import { IAction } from '../lib/interfaces';
 
 export function getAccountData() {
   try {
@@ -9,6 +10,23 @@ export function getAccountData() {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export function updateAccountData(id: string, version: string, actions: IAction[]) {
+  try {
+    return axios.post(
+      `${apiUrl}/${projectKey}/customers/${id}`,
+      { version, actions },
+      {
+        headers: {
+          Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
   } catch (e) {
     console.log(e);
   }
