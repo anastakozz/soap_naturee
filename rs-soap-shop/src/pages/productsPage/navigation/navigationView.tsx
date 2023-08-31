@@ -18,7 +18,7 @@ export function NavigationView({ nav }: NavigationViewProps) {
         <SelectCategory nav={nav} />
         <Breadcrumb nav={nav} />
         <SortingView />
-        <FilterModule />
+        <FilterModule changeContent={changeContent}/>
         <SearchView />
       </div>
     </div>
