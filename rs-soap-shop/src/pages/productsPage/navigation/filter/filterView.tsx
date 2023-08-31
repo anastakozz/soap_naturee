@@ -5,13 +5,35 @@ import FilterButton from './components/filterButton';
 import { useState } from 'react';
 import FilterIcon from '../../../../icons/filterIcon';
 import { iconClassesActive, iconClassesNormal } from '../../../../lib/constants';
+import { OurProductsCardsProps } from '../../../../lib/interfaces';
+import { getFiltered } from '../../../../services/product.service';
 
-export default function FilterView() {
+export default function FilterView({ changeContent }: OurProductsCardsProps) {
   const [isOn, setIsOn] = useState(false);
   const [isFiltered, setFilter] = useState(false);
 
   function toggleFilterMenu() {
     setIsOn(!isOn);
+  }
+
+  async function handleFilterClick() {
+    toggleFilterMenu();
+    setFilter(true);
+    const filterOptions = generateFilterQuery();
+    const response = await getFiltered(filterOptions);
+    changeContent(response);
+  }
+
+  function generateFilterQuery(): string {
+
+    const minPrice = +(document.querySelector('.min-price') as HTMLInputElement).value * 100;
+    const maxPrice = +(document.querySelector('.max-price') as HTMLInputElement).value * 100;
+    const productCheck = (document.querySelector('.product-check') as HTMLInputElement).checked;
+    const setCheck = (document.querySelector('.set-check') as HTMLInputElement).checked;
+    console.log(productCheck, setCheck)
+
+    const priceQuery = `variants.price.centAmount:range (${minPrice} to ${maxPrice})`
+    return priceQuery
   }
 
   return (
@@ -29,7 +51,7 @@ export default function FilterView() {
       <div className={isOn ? 'visible' : 'invisible'}>
         <div
           className={
-            'text-xs drop-shadow-lg bg-additionalColor absolute z-40 right-0 top-10 flex flex-col justify-between py-[10px] px-sm border rounded-normal '
+            ' text-xs drop-shadow-lg bg-additionalColor absolute z-40 right-0 top-11 flex flex-col justify-between py-[10px] px-sm border rounded-normal '
           }
         >
           <div className={'text-h5 my-4'}>Filter settings</div>
@@ -42,9 +64,7 @@ export default function FilterView() {
             <div className={'flex flex-col justify-between gap-[1rem]'}>
               <FilterButton
                 onClick={() => {
-                  setFilter(true);
-                  setIsOn(false);
-                  console.log('Send request');
+                  handleFilterClick();
                 }}
               >
                 Filter
