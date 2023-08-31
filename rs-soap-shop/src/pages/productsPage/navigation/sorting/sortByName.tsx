@@ -1,13 +1,14 @@
 import { SortABC } from '../../../../icons/sortABC';
 import { SortZYX } from '../../../../icons/sortZYX';
+import { iconClassesNormal } from '../../../../lib/constants';
 
-export function SortByName() {
+export default function SortByName() {
   return (
-    <div className={'flex justify-center'}>
-      <div className={'border border-solid border-r-0 border-b-0 rounded-tl border-black p-2'}>
+    <div className={'flex gap-[0.5rem]'}>
+      <div className={`${iconClassesNormal} hover:bg-grayLColor active:scale-95 transition`}>
         <SortABC />
       </div>
-      <div className={'border border-solid rounded-tr border-b-0 border-black p-2'}>
+      <div className={`${iconClassesNormal} hover:bg-grayLColor active:scale-95 transition`}>
         <SortZYX />
       </div>
     </div>

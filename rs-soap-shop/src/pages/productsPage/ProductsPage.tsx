@@ -1,7 +1,8 @@
 import OurProductsCards, { items } from './cardsSection/OurProductsCards';
-import { Navigation } from './navigation/navigation';
+import { NavigationView } from './navigation/navigationView';
 import { useState } from 'react';
 import { ProductCardProps } from '../../lib/interfaces';
+import BannerPageName from '../../components/bannerPageName';
 
 function ProductsPage() {
   const [products, setProducts] = useState(items);
@@ -12,7 +13,8 @@ function ProductsPage() {
 
   return (
     <>
-      <Navigation changeContent={changeContent} />
+      <BannerPageName {...{ children: 'OUR PRODUCTS' }}></BannerPageName>
+      <NavigationView changeContent={changeContent} />
       <OurProductsCards products={products} />
     </>
   );

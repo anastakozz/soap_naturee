@@ -29,9 +29,9 @@ export function PriceFilter() {
   return (
     <div>
       <div>Min price, €:</div>
-      <input
+      <input 
         type={'number'}
-        className={'w-big'}
+        className={'w-big my-2'}
         value={minPrice}
         onChange={handleMinPriceChange}
         min={0}
@@ -40,7 +40,7 @@ export function PriceFilter() {
       <div>Max price, €:</div>
       <input
         type={'number'}
-        className={'w-big'}
+        className={'w-big my-2'}
         value={maxPrice}
         onChange={handleMaxPriceChange}
         min={0}
