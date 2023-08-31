@@ -7,7 +7,7 @@ export default function toCardAdapter(data: Product): ProductCardProps {
     label: data.name['en'],
     description: `Natural ${data.searchKeywords['en'][0].text}`,
     imgSrc: variant.images[0].url,
-    link: `/product/${data.slug['en']}`,
+    link: `/product/${data.key}`,
     price: `${variant.prices[0].value.centAmount / 100} ${variant.prices[0].value.currencyCode}`,
     isOnSale: false,
     newPrice: null

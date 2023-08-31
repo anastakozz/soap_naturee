@@ -6,12 +6,12 @@ import { shuffleProducts } from '../../../lib/utils/shuffleCards';
 import { Product, ProductCardProps } from '../../../lib/interfaces';
 import { getProductsList } from '../../../services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
-import { cardsPerPage } from '../../../lib/enums';
+
 
 const items = await getCardsData();
 
 async function getCardsData(): Promise<ProductCardProps[]> {
-  const data: Product[] = await getProductsList(cardsPerPage.home);
+  const data: Product[] = await getProductsList();
   if (data) {
     const shuffledData = shuffleProducts(data).slice(0, 6);
     const dataAdapted = shuffledData.map((product: Product) => toCardAdapter(product));
