@@ -44,6 +44,22 @@ function App() {
           }
         ></Route>
         <Route
+          path='/our-products/:category'
+          element={
+            <AppLayout>
+              <ProductsPage />
+            </AppLayout>
+          }
+        ></Route>
+        <Route
+          path='/our-products/:category/:subcategory'
+          element={
+            <AppLayout>
+              <ProductsPage />
+            </AppLayout>
+          }
+        ></Route>
+        <Route
           path='/about-us'
           element={
             <AppLayout>
