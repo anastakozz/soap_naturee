@@ -6,6 +6,7 @@ import { OurProductsCardsProps } from '../../../../lib/interfaces';
 import { getCategoriesNames, getCategoryId } from '../../../../services/category.service';
 import SubCategory from './dropdownMenu';
 import ParentCategory from './parentCategory';
+import Breadcrumb from '../../../../components/BasicBreadcrumbs';
 
 export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,8 +43,8 @@ export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
   }
 
   return (
-    <div className='relative'>
-      <div>
+    <div className='relative flex flex-wrap'>
+      <div className='mr-8'>
         <button
           type='button'
           className={classNames(
@@ -93,6 +94,7 @@ export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
           </div>
         </div>
       )}
+      <Breadcrumb></Breadcrumb>
     </div>
   );
 };

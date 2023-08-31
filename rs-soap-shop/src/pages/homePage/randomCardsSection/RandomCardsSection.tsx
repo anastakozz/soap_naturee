@@ -2,11 +2,10 @@ import { Link } from 'react-router-dom';
 import EmptyButton from '../../../components/buttons/emptyButton';
 import Card from '../../../components/card';
 import { ReactNode } from 'react';
-import { shuffleProducts } from '../../../lib/utils/shuffleCards';
+import shuffleProducts from '../../../lib/utils/shuffleCards';
 import { Product, ProductCardProps } from '../../../lib/interfaces';
 import { getProductsList } from '../../../services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
-
 
 const items = await getCardsData();
 
