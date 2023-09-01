@@ -1,19 +1,22 @@
 import { SelectCategory } from './selectCategory/selectCategory';
 import SortingView from './sorting/sortingView';
-import FilterModule from './filter/filterView';
+import FilterView from './filter/filterView';
 import SearchView from './search/searchView';
 import Breadcrumb from '../../../components/BasicBreadcrumbs';
 import React from 'react';
-import { NavigationViewProps } from '../../../lib/types';
+import { NavigationViewProps } from '../../../lib/interfaces';
 
-export function NavigationView({ nav }: NavigationViewProps) {
+export function NavigationView({ nav, changeQuery }: NavigationViewProps) {
   return (
     <div className='bg-accentColor dark:bg-accentDarkColor text-primaryColor'>
       <div className='flex flex-wrap justify-between items-center max-w-[1440px] py-4 px-4 mx-auto lg:px-big'>
-        <SelectCategory nav={nav} />
-        <Breadcrumb nav={nav} />
+        <div className='flex flex-wrap gap-[10px] md:min-w-[550px]'>
+          <SelectCategory nav={nav} />
+          <Breadcrumb nav={nav} />
+        </div>
+
         <SortingView />
-        <FilterModule changeContent={changeContent}/>
+        <FilterView changeQuery={changeQuery} />
         <SearchView />
       </div>
     </div>

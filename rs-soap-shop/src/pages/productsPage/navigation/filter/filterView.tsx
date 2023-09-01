@@ -1,14 +1,12 @@
 import { Radiobuttons } from './components/radiobuttons';
-import { NewCollection } from './components/newCollection';
 import { PriceFilter } from './components/PriceFilter';
 import FilterButton from './components/filterButton';
 import { useState } from 'react';
 import FilterIcon from '../../../../icons/filterIcon';
 import { iconClassesActive, iconClassesNormal } from '../../../../lib/constants';
 import { OurProductsCardsProps } from '../../../../lib/interfaces';
-import { getFiltered } from '../../../../services/product.service';
 
-export default function FilterView({ changeContent }: OurProductsCardsProps) {
+export default function FilterView({changeQuery}: OurProductsCardsProps) {
   const [isOn, setIsOn] = useState(false);
   const [isFiltered, setFilter] = useState(false);
 
@@ -16,24 +14,30 @@ export default function FilterView({ changeContent }: OurProductsCardsProps) {
     setIsOn(!isOn);
   }
 
-  async function handleFilterClick() {
+  function handleFilterClick() {
     toggleFilterMenu();
     setFilter(true);
     const filterOptions = generateFilterQuery();
-    const response = await getFiltered(filterOptions);
-    changeContent(response);
+    console.log(filterOptions);
+    changeQuery(filterOptions);
   }
 
   function generateFilterQuery(): string {
-
     const minPrice = +(document.querySelector('.min-price') as HTMLInputElement).value * 100;
     const maxPrice = +(document.querySelector('.max-price') as HTMLInputElement).value * 100;
     const productCheck = (document.querySelector('.product-check') as HTMLInputElement).checked;
     const setCheck = (document.querySelector('.set-check') as HTMLInputElement).checked;
-    console.log(productCheck, setCheck)
 
-    const priceQuery = `variants.price.centAmount:range (${minPrice} to ${maxPrice})`
-    return priceQuery
+    let searchQuery = `filter=variants.price.centAmount:range (${minPrice} to ${maxPrice})`;
+    if (productCheck) {
+      searchQuery += '&filter=searchKeywords.en.text:"single"';
+    }
+
+    if (setCheck) {
+      searchQuery += '&filter=searchKeywords.en.text:"set"';
+    }
+
+    return searchQuery;
   }
 
   return (
@@ -58,7 +62,6 @@ export default function FilterView({ changeContent }: OurProductsCardsProps) {
           <div className={'flex gap-[1rem] flex-wrap md:flex-nowrap'}>
             <div className={'flex flex-col'}>
               <Radiobuttons />
-              <NewCollection />
             </div>
             <PriceFilter />
             <div className={'flex flex-col justify-between gap-[1rem]'}>

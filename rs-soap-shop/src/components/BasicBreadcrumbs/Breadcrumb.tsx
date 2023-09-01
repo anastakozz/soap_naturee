@@ -1,6 +1,6 @@
 import { Breadcrumbs } from '@material-tailwind/react';
 import { NavLink } from 'react-router-dom';
-import { NavigationViewProps } from '../../lib/types';
+import { NavigationViewProps } from '../../lib/interfaces';
 
 export default function Breadcrumb({ nav }: NavigationViewProps) {
   return (

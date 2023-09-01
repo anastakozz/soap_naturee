@@ -43,9 +43,6 @@ export type Price = {
     };
   };
 };
-export type NavigationViewProps = {
-  nav: {
-    category?: string;
-    subcategory?: string;
-  };
-};
+
+
+
