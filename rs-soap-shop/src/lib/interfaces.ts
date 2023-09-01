@@ -147,6 +147,8 @@ export interface CategoryData {
 }
 
 export interface parentCategoryProps {
+  onSelectCategory: (category: string) => void;
+  category: string;
   option: string;
   setIsDropdownOpened: React.Dispatch<React.SetStateAction<boolean>>;
   isDropdownOpened: boolean;
@@ -159,6 +161,7 @@ export interface CategoryDropdownArrowProps {
 }
 
 export interface SubCategoryProps {
+  onSelectCategory: (category: string) => void;
   isDropdownOpened: boolean;
   openedCategory: string;
 }
