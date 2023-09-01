@@ -28,11 +28,11 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
 
   function handleResetClick() {
     toggleFilterMenu();
+    setFilter(false);
     productCheck.checked = false;
     setCheck.checked = false;
-    minPriceInput.value = '0';
-    maxPriceInput.value = '300';
-    setFilter(false);
+    // minPriceInput.value = '0';
+    // maxPriceInput.value = '300';
     changeQuery('');
   }
 

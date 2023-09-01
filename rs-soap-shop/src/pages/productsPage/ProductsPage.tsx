@@ -14,6 +14,7 @@ function ProductsPage() {
 
   function changeQuery(options: string): void {
     setQuery(options);
+    console.log('global query updated');
   }
 
   function updateProducts() {
