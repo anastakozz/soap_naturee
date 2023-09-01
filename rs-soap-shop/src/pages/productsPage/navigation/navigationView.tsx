@@ -29,7 +29,7 @@ export function NavigationView({ nav, changeQuery }: NavigationViewProps) {
           <SelectCategory nav={nav} />
           <Breadcrumb nav={nav} />
         </div>
-        <SortingView />
+        <SortingView changeQuery={updateSortQuery}/>
         <FilterView changeQuery={updateFilterQuery} />
         <SearchView />
       </div>

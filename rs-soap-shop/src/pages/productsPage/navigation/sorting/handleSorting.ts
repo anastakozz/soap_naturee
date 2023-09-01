@@ -1,6 +1,12 @@
-import { changeSortingParameters } from './sortingView';
-
-export default function handleSorting(sortMethod: string): void {
+export default function handleSorting(
+  sortMethod: string,
+  changeSortingParameters: (
+    isSortPriceUp: boolean,
+    isSortPriceDown: boolean,
+    isSortABC: boolean,
+    isSortZYX: boolean
+  ) => void
+): void {
   const priceUp: HTMLDivElement = document.querySelector('.priceUp');
   const priceDown: HTMLDivElement = document.querySelector('.priceDown');
   const sortAbc: HTMLDivElement = document.querySelector('.sortAbc');
