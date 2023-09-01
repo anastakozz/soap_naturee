@@ -1,16 +1,28 @@
 import CategoryDropdownArrow from '../../../../icons/categoryDropdownArrow';
-import React from 'react';
 import { parentCategoryProps } from '../../../../lib/interfaces';
+import { useNavigate } from 'react-router-dom';
 
 export default function ParentCategory({
+  onSelectCategory,
+  category,
   option,
   setIsDropdownOpened,
   isDropdownOpened,
   setOpenedCategory
 }: parentCategoryProps) {
+  const navigate = useNavigate();
+
   return (
     <div className={'flex justify-between'}>
-      <div>{option}</div>
+      <div
+        onClick={() => {
+          onSelectCategory(option);
+          navigate(`/our-products/${option.toLocaleLowerCase()}`);
+        }}
+        className={category == option.toLocaleLowerCase() ? 'text-accentColor' : ''}
+      >
+        {option}
+      </div>
       <div
         onClick={event => {
           event.stopPropagation();

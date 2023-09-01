@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { DropdownIcon } from '../../../../icons/dropdownIcon';
 import classNames from 'classnames';
-import { getProductsOfCategory } from '../../../../services/product.service';
-import { OurProductsCardsProps } from '../../../../lib/interfaces';
-import { getCategoriesNames, getCategoryId } from '../../../../services/category.service';
+import { getCategoriesNames } from '../../../../services/category.service';
 import SubCategory from './dropdownMenu';
 import ParentCategory from './parentCategory';
+import { NavigationViewProps } from '../../../../lib/types';
 
-export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
+export const SelectCategory = ({ nav }: NavigationViewProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [options, setOptions] = useState<string[]>([]);
@@ -27,19 +26,10 @@ export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
     setIsOpen(!isOpen);
   };
 
-  async function selectOption(option: string): Promise<void> {
-    setSelectedCategory(option);
-    setIsOpen(false);
-    setOpenedCategory('');
-
-    try {
-      const categoryId = await getCategoryId(option);
-      const response = await getProductsOfCategory(categoryId);
-      changeContent(response);
-    } catch (error) {
-      console.error('Error loading products:', error);
-    }
-  }
+  const selectCategory = (category: string) => {
+    toggleDropdown();
+    setSelectedCategory(category);
+  };
 
   return (
     <div className='relative'>
@@ -70,20 +60,22 @@ export const SelectCategory = ({ changeContent }: OurProductsCardsProps) => {
                     key={option}
                     className='relative block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-200'
                     role='menuitem'
-                    onClick={async (event): Promise<void> => {
-                      const targetElement = event.target as HTMLElement;
-                      await selectOption(targetElement.textContent);
-                    }}
                   >
                     <>
                       <ParentCategory
+                        onSelectCategory={selectCategory}
+                        category={nav.category}
                         option={option}
                         setIsDropdownOpened={setIsDropdownOpened}
                         isDropdownOpened={isDropdownOpened}
                         setOpenedCategory={setOpenedCategory}
                       />
                       {openedCategory === option && !isDropdownOpened ? (
-                        <SubCategory isDropdownOpened={isDropdownOpened} openedCategory={openedCategory} />
+                        <SubCategory
+                          onSelectCategory={selectCategory}
+                          isDropdownOpened={isDropdownOpened}
+                          openedCategory={openedCategory}
+                        />
                       ) : null}
                     </>
                   </button>
