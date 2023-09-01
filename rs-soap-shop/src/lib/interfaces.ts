@@ -172,7 +172,7 @@ export interface DetailsProps {
   price: string;
   isOnSale: boolean;
   newPrice: string | null;
-  keyWords: string[]
+  keyWords: string[];
 }
 
 export interface AddressCardI {
@@ -192,3 +192,4 @@ export interface pageNameProp {
 export interface pageNameProp {
   children: string | JSX.Element | JSX.Element[];
 }
+

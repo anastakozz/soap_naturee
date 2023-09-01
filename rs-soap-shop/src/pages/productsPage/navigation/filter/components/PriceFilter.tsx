@@ -29,7 +29,7 @@ export function PriceFilter() {
   return (
     <div>
       <div>Min price, €:</div>
-      <input 
+      <input
         type={'number'}
         className={'w-big my-2'}
         value={minPrice}

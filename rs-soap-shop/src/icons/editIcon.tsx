@@ -14,7 +14,7 @@ function EditIcon() {
         fill='#000000'
       />
     </svg>
-  )
+  );
 }
 
-export default EditIcon
+export default EditIcon;

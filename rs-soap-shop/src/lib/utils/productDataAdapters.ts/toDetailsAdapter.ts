@@ -2,8 +2,8 @@ import { Product, DetailsProps } from '../../interfaces';
 
 export default function toDetailsAdapter(data: Product): DetailsProps {
   const variant = data.masterVariant;
-  const keyWords = (data.searchKeywords.en).map((word) => `#${word.text}`)
-  const paths = variant.images.map((item): string => item.url)
+  const keyWords = data.searchKeywords.en.map(word => `#${word.text}`);
+  const paths = variant.images.map((item): string => item.url);
   const dataForDetails: DetailsProps = {
     productId: data.id,
     name: data.name['en'],
