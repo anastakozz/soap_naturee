@@ -10,6 +10,7 @@ import { Input } from '../../components/forms/inputs/Input';
 import { dateValidation, emailValidation, nameValidation } from '../../lib/utils/inputValidations';
 import SuccessMessage from '../../components/ResultMessage/successMessage.tsx';
 import ErrorMessage from '../../components/ResultMessage/errorMessage.tsx';
+import ChangePasswordModal from './ChangePasswordModal';
 
 const countries = [
   {
@@ -35,6 +36,7 @@ function ProfilePage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [editMainData, setEditMainData] = useState(false);
+  const [editPasswordOpen, setEditPasswordOpen] = useState(false);
   const [dataUpdated, setDataUpdated] = useState(false);
   const [mainDataForm, setMainDataForm] = useState({
     firstName: '',
@@ -74,6 +76,9 @@ function ProfilePage() {
         setError('Something went wrong');
       });
   };
+  const handleEditPassword = () => {
+    setEditPasswordOpen(true);
+  };
 
   const handleCancel = () => {
     setEditMainData(false);
@@ -103,7 +108,15 @@ function ProfilePage() {
             {dataUpdated && <SuccessMessage disableRedirect={true} text={'Account data has been updated'} />}
             {error && <ErrorMessage message={error} />}
           </div>
-          <div className=''></div>
+          {editPasswordOpen && (
+            <ChangePasswordModal
+              email={account.email}
+              id={account.id}
+              version={account.version}
+              onClose={() => setEditPasswordOpen(false)}
+              onSuccess={() => setDataUpdated(true)}
+            />
+          )}
           <div className='py-sm px-sm max-w-[1440px] mx-auto lg:px-big'>
             <div>
               <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
@@ -196,7 +209,7 @@ function ProfilePage() {
                 ))}
               </div>
             </div>
-            <EmptyButton>Change password</EmptyButton>
+            <EmptyButton onClick={handleEditPassword}>Change password</EmptyButton>
           </div>
         </div>
       )}

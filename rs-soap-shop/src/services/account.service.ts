@@ -31,3 +31,20 @@ export function updateAccountData(id: string, version: string, actions: IAction[
     console.log(e);
   }
 }
+
+export function changePassword(id: string, version: string, currentPassword: string, newPassword: string) {
+  try {
+    return axios.post(
+      `${apiUrl}/${projectKey}/customers/password`,
+      { id, version, currentPassword, newPassword },
+      {
+        headers: {
+          Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+  } catch (e) {
+    console.log(e);
+  }
+}
