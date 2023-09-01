@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { getCategoriesNames } from '../../../../services/category.service';
 import SubCategory from './dropdownMenu';
 import ParentCategory from './parentCategory';
-import { NavigationViewProps } from '../../../../lib/types';
+import { NavigationViewProps } from '../../../../lib/interfaces';
 
 export const SelectCategory = ({ nav }: NavigationViewProps) => {
   const [isOpen, setIsOpen] = useState(false);

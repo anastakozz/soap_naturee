@@ -68,14 +68,13 @@ export async function getFiltered(options: string) {
   const accessToken = await getBasicToken();
   try {
     const response = await axios.get(
-      `${apiUrl}/${projectKey}/product-projections/search?filter=${options}`,
+      `${apiUrl}/${projectKey}/product-projections/search${options}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       }
     );
-    console.log(response.data.results)
     return response.data.results;
   } catch (error) {
     return undefined;

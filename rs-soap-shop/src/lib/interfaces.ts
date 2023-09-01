@@ -24,7 +24,7 @@ export interface InputProps {
 
 export interface OurProductsCardsProps {
   products?: ProductCardProps[] | null;
-  changeContent?: (categoryProducts: ProductCardProps[]) => void;
+  changeQuery?: (options: string) => void;
 }
 
 export interface RegistrationData {
@@ -196,3 +196,10 @@ export interface pageNameProp {
   children: string | JSX.Element | JSX.Element[];
 }
 
+export interface NavigationViewProps {
+  nav: {
+    category?: string;
+    subcategory?: string;
+  },
+  changeQuery?: (options: string) => void;
+};
