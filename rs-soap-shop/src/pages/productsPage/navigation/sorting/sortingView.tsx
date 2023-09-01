@@ -1,6 +1,5 @@
 import SortByName from './sortByName';
 import SortByPrice from './sortByPrice';
-import { apiUrl, projectKey } from '../../../../lib/constants';
 
 export let sortingQueryString= '';
 
@@ -11,13 +10,13 @@ export function changeSortingParameters(
   isSortZYX: boolean
 ): string {
   if (isSortPriceUp) {
-    sortingQueryString = `${apiUrl}/${projectKey}/product-projections/?sort=variants.price.centAmount%3Aasc`;
+    sortingQueryString = 'sort=price%20asc';
   } else if (isSortPriceDown) {
-    sortingQueryString = `${apiUrl}/${projectKey}/product-projections/?sort=variants.price.centAmount%3Adesc`;
+    sortingQueryString = 'sort=price%20desc';
   } else if (isSortABC) {
-    sortingQueryString = `${apiUrl}/${projectKey}/product-projections/?sort=name%3Aasc`;
+    sortingQueryString = 'sort=name.en%20asc';
   } else if (isSortZYX) {
-    sortingQueryString = `${apiUrl}/${projectKey}/product-projections/?sort=name%3Adesc`;
+    sortingQueryString = 'sort=name.en%20desc';
   } else sortingQueryString = '';
 
   return sortingQueryString;
