@@ -3,7 +3,7 @@ import SortingView, { sortingQueryString } from './sorting/sortingView';
 import FilterView from './filter/filterView';
 import SearchView from './search/searchView';
 import Breadcrumb from '../../../components/BasicBreadcrumbs';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavigationViewProps } from '../../../lib/interfaces';
 
 export function NavigationView({ nav, changeQuery }: NavigationViewProps) {
@@ -12,17 +12,15 @@ export function NavigationView({ nav, changeQuery }: NavigationViewProps) {
 
   function updateFilterQuery(options: string) {
     setFilterQuery(options);
+    console.log('filter query updated');
+    changeQuery(`${options}&${sortQuery}`);
   }
 
   function updateSortQuery(options: string) {
     setSortQuery(options);
+    console.log('sort query updated');
+    changeQuery(`${filterQuery}&${options}`);
   }
-
-  useEffect(() => {
-    if (filterQuery || sortQuery) {
-      changeQuery(`${filterQuery}&${sortQuery}`)
-    } 
-  }, [filterQuery, sortQuery]);
 
   return (
     <div className='bg-accentColor dark:bg-accentDarkColor text-primaryColor'>
@@ -31,7 +29,6 @@ export function NavigationView({ nav, changeQuery }: NavigationViewProps) {
           <SelectCategory nav={nav} />
           <Breadcrumb nav={nav} />
         </div>
-
         <SortingView />
         <FilterView changeQuery={updateFilterQuery} />
         <SearchView />
