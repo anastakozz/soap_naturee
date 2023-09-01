@@ -44,11 +44,11 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
 
     if (filter) {
       let searchQuery = `filter=variants.price.centAmount:range (${minPrice} to ${maxPrice})`;
-      if (isProductChecked) {
+      if (isProductChecked && isSetChecked) {
+        searchQuery += '&filter=searchKeywords.en.text:"single","set"';
+      } else if (isProductChecked) {
         searchQuery += '&filter=searchKeywords.en.text:"single"';
-      }
-
-      if (isSetChecked) {
+      } else if (isSetChecked) {
         searchQuery += '&filter=searchKeywords.en.text:"set"';
       }
 
