@@ -14,7 +14,7 @@ it('renders no controls in DOM', () => {
 });
 
 it('renders nothing if !isVisible', () => {
-    render(<SliderModal {...{ isVisible: false, paths: ['test-url-1', 'test-url-2'] }}> </SliderModal>);
-    const component = screen.queryByText('CLOSE');
-    expect(component).not.toBeInTheDocument();
-  });
+  render(<SliderModal {...{ isVisible: false, paths: ['test-url-1', 'test-url-2'] }}> </SliderModal>);
+  const component = screen.queryByText('CLOSE');
+  expect(component).not.toBeInTheDocument();
+});
