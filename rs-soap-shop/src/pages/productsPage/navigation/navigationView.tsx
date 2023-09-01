@@ -1,5 +1,5 @@
 import { SelectCategory } from './selectCategory/selectCategory';
-import SortingView, { sortingQueryString } from './sorting/sortingView';
+import SortingView from './sorting/sortingView';
 import FilterView from './filter/filterView';
 import SearchView from './search/searchView';
 import Breadcrumb from '../../../components/BasicBreadcrumbs';
