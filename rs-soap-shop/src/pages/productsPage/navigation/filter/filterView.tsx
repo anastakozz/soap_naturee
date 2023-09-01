@@ -6,9 +6,13 @@ import FilterIcon from '../../../../icons/filterIcon';
 import { iconClassesActive, iconClassesNormal } from '../../../../lib/constants';
 import { OurProductsCardsProps } from '../../../../lib/interfaces';
 
-export default function FilterView({changeQuery}: OurProductsCardsProps) {
+export default function FilterView({ changeQuery }: OurProductsCardsProps) {
   const [isOn, setIsOn] = useState(false);
   const [isFiltered, setFilter] = useState(false);
+  const minPriceInput = document.querySelector('.min-price') as HTMLInputElement;
+  const maxPriceInput = document.querySelector('.max-price') as HTMLInputElement;
+  const productCheck = document.querySelector('.product-check') as HTMLInputElement;
+  const setCheck = document.querySelector('.set-check') as HTMLInputElement;
 
   function toggleFilterMenu() {
     setIsOn(!isOn);
@@ -17,27 +21,40 @@ export default function FilterView({changeQuery}: OurProductsCardsProps) {
   function handleFilterClick() {
     toggleFilterMenu();
     setFilter(true);
-    const filterOptions = generateFilterQuery();
+    const filterOptions = generateFilterQuery(true);
     console.log(filterOptions);
     changeQuery(filterOptions);
   }
 
-  function generateFilterQuery(): string {
-    const minPrice = +(document.querySelector('.min-price') as HTMLInputElement).value * 100;
-    const maxPrice = +(document.querySelector('.max-price') as HTMLInputElement).value * 100;
-    const productCheck = (document.querySelector('.product-check') as HTMLInputElement).checked;
-    const setCheck = (document.querySelector('.set-check') as HTMLInputElement).checked;
+  function handleResetClick() {
+    toggleFilterMenu();
+    productCheck.checked = false;
+    setCheck.checked = false;
+    minPriceInput.value = '0';
+    maxPriceInput.value = '300';
+    setFilter(false);
+    changeQuery('');
+  }
 
-    let searchQuery = `filter=variants.price.centAmount:range (${minPrice} to ${maxPrice})`;
-    if (productCheck) {
-      searchQuery += '&filter=searchKeywords.en.text:"single"';
+  function generateFilterQuery(filter: boolean): string {
+    const minPrice = +minPriceInput.value * 100;
+    const maxPrice = +maxPriceInput.value * 100;
+    const isProductChecked = productCheck.checked;
+    const isSetChecked = setCheck.checked;
+
+    if (filter) {
+      let searchQuery = `filter=variants.price.centAmount:range (${minPrice} to ${maxPrice})`;
+      if (isProductChecked) {
+        searchQuery += '&filter=searchKeywords.en.text:"single"';
+      }
+
+      if (isSetChecked) {
+        searchQuery += '&filter=searchKeywords.en.text:"set"';
+      }
+
+      return searchQuery;
     }
-
-    if (setCheck) {
-      searchQuery += '&filter=searchKeywords.en.text:"set"';
-    }
-
-    return searchQuery;
+    return '';
   }
 
   return (
@@ -74,9 +91,7 @@ export default function FilterView({changeQuery}: OurProductsCardsProps) {
               </FilterButton>
               <FilterButton
                 onClick={() => {
-                  setFilter(false);
-                  setIsOn(false);
-                  console.log('Reset');
+                  handleResetClick();
                 }}
               >
                 Reset

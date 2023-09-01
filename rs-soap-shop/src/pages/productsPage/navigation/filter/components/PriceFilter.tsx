@@ -2,13 +2,13 @@ import React, { useState, ChangeEvent } from 'react';
 
 export function PriceFilter() {
   const [minPrice, setMinPrice] = useState('0');
-  const [maxPrice, setMaxPrice] = useState('1000');
+  const [maxPrice, setMaxPrice] = useState('300');
 
   const handleMinPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue: string = event.target.value;
     if (
       (newValue === '' || (newValue !== '' && parseFloat(newValue) <= parseFloat(maxPrice))) &&
-      parseFloat(newValue) <= 1000 &&
+      parseFloat(newValue) <= 300 &&
       parseFloat(newValue) >= 0
     ) {
       setMinPrice(newValue);
@@ -19,7 +19,7 @@ export function PriceFilter() {
     const newValue: string = event.target.value;
     if (
       (newValue === '' || (newValue !== '' && parseFloat(newValue) >= parseFloat(minPrice))) &&
-      parseFloat(newValue) <= 1000 &&
+      parseFloat(newValue) <= 300 &&
       parseFloat(newValue) >= 0
     ) {
       setMaxPrice(newValue);
@@ -35,7 +35,7 @@ export function PriceFilter() {
         value={minPrice}
         onChange={handleMinPriceChange}
         min={0}
-        max={1000}
+        max={300}
       ></input>
       <div>Max price, €:</div>
       <input
@@ -44,7 +44,7 @@ export function PriceFilter() {
         value={maxPrice}
         onChange={handleMaxPriceChange}
         min={0}
-        max={1000}
+        max={300}
       ></input>
     </div>
   );
