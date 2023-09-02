@@ -51,7 +51,7 @@ export const SelectCategory = ({ nav }: NavigationViewProps) => {
       </div>
 
       {isOpen && (
-        <div className='w-[170px] origin-top-left absolute left-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10'>
+        <div className='z-20 w-[170px] origin-top-left absolute left-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10'>
           <div className='py-1' role='menu' aria-orientation='vertical' aria-labelledby='options-menu'>
             {options.map((option: string) => {
               if (['Decor', 'Self-care', 'New', 'Sale'].includes(option)) {
