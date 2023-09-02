@@ -1,30 +1,11 @@
-import React, { useState, ChangeEvent } from 'react';
-
-export function PriceFilter() {
-  const [minPrice, setMinPrice] = useState('0');
-  const [maxPrice, setMaxPrice] = useState('300');
-
-  const handleMinPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newValue: string = event.target.value;
-    if (
-      (newValue === '' || (newValue !== '' && parseFloat(newValue) <= parseFloat(maxPrice))) &&
-      parseFloat(newValue) <= 300 &&
-      parseFloat(newValue) >= 0
-    ) {
-      setMinPrice(newValue);
-    }
-  };
-
-  const handleMaxPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newValue: string = event.target.value;
-    if (
-      (newValue === '' || (newValue !== '' && parseFloat(newValue) >= parseFloat(minPrice))) &&
-      parseFloat(newValue) <= 300 &&
-      parseFloat(newValue) >= 0
-    ) {
-      setMaxPrice(newValue);
-    }
-  };
+import { ChangeEvent } from 'react';
+export function PriceFilter(options: {
+  startMinPrice: string;
+  startMaxPrice: string;
+  callbackMin: (event: ChangeEvent<HTMLInputElement>) => void;
+  callbackMax: (event: ChangeEvent<HTMLInputElement>) => void;
+}) {
+  const { startMaxPrice, startMinPrice, callbackMax, callbackMin } = options;
 
   return (
     <div>
@@ -32,8 +13,8 @@ export function PriceFilter() {
       <input
         type={'number'}
         className={'w-big my-2 min-price'}
-        value={minPrice}
-        onChange={handleMinPriceChange}
+        value={startMinPrice}
+        onChange={callbackMin}
         min={0}
         max={300}
       ></input>
@@ -41,8 +22,8 @@ export function PriceFilter() {
       <input
         type={'number'}
         className={'w-big my-2 max-price '}
-        value={maxPrice}
-        onChange={handleMaxPriceChange}
+        value={startMaxPrice}
+        onChange={callbackMax}
         min={0}
         max={300}
       ></input>

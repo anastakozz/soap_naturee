@@ -1,7 +1,7 @@
 import { Radiobuttons } from './components/radiobuttons';
 import { PriceFilter } from './components/PriceFilter';
 import FilterButton from './components/filterButton';
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import FilterIcon from '../../../../icons/filterIcon';
 import { iconClassesActive, iconClassesNormal } from '../../../../lib/constants';
 import { OurProductsCardsProps } from '../../../../lib/interfaces';
@@ -9,6 +9,9 @@ import { OurProductsCardsProps } from '../../../../lib/interfaces';
 export default function FilterView({ changeQuery }: OurProductsCardsProps) {
   const [isOn, setIsOn] = useState(false);
   const [isFiltered, setFilter] = useState(false);
+  const [startMinPrice, setMinPrice] = useState('0');
+  const [startMaxPrice, setMaxPrice] = useState('300');
+
   const minPriceInput = document.querySelector('.min-price') as HTMLInputElement;
   const maxPriceInput = document.querySelector('.max-price') as HTMLInputElement;
   const productCheck = document.querySelector('.product-check') as HTMLInputElement;
@@ -31,8 +34,8 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
     setFilter(false);
     productCheck.checked = false;
     setCheck.checked = false;
-    // minPriceInput.value = '0';
-    // maxPriceInput.value = '300';
+    setMinPrice('0');
+    setMaxPrice('300');
     changeQuery('');
   }
 
@@ -57,6 +60,28 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
     return '';
   }
 
+  const handleMinPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue: string = event.target.value;
+    if (
+      (newValue === '' || (newValue !== '' && parseFloat(newValue) <= parseFloat(startMaxPrice))) &&
+      parseFloat(newValue) <= 300 &&
+      parseFloat(newValue) >= 0
+    ) {
+      setMinPrice(newValue);
+    }
+  };
+
+  const handleMaxPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue: string = event.target.value;
+    if (
+      (newValue === '' || (newValue !== '' && parseFloat(newValue) >= parseFloat(startMinPrice))) &&
+      parseFloat(newValue) <= 300 &&
+      parseFloat(newValue) >= 0
+    ) {
+      setMaxPrice(newValue);
+    }
+  };
+
   return (
     <div className='relative text-basicColor'>
       <div
@@ -80,7 +105,14 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
             <div className={'flex flex-col'}>
               <Radiobuttons />
             </div>
-            <PriceFilter />
+            <PriceFilter
+              {...{
+                startMinPrice: startMinPrice,
+                startMaxPrice: startMaxPrice,
+                callbackMin: handleMinPriceChange,
+                callbackMax: handleMaxPriceChange
+              }}
+            />
             <div className={'flex flex-col justify-between gap-[1rem]'}>
               <FilterButton
                 onClick={() => {

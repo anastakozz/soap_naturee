@@ -9,8 +9,6 @@ import handleSorting from './handleSorting';
 export let sortingQueryString = '';
 
 export default function SortingView({ changeQuery }: OurProductsCardsProps) {
-  console.log(changeQuery);
-
   function changeSortingParameters(
     isSortPriceUp: boolean,
     isSortPriceDown: boolean,
@@ -47,10 +45,16 @@ export default function SortingView({ changeQuery }: OurProductsCardsProps) {
         </div>
       </div>
       <div className={'flex gap-[0.5rem]'}>
-        <div className={`${iconClassesNormal} priceUp`} onClick={() => handleSorting('priceUp', changeSortingParameters)}>
+        <div
+          className={`${iconClassesNormal} priceUp`}
+          onClick={() => handleSorting('priceUp', changeSortingParameters)}
+        >
           <SortPriceUp />
         </div>
-        <div className={`${iconClassesNormal} priceDown`} onClick={() => handleSorting('priceDown', changeSortingParameters)}>
+        <div
+          className={`${iconClassesNormal} priceDown`}
+          onClick={() => handleSorting('priceDown', changeSortingParameters)}
+        >
           <SortPriceDown />
         </div>
       </div>
