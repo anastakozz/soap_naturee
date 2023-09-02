@@ -5,6 +5,7 @@ export interface ButtonProps {
   children: string;
   onClick?: VoidFunction;
   to?: string;
+  role?: string;
 }
 
 export interface LoginData {
