@@ -1,6 +1,11 @@
 import CarouselDefault from '../carousel';
+import { useEffect } from 'react';
+import scrollToTop from '../../lib/utils/scrollToTop';
 
 export default function SliderModal(modal: { isVisible: boolean; paths: string[] }) {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
   return (
     <>
       {modal.isVisible ? (

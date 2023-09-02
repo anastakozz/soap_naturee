@@ -6,11 +6,16 @@ import CarouselDefault from '../../components/carousel';
 import toDetailsAdapter from '../../lib/utils/productDataAdapters.ts/toDetailsAdapter';
 import EmptyButton from '../../components/buttons/emptyButton';
 import SliderModal from '../../components/SliderModal';
+import scrollToTop from '../../lib/utils/scrollToTop';
 
 function DetailedProductPage() {
   const [isModalVisible, setModalVisibility] = useState(false);
   const [data, initProductData] = useState<DetailsProps | null>(null);
   const { key } = useParams();
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

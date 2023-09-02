@@ -5,6 +5,7 @@ import EmptyButton from '../../components/buttons/emptyButton';
 import BannerPageName from '../../components/bannerPageName';
 import AddressCard from '../../components/addressCard';
 import EditIcon from '../../icons/editIcon';
+import scrollToTop from '../../lib/utils/scrollToTop';
 
 const countries = [
   {
@@ -30,6 +31,7 @@ function ProfilePage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    scrollToTop();
     setLoading(true);
     getAccountData()
       .then(resp => {
