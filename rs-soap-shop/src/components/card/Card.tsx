@@ -3,14 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import SmallButton from '../buttons/smallButton';
 import { MouseEvent } from 'react';
 
+function addToCard(): void {
+  console.log('add product to cart');
+}
+
 export default function Card(item: ProductCardProps) {
   const navigate = useNavigate();
   function handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (!target.classList.contains('cart-button')) {
-      navigate(`${item.link}`);
+    if (target.classList.contains('cart-button')) {
+      addToCard();
     } else {
-      console.log('add product to cart');
+      navigate(`${item.link}`);
     }
   }
 

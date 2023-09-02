@@ -1,4 +1,5 @@
 import { Category, Keyword, Price, ProductAttributes, ProductImage } from './types';
+import React from 'react';
 
 export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
@@ -26,7 +27,7 @@ export interface InputProps {
 
 export interface OurProductsCardsProps {
   products?: ProductCardProps[] | null;
-  changeContent?: (categoryProducts: ProductCardProps[]) => void;
+  changeQuery?: (options: string) => void;
 }
 
 export interface RegistrationData {
@@ -143,6 +144,32 @@ export interface Product {
   lastModifiedAt: string;
 }
 
+export interface CategoryData {
+  name: {
+    en: string;
+  };
+}
+
+export interface parentCategoryProps {
+  onSelectCategory: (category: string) => void;
+  category: string;
+  option: string;
+  setIsDropdownOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  isDropdownOpened: boolean;
+  setOpenedCategory: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface CategoryDropdownArrowProps {
+  isDropdownOpened: boolean;
+  option: string;
+}
+
+export interface SubCategoryProps {
+  onSelectCategory: (category: string) => void;
+  isDropdownOpened: boolean;
+  openedCategory: string;
+}
+
 export interface DetailsProps {
   productId: string;
   name: string;
@@ -176,4 +203,13 @@ export interface IAction {
   lastName?: string;
   dateOfBirth?: string;
   email?: string;
+}
+
+export interface NavigationViewProps {
+  nav?: {
+    category?: string;
+    subcategory?: string;
+  };
+  changeQuery?: (options: string) => void;
+  updateSearchedProducts?: (adaptedProducts: ProductCardProps[]) => void;
 }

@@ -5,7 +5,7 @@ import { cardsPerPage } from '../lib/enums';
 
 export async function getProductsList(limit?: cardsPerPage) {
   const accessToken = await getBasicToken();
-  const Params = limit ? {limit: limit} : {}
+  const Params = limit ? { limit: limit } : {};
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/search`, {
       headers: {
@@ -20,24 +20,27 @@ export async function getProductsList(limit?: cardsPerPage) {
 }
 
 export async function getProductByKey(key: string) {
-  const accessToken = await getBasicToken()
+  const accessToken = await getBasicToken();
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/key=${key}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
-    })
-    return response.data
+    });
+    return response.data;
   } catch (error) {
-    return undefined
+    return undefined;
   }
 }
 
-export async function getProductsOfCategory(id: string) {
+export async function findProducts(inputProductName: string) {
+  if (inputProductName === '') {
+    return await getProductsList();
+  }
   const accessToken = await getBasicToken();
   try {
     const response = await axios.get(
-      `${apiUrl}/${projectKey}/product-projections/search?filter=categories.id:"${id}"`,
+      `${apiUrl}/${projectKey}/product-projections/search?text.en="${inputProductName}"`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`
@@ -50,15 +53,15 @@ export async function getProductsOfCategory(id: string) {
   }
 }
 
-export async function getCategoryId(key: string) {
+export async function getFiltered(options: string) {
   const accessToken = await getBasicToken();
   try {
-    const response = await axios.get(`${apiUrl}/${projectKey}/categories/key=${key}`, {
+    const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/search${options}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
     });
-    return response.data.id;
+    return response.data.results;
   } catch (error) {
     return undefined;
   }

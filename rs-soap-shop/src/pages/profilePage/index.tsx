@@ -12,6 +12,7 @@ import SuccessMessage from '../../components/ResultMessage/successMessage.tsx';
 import ErrorMessage from '../../components/ResultMessage/errorMessage.tsx';
 import ChangePasswordModal from './ChangePasswordModal';
 import CreateNewAddressModal from './CreateNewAddressModal';
+import scrollToTop from '../../lib/utils/scrollToTop';
 
 const countries = [
   {
@@ -139,6 +140,7 @@ function ProfilePage() {
   };
 
   useEffect(() => {
+    scrollToTop();
     refreshAccount();
   }, []);
 

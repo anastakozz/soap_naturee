@@ -80,5 +80,10 @@
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "npm run lint"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }
