@@ -12,7 +12,7 @@ function HomePage() {
   }, []);
 
   return (
-    <div data-testid='home-page'>
+    <div role='home-page'>
       <NewCollectionSection />
       <CheckoutSection />
       <SaleSection />
