@@ -4,7 +4,6 @@ import { NavigationViewProps } from '../../lib/interfaces';
 import { BreadcrumbTheme } from './Breadcrumb.theme';
 
 export default function Breadcrumb({ nav }: NavigationViewProps) {
-  
   return (
     <ThemeProvider value={BreadcrumbTheme}>
       <Breadcrumbs fullWidth>

@@ -197,9 +197,10 @@ export interface pageNameProp {
 }
 
 export interface NavigationViewProps {
-  nav: {
+  nav?: {
     category?: string;
     subcategory?: string;
-  },
+  };
   changeQuery?: (options: string) => void;
-};
+  updateSearchedProducts?: (adaptedProducts: ProductCardProps[]) => void;
+}
