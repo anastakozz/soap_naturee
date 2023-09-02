@@ -11,6 +11,7 @@ import { dateValidation, emailValidation, nameValidation } from '../../lib/utils
 import SuccessMessage from '../../components/ResultMessage/successMessage.tsx';
 import ErrorMessage from '../../components/ResultMessage/errorMessage.tsx';
 import ChangePasswordModal from './ChangePasswordModal';
+import CreateNewAddressModal from './CreateNewAddressModal';
 
 const countries = [
   {
@@ -36,6 +37,8 @@ function ProfilePage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [editMainData, setEditMainData] = useState(false);
+  const [createAddress, setCreateAddress] = useState(false);
+  const [editAddress, setEditAddress] = useState(null);
   const [editPasswordOpen, setEditPasswordOpen] = useState(false);
   const [dataUpdated, setDataUpdated] = useState(false);
   const [mainDataForm, setMainDataForm] = useState({
@@ -44,6 +47,8 @@ function ProfilePage() {
     dateOfBirth: '',
     email: ''
   });
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [actions, setActions] = useState([]);
 
@@ -64,8 +69,46 @@ function ProfilePage() {
     );
     setMainDataForm({ ...mainDataForm, [key]: newValue });
   };
+
+  const validateFields = () => {
+    setIsSubmitted(true);
+
+    return !!mainDataForm.firstName && !!mainDataForm.lastName && !!mainDataForm.dateOfBirth && !!mainDataForm.email;
+  };
+
   const handleSave = () => {
+    if (validateFields()) {
+      updateAccountData(account?.id, account?.version, actions)
+        .then(resp => {
+          setEditMainData(false);
+          setAccount(resp.data);
+          setDataUpdated(true);
+        })
+        .catch(error => {
+          console.error(error);
+          setError('Something went wrong');
+        });
+    }
+  };
+  const handleEditPassword = () => {
+    setEditPasswordOpen(true);
+  };
+
+  const handleCancel = () => {
     setEditMainData(false);
+  };
+
+  const handleCreateNewAddress = () => {
+    setCreateAddress(true);
+  };
+
+  const handleDeleteAddress = (id: string) => {
+    const actions = [
+      {
+        action: 'removeAddress',
+        addressId: id
+      }
+    ];
     updateAccountData(account?.id, account?.version, actions)
       .then(resp => {
         setAccount(resp.data);
@@ -76,15 +119,13 @@ function ProfilePage() {
         setError('Something went wrong');
       });
   };
-  const handleEditPassword = () => {
-    setEditPasswordOpen(true);
+
+  const handleEditAddress = (address: AddressCardI) => {
+    setCreateAddress(true);
+    setEditAddress(address);
   };
 
-  const handleCancel = () => {
-    setEditMainData(false);
-  };
-
-  useEffect(() => {
+  const refreshAccount = () => {
     setLoading(true);
     getAccountData()
       .then(resp => {
@@ -95,8 +136,12 @@ function ProfilePage() {
         console.error(err);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    refreshAccount();
   }, []);
-  console.log(account);
+
   return (
     <>
       {loading ? (
@@ -115,6 +160,21 @@ function ProfilePage() {
               version={account.version}
               onClose={() => setEditPasswordOpen(false)}
               onSuccess={() => setDataUpdated(true)}
+            />
+          )}
+          {createAddress && (
+            <CreateNewAddressModal
+              onClose={() => {
+                setCreateAddress(false);
+                setEditAddress(null);
+              }}
+              account={account}
+              address={editAddress}
+              onSuccess={() => {
+                setDataUpdated(true);
+                refreshAccount();
+              }}
+              onError={e => setError(e)}
             />
           )}
           <div className='py-sm px-sm max-w-[1440px] mx-auto lg:px-big'>
@@ -139,6 +199,7 @@ function ProfilePage() {
                     {...nameValidation}
                     label=''
                     isColumn={true}
+                    isSubmitted={isSubmitted}
                     placeholder='Type your first name'
                     val={mainDataForm.firstName}
                     onChange={(newValue: string) => {
@@ -154,6 +215,7 @@ function ProfilePage() {
                     {...nameValidation}
                     label=''
                     isColumn={true}
+                    isSubmitted={isSubmitted}
                     placeholder='Type your second name'
                     val={mainDataForm.lastName}
                     onChange={(newValue: string) => {
@@ -170,6 +232,7 @@ function ProfilePage() {
                     {...dateValidation}
                     label=''
                     isColumn={true}
+                    isSubmitted={isSubmitted}
                     val={mainDataForm.dateOfBirth}
                     onChange={(newValue: string) => {
                       handleChangeInput('setDateOfBirth', 'dateOfBirth', newValue);
@@ -185,6 +248,7 @@ function ProfilePage() {
                     {...emailValidation}
                     label=''
                     isColumn={true}
+                    isSubmitted={isSubmitted}
                     val={mainDataForm.email}
                     onChange={(newValue: string) => {
                       handleChangeInput('changeEmail', 'email', newValue);
@@ -196,16 +260,22 @@ function ProfilePage() {
               </div>
               <div></div>
             </div>
-            <div>
+            <div className='mb-2'>
               <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
                 <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold'>My list of addresses</h3>
-                <button>
-                  <EditIcon />
-                </button>
+                <AdditionalButton notFixedWidth onClick={handleCreateNewAddress}>
+                  Add new address
+                </AdditionalButton>
               </div>
               <div className='flex flex-col justify-between items-center md:flex-row flex-wrap'>
                 {account?.addresses.map((address: AddressCardI) => (
-                  <AddressCard key={address.id} address={address} account={account} />
+                  <AddressCard
+                    key={address.id}
+                    address={address}
+                    account={account}
+                    onDelete={() => handleDeleteAddress(address.id)}
+                    onEdit={() => handleEditAddress(address)}
+                  />
                 ))}
               </div>
             </div>

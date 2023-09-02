@@ -1,7 +1,11 @@
+import DeleteIcon from '../../icons/deleteIcon';
+import EditIcon from '../../icons/editIcon';
 import { AddressCardI } from '../../lib/interfaces';
 import { dataAdapterToFullName } from '../../pages/profilePage';
 
 type AddressCardProps = {
+  onDelete: () => void;
+  onEdit: () => void;
   address: AddressCardI;
   account: {
     defaultBillingAddressId: string[];
@@ -11,7 +15,13 @@ type AddressCardProps = {
   };
 };
 
-function AddressCard({ address, account }: AddressCardProps): JSX.Element {
+function AddressCard({ address, account, onDelete, onEdit }: AddressCardProps): JSX.Element {
+  const handleEditAddress = () => {
+    onEdit();
+  };
+  const deleteAddres = () => {
+    onDelete();
+  };
   return (
     <div className='p-4 m4 border-2 border-dotted border-accentColor dark:border-basicColor flex flex-col rounded-normal w-full relative md:w-[45%] mb-4'>
       {account?.defaultBillingAddressId?.includes(address.id) && (
@@ -52,6 +62,14 @@ function AddressCard({ address, account }: AddressCardProps): JSX.Element {
       <div className='flex items-center mb-2'>
         <h4 className='text-h4 text-accentColor dark:text-basicColor mr-4'>Zip code:</h4>
         <p className='italic'>{address.postalCode}</p>
+      </div>
+      <div className='flex items-center justyfy-center'>
+        <button onClick={handleEditAddress} className='m-2'>
+          <EditIcon />
+        </button>
+        <button onClick={deleteAddres} className='m-2'>
+          <DeleteIcon />
+        </button>
       </div>
     </div>
   );

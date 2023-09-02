@@ -1,9 +1,11 @@
 import { Category, Keyword, Price, ProductAttributes, ProductImage } from './types';
 
 export interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset';
   children: string;
   onClick?: VoidFunction;
   to?: string;
+  notFixedWidth?: boolean;
 }
 
 export interface LoginData {
@@ -38,6 +40,7 @@ export interface RegistrationData {
 }
 
 export interface Address {
+  id?: string;
   country: string;
   city: string;
   street: string;
@@ -168,6 +171,7 @@ export interface PageNameProp {
 
 export interface IAction {
   action: string;
+  addressId?: string;
   firstName?: string;
   lastName?: string;
   dateOfBirth?: string;
