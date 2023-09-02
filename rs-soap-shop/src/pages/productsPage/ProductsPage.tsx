@@ -5,12 +5,17 @@ import BannerPageName from '../../components/bannerPageName';
 import { useParams } from 'react-router-dom';
 import { getCategoryId } from '../../services/category.service';
 import { getProductsList, getFiltered } from '../../services/product.service';
+import { ProductCardProps } from '../../lib/interfaces';
 import scrollToTop from '../../lib/utils/scrollToTop';
 
 function ProductsPage() {
   const [products, setProducts] = useState(items);
   const { category, subcategory } = useParams();
   const [query, setQuery] = useState('');
+
+  function updateSearchedProducts(adaptedProducts: ProductCardProps[]) {
+    setProducts(adaptedProducts);
+  }
 
   function changeQuery(options: string): void {
     setQuery(options);
@@ -55,7 +60,11 @@ function ProductsPage() {
   return (
     <>
       <BannerPageName {...{ children: 'OUR PRODUCTS' }}></BannerPageName>
-      <NavigationView nav={{ category, subcategory }} changeQuery={changeQuery} />
+      <NavigationView
+        nav={{ category, subcategory }}
+        changeQuery={changeQuery}
+        updateSearchedProducts={updateSearchedProducts}
+      />
       <OurProductsCards products={products} />
     </>
   );

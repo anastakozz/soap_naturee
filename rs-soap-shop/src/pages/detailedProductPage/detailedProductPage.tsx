@@ -45,7 +45,7 @@ function DetailedProductPage() {
           <div className='flex items-center flex-col md:flex-row md:justify-between md:items-start'>
             <div onClick={toggleModal} className='max-w-[400px] mx-auto h-[400px] md:mx-0 md:ml-10 mb-10'>
               {data.imgSources.length === 1 ? (
-                <img className='rounded-xl object-cover h-full w-full' src={data.imgSources[1]}></img>
+                <img className='rounded-xl object-cover h-full w-full' src={data.imgSources[0]}></img>
               ) : (
                 <CarouselDefault {...{ paths: data.imgSources, classes: 'h-full w-full object-cover' }}></CarouselDefault>
               )}
