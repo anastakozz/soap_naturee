@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { getCategoryId } from '../../services/category.service';
 import { getProductsList, getFiltered } from '../../services/product.service';
 import { ProductCardProps } from '../../lib/interfaces';
-// import { ProductCardProps } from '../../lib/interfaces';
+import scrollToTop from '../../lib/utils/scrollToTop';
 
 function ProductsPage() {
   const [products, setProducts] = useState(items);
@@ -33,6 +33,10 @@ function ProductsPage() {
       });
     });
   }
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     if (category || subcategory) {

@@ -6,13 +6,14 @@ export function PriceFilter(options: {
   callbackMax: (event: ChangeEvent<HTMLInputElement>) => void;
 }) {
   const { startMaxPrice, startMinPrice, callbackMax, callbackMin } = options;
+  const inputStyles = 'w-big my-2 min-price bg-additionalColor focus:bg-accentColor/20 pl-2 focus:outline-none'
 
   return (
     <div>
       <div>Min price, €:</div>
       <input
         type={'number'}
-        className={'w-big my-2 min-price'}
+        className={`${inputStyles} min-price`}
         value={startMinPrice}
         onChange={callbackMin}
         min={0}
@@ -21,7 +22,7 @@ export function PriceFilter(options: {
       <div>Max price, €:</div>
       <input
         type={'number'}
-        className={'w-big my-2 max-price '}
+        className={`${inputStyles} max-price`}
         value={startMaxPrice}
         onChange={callbackMax}
         min={0}

@@ -10,6 +10,7 @@ module.exports = withMT({
       stroke: ['hover', 'focus'],
       screens: {
         sm: '320px',
+        add: '610px',
         md: '768px',
         lg: '1024px',
         xl: '1280px',
