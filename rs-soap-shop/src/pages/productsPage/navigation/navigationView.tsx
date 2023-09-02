@@ -29,9 +29,9 @@ export function NavigationView({ nav, changeQuery }: NavigationViewProps) {
         <div className='flex flex-wrap gap-[10px]'>
           <SelectCategory nav={nav} />
           <SearchView />
-          <div className='flex flex-wrap gap-[10px]'>
-            <SortingView changeQuery={updateSortQuery} />
+          <div className='flex flex-wrap gap-[10px] flex-row-reverse'>
             <FilterView changeQuery={updateFilterQuery} />
+            <SortingView changeQuery={updateSortQuery} />
           </div>
         </div>
       </div>

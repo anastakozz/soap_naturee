@@ -5,6 +5,7 @@ import { useState, ChangeEvent } from 'react';
 import FilterIcon from '../../../../icons/filterIcon';
 import { iconClassesActive, iconClassesNormal } from '../../../../lib/constants';
 import { OurProductsCardsProps } from '../../../../lib/interfaces';
+import classNames from 'classnames';
 
 export default function FilterView({ changeQuery }: OurProductsCardsProps) {
   const [isOn, setIsOn] = useState(false);
@@ -96,11 +97,14 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
       </div>
       <div className={isOn ? 'visible' : 'invisible'}>
         <div
-          className={
-            ' text-xs drop-shadow-lg bg-additionalColor absolute z-40 right-0 top-11 flex flex-col justify-between py-[10px] px-sm border rounded-normal '
-          }
+          className={classNames(
+            'flex flex-col justify-between',
+            'absolute z-40 left-0 add:left-auto add:right-0 top-11 py-[10px] px-2 add:px-sm add:min-w-[170px] min-h-[172px]',
+            'drop-shadow-lg bg-primaryColor rounded-md ring-1 ring-black ring-opacity-5',
+            'text-sm text-grayMColor'
+          )}
         >
-          <div className={'text-h5 my-4'}>Filter settings</div>
+          <div className={'text-h5 my-2'}>Filter settings</div>
           <div className={'flex gap-[1rem] flex-wrap md:flex-nowrap'}>
             <div className={'flex flex-col'}>
               <Radiobuttons />
