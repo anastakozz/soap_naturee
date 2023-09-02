@@ -47,7 +47,7 @@ function DetailedProductPage() {
               {data.imgSources.length === 1 ? (
                 <img className='rounded-xl object-cover h-full w-full' src={data.imgSources[1]}></img>
               ) : (
-                <CarouselDefault {...{ paths: data.imgSources }}></CarouselDefault>
+                <CarouselDefault {...{ paths: data.imgSources, classes: 'h-full w-full object-cover' }}></CarouselDefault>
               )}
             </div>
             <div className='max-w-[400px] md:max-w-[60%] md:order-first'>
