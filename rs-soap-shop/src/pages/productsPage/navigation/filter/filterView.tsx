@@ -26,7 +26,6 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
     toggleFilterMenu();
     setFilter(true);
     const filterOptions = generateFilterQuery(true);
-    console.log(filterOptions);
     changeQuery(filterOptions);
   }
 
