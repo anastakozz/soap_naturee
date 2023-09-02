@@ -19,7 +19,7 @@ export default function OurProductsCards({ products }: OurProductsCardsProps) {
     <>
       {products ? (
         <div className='bg-primaryColor dark:bg-grayMColor h-auto p-sm text-center px-big flex flex-col items-center'>
-          <div className='flex flex-wrap justify-between mt-sm max-w-[1245px] pb-sm '>
+          <div className='flex flex-wrap justify-center md:justify-between mt-sm max-w-[1245px] pb-sm '>
             {products.length === 0 ? <p>No products to show...</p> : products.map((item: ProductCardProps | Product, index): ReactNode => {
               if ('priceMode' in item) {
                 item = toCardAdapter(item);
