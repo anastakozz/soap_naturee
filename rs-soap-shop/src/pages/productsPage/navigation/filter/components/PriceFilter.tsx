@@ -1,50 +1,32 @@
-import React, { useState, ChangeEvent } from 'react';
-
-export function PriceFilter() {
-  const [minPrice, setMinPrice] = useState('0');
-  const [maxPrice, setMaxPrice] = useState('30');
-
-  const handleMinPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newValue: string = event.target.value;
-    if (
-      (newValue === '' || (newValue !== '' && parseFloat(newValue) <= parseFloat(maxPrice))) &&
-      parseFloat(newValue) <= 30 &&
-      parseFloat(newValue) >= 0
-    ) {
-      setMinPrice(newValue);
-    }
-  };
-
-  const handleMaxPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newValue: string = event.target.value;
-    if (
-      (newValue === '' || (newValue !== '' && parseFloat(newValue) >= parseFloat(minPrice))) &&
-      parseFloat(newValue) <= 30 &&
-      parseFloat(newValue) >= 0
-    ) {
-      setMaxPrice(newValue);
-    }
-  };
+import { ChangeEvent } from 'react';
+export function PriceFilter(options: {
+  startMinPrice: string;
+  startMaxPrice: string;
+  callbackMin: (event: ChangeEvent<HTMLInputElement>) => void;
+  callbackMax: (event: ChangeEvent<HTMLInputElement>) => void;
+}) {
+  const { startMaxPrice, startMinPrice, callbackMax, callbackMin } = options;
+  const inputStyles = 'w-big my-2 min-price bg-additionalColor focus:bg-accentColor/20 pl-2 focus:outline-none'
 
   return (
     <div>
       <div>Min price, €:</div>
       <input
         type={'number'}
-        className={'w-big my-2'}
-        value={minPrice}
-        onChange={handleMinPriceChange}
+        className={`${inputStyles} min-price`}
+        value={startMinPrice}
+        onChange={callbackMin}
         min={0}
-        max={30}
+        max={300}
       ></input>
       <div>Max price, €:</div>
       <input
         type={'number'}
-        className={'w-big my-2'}
-        value={maxPrice}
-        onChange={handleMaxPriceChange}
+        className={`${inputStyles} max-price`}
+        value={startMaxPrice}
+        onChange={callbackMax}
         min={0}
-        max={30}
+        max={300}
       ></input>
     </div>
   );

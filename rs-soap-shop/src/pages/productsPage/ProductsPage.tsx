@@ -4,35 +4,58 @@ import { useEffect, useState } from 'react';
 import BannerPageName from '../../components/bannerPageName';
 import { useParams } from 'react-router-dom';
 import { getCategoryId } from '../../services/category.service';
-import { getProductsList, getProductsOfCategory } from '../../services/product.service';
+import { getProductsList, getFiltered } from '../../services/product.service';
+import scrollToTop from '../../lib/utils/scrollToTop';
 
 function ProductsPage() {
   const [products, setProducts] = useState(items);
-
   const { category, subcategory } = useParams();
+  const [query, setQuery] = useState('');
+
+  function changeQuery(options: string): void {
+    setQuery(options);
+    console.log('global query updated');
+  }
+
+  function updateProducts() {
+    getCategoryId(
+      subcategory
+        ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
+        : category.charAt(0).toUpperCase() + category.slice(1)
+    ).then(categoryId => {
+      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`).then(products => {
+        setProducts(products);
+      });
+    });
+  }
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     if (category || subcategory) {
-      getCategoryId(
-        subcategory
-          ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
-          : category.charAt(0).toUpperCase() + category.slice(1)
-      ).then(categoryId => {
-        getProductsOfCategory(categoryId).then(products => {
-          setProducts(products);
-        });
-      });
+      updateProducts();
     } else {
       getProductsList().then(products => {
         setProducts(products);
       });
     }
-  }, [category, subcategory]);
+    if (query) {
+      if (category || subcategory) {
+        updateProducts();
+      } else {
+        getFiltered(`?${query}`).then(products => {
+          setProducts(products);
+        });
+      }
+    }
+  }, [category, subcategory, query]);
 
   return (
     <>
       <BannerPageName {...{ children: 'OUR PRODUCTS' }}></BannerPageName>
-      <NavigationView nav={{ category, subcategory }} />
+      <NavigationView nav={{ category, subcategory }} changeQuery={changeQuery} />
       <OurProductsCards products={products} />
     </>
   );

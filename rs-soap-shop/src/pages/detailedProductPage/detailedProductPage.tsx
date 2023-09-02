@@ -6,11 +6,16 @@ import CarouselDefault from '../../components/carousel';
 import toDetailsAdapter from '../../lib/utils/productDataAdapters.ts/toDetailsAdapter';
 import EmptyButton from '../../components/buttons/emptyButton';
 import SliderModal from '../../components/SliderModal';
+import scrollToTop from '../../lib/utils/scrollToTop';
 
 function DetailedProductPage() {
   const [isModalVisible, setModalVisibility] = useState(false);
   const [data, initProductData] = useState<DetailsProps | null>(null);
   const { key } = useParams();
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +47,7 @@ function DetailedProductPage() {
               {data.imgSources.length === 1 ? (
                 <img className='rounded-xl object-cover h-full w-full' src={data.imgSources[1]}></img>
               ) : (
-                <CarouselDefault {...{ paths: data.imgSources }}></CarouselDefault>
+                <CarouselDefault {...{ paths: data.imgSources, classes: 'h-full w-full object-cover' }}></CarouselDefault>
               )}
             </div>
             <div className='max-w-[400px] md:max-w-[60%] md:order-first'>

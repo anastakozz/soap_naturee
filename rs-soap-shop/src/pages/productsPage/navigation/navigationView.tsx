@@ -1,25 +1,39 @@
 import { SelectCategory } from './selectCategory/selectCategory';
-import SortingView, { sortingQueryString } from './sorting/sortingView';
-import FilterModule from './filter/filterView';
+import SortingView from './sorting/sortingView';
+import FilterView from './filter/filterView';
 import SearchView from './search/searchView';
 import Breadcrumb from '../../../components/BasicBreadcrumbs';
-import React from 'react';
-import { NavigationViewProps } from '../../../lib/types';
+import React, { useState } from 'react';
+import { NavigationViewProps } from '../../../lib/interfaces';
 
-export function NavigationView({ nav }: NavigationViewProps) {
-  
-    // document.addEventListener('click', () => {
-  //   console.log(sortingQueryString)
-  // })
-  
+export function NavigationView({ nav, changeQuery }: NavigationViewProps) {
+  const [filterQuery, setFilterQuery] = useState('');
+  const [sortQuery, setSortQuery] = useState('');
+
+  function updateFilterQuery(options: string) {
+    setFilterQuery(options);
+    console.log('filter query updated');
+    changeQuery(`${options}&${sortQuery}`);
+  }
+
+  function updateSortQuery(options: string) {
+    setSortQuery(options);
+    console.log('sort query updated');
+    changeQuery(`${filterQuery}&${options}`);
+  }
+
   return (
-    <div className='bg-accentColor dark:bg-accentDarkColor text-primaryColor'>
-      <div className='flex flex-wrap justify-between items-center max-w-[1440px] py-4 px-4 mx-auto lg:px-big'>
-        <SelectCategory nav={nav} />
+    <div className='bg-accentColor dark:bg-accentDarkColor text-primaryColor '>
+      <div className='flex flex-wrap justify-between items-center max-w-[1440px] py-4 px-4 mx-auto lg:px-big gap-[10px]'>
         <Breadcrumb nav={nav} />
-        <SortingView />
-        <FilterModule />
-        <SearchView />
+        <div className='flex flex-wrap gap-[10px]'>
+          <SelectCategory nav={nav} />
+          <SearchView />
+          <div className='flex flex-wrap gap-[10px] flex-row-reverse'>
+            <FilterView changeQuery={updateFilterQuery} />
+            <SortingView changeQuery={updateSortQuery} />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HeavyButton from '../../components/buttons/heavyButton';
 import { useNavigate } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 import NavigationDark from '../../components/navigation/navigationDark';
+import scrollToTop from '../../lib/utils/scrollToTop';
 
 function PageNotFound() {
+  useEffect(() => {
+    scrollToTop;
+  }, []);
   const navigate = useNavigate();
   return (
     <div
