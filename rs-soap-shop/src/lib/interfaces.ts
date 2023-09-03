@@ -2,9 +2,11 @@ import { Category, Keyword, Price, ProductAttributes, ProductImage } from './typ
 import React from 'react';
 
 export interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset';
   children: string;
   onClick?: VoidFunction;
   to?: string;
+  notFixedWidth?: boolean;
 }
 
 export interface LoginData {
@@ -16,6 +18,7 @@ export interface InputProps {
   label: string;
   type: string;
   val?: string;
+  isColumn?: boolean;
   placeholder?: string;
   isSubmitted?: boolean;
   onChange?: (value: string) => void;
@@ -38,6 +41,7 @@ export interface RegistrationData {
 }
 
 export interface Address {
+  id?: string;
   country: string;
   city: string;
   street: string;
@@ -188,12 +192,17 @@ export interface AddressCardI {
   billingAddressIds: string[];
   shippingAddressIds: string[];
 }
-export interface pageNameProp {
+export interface PageNameProp {
   children: string | JSX.Element | JSX.Element[];
 }
 
-export interface pageNameProp {
-  children: string | JSX.Element | JSX.Element[];
+export interface IAction {
+  action: string;
+  addressId?: string;
+  firstName?: string;
+  lastName?: string;
+  dateOfBirth?: string;
+  email?: string;
 }
 
 export interface NavigationViewProps {
