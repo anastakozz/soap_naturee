@@ -6,8 +6,8 @@ export interface ButtonProps {
   children: string;
   onClick?: VoidFunction;
   to?: string;
-  notFixedWidth?: boolean;
   role?: string;
+  notFixedWidth?: boolean;
 }
 
 export interface LoginData {
