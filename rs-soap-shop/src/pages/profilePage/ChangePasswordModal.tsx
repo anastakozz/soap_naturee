@@ -24,9 +24,10 @@ export default function ChangePasswordModal({ email, id, version, onClose, onSuc
   const handleSave = () => {
     changePassword(id, version, currentPassword, newPassword)
       .then(() => {
-        handleLogin(email, newPassword);
-        onClose();
-        onSuccess();
+        handleLogin(email, newPassword).then(() => {
+          onClose();
+          onSuccess();
+        });
       })
       .catch(error => {
         console.error(error);

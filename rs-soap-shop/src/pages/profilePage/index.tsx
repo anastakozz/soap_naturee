@@ -161,7 +161,10 @@ function ProfilePage() {
               id={account.id}
               version={account.version}
               onClose={() => setEditPasswordOpen(false)}
-              onSuccess={() => setDataUpdated(true)}
+              onSuccess={() => {
+                setDataUpdated(true);
+                refreshAccount();
+              }}
             />
           )}
           {createAddress && (
