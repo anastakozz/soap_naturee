@@ -148,8 +148,7 @@ export default function CreateNewAddressModal({
             onClose();
             onSuccess();
           })
-          .catch(error => {
-            console.error(error);
+          .catch(() => {
             onError('Something went wrong');
           });
       } else {
@@ -163,8 +162,7 @@ export default function CreateNewAddressModal({
                 addressId: newAddresId
               }
             ];
-            updateAccountData(account?.id, account?.version + 1, newAction).then(addresTypeResponse => {
-              console.log(addresTypeResponse);
+            updateAccountData(account?.id, account?.version + 1, newAction).then(() => {
               if (!isDefaultAddress) {
                 onClose();
                 onSuccess();
@@ -182,8 +180,7 @@ export default function CreateNewAddressModal({
               }
             });
           })
-          .catch(error => {
-            console.error(error);
+          .catch(() => {
             onError('Something went wrong');
           });
       }
@@ -195,9 +192,9 @@ export default function CreateNewAddressModal({
   return (
     <div data-testid='add-address-modal'>
       <div
-        onClick={() => {
-          onClose();
-        }}
+        // onClick={() => {
+        //   onClose();
+        // }}
         className='w-full h-full bg-grayLColor opacity-30 fixed z-10 top-0 left-0'
       ></div>
       <div className='h-[600px] overflow-auto z-20 bg-secondaryColor dark:bg-grayLColor dark:text-secondaryColor fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-normal p-2 md:px-sm md:py-sm border-accentColor dark:border-secondaryColor border-8'>

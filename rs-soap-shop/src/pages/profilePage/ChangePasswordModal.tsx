@@ -30,7 +30,6 @@ export default function ChangePasswordModal({ email, id, version, onClose, onSuc
         });
       })
       .catch(error => {
-        console.error(error);
         setError(error.response.data.message);
       });
   };

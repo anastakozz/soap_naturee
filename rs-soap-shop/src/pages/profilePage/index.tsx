@@ -85,8 +85,7 @@ function ProfilePage() {
           setAccount(resp.data);
           setDataUpdated(true);
         })
-        .catch(error => {
-          console.error(error);
+        .catch(() => {
           setError('Something went wrong');
         });
     }
@@ -115,8 +114,7 @@ function ProfilePage() {
         setAccount(resp.data);
         setDataUpdated(true);
       })
-      .catch(error => {
-        console.error(error);
+      .catch(() => {
         setError('Something went wrong');
       });
   };
@@ -133,8 +131,7 @@ function ProfilePage() {
         setLoading(false);
         setAccount(resp.data);
       })
-      .catch(err => {
-        console.error(err);
+      .catch(() => {
         setLoading(false);
       });
   };
@@ -178,6 +175,7 @@ function ProfilePage() {
               onSuccess={() => {
                 setDataUpdated(true);
                 refreshAccount();
+                setError(null);
               }}
               onError={e => setError(e)}
             />
