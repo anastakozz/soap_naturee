@@ -13,6 +13,10 @@ import ErrorMessage from '../../components/ResultMessage/errorMessage.tsx';
 import ChangePasswordModal from './ChangePasswordModal';
 import CreateNewAddressModal from './CreateNewAddressModal';
 import scrollToTop from '../../lib/utils/scrollToTop';
+import { useNavigate } from 'react-router-dom';
+import { validateEmail } from '../../components/forms/validateFunctions/e-mail';
+import { validateDate } from '../../components/forms/validateFunctions/date';
+import { validateName } from '../../components/forms/validateFunctions/name';
 
 const countries = [
   {
@@ -34,6 +38,7 @@ export function dataAdapterToFullName(code: string): string {
 }
 
 function ProfilePage() {
+  const navigate = useNavigate();
   const [account, setAccount] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -74,7 +79,12 @@ function ProfilePage() {
   const validateFields = () => {
     setIsSubmitted(true);
 
-    return !!mainDataForm.firstName && !!mainDataForm.lastName && !!mainDataForm.dateOfBirth && !!mainDataForm.email;
+    return (
+      !validateName(mainDataForm.firstName) &&
+      !validateName(mainDataForm.lastName) &&
+      !validateDate(mainDataForm.dateOfBirth) &&
+      !validateEmail(mainDataForm.email)
+    );
   };
 
   const handleSave = () => {
@@ -138,7 +148,11 @@ function ProfilePage() {
 
   useEffect(() => {
     scrollToTop();
-    refreshAccount();
+    if (!localStorage.getItem('token')) {
+      navigate('/sign-in');
+    } else {
+      refreshAccount();
+    }
   }, []);
 
   return (

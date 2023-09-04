@@ -5,6 +5,9 @@ import { Input } from '../../components/forms/inputs/Input';
 import { updateAccountData } from '../../services/account.service';
 import { AddressCardI } from '../../lib/interfaces';
 import { dataAdapterToFullName } from '.';
+import { validateCity } from '../../components/forms/validateFunctions/city';
+import { validatePostalCode } from '../../components/forms/validateFunctions/postalCode';
+import { validateStreet } from '../../components/forms/validateFunctions/street';
 
 const countries = [
   {
@@ -137,7 +140,9 @@ export default function CreateNewAddressModal({
       setSelectedCountryError(true);
     }
 
-    return !!city && !!street && !!house && !!postalCode;
+    console.log(validatePostalCode(postalCode));
+
+    return !validateCity(city) && !validateStreet(street) && !!house && !validatePostalCode(postalCode);
   };
 
   const handleSave = () => {
@@ -191,12 +196,7 @@ export default function CreateNewAddressModal({
   };
   return (
     <div data-testid='add-address-modal'>
-      <div
-        // onClick={() => {
-        //   onClose();
-        // }}
-        className='w-full h-full bg-grayLColor opacity-30 fixed z-10 top-0 left-0'
-      ></div>
+      <div className='w-full h-full bg-grayLColor opacity-30 fixed z-10 top-0 left-0'></div>
       <div className='h-[600px] overflow-auto z-20 bg-secondaryColor dark:bg-grayLColor dark:text-secondaryColor fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-normal p-2 md:px-sm md:py-sm border-accentColor dark:border-secondaryColor border-8'>
         <div className={'flex'}>
           <input
