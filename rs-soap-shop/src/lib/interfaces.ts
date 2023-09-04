@@ -155,14 +155,15 @@ export interface parentCategoryProps {
   onSelectCategory: (category: string) => void;
   category: string;
   option: string;
-  setIsDropdownOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  isDropdownOpened: boolean;
+  handleCategoryClick: () => void;
   setOpenedCategory: React.Dispatch<React.SetStateAction<string>>;
+  openedCategory: string;
 }
 
 export interface CategoryDropdownArrowProps {
-  isDropdownOpened: boolean;
   option: string;
+  openedCategory: string;
+  setOpenedCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface SubCategoryProps {

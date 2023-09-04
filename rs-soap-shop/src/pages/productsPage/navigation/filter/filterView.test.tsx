@@ -17,8 +17,8 @@ it('closes filter-menu on filter click', () => {
 });
 
 it('closes filter-menu on reset click', () => {
-    render(<FilterView changeQuery={mockedCallback} />);
-    fireEvent.click(screen.getByRole('toggler'));
-    fireEvent.click(screen.getByRole('reset-button'));
-    expect(screen.getByRole('filter-menu').classList).toContain('invisible');
-  });
+  render(<FilterView changeQuery={mockedCallback} />);
+  fireEvent.click(screen.getByRole('toggler'));
+  fireEvent.click(screen.getByRole('reset-button'));
+  expect(screen.getByRole('filter-menu').classList).toContain('invisible');
+});
