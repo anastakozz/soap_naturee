@@ -10,7 +10,10 @@ export default function toDetailsAdapter(data: Product): DetailsProps {
     description: data.description['en'],
     imgSources: paths,
     link: `/product/${data.key}`,
-    price: `${variant.prices[0].value.centAmount / 100} ${variant.prices[0].value.currencyCode}`,
+    price: `${(variant.prices[0].value.centAmount / 100).toLocaleString('en-US', {
+      style: 'currency',
+      currency: `${variant.prices[0].value.currencyCode}`
+    })}`,
     isOnSale: false,
     newPrice: null,
     keyWords: keyWords
@@ -18,7 +21,10 @@ export default function toDetailsAdapter(data: Product): DetailsProps {
   const sale = variant.prices[0].discounted;
   if (sale) {
     dataForDetails.isOnSale = true;
-    dataForDetails.newPrice = `${sale.value.centAmount / 100} ${sale.value.currencyCode}`;
+    dataForDetails.newPrice = `${(sale.value.centAmount / 100).toLocaleString('en-US', {
+      style: 'currency',
+      currency: `${sale.value.currencyCode}`
+    })}`;
   }
   return dataForDetails;
 }

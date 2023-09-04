@@ -17,7 +17,7 @@ export function PriceFilter(options: {
         value={startMinPrice}
         onChange={callbackMin}
         min={0}
-        max={300}
+        max={50}
       ></input>
       <div>Max price, €:</div>
       <input
@@ -26,7 +26,7 @@ export function PriceFilter(options: {
         value={startMaxPrice}
         onChange={callbackMax}
         min={0}
-        max={300}
+        max={50}
       ></input>
     </div>
   );
