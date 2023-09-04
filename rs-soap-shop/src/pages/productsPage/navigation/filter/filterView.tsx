@@ -85,6 +85,7 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
   return (
     <div className='relative text-basicColor'>
       <div
+        role='toggler'
         className='transition flex items-center gap-[0.5rem] text-primaryColor cursor-pointer hover:text-basicColor active:scale-95'
         onClick={toggleFilterMenu}
       >
@@ -94,7 +95,7 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
 
         <div className='hidden md:block'>Filter</div>
       </div>
-      <div className={isOn ? 'visible' : 'invisible'}>
+      <div role='filter-menu' className={isOn ? 'visible' : 'invisible'}>
         <div
           className={classNames(
             'flex flex-col justify-between',
@@ -118,6 +119,7 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
             />
             <div className={'flex flex-col justify-between gap-[1rem]'}>
               <FilterButton
+                role='filter-button'
                 onClick={() => {
                   handleFilterClick();
                 }}
@@ -125,6 +127,7 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
                 Filter
               </FilterButton>
               <FilterButton
+                role='reset-button'
                 onClick={() => {
                   handleResetClick();
                 }}

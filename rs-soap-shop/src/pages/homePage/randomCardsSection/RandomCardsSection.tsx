@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom';
 import EmptyButton from '../../../components/buttons/emptyButton';
 import Card from '../../../components/card';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import shuffleProducts from '../../../lib/utils/shuffleCards';
 import { Product, ProductCardProps } from '../../../lib/interfaces';
 import { getProductsList } from '../../../services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
-
-const items = await getCardsData();
 
 async function getCardsData(): Promise<ProductCardProps[]> {
   const data: Product[] = await getProductsList();
@@ -19,8 +17,20 @@ async function getCardsData(): Promise<ProductCardProps[]> {
 }
 
 export default function RandomCardsSection() {
+  const [items, setItems] = useState<ProductCardProps[] | undefined>(undefined);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getCardsData();
+      setItems(data);
+    };
+    fetchData().catch(e => {
+      console.log(e);
+    });
+  }, []);
+
   return (
-    <>
+    <div role='random-section'>
       {items ? (
         <div className='bg-primaryColor dark:bg-grayMColor h-auto p-sm text-center px-big flex flex-col items-center'>
           <h3 className='text-basicColor dark:text-secondaryColor text-h3 text-center font-bold'>You may like it</h3>
@@ -40,6 +50,6 @@ export default function RandomCardsSection() {
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 }
