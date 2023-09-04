@@ -7,7 +7,7 @@ export default function SubCategory({ isDropdownOpened, openedCategory, onSelect
   return (
     <div
       className={classNames('left-40 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20', {
-        hidden: isDropdownOpened
+        hidden: !isDropdownOpened
       })}
     >
       {openedCategory === 'Decor' ? (

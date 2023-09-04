@@ -3,6 +3,10 @@ import HomePage from '.';
 import { BrowserRouter } from 'react-router-dom';
 
 it('renders random cards section page in DOM', () => {
-  render(<BrowserRouter><HomePage></HomePage></BrowserRouter>);
+  render(
+    <BrowserRouter>
+      <HomePage></HomePage>
+    </BrowserRouter>
+  );
   expect(screen.getByRole('home-page')).toBeInTheDocument();
 });

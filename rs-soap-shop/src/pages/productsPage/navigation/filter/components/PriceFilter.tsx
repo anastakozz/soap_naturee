@@ -6,7 +6,7 @@ export function PriceFilter(options: {
   callbackMax: (event: ChangeEvent<HTMLInputElement>) => void;
 }) {
   const { startMaxPrice, startMinPrice, callbackMax, callbackMin } = options;
-  const inputStyles = 'w-big my-2 min-price bg-additionalColor focus:bg-accentColor/20 pl-2 focus:outline-none'
+  const inputStyles = 'w-big my-2 min-price bg-additionalColor focus:bg-accentColor/20 pl-2 focus:outline-none';
 
   return (
     <div>

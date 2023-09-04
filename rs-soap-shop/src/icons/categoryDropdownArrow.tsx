@@ -1,18 +1,26 @@
 import { CategoryDropdownArrowProps } from '../lib/interfaces';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function CategoryDropdownArrow({ isDropdownOpened, option }: CategoryDropdownArrowProps) {
+export default function CategoryDropdownArrow({
+  option,
+  openedCategory,
+  setOpenedCategory
+}: CategoryDropdownArrowProps) {
   const [rotationAngle, setRotationAngle] = useState<string>('-90');
 
-  const handleClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    const clickedElement = event.currentTarget as HTMLElement;
-    const parentElement = clickedElement.parentElement?.parentElement?.firstElementChild?.textContent || '';
-
-    if (isDropdownOpened && parentElement === option) {
+  useEffect(() => {
+    if (option === openedCategory) {
       setRotationAngle('90');
     } else {
       setRotationAngle('-90');
+    }
+  }, [openedCategory, option]);
+
+  const handleCategoryClick = () => {
+    if (option === openedCategory) {
+      setOpenedCategory(null);
+    } else {
+      setOpenedCategory(option);
     }
   };
 
@@ -24,7 +32,7 @@ export default function CategoryDropdownArrow({ isDropdownOpened, option }: Cate
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
       style={{ transition: 'transform 0.3s ease', transform: `rotate(${rotationAngle}deg)` }}
-      onClick={handleClick}
+      onClick={handleCategoryClick}
     >
       <g id='SVGRepo_blackgCarrier' strokeWidth='0'></g>
       <g id='SVGRepo_tracerCarrier' strokeLinecap='round' strokeLinejoin='round'></g>

@@ -6,12 +6,11 @@ export default function ParentCategory({
   onSelectCategory,
   category,
   option,
-  setIsDropdownOpened,
-  isDropdownOpened,
-  setOpenedCategory
+  setOpenedCategory,
+  handleCategoryClick,
+  openedCategory
 }: parentCategoryProps) {
   const navigate = useNavigate();
-
   return (
     <div className={'flex justify-between'}>
       <div
@@ -26,12 +25,15 @@ export default function ParentCategory({
       <div
         onClick={event => {
           event.stopPropagation();
-          setIsDropdownOpened(!isDropdownOpened);
-          setOpenedCategory(option);
+          handleCategoryClick();
         }}
       >
         {option === 'Self-care' || option === 'Decor' ? (
-          <CategoryDropdownArrow isDropdownOpened={isDropdownOpened} option={option} />
+          <CategoryDropdownArrow
+            option={option}
+            openedCategory={openedCategory}
+            setOpenedCategory={setOpenedCategory}
+          />
         ) : null}
       </div>
     </div>

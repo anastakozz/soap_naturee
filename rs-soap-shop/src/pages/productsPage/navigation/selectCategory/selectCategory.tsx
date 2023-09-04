@@ -10,7 +10,7 @@ export const SelectCategory = ({ nav }: NavigationViewProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [options, setOptions] = useState<string[]>([]);
-  const [isDropdownOpened, setIsDropdownOpened] = useState(true);
+  const [isDropdownOpened, setIsDropdownOpened] = useState(false);
   const [openedCategory, setOpenedCategory] = useState('');
 
   useEffect(() => {
@@ -30,6 +30,18 @@ export const SelectCategory = ({ nav }: NavigationViewProps) => {
     toggleDropdown();
     setSelectedCategory(category);
   };
+
+  useEffect(() => {
+    let breadcrumpCategory;
+    if (nav.subcategory) {
+      breadcrumpCategory = nav.subcategory;
+    } else if (nav.category) {
+      breadcrumpCategory = nav.category;
+    } else if (nav) {
+      breadcrumpCategory = 'Select a category';
+    }
+    setSelectedCategory(breadcrumpCategory);
+  }, [nav]);
 
   return (
     <div className='relative'>
@@ -51,10 +63,22 @@ export const SelectCategory = ({ nav }: NavigationViewProps) => {
       </div>
 
       {isOpen && (
-        <div className='z-20 w-[170px] origin-top-left absolute left-0 mt-2 rounded-md drop-shadow-lg bg-primaryColor ring-1 ring-black ring-opacity-5 z-10'>
+        <div className='z-20 w-[170px] origin-top-left absolute left-0 mt-2 rounded-md drop-shadow-lg bg-primaryColor ring-1 ring-black ring-opacity-5'>
           <div className='py-1' role='menu' aria-orientation='vertical' aria-labelledby='options-menu'>
             {options.map((option: string) => {
               if (['Decor', 'Self-care', 'New', 'Sale'].includes(option)) {
+                const isCategoryOpen = openedCategory === option && isDropdownOpened;
+
+                const handleCategoryClick = () => {
+                  if (isCategoryOpen) {
+                    setIsDropdownOpened(false);
+                    setOpenedCategory('');
+                  } else {
+                    setIsDropdownOpened(true);
+                    setOpenedCategory(option);
+                  }
+                };
+
                 return (
                   <button
                     key={option}
@@ -66,11 +90,11 @@ export const SelectCategory = ({ nav }: NavigationViewProps) => {
                         onSelectCategory={selectCategory}
                         category={nav.category}
                         option={option}
-                        setIsDropdownOpened={setIsDropdownOpened}
-                        isDropdownOpened={isDropdownOpened}
                         setOpenedCategory={setOpenedCategory}
+                        handleCategoryClick={handleCategoryClick}
+                        openedCategory={openedCategory}
                       />
-                      {openedCategory === option && !isDropdownOpened ? (
+                      {openedCategory === option && isDropdownOpened ? (
                         <SubCategory
                           onSelectCategory={selectCategory}
                           isDropdownOpened={isDropdownOpened}
