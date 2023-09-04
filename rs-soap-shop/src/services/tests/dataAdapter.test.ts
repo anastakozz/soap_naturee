@@ -30,4 +30,3 @@ it('returns proper data', () => {
   expect(data.shippingAddress.country).toEqual('DE');
   expect(data.billingAddress.country).toEqual('IT');
 });
-

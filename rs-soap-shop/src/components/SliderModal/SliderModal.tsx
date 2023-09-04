@@ -2,7 +2,7 @@ import CarouselDefault from '../carousel';
 import { useEffect } from 'react';
 import scrollToTop from '../../lib/utils/scrollToTop';
 
-export default function SliderModal(modal: {paths: string[] }) {
+export default function SliderModal(modal: { paths: string[] }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     scrollToTop();

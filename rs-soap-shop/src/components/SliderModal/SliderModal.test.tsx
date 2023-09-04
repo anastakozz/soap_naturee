@@ -12,4 +12,3 @@ it('renders no controls in DOM', () => {
   const component = screen.queryByRole('button');
   expect(component).not.toBeInTheDocument();
 });
-
