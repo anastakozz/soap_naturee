@@ -14,6 +14,9 @@ import ChangePasswordModal from './ChangePasswordModal';
 import CreateNewAddressModal from './CreateNewAddressModal';
 import scrollToTop from '../../lib/utils/scrollToTop';
 import { useNavigate } from 'react-router-dom';
+import { validateEmail } from '../../components/forms/validateFunctions/e-mail';
+import { validateDate } from '../../components/forms/validateFunctions/date';
+import { validateName } from '../../components/forms/validateFunctions/name';
 
 const countries = [
   {
@@ -76,7 +79,12 @@ function ProfilePage() {
   const validateFields = () => {
     setIsSubmitted(true);
 
-    return !!mainDataForm.firstName && !!mainDataForm.lastName && !!mainDataForm.dateOfBirth && !!mainDataForm.email;
+    return (
+      !validateName(mainDataForm.firstName) &&
+      !validateName(mainDataForm.lastName) &&
+      !validateDate(mainDataForm.dateOfBirth) &&
+      !validateEmail(mainDataForm.email)
+    );
   };
 
   const handleSave = () => {
