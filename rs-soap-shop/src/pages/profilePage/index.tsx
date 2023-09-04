@@ -13,6 +13,7 @@ import ErrorMessage from '../../components/ResultMessage/errorMessage.tsx';
 import ChangePasswordModal from './ChangePasswordModal';
 import CreateNewAddressModal from './CreateNewAddressModal';
 import scrollToTop from '../../lib/utils/scrollToTop';
+import { useNavigate } from 'react-router-dom';
 
 const countries = [
   {
@@ -34,6 +35,7 @@ export function dataAdapterToFullName(code: string): string {
 }
 
 function ProfilePage() {
+  const navigate = useNavigate();
   const [account, setAccount] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -138,7 +140,11 @@ function ProfilePage() {
 
   useEffect(() => {
     scrollToTop();
-    refreshAccount();
+    if (!localStorage.getItem('token')) {
+      navigate('/sign-in');
+    } else {
+      refreshAccount();
+    }
   }, []);
 
   return (

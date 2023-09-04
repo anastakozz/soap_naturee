@@ -16,22 +16,27 @@ type ChangePasswordModalProps = {
 export default function ChangePasswordModal({ email, id, version, onClose, onSuccess }: ChangePasswordModalProps) {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
 
   const handleCancel = () => {
     onClose();
   };
   const handleSave = () => {
-    changePassword(id, version, currentPassword, newPassword)
-      .then(() => {
-        handleLogin(email, newPassword).then(() => {
-          onClose();
-          onSuccess();
+    if (newPassword == confirmPassword) {
+      changePassword(id, version, currentPassword, newPassword)
+        .then(() => {
+          handleLogin(email, newPassword).then(() => {
+            onClose();
+            onSuccess();
+          });
+        })
+        .catch(error => {
+          setError(error.response.data.message);
         });
-      })
-      .catch(error => {
-        setError(error.response.data.message);
-      });
+    } else {
+      setError('New passwords are not equal');
+    }
   };
 
   return (
@@ -51,6 +56,13 @@ export default function ChangePasswordModal({ email, id, version, onClose, onSuc
           label=''
           isColumn={true}
           onChange={(newValue: string) => setNewPassword(newValue)}
+        />
+        <h4 className='text-h4 text-accentColor dark:text-basicColor'>Confirm new password:</h4>
+        <Input
+          {...passwordValidation}
+          label=''
+          isColumn={true}
+          onChange={(newValue: string) => setConfirmPassword(newValue)}
         />
         {error && (
           <div className='bg-errorColor p-4 rounded-md mb-8 flex'>
