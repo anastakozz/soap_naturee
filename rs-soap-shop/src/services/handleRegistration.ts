@@ -2,7 +2,7 @@ import { RegistrationData, ResultProps } from '../lib/interfaces';
 import handleLogin from './handleLogin';
 import { createCustomer } from './registration.service';
 
-const countryId = {
+export const countryId = {
   Italy: 'IT',
   Spain: 'ES',
   Germany: 'DE'

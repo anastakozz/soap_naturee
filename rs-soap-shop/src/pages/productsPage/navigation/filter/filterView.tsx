@@ -11,7 +11,7 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
   const [isOn, setIsOn] = useState(false);
   const [isFiltered, setFilter] = useState(false);
   const [startMinPrice, setMinPrice] = useState('0');
-  const [startMaxPrice, setMaxPrice] = useState('300');
+  const [startMaxPrice, setMaxPrice] = useState('50');
 
   const minPriceInput = document.querySelector('.min-price') as HTMLInputElement;
   const maxPriceInput = document.querySelector('.max-price') as HTMLInputElement;
@@ -35,7 +35,7 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
     productCheck.checked = false;
     setCheck.checked = false;
     setMinPrice('0');
-    setMaxPrice('300');
+    setMaxPrice('50');
     changeQuery('');
   }
 
@@ -64,7 +64,7 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
     const newValue: string = event.target.value;
     if (
       (newValue === '' || (newValue !== '' && parseFloat(newValue) <= parseFloat(startMaxPrice))) &&
-      parseFloat(newValue) <= 300 &&
+      parseFloat(newValue) <= 50 &&
       parseFloat(newValue) >= 0
     ) {
       setMinPrice(newValue);
@@ -75,7 +75,7 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
     const newValue: string = event.target.value;
     if (
       (newValue === '' || (newValue !== '' && parseFloat(newValue) >= parseFloat(startMinPrice))) &&
-      parseFloat(newValue) <= 300 &&
+      parseFloat(newValue) <= 50 &&
       parseFloat(newValue) >= 0
     ) {
       setMaxPrice(newValue);

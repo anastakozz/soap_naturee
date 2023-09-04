@@ -85,7 +85,7 @@ function DetailedProductPage() {
             </div>
           </div>
           <div onClick={toggleModal}>
-            <SliderModal {...{ isVisible: isModalVisible, paths: data.imgSources }}></SliderModal>
+            { isModalVisible ? (<SliderModal {...{paths: data.imgSources }}></SliderModal>) : <></>}
           </div>
         </div>
       ) : (

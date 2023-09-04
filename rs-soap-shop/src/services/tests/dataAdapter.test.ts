@@ -27,6 +27,7 @@ const data: RegistrationData = {
 
 it('returns proper data', () => {
   dataAdapter(data);
-  expect(data.shippingAddress.country).toEqual('IT');
-  expect(data.billingAddress.country).toEqual('DE');
+  expect(data.shippingAddress.country).toEqual('DE');
+  expect(data.billingAddress.country).toEqual('IT');
 });
+

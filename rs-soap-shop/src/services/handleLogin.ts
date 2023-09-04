@@ -1,7 +1,7 @@
 import { getToken, login } from './login.service';
 
 export default function handleLogin(email: string, password: string) {
-  getToken(email, password)
+  return getToken(email, password)
     .then(resp => {
       console.log(resp.data);
       const authData = resp.data;
