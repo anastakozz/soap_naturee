@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import scrollToTop from '../../lib/utils/scrollToTop';
 
 function CartPage() {
-  return <>CartPage works!</>
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+  return <>CartPage works!</>;
 }
 
-export default CartPage
+export default CartPage;

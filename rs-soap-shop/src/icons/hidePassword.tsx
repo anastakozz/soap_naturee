@@ -8,5 +8,5 @@ export function HidePassword() {
         fill='black'
       />
     </svg>
-  )
+  );
 }

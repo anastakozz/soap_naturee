@@ -1,16 +1,17 @@
-import React, { ReactElement } from 'react'
-import './App.css'
-import Header from './components/header'
-import { Route, Routes } from 'react-router-dom'
-import HomePage from './pages/homePage'
-import ProductsPage from './pages/productsPage'
-import AboutPage from './pages/aboutPage'
-import CartPage from './pages/cartPage'
-import SingInPage from './pages/singInPage'
-import SignUpPage from './pages/singnUpPage'
-import ProfilePage from './pages/profilePage'
-import Footer from './components/footer'
-import PageNotFound from './pages/pageNotFound'
+import React, { ReactElement } from 'react';
+import './App.css';
+import Header from './components/header';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './pages/homePage';
+import ProductsPage from './pages/productsPage';
+import AboutPage from './pages/aboutPage';
+import CartPage from './pages/cartPage';
+import SingInPage from './pages/singInPage';
+import SignUpPage from './pages/singnUpPage';
+import ProfilePage from './pages/profilePage';
+import Footer from './components/footer';
+import PageNotFound from './pages/pageNotFound';
+import DetailedProductPage from './pages/detailedProductPage';
 
 const AppLayout = ({ children }: { children: ReactElement }) => {
   return (
@@ -19,8 +20,8 @@ const AppLayout = ({ children }: { children: ReactElement }) => {
       {children}
       <Footer />
     </>
-  )
-}
+  );
+};
 
 function App() {
   return (
@@ -36,6 +37,22 @@ function App() {
         ></Route>
         <Route
           path='/our-products'
+          element={
+            <AppLayout>
+              <ProductsPage />
+            </AppLayout>
+          }
+        ></Route>
+        <Route
+          path='/our-products/:category'
+          element={
+            <AppLayout>
+              <ProductsPage />
+            </AppLayout>
+          }
+        ></Route>
+        <Route
+          path='/our-products/:category/:subcategory'
           element={
             <AppLayout>
               <ProductsPage />
@@ -82,10 +99,18 @@ function App() {
             </AppLayout>
           }
         ></Route>
+        <Route
+          path='/product/:key'
+          element={
+            <AppLayout>
+              <DetailedProductPage />
+            </AppLayout>
+          }
+        ></Route>
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

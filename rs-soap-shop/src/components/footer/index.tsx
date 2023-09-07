@@ -1,5 +1,5 @@
-import Navigation from '../navigation/navigationLight'
-import SocialMediaLinks from '../socialMediaLinks'
+import Navigation from '../navigation/navigationLight';
+import SocialMediaLinks from '../socialMediaLinks';
 
 function Footer() {
   return (
@@ -34,7 +34,7 @@ function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

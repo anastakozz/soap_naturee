@@ -1,2 +1,2 @@
-import ResultMessage from './ResultMessage'
-export default ResultMessage
+import ResultMessage from './ResultMessage';
+export default ResultMessage;

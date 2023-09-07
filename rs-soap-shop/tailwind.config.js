@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+
+import withMT from '@material-tailwind/react/utils/withMT';
+
+module.exports = withMT({
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'class',
   theme: {
@@ -7,6 +10,7 @@ module.exports = {
       stroke: ['hover', 'focus'],
       screens: {
         sm: '320px',
+        add: '610px',
         md: '768px',
         lg: '1024px',
         xl: '1280px',
@@ -21,7 +25,8 @@ module.exports = {
         additionalColor: '#F4F5F7',
         grayLColor: '#3A3A3A',
         grayMColor: '#898989',
-        graySColor: '#B0B0B0'
+        graySColor: '#B0B0B0',
+        errorColor: '#b82323'
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif']
@@ -65,4 +70,4 @@ module.exports = {
     }
   },
   plugins: []
-}
+});

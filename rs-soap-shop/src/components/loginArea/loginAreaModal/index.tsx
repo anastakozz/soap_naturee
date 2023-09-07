@@ -1,11 +1,11 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function LoginAreaModal({ isLoggedIn, onClose }: { isLoggedIn: boolean; onClose: () => void }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.clear()
-    navigate('/sign-in')
-  }
+    localStorage.clear();
+    navigate('/sign-in');
+  };
   return (
     <>
       {isLoggedIn ? (
@@ -20,8 +20,8 @@ function LoginAreaModal({ isLoggedIn, onClose }: { isLoggedIn: boolean; onClose:
 
           <div
             onClick={() => {
-              onClose()
-              handleLogout()
+              onClose();
+              handleLogout();
             }}
             className='text-primaryColor hover:text-grayLColor cursor-pointer transition border-b border-solid border-primaryColor w-full text-2xl py-4'
           >
@@ -47,7 +47,7 @@ function LoginAreaModal({ isLoggedIn, onClose }: { isLoggedIn: boolean; onClose:
         </>
       )}
     </>
-  )
+  );
 }
 
-export default LoginAreaModal
+export default LoginAreaModal;

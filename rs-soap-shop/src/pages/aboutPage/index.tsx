@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import scrollToTop from '../../lib/utils/scrollToTop';
 
 function AboutPage() {
-  return <>AboutPage works!</>
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+  return <>AboutPage works!</>;
 }
 
-export default AboutPage
+export default AboutPage;

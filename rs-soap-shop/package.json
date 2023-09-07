@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-tailwind/react": "^2.1.1",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.39",
     "@types/react": "^18.2.18",
@@ -79,5 +80,10 @@
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "npm run lint"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }

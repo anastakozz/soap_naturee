@@ -1,12 +1,6 @@
-import axios, { AxiosError } from 'axios'
-import { RegistrationData, ResultProps } from '../lib/interfaces'
-
-const authUrl = process.env.REACT_APP_CTP_AUTH_URL
-const apiUrl = process.env.REACT_APP_CTP_API_URL
-const projectKey = process.env.REACT_APP_CTP_PROJECT_KEY
-const clientId = process.env.REACT_APP_CTP_CLIENT_ID
-const secret = process.env.REACT_APP_CTP_CLIENT_SECRET
-const accessKey = await getBasicToken()
+import axios, { AxiosError } from 'axios';
+import { RegistrationData, ResultProps } from '../lib/interfaces';
+import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants';
 
 export async function getBasicToken() {
   try {
@@ -16,16 +10,17 @@ export async function getBasicToken() {
       headers: {
         Authorization: 'Basic ' + btoa(`${clientId}:${secret}`)
       }
-    })
-    return response.data.access_token
+    });
+    return response.data.access_token;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
 export async function createCustomer(data: Partial<RegistrationData>): Promise<ResultProps> {
-  const billingDefaultIndex = data.billingAddress.isDefault ? 0 : undefined
-  const shippingDefaultIndex = data.shippingAddress.isDefault ? 1 : undefined
+  const accessKey = await getBasicToken();
+  const billingDefaultIndex = data.billingAddress.isDefault ? 0 : undefined;
+  const shippingDefaultIndex = data.shippingAddress.isDefault ? 1 : undefined;
 
   try {
     const response = await axios({
@@ -59,12 +54,12 @@ export async function createCustomer(data: Partial<RegistrationData>): Promise<R
         defaultShippingAddress: shippingDefaultIndex
       },
       headers: { Authorization: `Bearer ${accessKey}` }
-    })
-    return { isSuccess: true, message: response.data.customer.id }
+    });
+    return { isSuccess: true, message: response.data.customer.id };
   } catch (error) {
-    console.log(error)
+    console.log(error);
     if (error instanceof AxiosError) {
-      return { isSuccess: false, message: error.response.data.message }
+      return { isSuccess: false, message: error.response.data.message };
     }
   }
 }

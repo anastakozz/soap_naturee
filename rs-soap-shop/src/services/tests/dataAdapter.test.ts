@@ -1,5 +1,5 @@
-import { dataAdapter } from '../handleRegistration'
-import { RegistrationData } from '../../lib/interfaces'
+import { dataAdapter } from '../handleRegistration';
+import { RegistrationData } from '../../lib/interfaces';
 
 const data: RegistrationData = {
   firstName: 'A',
@@ -23,10 +23,10 @@ const data: RegistrationData = {
     postalCode: '12345',
     isDefault: true
   }
-}
+};
 
 it('returns proper data', () => {
-  dataAdapter(data)
-  expect(data.shippingAddress.country).toEqual('IT')
-  expect(data.billingAddress.country).toEqual('DE')
-})
+  dataAdapter(data);
+  expect(data.shippingAddress.country).toEqual('DE');
+  expect(data.billingAddress.country).toEqual('IT');
+});

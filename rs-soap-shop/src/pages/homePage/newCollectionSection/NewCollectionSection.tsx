@@ -1,26 +1,24 @@
-import Banner from '../../../components/banner'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import Banner from '../../../components/banner';
 
 export default function NewCollectionSection() {
   return (
-    <div className='bg-new-collection xxl:min-h-[746px] bg-no-repeat bg-left bg-cover p-sm md:p-big flex flex-row-reverse'>
-      <div className='flex absolute top-[95px] left-1/2 -translate-x-1/2'>
-        <Link to={'/sign-in'} className='mx-4 text-grayMColor hover:text-accentColor'>
-          sign-in
-        </Link>
-        <Link to={'/sign-up'} className='mx-4 text-grayMColor hover:text-accentColor'>
-          sign-up
-        </Link>
-      </div>
+    <div className='bg-new-collection xxl:min-h-[746px] bg-no-repeat bg-left bg-cover p-sm md:p-big flex flex-row-reverse relative'>
+      <NavLink
+        className={'absolute top-[5px] left-1/2 -translate-x-1/2  text-graySColor hover:text-grayLColor'}
+        to={'/profile'}
+      >
+        My Profile
+      </NavLink>
       <Banner
         {...{
-          p: 'New Arrival',
-          h2: 'Discover Our New Collection',
-          h4: 'Handmade soap in the form of flowers and food',
+          label: 'New Arrival',
+          title: 'Discover Our New Collection',
+          description: 'Handmade soap in the form of flowers and food',
           buttonText: 'BUY NOW',
           linkAdress: '/our-products'
         }}
       />
     </div>
-  )
+  );
 }

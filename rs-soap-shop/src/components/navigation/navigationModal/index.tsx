@@ -1,14 +1,14 @@
-import { NavLink } from 'react-router-dom'
-import LoginAreaModal from '../../loginArea/loginAreaModal'
+import { NavLink } from 'react-router-dom';
+import LoginAreaModal from '../../loginArea/loginAreaModal';
 
 function NavigationModal({
   isOpen,
   isLoggedIn,
   onClose
 }: {
-  isOpen: boolean
-  isLoggedIn: boolean
-  onClose: () => void
+  isOpen: boolean;
+  isLoggedIn: boolean;
+  onClose: () => void;
 }) {
   return (
     <div
@@ -46,7 +46,7 @@ function NavigationModal({
       </NavLink>
       <LoginAreaModal onClose={onClose} isLoggedIn={isLoggedIn} />
     </div>
-  )
+  );
 }
 
-export default NavigationModal
+export default NavigationModal;

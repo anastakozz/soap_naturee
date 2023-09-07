@@ -1,63 +1,63 @@
-import { emailValidation, passwordValidation } from '../../lib/utils/inputValidations'
-import React, { useState } from 'react'
-import ButtonForm from './buttonForm'
-import { Input } from './inputs/Input'
-import { validateEmail } from './validateFunctions/e-mail'
-import { validatePassword } from './validateFunctions/password'
-import { LoginData } from '../../lib/interfaces'
-import { useNavigate } from 'react-router-dom'
-import { getToken, login } from '../../services/login.service'
+import { emailValidation, passwordValidation } from '../../lib/utils/inputValidations';
+import React, { useState } from 'react';
+import ButtonForm from './buttonForm';
+import { Input } from './inputs/Input';
+import { validateEmail } from './validateFunctions/e-mail';
+import { validatePassword } from './validateFunctions/password';
+import { LoginData } from '../../lib/interfaces';
+import { useNavigate } from 'react-router-dom';
+import { getToken, login } from '../../services/login.service';
 
 export const LoginForm = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [error, setError] = useState(null)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   function validateAllInputs(): LoginData {
-    setIsSubmitted(true)
-    const emailValidationResult: string | undefined = validateEmail(email)
-    const passwordValidationResult: string | undefined = validatePassword(password)
+    setIsSubmitted(true);
+    const emailValidationResult: string | undefined = validateEmail(email);
+    const passwordValidationResult: string | undefined = validatePassword(password);
 
     if (!emailValidationResult && !passwordValidationResult) {
       const loginData: LoginData = {
         email: email,
         password: password
-      }
-      return loginData
+      };
+      return loginData;
     }
   }
 
   const onSubmit = () => {
     if (validateAllInputs()) {
-      const { email, password } = validateAllInputs()
+      const { email, password } = validateAllInputs();
       getToken(email, password)
         .then(resp => {
-          console.log(resp.data)
-          const authData = resp.data
-          localStorage.setItem('token', JSON.stringify(authData))
+          console.log(resp.data);
+          const authData = resp.data;
+          localStorage.setItem('token', JSON.stringify(authData));
           login(email, password).then(resp => {
-            const userData = resp.data
-            localStorage.setItem('user', JSON.stringify(userData))
-            navigate('/')
-          })
+            const userData = resp.data;
+            localStorage.setItem('user', JSON.stringify(userData));
+            navigate('/');
+          });
         })
         .catch(err => {
-          console.error(err)
+          console.error(err);
           if (err.response.data.error == 'invalid_customer_account_credentials') {
-            setError(err.response.data.error_description)
+            setError(err.response.data.error_description);
           }
-        })
+        });
     }
-  }
+  };
 
   return (
     <form className='bg-secondaryColor dark:bg-grayMColor'>
       <div className='container px-sm py-sm md:px-big md:py-bigY max-w-[1440px] mx-auto lg:px-big'>
         <h3 className={'text-accentColor dark:text-primaryColor text-h3 font-bold pb-bigY'}>Sign In form:</h3>
         {error && (
-          <div className='bg-red-500/50 p-4 rounded-md mb-8 flex'>
+          <div className='bg-errorColor p-4 rounded-md mb-8 flex'>
             <img src='/images/attention-circle-svgrepo-com.svg' alt='' width='24px' className='mr-4' />
             <p>{error}</p>
           </div>
@@ -67,16 +67,16 @@ export const LoginForm = () => {
             {...emailValidation}
             isSubmitted={isSubmitted}
             onChange={(newValue: string) => {
-              setEmail(newValue)
-              setError(null)
+              setEmail(newValue);
+              setError(null);
             }}
           />
           <Input
             {...passwordValidation}
             isSubmitted={isSubmitted}
             onChange={(newValue: string) => {
-              setPassword(newValue)
-              setError(null)
+              setPassword(newValue);
+              setError(null);
             }}
           />
         </div>
@@ -91,5 +91,5 @@ export const LoginForm = () => {
         </div>
       </div>
     </form>
-  )
-}
+  );
+};
