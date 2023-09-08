@@ -43,3 +43,12 @@ export type Price = {
     };
   };
 };
+
+export type AbutUsType = {
+  fullName: string;
+  role: string;
+  bio: string;
+  img: string;
+  contributions: string[];
+  github: string;
+};
