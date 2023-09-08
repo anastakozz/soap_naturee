@@ -30,6 +30,23 @@ const ABOUT_US: AbutUsType[] = [
     img: '/images/yulia_photo.jpg',
     contributions: [],
     github: 'https://github.com/anastakozz'
+  },
+  {
+    fullName: 'Ryshkov Vyacheslav',
+    role: 'Software engineer',
+    bio: 'My previous place of work was a Mining and processing plant, where I worked as an electrician on duty for the last 7 years. I received a higher education in the specialty "Automation of technological processes and production". For many reasons, I decided to change my job and chose the IT path. Since I already had experience in website administration and promotion, I liked Frontend development the most. I like it and I hope to become a good specialist.',
+    img: '/images/yulia_photo.jpg',
+    contributions: [
+      'made a basic configuration of Commercetools',
+      'created a basic project template in figma',
+      'made up the login, registration and our products pages',
+      'add inputs validation in login and registration pages',
+      'created information about all categories and products in Commercetools',
+      'implemented sorting products',
+      'implemented products search',
+      'implemented a change of categories and subcategories of goods'
+    ],
+    github: 'https://github.com/SlaVR7'
   }
 ];
 
@@ -43,8 +60,10 @@ function AboutPage() {
         <BannerPageName>ABOUT US</BannerPageName>
         <div className='py-sm px-sm max-w-[1440px] mx-auto lg:px-big'>
           <div>
-            <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
-              <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold'>Team Members:</h3>
+            <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-center md:justify-between items-center mb-4'>
+              <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold text-center md:text-start'>
+                Team Members:
+              </h3>
             </div>
             {ABOUT_US.map(person => (
               <div
@@ -70,7 +89,7 @@ function AboutPage() {
                   <h4 className='text-h4 font-bold text-accentColor dark:text-basicColor mb-2 text-center md:text-start'>
                     About me
                   </h4>
-                  <p>{person.bio}</p>
+                  <p className='text-justify'>{person.bio}</p>
                   <h4 className='text-h4 font-bold text-accentColor dark:text-basicColor mb-2 text-center md:text-start'>
                     My contributions
                   </h4>
@@ -80,7 +99,7 @@ function AboutPage() {
                         <div className='w-[20px] mr-2'>
                           <MarkIcon />
                         </div>
-                        <p>{el}</p>
+                        <p className='text-justify'>{el}</p>
                       </div>
                     ))}
                   </div>
@@ -89,10 +108,12 @@ function AboutPage() {
             ))}
           </div>
           <div>
-            <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
-              <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold'>Collaboration:</h3>
+            <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-center md:justify-between items-center mb-4'>
+              <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold text-center md:text-start'>
+                Collaboration:
+              </h3>
             </div>
-            <p>
+            <p className='text-justify'>
               In our recent study task to implement an e-shop for handmade candles and soaps, our team of front-end
               developers effectively collaborated to achieve a successful outcome. To begin, we assigned clear roles and
               responsibilities within our team. Each team member had a specific area of focus. This division of labor
@@ -116,8 +137,10 @@ function AboutPage() {
             </p>
           </div>
           <div>
-            <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
-              <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold'>Gratitude:</h3>
+            <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-center md:justify-between items-center mb-4'>
+              <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold text-center md:text-start'>
+                Gratitude:
+              </h3>
             </div>
             <div className='flex justify-center items-center p-4'>
               <p className='mr-4'>Thank you for our new usefull skills</p>
