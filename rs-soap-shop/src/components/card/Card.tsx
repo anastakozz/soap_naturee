@@ -2,17 +2,29 @@ import { ProductCardProps } from '../../lib/interfaces';
 import { useNavigate } from 'react-router-dom';
 import SmallButton from '../buttons/smallButton';
 import { MouseEvent } from 'react';
+import { addToCart, getActiveCart } from '../../services/cart.service';
 
-function addToCard(): void {
-  console.log('add product to cart');
+async function addToCard(id: string) {
+  const token = JSON.parse(localStorage.getItem('token')).access_token;
+  const cartId = await getActiveCart(token);
+  addToCart(id, token, cartId.data.id, cartId.data.version)
+
+  console.log(`add product ${id}  to cart`);
 }
 
 export default function Card(item: ProductCardProps) {
+
+  enum cardMessage {
+    inCart = 'Already in Cart',
+    toCart = 'Add to Cart'
+  }
+
   const navigate = useNavigate();
   function handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (target.classList.contains('cart-button')) {
-      addToCard();
+      console.log(item.productId)
+      addToCard(item.productId);
     } else {
       navigate(`${item.link}`);
     }
@@ -26,7 +38,7 @@ export default function Card(item: ProductCardProps) {
     >
       <img className='object-cover h-[300px] w-full ' src={item.imgSrc} alt=''></img>
       <div className='z-20 w-full absolute -translate-y-[30px]'>
-        <SmallButton {...{ children: 'Add to Cart' }}></SmallButton>
+        <SmallButton {...{ children: cardMessage.toCart }}></SmallButton>
       </div>
       <div className='h-[130px] bg-additionalColor dark:bg-graySColor text-left p-4 flex flex-col justify-between'>
         <p className='leading-5 w-full text-h5 font-semibold text-grayLColor dark:text-secondaryColor'>{item.label}</p>
