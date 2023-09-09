@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import SmallButton from '../buttons/smallButton';
 import { MouseEvent } from 'react';
 import { addToCart, getActiveCart } from '../../services/cart.service';
+import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
 
 async function addToCard(id: string) {
-  const token = JSON.parse(localStorage.getItem('token')).access_token;
+  const token = getTokenFromStorage();
   const cartId = await getActiveCart(token);
-  addToCart(id, token, cartId.data.id, cartId.data.version)
+  addToCart(id, token, cartId.data.id, cartId.data.version);
 
-  console.log(`add product ${id}  to cart`);
+  console.log(`add product ${id} to cart ${cartId.data.id}`);
 }
 
 export default function Card(item: ProductCardProps) {
-
   enum cardMessage {
     inCart = 'Already in Cart',
     toCart = 'Add to Cart'
@@ -23,7 +23,6 @@ export default function Card(item: ProductCardProps) {
   function handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (target.classList.contains('cart-button')) {
-      console.log(item.productId)
       addToCard(item.productId);
     } else {
       navigate(`${item.link}`);

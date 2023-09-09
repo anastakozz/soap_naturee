@@ -8,8 +8,6 @@ import { getProductsList } from '../../../services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
 import { getCartId } from '../../../services/handleCart';
 
-
-
 async function getCardsData(): Promise<ProductCardProps[]> {
   getCartId();
   const data: Product[] = await getProductsList();
@@ -22,15 +20,27 @@ async function getCardsData(): Promise<ProductCardProps[]> {
 
 export default function RandomCardsSection() {
   const [items, setItems] = useState<ProductCardProps[] | undefined>(undefined);
+  const [isDataLoading, setDataLoading] = useState(false);
+  // const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getCardsData();
-      setItems(data);
+      return data;
     };
-    fetchData().catch(e => {
-      console.log(e);
-    });
+
+    if (!items && !isDataLoading) {
+      setDataLoading(true);
+
+      fetchData()
+        .then(data => setItems(data))
+        .catch(e => {
+          console.log(e);
+        })
+        .finally(() => {
+          setDataLoading(false);
+        });
+    }
   }, []);
 
   return (
