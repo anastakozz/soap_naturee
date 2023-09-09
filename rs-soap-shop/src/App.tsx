@@ -42,7 +42,7 @@ function App() {
       setAnonimousToken();
       console.log('hello new visitor');
     } else {
-      setToken('exists')
+      setToken('token');
     }
   });
 

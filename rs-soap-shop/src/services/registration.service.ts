@@ -23,7 +23,7 @@ export async function getAnonimousToken() {
       method: 'post',
       url: `${authUrl}/oauth/${projectKey}/anonymous/token?grant_type=client_credentials`,
       headers: {
-        Authorization: 'Basic ' + btoa(`${clientId}:${secret}`),
+        Authorization: 'Basic ' + btoa(`${clientId}:${secret}`)
       }
     });
     return response;
