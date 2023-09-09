@@ -21,7 +21,6 @@ async function getCardsData(): Promise<ProductCardProps[]> {
 export default function RandomCardsSection() {
   const [items, setItems] = useState<ProductCardProps[] | undefined>(undefined);
   const [isDataLoading, setDataLoading] = useState(false);
-  // const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
