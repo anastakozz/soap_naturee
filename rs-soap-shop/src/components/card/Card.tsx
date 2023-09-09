@@ -2,15 +2,16 @@ import { ProductCardProps } from '../../lib/interfaces';
 import { useNavigate } from 'react-router-dom';
 import SmallButton from '../buttons/smallButton';
 import { MouseEvent } from 'react';
-import { addToCart, getActiveCart } from '../../services/cart.service';
+import { addToCart } from '../../services/cart.service';
 import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
+import { getCart } from '../../services/handleCart';
 
 async function addToCard(id: string) {
   const token = getTokenFromStorage();
-  const cartId = await getActiveCart(token);
-  addToCart(id, token, cartId.data.id, cartId.data.version);
+  const cart = await getCart();
+  addToCart(id, token, cart.data.id, cart.data.version);
 
-  console.log(`add product ${id} to cart ${cartId.data.id}`);
+  console.log(`add product ${id} to cart ${cart.data.id}`);
 }
 
 export default function Card(item: ProductCardProps) {

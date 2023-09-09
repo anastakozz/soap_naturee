@@ -6,10 +6,10 @@ import shuffleProducts from '../../../lib/utils/shuffleCards';
 import { Product, ProductCardProps } from '../../../lib/interfaces';
 import { getProductsList } from '../../../services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
-import { getCartId } from '../../../services/handleCart';
+import { getCart } from '../../../services/handleCart';
 
 async function getCardsData(): Promise<ProductCardProps[]> {
-  getCartId();
+  getCart();
   const data: Product[] = await getProductsList();
   if (data) {
     const shuffledData = shuffleProducts(data).slice(0, 6);

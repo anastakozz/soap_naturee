@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 function LoginAreaModal({ isLoggedIn, onClose }: { isLoggedIn: boolean; onClose: () => void }) {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem('token');
     navigate('/sign-in');
   };
   return (
