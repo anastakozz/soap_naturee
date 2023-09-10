@@ -2,8 +2,9 @@ import { CardMessage } from '../../../lib/enums';
 import SmallButton, { smallButtonClassesInactive } from '../../buttons/smallButton/SmallButton';
 
 interface SendButtonProps {
-    isInCart: boolean, isSending: boolean
-  }
+  isInCart: boolean;
+  isSending: boolean;
+}
 
 export default function SendButton({ isInCart, isSending }: SendButtonProps) {
   if (isInCart && !isSending) {

@@ -1,19 +1,10 @@
 import { ProductCardProps } from '../../lib/interfaces';
 import { useNavigate } from 'react-router-dom';
 import { MouseEvent, useState } from 'react';
-import { addToCart } from '../../services/cart.service';
-import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
-import { getCart } from '../../services/handleCart';
+import { sendToCart } from '../../services/handleCart';
 import SendButton from './SendButton';
 
-async function sendToCart(id: string) {
-  const token = getTokenFromStorage();
-  const cart = await getCart();
-  const response = addToCart(id, token, cart.data.id, cart.data.version);
 
-  console.log(`add product ${id} to cart ${cart.data.id}`);
-  return response;
-}
 
 export default function Card(item: ProductCardProps) {
   const [isInCart, setIsInCart] = useState<boolean>(item.isInCart);
