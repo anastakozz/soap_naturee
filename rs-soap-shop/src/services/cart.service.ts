@@ -27,7 +27,7 @@ export async function createCart(token: string) {
   }
 }
 
-export async function addToCart(productId: string, token: string, cartId: string, cartVersion: number) {
+export async function addLineItem(productId: string, token: string, cartId: string, cartVersion: number) {
   try {
     const response = await axios({
       method: 'post',
@@ -39,6 +39,29 @@ export async function addToCart(productId: string, token: string, cartId: string
             action: 'addLineItem',
             productId: `${productId}`,
             quantity: 1
+          }
+        ]
+      },
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function removeLineItem(lineItemId: string, token: string, cartId: string, cartVersion: number) {
+  console.log(lineItemId)
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${apiUrl}/${projectKey}/me/carts/${cartId}`,
+      data: {
+        version: cartVersion,
+        actions: [
+          {
+            action: 'removeLineItem',
+            lineItemId
           }
         ]
       },

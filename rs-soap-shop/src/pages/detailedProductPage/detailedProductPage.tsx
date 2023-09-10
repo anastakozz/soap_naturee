@@ -4,11 +4,16 @@ import React, { useEffect, useState } from 'react';
 import { DetailsProps } from '../../lib/interfaces';
 import CarouselDefault from '../../components/carousel';
 import toDetailsAdapter from '../../lib/utils/productDataAdapters.ts/toDetailsAdapter';
-import EmptyButton from '../../components/buttons/emptyButton';
 import SliderModal from '../../components/SliderModal';
 import scrollToTop from '../../lib/utils/scrollToTop';
+import AddButton from './addButton';
+import RemoveButton from './removeButton';
+import { sendToCart, getProductsInCart, removeFromCart } from '../../services/handleCart';
 
 function DetailedProductPage() {
+  const [isInCart, setIsInCart] = useState<boolean>(false);
+  const [isSending, setIsSending] = useState<boolean>(false);
+
   const [isModalVisible, setModalVisibility] = useState(false);
   const [data, initProductData] = useState<DetailsProps | null>(null);
   const { key } = useParams();
@@ -19,7 +24,11 @@ function DetailedProductPage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const cartProducts = await getProductsInCart();
       const product = await getProductByKey(key);
+      if (cartProducts.includes(product.id)) {
+        setIsInCart(true);
+      }
       const adaptedProduct = toDetailsAdapter(product);
       initProductData(adaptedProduct);
     };
@@ -34,6 +43,33 @@ function DetailedProductPage() {
       setModalVisibility(!isModalVisible);
     } else if (isModalVisible && target.classList.contains('closing-icon')) {
       setModalVisibility(!isModalVisible);
+    }
+  }
+
+  async function handleAddClick() {
+    try {
+      setIsSending(true);
+      await sendToCart(data.productId);
+    } catch (err) {
+      console.log(err);
+      setIsSending(false);
+    } finally {
+      setIsInCart(true);
+      setIsSending(false);
+    }
+  }
+
+  async function handleRemoveClick() {
+    try {
+      setIsSending(true);
+      console.log('remove from cart')
+      await removeFromCart(data.productId);
+    } catch (err) {
+      console.log(err);
+      setIsSending(false);
+    } finally {
+      setIsInCart(false);
+      setIsSending(false);
     }
   }
 
@@ -69,7 +105,11 @@ function DetailedProductPage() {
                   <div className='text-h2 whitespace-nowrap'>{data.price}</div>
                 )}
               </div>
-              <EmptyButton {...{ children: 'Add to Cart' }}></EmptyButton>
+              <div className='flex gap-[15px] flex-wrap'>
+                <AddButton isInCart={isInCart} isSending={isSending} onClick={handleAddClick}></AddButton>
+                <RemoveButton isInCart={isInCart} isSending={isSending} onClick={handleRemoveClick}></RemoveButton>
+              </div>
+
               <div className='flex my-sm'>
                 <div className='mr-sm'>Tags:</div>
                 <div>
