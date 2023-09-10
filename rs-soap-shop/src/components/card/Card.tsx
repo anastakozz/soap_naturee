@@ -1,32 +1,69 @@
 import { ProductCardProps } from '../../lib/interfaces';
 import { useNavigate } from 'react-router-dom';
 import SmallButton from '../buttons/smallButton';
-import { MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 import { addToCart } from '../../services/cart.service';
 import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
 import { getCart } from '../../services/handleCart';
+import { smallButtonClassesInactive } from '../buttons/smallButton/SmallButton';
 
-async function addToCard(id: string) {
+async function sendToCart(id: string) {
   const token = getTokenFromStorage();
   const cart = await getCart();
-  addToCart(id, token, cart.data.id, cart.data.version);
+  const response = addToCart(id, token, cart.data.id, cart.data.version);
 
   console.log(`add product ${id} to cart ${cart.data.id}`);
+  return response;
 }
 
 export default function Card(item: ProductCardProps) {
+  const [isInCart, setIsInCart] = useState<boolean>(item.isInCart);
+  const [isSending, setIsSending] = useState<boolean>(false);
+
   enum cardMessage {
     inCart = 'Already in Cart',
-    toCart = 'Add to Cart'
+    toCart = 'Add to Cart',
+    inProgress = '...Sending to Cart...'
   }
 
   const navigate = useNavigate();
-  function handleClick(event: MouseEvent) {
+
+  async function handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (target.classList.contains('cart-button')) {
-      addToCard(item.productId);
+      try {
+        setIsSending(true);
+        await sendToCart(item.productId);
+      } catch (err) {
+        console.log(err);
+        setIsSending(false);
+      } finally {
+        setIsInCart(true);
+        setIsSending(false);
+      }
     } else {
       navigate(`${item.link}`);
+    }
+  }
+interface SendButtonProps {
+  isInCart: boolean, isSending: boolean
+}
+
+  function SendButton({isInCart, isSending}: SendButtonProps) {
+    if (isInCart && !isSending) {
+      return (
+        <button disabled className={smallButtonClassesInactive}>
+          {cardMessage.inCart}
+        </button>
+      );
+    } else if (isSending) {
+      return (
+        <button disabled className={smallButtonClassesInactive}>
+          {cardMessage.inProgress}
+        </button>
+      );
+    } else {
+      return <SmallButton {...{ children: cardMessage.toCart }}></SmallButton>;
     }
   }
 
@@ -38,7 +75,7 @@ export default function Card(item: ProductCardProps) {
     >
       <img className='object-cover h-[300px] w-full ' src={item.imgSrc} alt=''></img>
       <div className='z-20 w-full absolute -translate-y-[30px]'>
-        <SmallButton {...{ children: cardMessage.toCart }}></SmallButton>
+        <SendButton isInCart={isInCart} isSending={isSending}/>
       </div>
       <div className='h-[130px] bg-additionalColor dark:bg-graySColor text-left p-4 flex flex-col justify-between'>
         <p className='leading-5 w-full text-h5 font-semibold text-grayLColor dark:text-secondaryColor'>{item.label}</p>

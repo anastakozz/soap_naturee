@@ -1,21 +1,23 @@
-import OurProductsCards, { items } from './cardsSection/OurProductsCards';
+import OurProductsCards from './cardsSection/OurProductsCards';
 import { NavigationView } from './navigation/navigationView';
 import { useEffect, useState } from 'react';
 import BannerPageName from '../../components/bannerPageName';
 import { useParams } from 'react-router-dom';
 import { getCategoryId } from '../../services/category.service';
 import { getFiltered, getProductsList } from '../../services/product.service';
-import { ProductCardProps } from '../../lib/interfaces';
+import { Product } from '../../lib/interfaces';
 import scrollToTop from '../../lib/utils/scrollToTop';
 import { CardsPerPage } from '../../lib/enums';
 
+const items: Product[] = await getProductsList(CardsPerPage.catalog);
+
 function ProductsPage() {
-  const [products, setProducts] = useState(items);
+  const [products, setProducts] = useState<Product[]>(items);
   const { category, subcategory } = useParams();
   const [query, setQuery] = useState('');
 
-  function updateSearchedProducts(adaptedProducts: ProductCardProps[]) {
-    setProducts(adaptedProducts);
+  function updateSearchedProducts(products: Product[]) {
+    setProducts(products);
   }
 
   function changeQuery(options: string): void {
@@ -66,7 +68,7 @@ function ProductsPage() {
         changeQuery={changeQuery}
         updateSearchedProducts={updateSearchedProducts}
       />
-      <OurProductsCards products={products} />
+      <OurProductsCards {...{products}} />
     </>
   );
 }

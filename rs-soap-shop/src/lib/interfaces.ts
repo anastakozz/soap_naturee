@@ -27,7 +27,7 @@ export interface InputProps {
 }
 
 export interface OurProductsCardsProps {
-  products?: ProductCardProps[] | null;
+  products?: Product[] | null;
   changeQuery?: (options: string) => void;
 }
 
@@ -66,6 +66,7 @@ export interface ProductCardProps {
   isOnSale: boolean;
   newPrice?: string;
   productId: string;
+  isInCart?: boolean;
 }
 
 export interface RegistrationData {
@@ -213,5 +214,5 @@ export interface NavigationViewProps {
     subcategory?: string;
   };
   changeQuery?: (options: string) => void;
-  updateSearchedProducts?: (adaptedProducts: ProductCardProps[]) => void;
+  updateSearchedProducts?: (adaptedProducts: Product[]) => void;
 }
