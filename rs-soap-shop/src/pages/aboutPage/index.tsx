@@ -27,7 +27,7 @@ const ABOUT_US: AbutUsType[] = [
     fullName: 'Kozlova Anastasiya',
     role: 'Team Lead software engineer',
     bio: 'Having architectural education and long experience in digital fabrication I started coding from writing JS scripts for Adobe Illustrator and fell in love with the process. I decided to change a career and dove into JS with help of Rolling Scopes School. I believe, that every specialist unique combination of skills and experience may shine bright in its place, and hope to find my place in IT sphere',
-    img: '/images/yulia_photo.jpg',
+    img: '/images/anastasia_photo.jpg',
     contributions: [],
     github: 'https://github.com/anastakozz'
   },
@@ -35,7 +35,7 @@ const ABOUT_US: AbutUsType[] = [
     fullName: 'Ryshkov Vyacheslav',
     role: 'Software engineer',
     bio: 'My previous place of work was a Mining and processing plant, where I worked as an electrician on duty for the last 7 years. I received a higher education in the specialty "Automation of technological processes and production". For many reasons, I decided to change my job and chose the IT path. Since I already had experience in website administration and promotion, I liked Frontend development the most. I like it and I hope to become a good specialist.',
-    img: '/images/yulia_photo.jpg',
+    img: '/images/slava_photo.jpg',
     contributions: [
       'made a basic configuration of Commercetools',
       'created a basic project template in figma',
