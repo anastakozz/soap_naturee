@@ -7,7 +7,7 @@ import LogoutIconDark from '../../../icons/logoutIconDark';
 function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem('token');
     navigate('/sign-in');
   };
   return (

@@ -17,6 +17,21 @@ export async function getBasicToken() {
   }
 }
 
+export async function getAnonimousToken() {
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${authUrl}/oauth/${projectKey}/anonymous/token?grant_type=client_credentials`,
+      headers: {
+        Authorization: 'Basic ' + btoa(`${clientId}:${secret}`)
+      }
+    });
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function createCustomer(data: Partial<RegistrationData>): Promise<ResultProps> {
   const accessKey = await getBasicToken();
   const billingDefaultIndex = data.billingAddress.isDefault ? 0 : undefined;

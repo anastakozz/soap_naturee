@@ -6,8 +6,10 @@ import shuffleProducts from '../../../lib/utils/shuffleCards';
 import { Product, ProductCardProps } from '../../../lib/interfaces';
 import { getProductsList } from '../../../services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
+import { getCart } from '../../../services/handleCart';
 
 async function getCardsData(): Promise<ProductCardProps[]> {
+  getCart();
   const data: Product[] = await getProductsList();
   if (data) {
     const shuffledData = shuffleProducts(data).slice(0, 6);
@@ -18,15 +20,26 @@ async function getCardsData(): Promise<ProductCardProps[]> {
 
 export default function RandomCardsSection() {
   const [items, setItems] = useState<ProductCardProps[] | undefined>(undefined);
+  const [isDataLoading, setDataLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getCardsData();
-      setItems(data);
+      return data;
     };
-    fetchData().catch(e => {
-      console.log(e);
-    });
+
+    if (!items && !isDataLoading) {
+      setDataLoading(true);
+
+      fetchData()
+        .then(data => setItems(data))
+        .catch(e => {
+          console.log(e);
+        })
+        .finally(() => {
+          setDataLoading(false);
+        });
+    }
   }, []);
 
   return (
