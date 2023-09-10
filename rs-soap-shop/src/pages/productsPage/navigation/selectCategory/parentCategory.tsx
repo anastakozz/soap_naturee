@@ -12,12 +12,13 @@ export default function ParentCategory({
 }: parentCategoryProps) {
   const navigate = useNavigate();
   return (
-    <div className={'flex justify-between'}>
+    <div className={'flex justify-between px-4 py-2'}
+         onClick={() => {
+           onSelectCategory(option);
+           navigate(`/our-products/${option.toLocaleLowerCase()}`);
+         }}
+    >
       <div
-        onClick={() => {
-          onSelectCategory(option);
-          navigate(`/our-products/${option.toLocaleLowerCase()}`);
-        }}
         className={category == option.toLocaleLowerCase() ? 'text-accentColor' : ''}
       >
         {option}
