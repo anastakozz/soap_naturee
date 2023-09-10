@@ -3,12 +3,12 @@ import Card from '../../../components/card';
 import { OurProductsCardsProps, Product, ProductCardProps } from '../../../lib/interfaces';
 import { getProductsList } from '../../../services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
-import { cardsPerPage } from '../../../lib/enums';
+import { CardsPerPage } from '../../../lib/enums';
 
 export const items: ProductCardProps[] = await getCardsData();
 
 async function getCardsData(): Promise<ProductCardProps[]> {
-  const data: Product[] = await getProductsList(cardsPerPage.catalog);
+  const data: Product[] = await getProductsList(CardsPerPage.catalog);
   if (data) {
     return data.map((product: Product) => toCardAdapter(product));
   }

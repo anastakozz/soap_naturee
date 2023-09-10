@@ -42,7 +42,7 @@ function ProductsPage() {
     if (category || subcategory) {
       updateProducts();
     } else {
-      getProductsList().then(products => {
+      getProductsList(60).then(products => {
         setProducts(products);
       });
     }
