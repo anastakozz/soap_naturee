@@ -1,4 +1,5 @@
 export enum CardsPerPage {
   home = 6,
-  catalog = 60
+  limit = 9,
+  default = 20
 }

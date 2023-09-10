@@ -13,6 +13,8 @@ function ProductsPage() {
   const [products, setProducts] = useState(items);
   const { category, subcategory } = useParams();
   const [query, setQuery] = useState('');
+  let isLoading = false;
+  let currentPage = 1;
 
   function updateSearchedProducts(adaptedProducts: ProductCardProps[]) {
     setProducts(adaptedProducts);
@@ -24,12 +26,13 @@ function ProductsPage() {
   }
 
   function updateProducts() {
+    currentPage = 1;
     getCategoryId(
       subcategory
         ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
         : category.charAt(0).toUpperCase() + category.slice(1)
     ).then(categoryId => {
-      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`).then(products => {
+      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, currentPage).then(products => {
         setProducts(products);
       });
     });
@@ -43,20 +46,71 @@ function ProductsPage() {
     if (category || subcategory) {
       updateProducts();
     } else {
-      getProductsList(CardsPerPage.catalog).then(products => {
-        setProducts(products);
-      });
-    }
+      // currentPage = 0;
+      // loadNextPage();
+      }
+
     if (query) {
       if (category || subcategory) {
         updateProducts();
       } else {
-        getFiltered(`?${query}`).then(products => {
+        getFiltered(`?${query}`, currentPage).then(products => {
           setProducts(products);
         });
       }
     }
   }, [category, subcategory, query]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+        console.log(category, subcategory);
+        if (!(category || subcategory)) {
+          loadNextPage();
+        } else loadNextPageWithCategory();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [currentPage, category, subcategory]);
+
+  function loadNextPage() {
+    console.log('loadAllProducts');
+    if (isLoading) return;
+    isLoading = true;
+    currentPage += 1;
+
+    getProductsList(true, currentPage).then((nextPageProducts) => {
+      isLoading = false;
+      if (nextPageProducts.length > 0) {
+        setProducts((prevProducts) => [...prevProducts, ...nextPageProducts]);
+      }
+    });
+  }
+
+  function loadNextPageWithCategory() {
+    console.log('loadCategoryProducts');
+    if (isLoading) return;
+    isLoading = true;
+    currentPage += 1;
+
+    getCategoryId(
+      subcategory
+        ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
+        : category.charAt(0).toUpperCase() + category.slice(1)
+    ).then(categoryId => {
+      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, currentPage).then(nextPageProducts => {
+        isLoading = false;
+        if (nextPageProducts.length > 0) {
+          setProducts((prevProducts) => [...prevProducts, ...nextPageProducts]);
+        }
+      });
+    });
+  }
 
   return (
     <>
@@ -66,7 +120,7 @@ function ProductsPage() {
         changeQuery={changeQuery}
         updateSearchedProducts={updateSearchedProducts}
       />
-      <OurProductsCards products={products} />
+      <OurProductsCards products={products}/>
     </>
   );
 }
