@@ -6,6 +6,7 @@ import { addToCart } from '../../services/cart.service';
 import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
 import { getCart } from '../../services/handleCart';
 import { smallButtonClassesInactive } from '../buttons/smallButton/SmallButton';
+import { CardMessage } from '../../lib/enums';
 
 async function sendToCart(id: string) {
   const token = getTokenFromStorage();
@@ -19,12 +20,6 @@ async function sendToCart(id: string) {
 export default function Card(item: ProductCardProps) {
   const [isInCart, setIsInCart] = useState<boolean>(item.isInCart);
   const [isSending, setIsSending] = useState<boolean>(false);
-
-  enum cardMessage {
-    inCart = 'Already in Cart',
-    toCart = 'Add to Cart',
-    inProgress = '...Sending to Cart...'
-  }
 
   const navigate = useNavigate();
 
@@ -53,17 +48,17 @@ interface SendButtonProps {
     if (isInCart && !isSending) {
       return (
         <button disabled className={smallButtonClassesInactive}>
-          {cardMessage.inCart}
+          {CardMessage.inCart}
         </button>
       );
     } else if (isSending) {
       return (
         <button disabled className={smallButtonClassesInactive}>
-          {cardMessage.inProgress}
+          {CardMessage.inProgress}
         </button>
       );
     } else {
-      return <SmallButton {...{ children: cardMessage.toCart }}></SmallButton>;
+      return <SmallButton {...{ children: CardMessage.toCart }}></SmallButton>;
     }
   }
 
