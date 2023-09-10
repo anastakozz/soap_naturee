@@ -38,7 +38,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log('double testing');
     if (!isLoggedIn && !isSeenBefore) {
       setAnonimousToken();
       console.log('hello new visitor');
