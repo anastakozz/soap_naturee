@@ -1,12 +1,10 @@
 import { ProductCardProps } from '../../lib/interfaces';
 import { useNavigate } from 'react-router-dom';
-import SmallButton from '../buttons/smallButton';
 import { MouseEvent, useState } from 'react';
 import { addToCart } from '../../services/cart.service';
 import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
 import { getCart } from '../../services/handleCart';
-import { smallButtonClassesInactive } from '../buttons/smallButton/SmallButton';
-import { CardMessage } from '../../lib/enums';
+import SendButton from './SendButton';
 
 async function sendToCart(id: string) {
   const token = getTokenFromStorage();
@@ -38,27 +36,6 @@ export default function Card(item: ProductCardProps) {
       }
     } else {
       navigate(`${item.link}`);
-    }
-  }
-interface SendButtonProps {
-  isInCart: boolean, isSending: boolean
-}
-
-  function SendButton({isInCart, isSending}: SendButtonProps) {
-    if (isInCart && !isSending) {
-      return (
-        <button disabled className={smallButtonClassesInactive}>
-          {CardMessage.inCart}
-        </button>
-      );
-    } else if (isSending) {
-      return (
-        <button disabled className={smallButtonClassesInactive}>
-          {CardMessage.inProgress}
-        </button>
-      );
-    } else {
-      return <SmallButton {...{ children: CardMessage.toCart }}></SmallButton>;
     }
   }
 
