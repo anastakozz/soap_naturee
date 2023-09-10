@@ -1,9 +1,9 @@
 import { apiUrl, projectKey } from '../lib/constants';
 import { getBasicToken } from './registration.service';
 import axios from 'axios';
-import { cardsPerPage } from '../lib/enums';
+import { CardsPerPage } from '../lib/enums';
 
-export async function getProductsList(limit?: cardsPerPage) {
+export async function getProductsList(limit?: CardsPerPage) {
   const accessToken = await getBasicToken();
   const Params = limit ? { limit: limit } : {};
   try {
@@ -61,6 +61,7 @@ export async function getFiltered(options: string) {
         Authorization: `Bearer ${accessToken}`
       }
     });
+    console.log(response.data.results);
     return response.data.results;
   } catch (error) {
     return undefined;
