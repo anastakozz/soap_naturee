@@ -34,7 +34,7 @@ function CartPage() {
             <div className='flex flex-col'>
               <div className='flex flex-col border-b-2 border-accentColor dark:border-basicColor'>
                 <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
-                  <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold text-center md:text-start'>
+                  <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold  md:text-start'>
                     My list of products
                   </h3>
                   <AdditionalButton>Clean</AdditionalButton>
