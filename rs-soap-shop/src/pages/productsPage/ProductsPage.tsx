@@ -1,4 +1,4 @@
-import OurProductsCards, { items } from './cardsSection/OurProductsCards';
+import OurProductsCards from './cardsSection/OurProductsCards';
 import { NavigationView } from './navigation/navigationView';
 import { useEffect, useState } from 'react';
 import BannerPageName from '../../components/bannerPageName';
@@ -10,7 +10,7 @@ import scrollToTop from '../../lib/utils/scrollToTop';
 import LoadingSpinner from '../../components/loading/loading';
 
 function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>(items);
+  const [products, setProducts] = useState<Product[]>();
   const { category, subcategory } = useParams();
   const [query, setQuery] = useState('');
   const [isLoadingNewProducts, setIsLoadingNewProducts] = useState(false);

@@ -44,7 +44,7 @@ function App() {
     } else {
       setToken('token');
     }
-  });
+  },[]);
 
   return (
     <>
