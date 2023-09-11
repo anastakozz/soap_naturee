@@ -8,6 +8,8 @@ export default function ResultMessage({ isSuccess, isVisible, message }: ResultP
   }
 
   return (
-    <div data-testid='reg-result-message'>{isSuccess ? <SuccessMessage /> : <ErrorMessage message={message} />}</div>
+    <div data-testid='reg-result-message'>
+      {isSuccess ? <SuccessMessage text={message} /> : <ErrorMessage message={message} />}
+    </div>
   );
 }
