@@ -34,8 +34,12 @@ export async function getCategories() {
 
 export async function getCategoriesNames() {
   const categoriesData = await getCategories();
-  return categoriesData.map((categoryData: CategoryData) => {
-    const categoryName: string = categoryData.name.en;
-    return categoryName[0].toUpperCase() + categoryName.slice(1);
-  });
+  try {
+    return categoriesData.map((categoryData: CategoryData) => {
+      const categoryName: string = categoryData.name.en;
+      return categoryName[0].toUpperCase() + categoryName.slice(1);
+    });
+  } catch {
+    return undefined;
+  }
 }

@@ -7,7 +7,7 @@ import { getCategoryId } from '../../services/category.service';
 import { getFiltered, getProductsList } from '../../services/product.service';
 import { Product } from '../../lib/interfaces';
 import scrollToTop from '../../lib/utils/scrollToTop';
-import { CardsPerPage } from '../../lib/enums';
+import LoadingSpinner from '../../components/loading/loading';
 
 const items: Product[] = await getProductsList(CardsPerPage.catalog);
 
@@ -15,6 +15,9 @@ function ProductsPage() {
   const [products, setProducts] = useState<Product[]>(items);
   const { category, subcategory } = useParams();
   const [query, setQuery] = useState('');
+  const [isLoadingNewProducts, setIsLoadingNewProducts] = useState(false);
+  const [isEndOfPage, setIsEndOfPage] = useState(false);
+  const [isUpdatingProducts, setIsUpdatingProducts] = useState(false);
   let isLoading = false;
   let currentPage = 1;
 
@@ -29,6 +32,22 @@ function ProductsPage() {
 
   function updateProducts() {
     currentPage = 1;
+    try {
+      if (!category && !subcategory) {
+        getProductsList(true, currentPage).then((pageProducts) => {
+          isLoading = false;
+          setIsLoadingNewProducts(false)
+          if (pageProducts.length > 0) {
+            setProducts(pageProducts);
+          }
+          setIsUpdatingProducts(false);
+        });
+        return;
+      }
+    } catch {
+      return;
+    }
+
     getCategoryId(
       subcategory
         ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
@@ -36,6 +55,7 @@ function ProductsPage() {
     ).then(categoryId => {
       getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, currentPage).then(products => {
         setProducts(products);
+        setIsUpdatingProducts(false);
       });
     });
   }
@@ -45,13 +65,9 @@ function ProductsPage() {
   }, []);
 
   useEffect(() => {
-    if (category || subcategory) {
-      updateProducts();
-    } else {
-      // currentPage = 0;
-      // loadNextPage();
-      }
-
+    setIsUpdatingProducts(true);
+    setIsEndOfPage(false);
+    updateProducts()
     if (query) {
       if (category || subcategory) {
         updateProducts();
@@ -66,7 +82,6 @@ function ProductsPage() {
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-        console.log(category, subcategory);
         if (!(category || subcategory)) {
           loadNextPage();
         } else loadNextPageWithCategory();
@@ -81,23 +96,27 @@ function ProductsPage() {
   }, [currentPage, category, subcategory]);
 
   function loadNextPage() {
-    console.log('loadAllProducts');
     if (isLoading) return;
     isLoading = true;
+    setIsLoadingNewProducts(true);
+
     currentPage += 1;
 
     getProductsList(true, currentPage).then((nextPageProducts) => {
       isLoading = false;
+      setIsLoadingNewProducts(false);
       if (nextPageProducts.length > 0) {
         setProducts((prevProducts) => [...prevProducts, ...nextPageProducts]);
-      }
-    });
+      } else setIsEndOfPage(true)
+    }).catch(error => {
+        console.error(error);
+      });
   }
 
   function loadNextPageWithCategory() {
-    console.log('loadCategoryProducts');
     if (isLoading) return;
     isLoading = true;
+    setIsLoadingNewProducts(true);
     currentPage += 1;
 
     getCategoryId(
@@ -107,10 +126,13 @@ function ProductsPage() {
     ).then(categoryId => {
       getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, currentPage).then(nextPageProducts => {
         isLoading = false;
+        setIsLoadingNewProducts(false);
         if (nextPageProducts.length > 0) {
           setProducts((prevProducts) => [...prevProducts, ...nextPageProducts]);
-        }
-      });
+        } else setIsEndOfPage(true);
+      }).catch(error => {
+          console.error(error);
+        });
     });
   }
 
@@ -122,7 +144,8 @@ function ProductsPage() {
         changeQuery={changeQuery}
         updateSearchedProducts={updateSearchedProducts}
       />
-      <OurProductsCards {...{products}} />
+      {!isUpdatingProducts ? <OurProductsCards {...{products}}/> : <LoadingSpinner marginTop={0}/>}
+      {isLoadingNewProducts && !isEndOfPage && <LoadingSpinner />}
     </>
   );
 }
