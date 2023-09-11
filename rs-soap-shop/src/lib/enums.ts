@@ -11,5 +11,5 @@ export enum CardMessage {
 
 export enum RemoveMessage {
   inCart = 'Remove from Cart',
-  inProgress = '...Sending to Cart...'
+  inProgress = '...Removing...'
 }

@@ -25,5 +25,5 @@ export const classesDisabled = classNames(
   'text-graySColor  font-bold',
   'border-2 border-graySColor ',
   'bg-none',
-  'rounded-normal h-[74px] px-12 active:scale-95 w-[250px] whitespace-nowrap'
+  'rounded-normal h-[74px] px-12 w-[250px] whitespace-nowrap'
 );
