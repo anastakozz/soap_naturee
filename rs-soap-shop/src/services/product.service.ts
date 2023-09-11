@@ -10,10 +10,10 @@ export async function getProductsList(isCatalogCalling?: boolean, page = 1) {
     queryParms = {
       limit: CardsPerPage.limit,
       offset: (page - 1) * CardsPerPage.limit
-      }
-    } else {
-      queryParms = {};
-    }
+    };
+  } else {
+    queryParms = {};
+  }
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/search`, {
       headers: {

@@ -27,7 +27,7 @@ export default function OurProductsCards({ products }: OurProductsCardsProps) {
           setDataLoading(false);
         });
     }
-  },[products]);
+  }, [products]);
 
   return (
     <>

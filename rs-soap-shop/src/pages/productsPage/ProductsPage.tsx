@@ -32,9 +32,9 @@ function ProductsPage() {
     currentPage = 1;
     try {
       if (!category && !subcategory) {
-        getProductsList(true, currentPage).then((pageProducts) => {
+        getProductsList(true, currentPage).then(pageProducts => {
           isLoading = false;
-          setIsLoadingNewProducts(false)
+          setIsLoadingNewProducts(false);
           if (pageProducts.length > 0) {
             setProducts(pageProducts);
           }
@@ -65,7 +65,7 @@ function ProductsPage() {
   useEffect(() => {
     setIsUpdatingProducts(true);
     setIsEndOfPage(false);
-    updateProducts()
+    updateProducts();
     if (query) {
       if (category || subcategory) {
         updateProducts();
@@ -100,13 +100,15 @@ function ProductsPage() {
 
     currentPage += 1;
 
-    getProductsList(true, currentPage).then((nextPageProducts) => {
-      isLoading = false;
-      setIsLoadingNewProducts(false);
-      if (nextPageProducts.length > 0) {
-        setProducts((prevProducts) => [...prevProducts, ...nextPageProducts]);
-      } else setIsEndOfPage(true)
-    }).catch(error => {
+    getProductsList(true, currentPage)
+      .then(nextPageProducts => {
+        isLoading = false;
+        setIsLoadingNewProducts(false);
+        if (nextPageProducts.length > 0) {
+          setProducts(prevProducts => [...prevProducts, ...nextPageProducts]);
+        } else setIsEndOfPage(true);
+      })
+      .catch(error => {
         console.error(error);
       });
   }
@@ -122,13 +124,15 @@ function ProductsPage() {
         ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
         : category.charAt(0).toUpperCase() + category.slice(1)
     ).then(categoryId => {
-      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, currentPage).then(nextPageProducts => {
-        isLoading = false;
-        setIsLoadingNewProducts(false);
-        if (nextPageProducts.length > 0) {
-          setProducts((prevProducts) => [...prevProducts, ...nextPageProducts]);
-        } else setIsEndOfPage(true);
-      }).catch(error => {
+      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, currentPage)
+        .then(nextPageProducts => {
+          isLoading = false;
+          setIsLoadingNewProducts(false);
+          if (nextPageProducts.length > 0) {
+            setProducts(prevProducts => [...prevProducts, ...nextPageProducts]);
+          } else setIsEndOfPage(true);
+        })
+        .catch(error => {
           console.error(error);
         });
     });
@@ -142,7 +146,7 @@ function ProductsPage() {
         changeQuery={changeQuery}
         updateSearchedProducts={updateSearchedProducts}
       />
-      {!isUpdatingProducts ? <OurProductsCards products={products}/> : <LoadingSpinner marginTop={0}/>}
+      {!isUpdatingProducts ? <OurProductsCards products={products} /> : <LoadingSpinner marginTop={0} />}
       {isLoadingNewProducts && !isEndOfPage && <LoadingSpinner />}
     </>
   );

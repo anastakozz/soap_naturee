@@ -11,5 +11,5 @@ export default function SmallButton({ children, onClick }: ButtonProps): JSX.Ele
     </button>
   );
 }
-export const smallButtonClassesInactive = 'cart-button text-secondaryColor font-bold bg-grayLColor  h-[30px] w-full px-12'
- 
+export const smallButtonClassesInactive =
+  'cart-button text-secondaryColor font-bold bg-grayLColor  h-[30px] w-full px-12';
