@@ -92,6 +92,8 @@ export interface ResultProps {
   isSuccess?: boolean | null;
   message: string;
   isVisible?: boolean;
+  data?: string;
+  disableRedirect?: boolean;
 }
 
 export interface BannerProps {

@@ -8,3 +8,8 @@ export enum CardMessage {
   toCart = 'Add to Cart',
   inProgress = '...Sending to Cart...'
 }
+
+export enum RemoveMessage {
+  inCart = 'Remove from Cart',
+  inProgress = '...Removing...'
+}

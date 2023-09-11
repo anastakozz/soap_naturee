@@ -68,7 +68,7 @@ function ProductsPage() {
         changeQuery={changeQuery}
         updateSearchedProducts={updateSearchedProducts}
       />
-      <OurProductsCards {...{products}} />
+      <OurProductsCards {...{ products }} />
     </>
   );
 }

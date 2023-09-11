@@ -3,7 +3,7 @@ import Card from '../../../components/card';
 import { OurProductsCardsProps, ProductCardProps } from '../../../lib/interfaces';
 import { adaptCardsData } from './getDataForCards';
 
-export default function OurProductsCards({products}: OurProductsCardsProps) {
+export default function OurProductsCards({ products }: OurProductsCardsProps) {
   const [items, setItems] = useState<ProductCardProps[] | undefined>(undefined);
   const [isDataLoading, setDataLoading] = useState(false);
 
