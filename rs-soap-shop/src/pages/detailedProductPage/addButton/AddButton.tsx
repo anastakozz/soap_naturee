@@ -1,3 +1,4 @@
+import { classesActive, classesDisabled } from '../../../lib/constants';
 import { CardMessage } from '../../../lib/enums';
 
 interface AddButtonProps {
@@ -8,10 +9,18 @@ interface AddButtonProps {
 
 export default function AddButton({ isInCart, isSending, onClick }: AddButtonProps) {
   if (isInCart && !isSending) {
-    return <button disabled>{CardMessage.inCart}</button>;
+    return (
+      <button className={classesDisabled} disabled>
+        {CardMessage.inCart}
+      </button>
+    );
   } else if (isSending) {
-    return <button disabled>{CardMessage.inProgress}</button>;
+    return (
+      <button className={classesDisabled} disabled>
+        {CardMessage.inProgress}
+      </button>
+    );
   } else {
-    return <button onClick={onClick} {...{ children: CardMessage.toCart }}></button>;
+    return <button className={classesActive} onClick={onClick} {...{ children: CardMessage.toCart }}></button>;
   }
 }

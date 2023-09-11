@@ -1,5 +1,5 @@
 import { RemoveMessage } from '../../../lib/enums';
-
+import { classesActive, classesDisabled } from '../../../lib/constants';
 interface RemoveButtonProps {
   isInCart: boolean;
   isSending: boolean;
@@ -8,10 +8,10 @@ interface RemoveButtonProps {
 
 export default function RemoveButton({ isInCart, isSending, onClick }: RemoveButtonProps) {
   if (isInCart && !isSending) {
-    return <button onClick={onClick}>{RemoveMessage.inCart}</button>;
+    return <button className={classesActive} onClick={onClick}>{RemoveMessage.inCart}</button>;
   } else if (isSending) {
-    return <button disabled>{RemoveMessage.inProgress}</button>;
+    return <button className={classesDisabled} disabled>{RemoveMessage.inProgress}</button>;
   } else {
-    return <button disabled>{RemoveMessage.inCart}</button>;
+    return <button className={classesDisabled} disabled>{RemoveMessage.inCart}</button>;
   }
 }
