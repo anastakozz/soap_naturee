@@ -62,7 +62,7 @@ function DetailedProductPage() {
   async function handleRemoveClick() {
     try {
       setIsSending(true);
-      console.log('remove from cart')
+      console.log('remove from cart');
       await removeFromCart(data.productId);
     } catch (err) {
       console.log(err);

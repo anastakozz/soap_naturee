@@ -4,8 +4,6 @@ import { MouseEvent, useState } from 'react';
 import { sendToCart } from '../../services/handleCart';
 import SendButton from './SendButton';
 
-
-
 export default function Card(item: ProductCardProps) {
   const [isInCart, setIsInCart] = useState<boolean>(item.isInCart);
   const [isSending, setIsSending] = useState<boolean>(false);
@@ -38,7 +36,7 @@ export default function Card(item: ProductCardProps) {
     >
       <img className='object-cover h-[300px] w-full ' src={item.imgSrc} alt=''></img>
       <div className='z-20 w-full absolute -translate-y-[30px]'>
-        <SendButton isInCart={isInCart} isSending={isSending}/>
+        <SendButton isInCart={isInCart} isSending={isSending} />
       </div>
       <div className='h-[130px] bg-additionalColor dark:bg-graySColor text-left p-4 flex flex-col justify-between'>
         <p className='leading-5 w-full text-h5 font-semibold text-grayLColor dark:text-secondaryColor'>{item.label}</p>
