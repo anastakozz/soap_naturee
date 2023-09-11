@@ -18,30 +18,39 @@ export function CartListItem({ el }: { el: Product }) {
         <div>
           {el.price.discounted ? (
             <>
-              <div className='flex mr-4 '>
-                <p className='line-through text-graySColor dark:text-grayMColor'>{el.price.value.centAmount}</p>
-                <p className='line-through text-graySColor dark:text-grayMColor'>{el.price.value.currencyCode}</p>
-              </div>
-              <div className='flex mr-4 '>
-                <p>{el.price.discounted.value.centAmount}</p>
-                <p>{el.price.discounted.value.currencyCode}</p>
-              </div>
+              <p className='line-through text-graySColor dark:text-grayMColor mr-4'>
+                {(el.price.value.centAmount / 100).toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: el.price.value.currencyCode
+                })}
+              </p>
+
+              <p className='mr-4'>
+                {(el.price.discounted.value.centAmount / 100).toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: el.price.discounted.value.currencyCode
+                })}
+              </p>
             </>
           ) : (
-            <div className='flex mr-4'>
-              <p>{el.price.value.centAmount}</p>
-              <p>{el.price.value.currencyCode}</p>
-            </div>
+            <p className='mr-4'>
+              {(el.price.value.centAmount / 100).toLocaleString('en-US', {
+                style: 'currency',
+                currency: el.price.value.currencyCode
+              })}
+            </p>
           )}
         </div>
         <div className='flex mr-4'>
           <div
             onClick={() => {
-              setAmount(amount + 1);
+              if (amount > 1) {
+                setAmount(amount - 1);
+              }
             }}
             className='cursor-pointer flex justify-center items-center w-[20px] bg-graySColor hover:bg-grayMColor transition'
           >
-            +
+            -
           </div>
           <input
             onChange={e => {
@@ -54,19 +63,20 @@ export function CartListItem({ el }: { el: Product }) {
           />
           <div
             onClick={() => {
-              if (amount > 1) {
-                setAmount(amount - 1);
-              }
+              setAmount(amount + 1);
             }}
             className='cursor-pointer flex justify-center items-center w-[20px] bg-graySColor hover:bg-grayMColor transition'
           >
-            -
+            +
           </div>
         </div>
-        <div className='flex mr-2'>
-          <p className='font-bold'>{el.totalPrice.centAmount}</p>
-          <p className='font-bold'>{el.totalPrice.currencyCode}</p>
-        </div>
+        <p className='font-bold mr-2'>
+          {(el.totalPrice.centAmount / 100).toLocaleString('en-US', {
+            style: 'currency',
+            currency: el.totalPrice.currencyCode
+          })}
+        </p>
+
         <button>
           <DeleteIcon />
         </button>
