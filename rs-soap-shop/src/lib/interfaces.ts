@@ -125,9 +125,23 @@ export interface Product {
     prices: Price[];
     id: number;
   };
+  variant?: {
+    attributes: ProductAttributes[];
+    images: ProductImage[];
+    prices: Price[];
+    id: number;
+  };
+  price?: Price;
+  totalPrice?: {
+    centAmount: number;
+    currencyCode: string;
+    fractionDigits: number;
+    type: string;
+  };
   metaTitle: {
     en: string;
   };
+  quantity?: number;
   metaDescription: {
     en: string;
   };
