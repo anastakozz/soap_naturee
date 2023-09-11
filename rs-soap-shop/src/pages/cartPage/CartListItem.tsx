@@ -7,7 +7,7 @@ export function CartListItem({ el }: { el: Product }) {
   const [amount, setAmount] = useState(el.quantity);
 
   return (
-    <div className='p-4 border-2 border-dotted border-accentColor dark:border-basicColor rounded-normal w-full mb-4 flex flex-col md:flex-row items-start justify-between'>
+    <div className='p-4 border-2 border-dotted border-accentColor dark:border-basicColor rounded-normal w-full mb-4 flex flex-col md:flex-row items-start md:items-center justify-between'>
       <div className='flex items-center  justify-start mb-4 md:mb-0'>
         <div className='border-2 border-accentColor dark:border-basicColor rounded-normal overflow-hidden flex justify-center items-center w-[100px] h-[100px] shrink-0 mr-4'>
           <img src={el.variant.images[0].url} alt=''></img>
