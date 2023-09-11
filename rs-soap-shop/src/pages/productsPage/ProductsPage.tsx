@@ -9,7 +9,7 @@ import { Product } from '../../lib/interfaces';
 import scrollToTop from '../../lib/utils/scrollToTop';
 import LoadingSpinner from '../../components/loading/loading';
 
-const items: Product[] = await getProductsList(CardsPerPage.catalog);
+const items: Product[] = await getProductsList(true);
 
 function ProductsPage() {
   const [products, setProducts] = useState<Product[]>(items);
