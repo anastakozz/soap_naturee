@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 export default function SuccessMessage({
   text = '',
-  disableRedirect = false
+  disableRedirect = true
 }: {
   text?: string;
   disableRedirect?: boolean;

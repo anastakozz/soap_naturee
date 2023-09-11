@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { getProductByKey } from '../../services/product.service';
 import React, { useEffect, useState } from 'react';
-import { DetailsProps } from '../../lib/interfaces';
+import { DetailsProps, ResultProps } from '../../lib/interfaces';
 import CarouselDefault from '../../components/carousel';
 import toDetailsAdapter from '../../lib/utils/productDataAdapters.ts/toDetailsAdapter';
 import SliderModal from '../../components/SliderModal';
@@ -9,8 +9,14 @@ import scrollToTop from '../../lib/utils/scrollToTop';
 import AddButton from './addButton';
 import RemoveButton from './removeButton';
 import { sendToCart, getProductsInCart, removeFromCart } from '../../services/handleCart';
+import ResultMessage from '../../components/ResultMessage';
 
 function DetailedProductPage() {
+  const [submitResult, setSubmitResult] = useState<ResultProps>({
+    isSuccess: false,
+    message: '',
+    isVisible: false
+  });
   const [isInCart, setIsInCart] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
 
@@ -64,7 +70,17 @@ function DetailedProductPage() {
       setIsSending(true);
       console.log('remove from cart');
       await removeFromCart(data.productId);
+      setSubmitResult({
+        isSuccess: true,
+        message: 'Product has been removed from cart',
+        isVisible: true
+      });
     } catch (err) {
+      setSubmitResult({
+        isSuccess: false,
+        message: 'Ooops. Something went wrong.',
+        isVisible: true
+      });
       console.log(err);
       setIsSending(false);
     } finally {
@@ -108,6 +124,17 @@ function DetailedProductPage() {
               <div className='flex gap-[15px] flex-wrap'>
                 <AddButton isInCart={isInCart} isSending={isSending} onClick={handleAddClick}></AddButton>
                 <RemoveButton isInCart={isInCart} isSending={isSending} onClick={handleRemoveClick}></RemoveButton>
+                <div
+                  onClick={() => {
+                    setSubmitResult({
+                      isSuccess: false,
+                      message: '',
+                      isVisible: false
+                    });
+                  }}
+                >
+                  <ResultMessage {...submitResult}></ResultMessage>
+                </div>
               </div>
 
               <div className='flex my-sm'>
