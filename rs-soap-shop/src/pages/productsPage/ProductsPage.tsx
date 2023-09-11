@@ -5,12 +5,12 @@ import BannerPageName from '../../components/bannerPageName';
 import { useParams } from 'react-router-dom';
 import { getCategoryId } from '../../services/category.service';
 import { getFiltered, getProductsList } from '../../services/product.service';
-import { ProductCardProps } from '../../lib/interfaces';
+import { Product } from '../../lib/interfaces';
 import scrollToTop from '../../lib/utils/scrollToTop';
 import LoadingSpinner from '../../components/loading/loading';
 
 function ProductsPage() {
-  const [products, setProducts] = useState(items);
+  const [products, setProducts] = useState<Product[]>(items);
   const { category, subcategory } = useParams();
   const [query, setQuery] = useState('');
   const [isLoadingNewProducts, setIsLoadingNewProducts] = useState(false);
@@ -19,8 +19,8 @@ function ProductsPage() {
   let isLoading = false;
   let currentPage = 1;
 
-  function updateSearchedProducts(adaptedProducts: ProductCardProps[]) {
-    setProducts(adaptedProducts);
+  function updateSearchedProducts(products: Product[]) {
+    setProducts(products);
   }
 
   function changeQuery(options: string): void {

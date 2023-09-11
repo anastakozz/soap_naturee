@@ -1,31 +1,49 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import Card from '../../../components/card';
 import { OurProductsCardsProps, Product, ProductCardProps } from '../../../lib/interfaces';
 import { getProductsList } from '../../../services/product.service';
-import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
+import { adaptCardsData } from './getDataForCards';
+export const items: Product[] = await getCardsData();
 
-export const items: ProductCardProps[] = await getCardsData();
-
-async function getCardsData(): Promise<ProductCardProps[]> {
+async function getCardsData(): Promise<Product[]> {
   const data: Product[] = await getProductsList(true);
-  if (data) {
-    return data.map((product: Product) => toCardAdapter(product));
-  }
+  return data;
 }
 
-export default function OurProductsCards({ products }: OurProductsCardsProps) {
+export default function OurProductsCards({products}: OurProductsCardsProps) {
+  console.log('приходят ', products);
+  const [items, setItems] = useState<ProductCardProps[] | undefined>(undefined);
+  const [isDataLoading, setDataLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await adaptCardsData(products);
+      return data;
+    };
+
+    if (!items && !isDataLoading) {
+      setDataLoading(true);
+
+      fetchData()
+        .then(data => setItems(data))
+        .catch(e => {
+          console.log(e);
+        })
+        .finally(() => {
+          setDataLoading(false);
+        });
+    }
+  }, []);
+
   return (
     <>
-      {products ? (
+      {items ? (
         <div className='bg-primaryColor dark:bg-grayMColor h-auto p-sm text-center px-big flex flex-col items-center'>
           <div className='flex flex-wrap justify-center md:justify-between mt-sm max-w-[1245px] pb-sm' >
-            {products.length === 0 ? (
+            {items.length === 0 ? (
               <p>No products to show...</p>
             ) : (
-              products.map((item: ProductCardProps | Product, index): ReactNode => {
-                if ('priceMode' in item) {
-                  item = toCardAdapter(item);
-                }
+              items.map((item: ProductCardProps, index: number): ReactNode => {
                 return (
                   <div key={index} className='mb-sm mx-4'>
                     <Card {...item} />

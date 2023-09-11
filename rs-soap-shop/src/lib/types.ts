@@ -43,3 +43,11 @@ export type Price = {
     };
   };
 };
+
+export type responseObject = {
+  [key: string]: responseObject
+}
+
+export type ProductListItem = {
+  [key: string]: string | responseObject
+}

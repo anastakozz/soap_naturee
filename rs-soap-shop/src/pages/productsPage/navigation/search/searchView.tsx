@@ -2,16 +2,14 @@ import classNames from 'classnames';
 import SearchButton from '../../../../icons/searchButton';
 import { findProducts } from '../../../../services/product.service';
 import React, { useRef } from 'react';
-import toCardAdapter from '../../../../lib/utils/productDataAdapters.ts/toCardAdapter';
-import { NavigationViewProps, Product, ProductCardProps } from '../../../../lib/interfaces';
+import { NavigationViewProps} from '../../../../lib/interfaces';
 
 export default function SearchView({ updateSearchedProducts }: NavigationViewProps) {
   const inputRef = useRef(null);
 
   const handleSearch = async () => {
     const products = await findProducts(inputRef.current.value);
-    const adaptedProducts = products.map((product: Product): ProductCardProps => toCardAdapter(product));
-    updateSearchedProducts(adaptedProducts);
+    updateSearchedProducts(products);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
