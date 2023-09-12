@@ -86,6 +86,7 @@ export const RegistrationForm = () => {
     const data = validateAllInputs();
     const result = await handleRegistration(data);
     if (result) {
+      result.disableRedirect = false;
       result.isVisible = true;
       setSubmitResult(result);
     } else {

@@ -4,8 +4,7 @@ import { OurProductsCardsProps, ProductCardProps } from '../../../lib/interfaces
 import { adaptCardsData } from './getDataForCards';
 
 export default function OurProductsCards({ products }: OurProductsCardsProps) {
-  console.log('in Products Cards', products);
-  const [items, setItems] = useState<ProductCardProps[] | undefined>();
+  const [items, setItems] = useState<ProductCardProps[] | undefined>(undefined);
   const [isDataLoading, setDataLoading] = useState(false);
 
   useEffect(() => {
