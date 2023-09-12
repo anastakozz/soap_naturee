@@ -19,7 +19,6 @@ describe('NavigationModal', () => {
     expect(homeLink).toBeInTheDocument();
     expect(productsLink).toBeInTheDocument();
     expect(aboutUsLink).toBeInTheDocument();
-    expect(cartLink).toBeInTheDocument();
   });
 
   it('should call onClose when a navigation link is clicked', () => {

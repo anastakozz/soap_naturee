@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import scrollToTop from '../../lib/utils/scrollToTop';
 import BannerPageName from '../../components/bannerPageName';
 import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
-import { getActiveCart } from '../../services/cart.service';
+import { deleteCart, getActiveCart } from '../../services/cart.service';
 import { Product } from '../../lib/interfaces';
 
 import AdditionalButton from '../../components/buttons/additionalButton';
@@ -11,11 +11,10 @@ import { EmptyCart } from './EmptyCart';
 
 function CartPage() {
   const [activeCart, setActiveCart] = useState(null);
+  const token = getTokenFromStorage();
 
-  useEffect(() => {
-    scrollToTop();
-    const token = getTokenFromStorage();
-    getActiveCart(token)
+  const updateCart = () => {
+    return getActiveCart(token)
       .then(response => {
         setActiveCart(response.data);
         console.log(response.data);
@@ -23,6 +22,15 @@ function CartPage() {
       .catch(err => {
         console.error(err);
       });
+  };
+
+  const handleCleanCart = () => {
+    deleteCart(token, activeCart.id, activeCart.version).then(() => setActiveCart(null));
+  };
+
+  useEffect(() => {
+    scrollToTop();
+    updateCart();
   }, []);
 
   return (
@@ -37,9 +45,18 @@ function CartPage() {
                   <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold  md:text-start'>
                     My list of products
                   </h3>
-                  <AdditionalButton>Clean</AdditionalButton>
+                  <AdditionalButton onClick={handleCleanCart}>Clean</AdditionalButton>
                 </div>
-                {activeCart?.lineItems.map((el: Product) => <CartListItem key={el.id} el={el} />)}
+                {activeCart?.lineItems.map((el: Product) => (
+                  <CartListItem
+                    token={token}
+                    cartId={activeCart.id}
+                    key={el.id}
+                    el={el}
+                    version={activeCart.version}
+                    onUpdate={updateCart}
+                  />
+                ))}
               </div>
               <div className='flex flex-col md:flex-row items-center justify-center md:justify-end p-4 border-b-2 border-accentColor dark:border-basicColor'>
                 <p className='text-center md:text-start mb-2 md:mr-4 md:mb-0'>

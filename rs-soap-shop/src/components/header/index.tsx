@@ -11,6 +11,7 @@ import NavigationModal from '../navigation/navigationModal';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const amount = 3;
 
   useEffect(() => {
     const changeWidth = () => {
@@ -58,14 +59,19 @@ function Header() {
         <NavigationModal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} isLoggedIn={isLoggedIn} />
         <div className='flex items-center'>
           <DarkModeButton onChange={handleChangeMode} />
-          <div className='flex items-center hidden md:flex'>
-            <NavLink
-              className='text-basicColor mr-4 hover:scale-110 transition dark:text-primaryColor transition'
-              to={'/cart'}
-            >
+          <NavLink
+            className='text-basicColor mr-4 hover:scale-110 transition dark:text-primaryColor transition'
+            to={'/cart'}
+          >
+            <div className='relative'>
               <CartIconDark />
               <CartIcon />
-            </NavLink>
+              <div className='opacity-75 rounded-full w-[20px] h-[20px] flex items-center justify-center bg-accentColor border-2 border-primaryColor text-primaryColor text-[10px] absolute z-10 top-[-15px] right-[-15px]'>
+                {amount}
+              </div>
+            </div>
+          </NavLink>
+          <div className='flex items-center hidden md:flex'>
             <LoginArea isLoggedIn={isLoggedIn} />
           </div>
           <BurgerMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} isMenuOpen={isMenuOpen} />
