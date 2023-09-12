@@ -3,7 +3,7 @@ import { getTokenFromStorage } from '../lib/utils/getLocalStorageToken';
 import { ProductListItem } from '../lib/types';
 
 export async function getCart() {
-  const token = getTokenFromStorage();
+  const token = await getTokenFromStorage();
 
   try {
     const cart = await getActiveCart(token);
@@ -49,7 +49,7 @@ export async function getProductsInCart(): Promise<string[]> {
 }
 
 export async function sendToCart(id: string) {
-  const token = getTokenFromStorage();
+  const token = await getTokenFromStorage();
   const cart = await getCart();
   const response = addLineItem(id, token, cart.data.id, cart.data.version);
 
@@ -58,7 +58,7 @@ export async function sendToCart(id: string) {
 }
 
 export async function removeFromCart(id: string) {
-  const token = getTokenFromStorage();
+  const token = await getTokenFromStorage();
   const cart = await getCart();
   const list = cart.data.lineItems;
   const lineItem = list.find((item: ProductListItem) => item.productId === id);

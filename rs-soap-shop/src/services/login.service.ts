@@ -39,11 +39,3 @@ export async function login(email: string, password: string) {
   }
 }
 
-export function refreshToken() {
-  const refreshToken = JSON.parse(localStorage.getItem('token')).refresh_token;
-  return axios.post(
-    `${authUrl}/oauth/${projectKey}/customers/token?grant_type=refresh_token&refresh_token=${refreshToken}`,
-    {},
-    { headers: HEADERS }
-  );
-}

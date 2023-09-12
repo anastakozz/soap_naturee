@@ -6,6 +6,7 @@ export default function handleLogin(email: string, password: string) {
       console.log(resp.data);
       const authData = resp.data;
       localStorage.setItem('token', JSON.stringify(authData));
+      localStorage.setItem('tokenRefresh', authData.refresh_token);
       login(email, password).then(resp => {
         const userData = resp.data;
         localStorage.setItem('user', JSON.stringify(userData));
