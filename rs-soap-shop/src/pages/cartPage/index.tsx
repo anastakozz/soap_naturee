@@ -27,7 +27,7 @@ function CartPage() {
 
   return (
     <>
-      <div className='bg-secondaryColor dark:bg-grayMColor'>
+      <div className='bg-secondaryColor dark:bg-grayMColor flex-1'>
         <BannerPageName>MY CART</BannerPageName>
         <div className='py-sm px-sm max-w-[1440px] mx-auto lg:px-big'>
           {activeCart?.lineItems && activeCart?.lineItems.length > 0 ? (

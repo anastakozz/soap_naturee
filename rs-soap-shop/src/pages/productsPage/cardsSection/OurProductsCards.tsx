@@ -32,7 +32,7 @@ export default function OurProductsCards({ products }: OurProductsCardsProps) {
   return (
     <>
       {items ? (
-        <div className='bg-primaryColor dark:bg-grayMColor h-auto p-sm text-center px-big flex flex-col items-center'>
+        <div className='bg-primaryColor dark:bg-grayMColor h-auto p-sm text-center px-big flex flex-col flex-1 items-center'>
           <div className='flex flex-wrap justify-center md:justify-between mt-sm max-w-[1245px] pb-sm'>
             {items.length === 0 ? (
               <p>No products to show...</p>
