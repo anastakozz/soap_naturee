@@ -14,15 +14,20 @@ function CartPage() {
 
   useEffect(() => {
     scrollToTop();
-    const token = getTokenFromStorage();
-    getActiveCart(token)
-      .then(response => {
-        setActiveCart(response.data);
-        console.log(response.data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+
+    const setCart = async () => {
+      const token = await getTokenFromStorage();
+      getActiveCart(token)
+        .then(response => {
+          setActiveCart(response.data);
+          console.log(response.data);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    };
+
+    setCart();
   }, []);
 
   return (

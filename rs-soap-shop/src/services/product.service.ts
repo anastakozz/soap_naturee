@@ -61,7 +61,6 @@ export async function getFiltered(options: string) {
         Authorization: `Bearer ${accessToken}`
       }
     });
-    console.log(response.data.results);
     return response.data.results;
   } catch (error) {
     return undefined;

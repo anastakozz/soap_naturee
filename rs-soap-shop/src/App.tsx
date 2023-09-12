@@ -12,7 +12,9 @@ import ProfilePage from './pages/profilePage';
 import Footer from './components/footer';
 import PageNotFound from './pages/pageNotFound';
 import DetailedProductPage from './pages/detailedProductPage';
-import { getAnonimousToken } from './services/registration.service';
+import { getAnonymousToken } from './services/registration.service';
+import { tokenNames } from './lib/enums';
+const { userToken, anonymous, anonymousRefresh } = tokenNames;
 
 const AppLayout = ({ children }: { children: ReactElement }) => {
   return (
@@ -25,30 +27,28 @@ const AppLayout = ({ children }: { children: ReactElement }) => {
 };
 
 function App() {
-  const [token, setToken] = useState(null);
-  const isLoggedIn = !!localStorage.getItem('token');
-  const isSeenBefore = !!localStorage.getItem('anonimousToken');
+  const [hasToken, setHasToken] = useState<boolean>(false);
+  const isLoggedIn = !!localStorage.getItem(`${userToken}`);
+  const isSeenBefore = !!localStorage.getItem(`${anonymous}`);
 
-  const setAnonimousToken = async () => {
-    const id = await getAnonimousToken();
-    console.log('got anonimous id');
-    localStorage.setItem('anonimousToken', id.data.access_token);
-    console.log('token is set: ' + id.data.access_token);
-    setToken(id.data.access_token);
+  const setAnonymousToken = async () => {
+    const id = await getAnonymousToken();
+    localStorage.setItem(`${anonymous}`, JSON.stringify(id.data));
+    localStorage.setItem(`${anonymousRefresh}`, id.data.refresh_token);
+    setHasToken(true);
   };
 
   useEffect(() => {
     if (!isLoggedIn && !isSeenBefore) {
-      setAnonimousToken();
-      console.log('hello new visitor');
+      setAnonymousToken();
     } else {
-      setToken('token');
+      setHasToken(true);
     }
-  });
+  }, []);
 
   return (
     <>
-      {token && (
+      {hasToken && (
         <Routes>
           <Route
             path='/'

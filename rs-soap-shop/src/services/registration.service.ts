@@ -17,7 +17,7 @@ export async function getBasicToken() {
   }
 }
 
-export async function getAnonimousToken() {
+export async function getAnonymousToken() {
   try {
     const response = await axios({
       method: 'post',
@@ -29,6 +29,36 @@ export async function getAnonimousToken() {
     return response;
   } catch (e) {
     console.log(e);
+  }
+}
+
+export async function introspectToken(token: string) {
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${authUrl}/oauth/introspect?token=${token}`,
+      headers: {
+        Authorization: 'Basic ' + btoa(`${clientId}:${secret}`)
+      }
+    });
+    return response.data.active;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function refreshToken(refreshToken: string) {
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${authUrl}/oauth/token?grant_type=refresh_token&refresh_token=${refreshToken}`,
+      headers: {
+        Authorization: 'Basic ' + btoa(`${clientId}:${secret}`)
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
   }
 }
 
