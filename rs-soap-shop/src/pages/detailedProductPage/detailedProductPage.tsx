@@ -90,7 +90,7 @@ function DetailedProductPage() {
   }
 
   return (
-    <div className='bg-primaryColor dark:bg-grayMColor'>
+    <div className='bg-primaryColor dark:bg-grayMColor flex-1'>
       {data ? (
         <div className='max-w-[1440px] mx-auto px-8 lg:px-big py-4'>
           <h1 className='text-h2 py-4 text-center md:text-left text-accentColor dark:text-primaryColor'>{data.name}</h1>
