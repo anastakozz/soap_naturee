@@ -4,11 +4,11 @@ import { CategoryCardProps } from '../../../../lib/interfaces';
 import CategoryCard from './CategoryCard';
 
 const items: CategoryCardProps[] = [
-  { name: 'Candles', path: './images/candle.png', link: '/our-products' },
-  { name: 'Soap', path: './images/soap.png', link: '/our-products' },
-  { name: 'Scrubs', path: './images/scrub.png', link: '/our-products' },
-  { name: 'Aroma sachet', path: './images/sachet.png', link: '/our-products' },
-  { name: 'Bath bombs', path: './images/bombs.png', link: '/our-products' }
+  { name: 'Candles', path: './images/candle.png', link: '/our-products/decor/candles' },
+  { name: 'Soap', path: './images/soap.png', link: '/our-products/self-care/soap' },
+  { name: 'Scrubs', path: './images/scrub.png', link: '/our-products/self-care/scrub' },
+  { name: 'Aroma sachet', path: './images/sachet.png', link: '/our-productsdecor/aroma-sachet' },
+  { name: 'Bath bombs', path: './images/bombs.png', link: '/our-products/self-care/bath-bomb' }
 ];
 
 export default function CategoryCarousel() {
