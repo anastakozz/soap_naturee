@@ -32,7 +32,7 @@ export async function getAnonymousToken() {
   }
 }
 
-export async function introspectToken(token:string) {
+export async function introspectToken(token: string) {
   try {
     const response = await axios({
       method: 'post',
@@ -47,7 +47,7 @@ export async function introspectToken(token:string) {
   }
 }
 
-export async function refreshToken(refreshToken:string) {
+export async function refreshToken(refreshToken: string) {
   try {
     const response = await axios({
       method: 'post',

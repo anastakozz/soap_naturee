@@ -1,6 +1,6 @@
 import { introspectToken, refreshToken } from '../../services/registration.service';
 import { tokenNames } from '../enums';
-const { userToken, userTokenRefresh, anonymous, anonymousRefresh } = tokenNames;
+const { userToken, anonymous } = tokenNames;
 
 async function setRefreshedToken(storageKey: string) {
   const refresh = localStorage.getItem(`${storageKey}Refresh`);

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants';
 import { getSpecificCart } from './handleCart';
 import { tokenNames } from '../lib/enums';
-const { userToken, userTokenRefresh, anonymous, anonymousRefresh } = tokenNames;
+const { userToken, anonymous } = tokenNames;
 
 const HEADERS = {
   Authorization: 'Basic ' + btoa(`${clientId}:${secret}`),
