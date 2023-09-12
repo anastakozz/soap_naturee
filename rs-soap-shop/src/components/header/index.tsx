@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { DarkModeButton } from '../darkModeButton';
 import LoginArea from '../loginArea/loginAreaDesctop';
 import Navigation from '../navigation/navigationLight';
@@ -51,9 +51,10 @@ function Header() {
   return (
     <header data-testid='header' className='bg-primaryColor dark:bg-grayLColor transition relative'>
       <div className='max-w-[1440px] mx-auto px-4 flex justify-between items-center h-24 lg:px-big'>
-        <img src='/images/logo-light.png' width='142' height='70px' alt='logo' className='block dark:hidden' />
-        <img src='/images/logo-dark.png' width='142' height='70px' alt='logo' className='hidden dark:block' />
-
+        <Link to="/">
+          <img src='/images/logo-light.png' width='142' height='70px' alt='logo' className='block dark:hidden' />
+          <img src='/images/logo-dark.png' width='142' height='70px' alt='logo' className='hidden dark:block' />
+        </Link>
         <Navigation />
         <NavigationModal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} isLoggedIn={isLoggedIn} />
         <div className='flex items-center'>
