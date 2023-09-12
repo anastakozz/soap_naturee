@@ -33,17 +33,14 @@ function App() {
 
   const setAnonymousToken = async () => {
     const id = await getAnonymousToken();
-    console.log('got anonymous id');
     localStorage.setItem(`${anonymous}`, JSON.stringify(id.data));
     localStorage.setItem(`${anonymousRefresh}`, id.data.refresh_token);
-    console.log('token is set: ' + JSON.stringify(id.data));
     setHasToken(true);
   };
 
   useEffect(() => {
     if (!isLoggedIn && !isSeenBefore) {
       setAnonymousToken();
-      console.log('hello new visitor');
     } else {
       setHasToken(true);
     }
