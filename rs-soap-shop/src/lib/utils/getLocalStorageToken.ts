@@ -1,21 +1,23 @@
 import { introspectToken, refreshToken } from '../../services/registration.service';
+import { tokenNames } from '../enums';
+const { userToken, userTokenRefresh, anonymous, anonymousRefresh } = tokenNames;
 
 async function setRefreshedToken(storageKey: string) {
   const refresh = localStorage.getItem(`${storageKey}Refresh`);
   const newToken = await refreshToken(refresh);
-  const dataToSet = JSON.stringify(newToken.data)
+  const dataToSet = JSON.stringify(newToken.data);
   localStorage.setItem(`${storageKey}`, dataToSet);
   console.log('token is refreshed. new token: ' + dataToSet);
   return newToken.data.access_token;
 }
 
 export async function getTokenFromStorage() {
-  const isLoggedIn = !!localStorage.getItem('token');
+  const isLoggedIn = !!localStorage.getItem(`${userToken}`);
   console.log('is loggedIn = ' + isLoggedIn);
 
   const token = isLoggedIn
-    ? JSON.parse(localStorage.getItem('token')).access_token
-    : JSON.parse(localStorage.getItem('anonymousToken')).access_token;
+    ? JSON.parse(localStorage.getItem(`${userToken}`)).access_token
+    : JSON.parse(localStorage.getItem(`${anonymous}`)).access_token;
 
   const check = await introspectToken(token);
   console.log('token is ' + token);
@@ -24,8 +26,8 @@ export async function getTokenFromStorage() {
   if (check) {
     return token;
   } else if (isLoggedIn) {
-    return await setRefreshedToken('token');
+    return await setRefreshedToken(`${userToken}`);
   } else {
-    return await setRefreshedToken('anonymousToken');
+    return await setRefreshedToken(`${anonymous}`);
   }
 }
