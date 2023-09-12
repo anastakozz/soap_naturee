@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants';
-import { getActiveCart } from './cart.service';
+import { getSpecificCart } from './handleCart';
 
 const HEADERS = {
   Authorization: 'Basic ' + btoa(`${clientId}:${secret}`),
@@ -20,10 +20,9 @@ export async function login(email: string, password: string) {
     const token = JSON.parse(localStorage.getItem('token')).access_token;
     const anonimousToken = localStorage.getItem('anonimousToken');
 
-    const cart = await getActiveCart(anonimousToken);
-    console.log(cart);
-
+    const cart = await getSpecificCart(anonimousToken);
     const anonymousCart = { id: cart.data.id, typeId: 'cart' };
+    localStorage.removeItem('anonimousToken');
 
     return axios.post(
       `${apiUrl}/${projectKey}/login`,

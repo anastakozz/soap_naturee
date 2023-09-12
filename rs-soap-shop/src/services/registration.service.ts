@@ -70,7 +70,7 @@ export async function createCustomer(data: Partial<RegistrationData>): Promise<R
       },
       headers: { Authorization: `Bearer ${accessKey}` }
     });
-    return { isSuccess: true, message: response.data.customer.id };
+    return { isSuccess: true, data: response.data.customer.id, message: 'Account has been succefully created' };
   } catch (error) {
     console.log(error);
     if (error instanceof AxiosError) {

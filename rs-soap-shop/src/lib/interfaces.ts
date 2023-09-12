@@ -92,6 +92,8 @@ export interface ResultProps {
   isSuccess?: boolean | null;
   message: string;
   isVisible?: boolean;
+  data?: string;
+  disableRedirect?: boolean;
 }
 
 export interface BannerProps {
@@ -125,9 +127,23 @@ export interface Product {
     prices: Price[];
     id: number;
   };
+  variant?: {
+    attributes: ProductAttributes[];
+    images: ProductImage[];
+    prices: Price[];
+    id: number;
+  };
+  price?: Price;
+  totalPrice?: {
+    centAmount: number;
+    currencyCode: string;
+    fractionDigits: number;
+    type: string;
+  };
   metaTitle: {
     en: string;
   };
+  quantity?: number;
   metaDescription: {
     en: string;
   };
