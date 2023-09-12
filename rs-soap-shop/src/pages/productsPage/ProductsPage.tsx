@@ -19,6 +19,12 @@ function ProductsPage() {
   let isLoading = false;
   let currentPage = 1;
 
+  useEffect(() => {
+    return () => {
+      sessionStorage.setItem('query', '');
+    };
+  }, []);
+
   function updateSearchedProducts(products: Product[]) {
     setProducts(products);
   }
