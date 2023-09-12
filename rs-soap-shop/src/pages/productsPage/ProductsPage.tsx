@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import BannerPageName from '../../components/bannerPageName';
 import { useParams } from 'react-router-dom';
 import { getCategoryId } from '../../services/category.service';
-import { getFiltered, getProductsList } from '../../services/product.service';
+import { getFiltered } from '../../services/product.service';
 import { Product } from '../../lib/interfaces';
 import scrollToTop from '../../lib/utils/scrollToTop';
 import LoadingSpinner from '../../components/loading/loading';
@@ -12,7 +12,7 @@ import LoadingSpinner from '../../components/loading/loading';
 function ProductsPage() {
   const [products, setProducts] = useState<Product[]>();
   const { category, subcategory } = useParams();
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(sessionStorage.getItem('query'));
   const [isLoadingNewProducts, setIsLoadingNewProducts] = useState(false);
   const [isEndOfPage, setIsEndOfPage] = useState(false);
   const [isUpdatingProducts, setIsUpdatingProducts] = useState(false);
@@ -25,27 +25,10 @@ function ProductsPage() {
 
   function changeQuery(options: string): void {
     setQuery(options);
-    console.log('global query updated');
+    sessionStorage.setItem('query', options);
   }
 
-  function updateProducts() {
-    currentPage = 1;
-    try {
-      if (!category && !subcategory) {
-        getProductsList(true, currentPage).then(pageProducts => {
-          isLoading = false;
-          setIsLoadingNewProducts(false);
-          if (pageProducts.length > 0) {
-            setProducts(pageProducts);
-          }
-          setIsUpdatingProducts(false);
-        });
-        return;
-      }
-    } catch {
-      return;
-    }
-
+  function updateProductsInCategories() {
     getCategoryId(
       subcategory
         ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
@@ -65,15 +48,13 @@ function ProductsPage() {
   useEffect(() => {
     setIsUpdatingProducts(true);
     setIsEndOfPage(false);
-    updateProducts();
-    if (query) {
-      if (category || subcategory) {
-        updateProducts();
-      } else {
-        getFiltered(`?${query}`, currentPage).then(products => {
-          setProducts(products);
-        });
-      }
+    if (category || subcategory) {
+      updateProductsInCategories();
+    } else {
+      getFiltered(`?${sessionStorage.getItem('query')}`, currentPage).then(items => {
+        setProducts(items);
+        setIsUpdatingProducts(false);
+      });
     }
   }, [category, subcategory, query]);
 
@@ -100,7 +81,7 @@ function ProductsPage() {
 
     currentPage += 1;
 
-    getProductsList(true, currentPage)
+    getFiltered(`?${sessionStorage.getItem('query')}`, currentPage)
       .then(nextPageProducts => {
         isLoading = false;
         setIsLoadingNewProducts(false);
@@ -124,7 +105,7 @@ function ProductsPage() {
         ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
         : category.charAt(0).toUpperCase() + category.slice(1)
     ).then(categoryId => {
-      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, currentPage)
+      getFiltered(`?filter=categories.id:"${categoryId}"&${sessionStorage.getItem('query')}`, currentPage)
         .then(nextPageProducts => {
           isLoading = false;
           setIsLoadingNewProducts(false);
