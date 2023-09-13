@@ -80,3 +80,5 @@
 
 //   expect(screen.queryByText('SALE')).not.toBeInTheDocument();
 // });
+
+export {}
