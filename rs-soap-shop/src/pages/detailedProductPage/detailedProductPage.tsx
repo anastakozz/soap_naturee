@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { getProductByKey } from '../../services/product.service';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DetailsProps, ResultProps } from '../../lib/interfaces';
 import CarouselDefault from '../../components/carousel';
 import toDetailsAdapter from '../../lib/utils/productDataAdapters.ts/toDetailsAdapter';
@@ -10,6 +10,7 @@ import AddButton from './addButton';
 import RemoveButton from './removeButton';
 import { sendToCart, getProductsInCart, removeFromCart } from '../../services/handleCart';
 import ResultMessage from '../../components/ResultMessage';
+import { CartContext } from '../../App';
 
 function DetailedProductPage() {
   const [submitResult, setSubmitResult] = useState<ResultProps>({
@@ -19,7 +20,7 @@ function DetailedProductPage() {
   });
   const [isInCart, setIsInCart] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
-
+  const [cart, setCart] = useContext(CartContext);
   const [isModalVisible, setModalVisibility] = useState(false);
   const [data, initProductData] = useState<DetailsProps | null>(null);
   const { key } = useParams();
@@ -55,7 +56,9 @@ function DetailedProductPage() {
   async function handleAddClick() {
     try {
       setIsSending(true);
-      await sendToCart(data.productId);
+      sendToCart(data.productId).then(res => {
+        setCart({ ...cart, ...res.data });
+      });
     } catch (err) {
       console.log(err);
       setIsSending(false);
@@ -69,7 +72,9 @@ function DetailedProductPage() {
     try {
       setIsSending(true);
       console.log('remove from cart');
-      await removeFromCart(data.productId);
+      removeFromCart(data.productId).then(res => {
+        setCart({ ...cart, ...res.data });
+      });
       setSubmitResult({
         isSuccess: true,
         message: 'Product has been removed from cart',

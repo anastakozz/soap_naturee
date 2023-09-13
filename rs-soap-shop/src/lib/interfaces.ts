@@ -106,6 +106,7 @@ export interface BannerProps {
 
 export interface Product {
   id: string;
+  productKey?: string;
   version: string;
   productType: {
     typeId: string;
