@@ -2,17 +2,65 @@ import React, { useState } from 'react';
 
 import { Product } from '../../lib/interfaces';
 import DeleteIcon from '../../icons/deleteIcon';
+import { updateProductInCart } from '../../services/cart.service';
+import { NavLink } from 'react-router-dom';
 
-export function CartListItem({ el }: { el: Product }) {
+export function CartListItem({
+  token,
+  el,
+  cartId,
+  version,
+  onUpdate
+}: {
+  token: string;
+  el: Product;
+  cartId: string;
+  version: number;
+  onUpdate: () => Promise<void>;
+}) {
   const [amount, setAmount] = useState(el.quantity);
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
+
+  const onDelete = (lineItemId: string) => {
+    const actions = [
+      {
+        action: 'changeLineItemQuantity',
+        lineItemId: lineItemId,
+        quantity: 0
+      }
+    ];
+    updateProductInCart(token, cartId, actions, version).then(() => {
+      onUpdate();
+    });
+  };
+
+  const onChangeAmount = (lineItemId: string, quantity: number) => {
+    setButtonsDisabled(true);
+    const actions = [
+      {
+        action: 'changeLineItemQuantity',
+        lineItemId: lineItemId,
+        quantity: quantity
+      }
+    ];
+    updateProductInCart(token, cartId, actions, version).then(() => {
+      onUpdate().then(() => {
+        setButtonsDisabled(false);
+      });
+    });
+  };
 
   return (
     <div className='p-4 border-2 border-dotted border-accentColor dark:border-basicColor rounded-normal w-full mb-4 flex flex-col md:flex-row items-start md:items-center justify-between'>
       <div className='flex items-center  justify-start mb-4 md:mb-0'>
         <div className='border-2 border-accentColor dark:border-basicColor rounded-normal overflow-hidden flex justify-center items-center w-[100px] h-[100px] shrink-0 mr-4'>
-          <img src={el.variant.images[0].url} alt=''></img>
+          <img className='w-full h-full object-cover' src={el.variant.images[0].url} alt=''></img>
         </div>
-        <h3 className='text-accentColor dark:text-basicColor font-bold mr-2 text-center md:text-start'>{el.name.en}</h3>
+        <NavLink to={`/product/${el.productKey}`}>
+          <h3 className='text-accentColor dark:text-basicColor font-bold mr-2 text-center md:text-start hover:text-accentDarkColor dark:hover:text-accentDarkColor'>
+            {el.name.en}
+          </h3>
+        </NavLink>
       </div>
       <div className='flex items-center flex-wrap'>
         <div>
@@ -44,8 +92,9 @@ export function CartListItem({ el }: { el: Product }) {
         <div className='flex mr-4'>
           <div
             onClick={() => {
-              if (amount > 1) {
+              if (amount > 1 && !buttonsDisabled) {
                 setAmount(amount - 1);
+                onChangeAmount(el.id, amount - 1);
               }
             }}
             className='cursor-pointer flex justify-center items-center w-[20px] bg-graySColor hover:bg-grayMColor transition'
@@ -54,7 +103,6 @@ export function CartListItem({ el }: { el: Product }) {
           </div>
           <input
             onChange={e => {
-              // setAmount(parseInt(e.target.value));
               console.log(e.target.value);
             }}
             className='w-[30px] text-center'
@@ -63,7 +111,10 @@ export function CartListItem({ el }: { el: Product }) {
           />
           <div
             onClick={() => {
-              setAmount(amount + 1);
+              if (!buttonsDisabled) {
+                setAmount(amount + 1);
+                onChangeAmount(el.id, amount + 1);
+              }
             }}
             className='cursor-pointer flex justify-center items-center w-[20px] bg-graySColor hover:bg-grayMColor transition'
           >
@@ -77,7 +128,7 @@ export function CartListItem({ el }: { el: Product }) {
           })}
         </p>
 
-        <button>
+        <button onClick={() => onDelete(el.id)}>
           <DeleteIcon />
         </button>
       </div>

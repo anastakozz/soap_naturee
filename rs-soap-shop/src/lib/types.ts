@@ -51,3 +51,9 @@ export type responseObject = {
 export type ProductListItem = {
   [key: string]: string | responseObject;
 };
+
+export type CartActionType = {
+  action: string;
+  lineItemId: string;
+  quantity: number;
+};

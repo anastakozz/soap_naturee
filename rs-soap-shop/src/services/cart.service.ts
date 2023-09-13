@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { apiUrl, projectKey } from '../lib/constants';
+import { CartActionType } from '../lib/types';
 
 export async function getActiveCart(token: string) {
   try {
@@ -90,6 +91,35 @@ export async function updateCart(token: string, cartId: string, cartVersion: num
       headers: { Authorization: `Bearer ${token}` }
     });
     return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export function updateProductInCart(token: string, id: string, actions: CartActionType[], version: number) {
+  try {
+    return axios.post(
+      `${apiUrl}/${projectKey}/me/carts/${id}`,
+      { version, actions },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export function deleteCart(token: string, id: string, version: number) {
+  try {
+    return axios.delete(`${apiUrl}/${projectKey}/me/carts/${id}?version=${version}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   } catch (e) {
     console.log(e);
   }

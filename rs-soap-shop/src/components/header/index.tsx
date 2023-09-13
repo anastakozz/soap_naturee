@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import { NavLink } from 'react-router-dom';
 import { DarkModeButton } from '../darkModeButton';
@@ -11,8 +11,36 @@ import NavigationModal from '../navigation/navigationModal';
 import { tokenNames } from '../../lib/enums';
 const { userToken } = tokenNames;
 
+import { CartContext } from '../../App';
+import { getActiveCart } from '../../services/cart.service';
+import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
+
 function Header() {
+  const [cart, setCart] = useContext(CartContext);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    getTokenFromStorage().then(res => {
+      setToken(res);
+    });
+  }, []);
+
+  const amount = cart ? cart.lineItems.length : 0;
+
+  useEffect(() => {
+    if (token) {
+      getActiveCart(token)
+        .then(response => {
+          setCart(response.data);
+          console.log(response.data);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }, [token]);
 
   useEffect(() => {
     const changeWidth = () => {
@@ -60,14 +88,19 @@ function Header() {
         <NavigationModal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} isLoggedIn={isLoggedIn} />
         <div className='flex items-center'>
           <DarkModeButton onChange={handleChangeMode} />
-          <div className='flex items-center hidden md:flex'>
-            <NavLink
-              className='text-basicColor mr-4 hover:scale-110 transition dark:text-primaryColor transition'
-              to={'/cart'}
-            >
+          <NavLink
+            className='text-basicColor mr-4 hover:scale-110 transition dark:text-primaryColor transition'
+            to={'/cart'}
+          >
+            <div className='relative'>
               <CartIconDark />
               <CartIcon />
-            </NavLink>
+              <div className='opacity-75 rounded-full w-[20px] h-[20px] flex items-center justify-center bg-accentColor border-2 border-primaryColor text-primaryColor text-[10px] absolute z-10 top-[-15px] right-[-15px]'>
+                {amount}
+              </div>
+            </div>
+          </NavLink>
+          <div className='flex items-center hidden md:flex'>
             <LoginArea isLoggedIn={isLoggedIn} />
           </div>
           <BurgerMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} isMenuOpen={isMenuOpen} />

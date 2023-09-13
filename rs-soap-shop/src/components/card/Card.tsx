@@ -1,12 +1,14 @@
 import { ProductCardProps } from '../../lib/interfaces';
 import { useNavigate } from 'react-router-dom';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useContext, useState } from 'react';
 import { sendToCart } from '../../services/handleCart';
 import SendButton from './SendButton';
+import { CartContext } from '../../App';
 
 export default function Card(item: ProductCardProps) {
   const [isInCart, setIsInCart] = useState<boolean>(item.isInCart);
   const [isSending, setIsSending] = useState<boolean>(false);
+  const [cart, setCart] = useContext(CartContext);
 
   const navigate = useNavigate();
 
@@ -15,7 +17,9 @@ export default function Card(item: ProductCardProps) {
     if (target.classList.contains('cart-button')) {
       try {
         setIsSending(true);
-        await sendToCart(item.productId);
+        sendToCart(item.productId).then(res => {
+          setCart({ ...cart, ...res.data });
+        });
       } catch (err) {
         console.log(err);
         setIsSending(false);
