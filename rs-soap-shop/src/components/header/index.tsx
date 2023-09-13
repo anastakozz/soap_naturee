@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { DarkModeButton } from '../darkModeButton';
 import LoginArea from '../loginArea/loginAreaDesctop';
 import Navigation from '../navigation/navigationLight';

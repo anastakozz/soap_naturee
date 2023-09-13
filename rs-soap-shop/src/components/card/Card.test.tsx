@@ -55,19 +55,19 @@ it('navigates on click', () => {
   expect(mockedUsedNavigate).toBeCalled();
 });
 
-// it('does not navigate on click on button Add to Cart', () => {
-//   act(() => {
-//     render(
-//       <BrowserRouter>
-//         <Card {...propsData} />
-//       </BrowserRouter>
-//     );
+it('does not navigate on click on button Add to Cart', () => {
+  act(() => {
+    render(
+      <BrowserRouter>
+        <Card {...propsData} />
+      </BrowserRouter>
+    );
 
-//   });
-//   act(()=>{fireEvent.click(screen.getByRole('button'));})
+  });
+  act(()=>{fireEvent.click(screen.getByRole('button'));})
 
-//   expect(mockedUsedNavigate).not.toBeCalled();
-// });
+  expect(mockedUsedNavigate).not.toBeCalled();
+});
 
 it('renders no sale info if !isOnSale', () => {
   act(() => {
