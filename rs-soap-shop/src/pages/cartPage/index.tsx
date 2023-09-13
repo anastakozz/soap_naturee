@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import scrollToTop from '../../lib/utils/scrollToTop';
 import BannerPageName from '../../components/bannerPageName';
 import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
@@ -8,20 +8,22 @@ import { Product } from '../../lib/interfaces';
 import AdditionalButton from '../../components/buttons/additionalButton';
 import { CartListItem } from './CartListItem';
 import { EmptyCart } from './EmptyCart';
+import { CartContext } from '../../App';
 
 function CartPage() {
-  const [activeCart, setActiveCart] = useState(null);
+  const [cart, setCart] = useContext(CartContext);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const systemToken = getTokenFromStorage();
-    setToken(systemToken);
+    getTokenFromStorage().then(res => {
+      setToken(res);
+    });
   }, []);
 
   async function updateCart() {
     getActiveCart(token)
       .then(response => {
-        setActiveCart(response.data);
+        setCart(response.data);
         console.log(response.data);
       })
       .catch(err => {
@@ -30,20 +32,22 @@ function CartPage() {
   }
 
   const handleCleanCart = () => {
-    deleteCart(token, activeCart.id, activeCart.version).then(() => setActiveCart(null));
+    deleteCart(token, cart.id, cart.version).then(() => setCart(null));
   };
 
   useEffect(() => {
     scrollToTop();
-    updateCart();
-  }, []);
+    if (token) {
+      updateCart();
+    }
+  }, [token]);
 
   return (
     <>
       <div className='bg-secondaryColor dark:bg-grayMColor'>
         <BannerPageName>MY CART</BannerPageName>
         <div className='py-sm px-sm max-w-[1440px] mx-auto lg:px-big'>
-          {activeCart?.lineItems && activeCart?.lineItems.length > 0 ? (
+          {cart?.lineItems && cart?.lineItems.length > 0 ? (
             <div className='flex flex-col'>
               <div className='flex flex-col border-b-2 border-accentColor dark:border-basicColor'>
                 <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
@@ -52,13 +56,13 @@ function CartPage() {
                   </h3>
                   <AdditionalButton onClick={handleCleanCart}>Clean</AdditionalButton>
                 </div>
-                {activeCart?.lineItems.map((el: Product) => (
+                {cart?.lineItems.map((el: Product) => (
                   <CartListItem
                     token={token}
-                    cartId={activeCart.id}
+                    cartId={cart.id}
                     key={el.id}
                     el={el}
-                    version={activeCart.version}
+                    version={cart.version}
                     onUpdate={updateCart}
                   />
                 ))}

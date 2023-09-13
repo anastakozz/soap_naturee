@@ -41,9 +41,11 @@ export const LoginForm = () => {
           localStorage.setItem(`${userToken}`, JSON.stringify(authData));
           localStorage.setItem(`${userTokenRefresh}`, authData.refresh_token);
           login(email, password).then(resp => {
-            const userData = resp.data;
-            localStorage.setItem('user', JSON.stringify(userData));
-            navigate('/');
+            const userData = resp?.data;
+            if (userData) {
+              localStorage.setItem('user', JSON.stringify(userData));
+              navigate('/');
+            }
           });
         })
         .catch(err => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import { NavLink } from 'react-router-dom';
 import { DarkModeButton } from '../darkModeButton';
@@ -11,9 +11,36 @@ import NavigationModal from '../navigation/navigationModal';
 import { tokenNames } from '../../lib/enums';
 const { userToken } = tokenNames;
 
+import { CartContext } from '../../App';
+import { getActiveCart } from '../../services/cart.service';
+import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
+
 function Header() {
+  const [cart, setCart] = useContext(CartContext);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const amount = 3;
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    getTokenFromStorage().then(res => {
+      setToken(res);
+    });
+  }, []);
+
+  const amount = cart ? cart.lineItems.length : 0;
+
+  useEffect(() => {
+    if (token) {
+      getActiveCart(token)
+        .then(response => {
+          setCart(response.data);
+          console.log(response.data);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }, [token]);
 
   useEffect(() => {
     const changeWidth = () => {
