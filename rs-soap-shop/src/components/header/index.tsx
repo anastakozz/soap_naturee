@@ -8,6 +8,8 @@ import CartIconDark from '../../icons/cartIconDark';
 import CartIcon from '../../icons/cartIcon';
 import BurgerMenuButton from '../burgerMenuButton';
 import NavigationModal from '../navigation/navigationModal';
+import { tokenNames } from '../../lib/enums';
+const { userToken } = tokenNames;
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +49,7 @@ function Header() {
     }
   };
 
-  const isLoggedIn = !!localStorage.getItem('token');
+  const isLoggedIn = !!localStorage.getItem(`${userToken}`);
 
   return (
     <header data-testid='header' className='bg-primaryColor dark:bg-grayLColor transition relative'>

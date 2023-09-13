@@ -11,10 +11,15 @@ import { EmptyCart } from './EmptyCart';
 
 function CartPage() {
   const [activeCart, setActiveCart] = useState(null);
-  const token = getTokenFromStorage();
+  const [token, setToken] = useState(null);
 
-  const updateCart = () => {
-    return getActiveCart(token)
+  useEffect(() => {
+    const systemToken = getTokenFromStorage();
+    setToken(systemToken);
+  }, []);
+
+  async function updateCart() {
+    getActiveCart(token)
       .then(response => {
         setActiveCart(response.data);
         console.log(response.data);
@@ -22,7 +27,7 @@ function CartPage() {
       .catch(err => {
         console.error(err);
       });
-  };
+  }
 
   const handleCleanCart = () => {
     deleteCart(token, activeCart.id, activeCart.version).then(() => setActiveCart(null));

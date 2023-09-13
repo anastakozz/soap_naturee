@@ -7,6 +7,8 @@ import { validatePassword } from './validateFunctions/password';
 import { LoginData } from '../../lib/interfaces';
 import { useNavigate } from 'react-router-dom';
 import { getToken, login } from '../../services/login.service';
+import { tokenNames } from '../../lib/enums';
+const { userToken, userTokenRefresh } = tokenNames;
 
 export const LoginForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -36,7 +38,8 @@ export const LoginForm = () => {
         .then(resp => {
           console.log(resp.data);
           const authData = resp.data;
-          localStorage.setItem('token', JSON.stringify(authData));
+          localStorage.setItem(`${userToken}`, JSON.stringify(authData));
+          localStorage.setItem(`${userTokenRefresh}`, authData.refresh_token);
           login(email, password).then(resp => {
             const userData = resp.data;
             localStorage.setItem('user', JSON.stringify(userData));

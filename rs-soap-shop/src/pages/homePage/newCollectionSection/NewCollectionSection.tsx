@@ -16,7 +16,7 @@ export default function NewCollectionSection() {
           title: 'Discover Our New Collection',
           description: 'Handmade soap in the form of flowers and food',
           buttonText: 'BUY NOW',
-          linkAdress: '/our-products'
+          linkAdress: '/our-products/new'
         }}
       />
     </div>

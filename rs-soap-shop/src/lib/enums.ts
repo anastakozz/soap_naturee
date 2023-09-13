@@ -13,3 +13,10 @@ export enum RemoveMessage {
   inCart = 'Remove from Cart',
   inProgress = '...Removing...'
 }
+
+export enum tokenNames {
+  userToken = 'userToken',
+  userTokenRefresh = 'userTokenRefresh',
+  anonymous = 'anonymousToken',
+  anonymousRefresh = 'anonymousTokenRefresh'
+}
