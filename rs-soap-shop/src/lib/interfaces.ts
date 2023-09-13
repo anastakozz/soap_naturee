@@ -27,7 +27,7 @@ export interface InputProps {
 }
 
 export interface OurProductsCardsProps {
-  products?: Product[] | null;
+  products?: Product[];
   changeQuery?: (options: string) => void;
 }
 
@@ -231,5 +231,5 @@ export interface NavigationViewProps {
     subcategory?: string;
   };
   changeQuery?: (options: string) => void;
-  updateSearchedProducts?: (adaptedProducts: Product[]) => void;
+  updateSearchedProducts?: (products: Product[]) => void;
 }

@@ -13,11 +13,13 @@ export default function OurProductsCards({ products }: OurProductsCardsProps) {
       return data;
     };
 
-    if (!items && !isDataLoading) {
+    if (!isDataLoading) {
       setDataLoading(true);
 
       fetchData()
-        .then(data => setItems(data))
+        .then(data => {
+          setItems(data);
+        })
         .catch(e => {
           console.log(e);
         })
@@ -25,13 +27,13 @@ export default function OurProductsCards({ products }: OurProductsCardsProps) {
           setDataLoading(false);
         });
     }
-  }, []);
+  }, [products]);
 
   return (
     <>
       {items ? (
-        <div className='bg-primaryColor dark:bg-grayMColor h-auto p-sm text-center px-big flex flex-col items-center'>
-          <div className='flex flex-wrap justify-center md:justify-between mt-sm max-w-[1245px] pb-sm '>
+        <div className='bg-primaryColor dark:bg-grayMColor h-auto p-sm text-center px-big flex flex-col flex-1 items-center'>
+          <div className='flex flex-wrap justify-center md:justify-between mt-sm max-w-[1245px] pb-sm'>
             {items.length === 0 ? (
               <p>No products to show...</p>
             ) : (
