@@ -82,7 +82,10 @@ function Header() {
   return (
     <header data-testid='header' className='bg-primaryColor dark:bg-grayLColor transition relative'>
       <div className='max-w-[1440px] mx-auto px-4 flex justify-between items-center h-24 lg:px-big'>
-        <NavLink to={'/'} className='text-basicColor dark:text-primaryColor drop-shadow-sm hover:text-accentColor dark:hover:text-accentColor active:scale-95 transition'>
+        <NavLink
+          to={'/'}
+          className='text-basicColor dark:text-primaryColor drop-shadow-sm hover:text-accentColor dark:hover:text-accentColor active:scale-95 transition'
+        >
           <ShopLogo></ShopLogo>
         </NavLink>
         <Navigation />
