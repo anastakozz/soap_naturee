@@ -1,4 +1,5 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState, createContext } from 'react';
+
 import './App.css';
 import Header from './components/header';
 import { Route, Routes } from 'react-router-dom';
@@ -16,12 +17,17 @@ import { getAnonymousToken } from './services/registration.service';
 import { tokenNames } from './lib/enums';
 const { userToken, anonymous, anonymousRefresh } = tokenNames;
 
+export const CartContext = createContext(null);
+
 const AppLayout = ({ children }: { children: ReactElement }) => {
+  const [cart, setCart] = useState(null);
   return (
     <>
-      <Header />
-      {children}
-      <Footer />
+      <CartContext.Provider value={[cart, setCart]}>
+        <Header />
+        {children}
+        <Footer />
+      </CartContext.Provider>
     </>
   );
 };
