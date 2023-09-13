@@ -52,7 +52,7 @@ it('navigates on click', () => {
     );
   });
   fireEvent.click(screen.getByRole('product-card'));
-  expect(mockedUsedNavigate).toBeCalled;
+  expect(mockedUsedNavigate).toBeCalled();
 });
 
 // it('does not navigate on click on button Add to Cart', () => {
@@ -66,7 +66,7 @@ it('navigates on click', () => {
 //   });
 //   act(()=>{fireEvent.click(screen.getByRole('button'));})
 
-//   expect(mockedUsedNavigate).not.toBeCalled;
+//   expect(mockedUsedNavigate).not.toBeCalled();
 // });
 
 it('renders no sale info if !isOnSale', () => {
