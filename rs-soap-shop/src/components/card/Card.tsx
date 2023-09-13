@@ -35,7 +35,7 @@ export default function Card(item: ProductCardProps) {
   return (
     <div
       onClick={handleClick}
-      data-testid='card'
+      role='product-card'
       className='cursor-pointer relative transition w-[280px] hover:scale-[1.02] hover:drop-shadow-lg active:scale-100 active:drop-shadow-none'
     >
       <img className='object-cover h-[300px] w-full ' src={item.imgSrc} alt=''></img>
