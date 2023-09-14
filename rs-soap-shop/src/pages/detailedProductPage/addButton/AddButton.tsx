@@ -21,6 +21,13 @@ export default function AddButton({ isInCart, isSending, onClick }: AddButtonPro
       </button>
     );
   } else {
-    return <button role='active-button' className={classesActive} onClick={onClick} {...{ children: CardMessage.toCart }}></button>;
+    return (
+      <button
+        role='active-button'
+        className={classesActive}
+        onClick={onClick}
+        {...{ children: CardMessage.toCart }}
+      ></button>
+    );
   }
 }

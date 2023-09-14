@@ -31,7 +31,7 @@ function ProductsPage() {
     sessionStorage.setItem('query', '');
     sessionStorage.setItem('currentPage', '');
     sessionStorage.setItem('isLoading', 'false');
-  })
+  });
 
   function updateSearchedProducts(products: Product[]) {
     setProducts(products);
@@ -48,12 +48,11 @@ function ProductsPage() {
         ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
         : category.charAt(0).toUpperCase() + category.slice(1)
     ).then(categoryId => {
-      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, 1)
-        .then(products => {
+      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, 1).then(products => {
         setProducts(products);
         setIsUpdatingProducts(false);
-          sessionStorage.setItem('isLoading', 'false');
-        })
+        sessionStorage.setItem('isLoading', 'false');
+      });
     });
   }
 
@@ -63,7 +62,7 @@ function ProductsPage() {
 
   useEffect(() => {
     sessionStorage.setItem('isLoading', 'true');
-    sessionStorage.setItem('currentPage', '1')
+    sessionStorage.setItem('currentPage', '1');
 
     setIsUpdatingProducts(true);
     setIsEndOfPage(false);
@@ -118,14 +117,17 @@ function ProductsPage() {
     if (sessionStorage.getItem('isLoading') === 'true') return;
     sessionStorage.setItem('isLoading', 'true');
     setIsLoadingNewProducts(true);
-    sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1))
+    sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1));
     console.log('должно смениться на 2', sessionStorage.getItem('currentPage'));
     getCategoryId(
       subcategory
         ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
         : category.charAt(0).toUpperCase() + category.slice(1)
     ).then(categoryId => {
-      getFiltered(`?filter=categories.id:"${categoryId}"&${sessionStorage.getItem('query')}`, +sessionStorage.getItem('currentPage'))
+      getFiltered(
+        `?filter=categories.id:"${categoryId}"&${sessionStorage.getItem('query')}`,
+        +sessionStorage.getItem('currentPage')
+      )
         .then(nextPageProducts => {
           sessionStorage.setItem('isLoading', 'false');
           setIsLoadingNewProducts(false);

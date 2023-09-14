@@ -1,4 +1,4 @@
-import RemoveButton, {RemoveButtonProps} from './RemoveButton';
+import RemoveButton, { RemoveButtonProps } from './RemoveButton';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 const mockedCallback = jest.fn();
