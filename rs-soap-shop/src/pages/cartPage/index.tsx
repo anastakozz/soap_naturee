@@ -9,10 +9,12 @@ import AdditionalButton from '../../components/buttons/additionalButton';
 import { CartListItem } from './CartListItem';
 import { EmptyCart } from './EmptyCart';
 import { CartContext } from '../../App';
+import { Spinner } from '@material-tailwind/react';
 
 function CartPage() {
   const [cart, setCart] = useContext(CartContext);
   const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getTokenFromStorage().then(res => {
@@ -21,13 +23,16 @@ function CartPage() {
   }, []);
 
   async function updateCart() {
+    setLoading(true);
     getActiveCart(token)
       .then(response => {
         setCart(response.data);
         console.log(response.data);
+        setLoading(false);
       })
       .catch(err => {
         console.error(err);
+        setLoading(false);
       });
   }
 
@@ -47,7 +52,7 @@ function CartPage() {
       <div className='bg-secondaryColor dark:bg-grayMColor flex-1'>
         <BannerPageName>MY CART</BannerPageName>
         <div className='py-sm px-sm max-w-[1440px] mx-auto lg:px-big'>
-          {cart?.lineItems && cart?.lineItems.length > 0 ? (
+          {cart?.lineItems && cart?.lineItems.length > 0 && (
             <div className='flex flex-col'>
               <div className='flex flex-col border-b-2 border-accentColor dark:border-basicColor'>
                 <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
@@ -83,9 +88,15 @@ function CartPage() {
                 <p className='text-h3 font-bold'>132400</p>
               </div>
             </div>
-          ) : (
+          )}
+          {cart?.lineItems.length == 0 && (
             <div>
               <EmptyCart />
+            </div>
+          )}
+          {loading && (
+            <div className='flex items-center justify-center'>
+              <Spinner />
             </div>
           )}
         </div>
