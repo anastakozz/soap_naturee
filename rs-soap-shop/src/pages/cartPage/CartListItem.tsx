@@ -21,6 +21,8 @@ export function CartListItem({
   const [amount, setAmount] = useState(el.quantity);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
 
+  console.log(el);
+
   const onDelete = (lineItemId: string) => {
     const actions = [
       {
@@ -64,9 +66,9 @@ export function CartListItem({
       </div>
       <div className='flex items-center flex-wrap'>
         <div>
-          {el.price.discounted ? (
+          {el.discountedPrice ? (
             <>
-              <p className='line-through text-graySColor dark:text-grayMColor mr-4'>
+              <p className='line-through text-graySColor dark:accent-accentColor mr-4'>
                 {(el.price.value.centAmount / 100).toLocaleString('en-US', {
                   style: 'currency',
                   currency: el.price.value.currencyCode
@@ -74,9 +76,9 @@ export function CartListItem({
               </p>
 
               <p className='mr-4'>
-                {(el.price.discounted.value.centAmount / 100).toLocaleString('en-US', {
+                {(el.discountedPrice.value.centAmount / 100).toLocaleString('en-US', {
                   style: 'currency',
-                  currency: el.price.discounted.value.currencyCode
+                  currency: el.discountedPrice.value.currencyCode
                 })}
               </p>
             </>
