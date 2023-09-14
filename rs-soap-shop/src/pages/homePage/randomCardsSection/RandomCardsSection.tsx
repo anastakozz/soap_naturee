@@ -15,7 +15,7 @@ async function getRandomCardsData(): Promise<ProductCardProps[]> {
   if (data) {
     const shuffledData = shuffleProducts(data).slice(0, 6);
     const dataAdapted = shuffledData.map((product: Product) => {
-      const isInCart = cartProducts.includes(product.id);
+      const isInCart = cartProducts ? cartProducts.includes(product.id) : false;
       return toCardAdapter(product, isInCart);
     });
     return dataAdapted;
