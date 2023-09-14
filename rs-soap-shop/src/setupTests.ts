@@ -54,3 +54,4 @@ export function setAnonymousToLocalStorage() {
 }
 
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+setAnonymousToLocalStorage();
