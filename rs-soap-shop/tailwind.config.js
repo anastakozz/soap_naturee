@@ -80,5 +80,5 @@ module.exports = withMT({
       }
     }
   },
-  plugins: [require('daisyui')]
+  plugins: []
 });
