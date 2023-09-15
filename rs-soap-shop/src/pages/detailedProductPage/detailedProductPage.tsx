@@ -46,9 +46,11 @@ function DetailedProductPage() {
 
   function toggleModal(event: React.MouseEvent) {
     const target = event.target as HTMLElement;
+    console.log(target);
+    const list = target.classList;
     if (!isModalVisible && target.tagName === 'IMG') {
       setModalVisibility(!isModalVisible);
-    } else if (isModalVisible && target.classList.contains('closing-icon')) {
+    } else if (isModalVisible && (list.contains('closing-icon') || list.contains('back'))) {
       setModalVisibility(!isModalVisible);
     }
   }
