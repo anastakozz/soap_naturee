@@ -66,8 +66,18 @@ module.exports = withMT({
       backgroundImage: {
         'new-collection': "url('./pages/homePage/assets/candle_masked.png')",
         'sale-section': "url('./pages/homePage/assets/massage_soap.png')"
+      },
+      keyframes: {
+        slide: {
+          '0%': { transform: 'none' },
+          '100%': { transform: 'translate(-380px)' }
+        },
+        slideBack: {
+          '0%': { transform: 'none' },
+          '100%': { transform: 'translate(380px)' }
+        }
       }
     }
   },
-  plugins: []
+  plugins: [require('daisyui')]
 });
