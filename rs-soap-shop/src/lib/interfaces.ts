@@ -27,7 +27,7 @@ export interface InputProps {
 }
 
 export interface OurProductsCardsProps {
-  products?: ProductCardProps[] | null;
+  products?: Product[];
   changeQuery?: (options: string) => void;
 }
 
@@ -66,6 +66,7 @@ export interface ProductCardProps {
   isOnSale: boolean;
   newPrice?: string;
   productId: string;
+  isInCart?: boolean;
 }
 
 export interface RegistrationData {
@@ -91,6 +92,8 @@ export interface ResultProps {
   isSuccess?: boolean | null;
   message: string;
   isVisible?: boolean;
+  data?: string;
+  disableRedirect?: boolean;
 }
 
 export interface BannerProps {
@@ -103,6 +106,7 @@ export interface BannerProps {
 
 export interface Product {
   id: string;
+  productKey?: string;
   version: string;
   productType: {
     typeId: string;
@@ -124,9 +128,23 @@ export interface Product {
     prices: Price[];
     id: number;
   };
+  variant?: {
+    attributes: ProductAttributes[];
+    images: ProductImage[];
+    prices: Price[];
+    id: number;
+  };
+  price?: Price;
+  totalPrice?: {
+    centAmount: number;
+    currencyCode: string;
+    fractionDigits: number;
+    type: string;
+  };
   metaTitle: {
     en: string;
   };
+  quantity?: number;
   metaDescription: {
     en: string;
   };
@@ -213,5 +231,5 @@ export interface NavigationViewProps {
     subcategory?: string;
   };
   changeQuery?: (options: string) => void;
-  updateSearchedProducts?: (adaptedProducts: ProductCardProps[]) => void;
+  updateSearchedProducts?: (products: Product[]) => void;
 }

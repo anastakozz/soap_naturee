@@ -1,5 +1,7 @@
 import Navigation from '../navigation/navigationLight';
 import SocialMediaLinks from '../socialMediaLinks';
+import { NavLink } from 'react-router-dom';
+import ShopLogo from '../../icons/shopLogo';
 
 function Footer() {
   return (
@@ -7,8 +9,12 @@ function Footer() {
       <div className='max-w-[1440px] mx-auto px-4 flex flex-col lg:px-big py-4'>
         <div className='flex flex-col justify-between items-center md:flex-row'>
           <div className='hidden md:block'>
-            <img src='/images/logo-light.png' width='142' height='70px' alt='logo' className='block dark:hidden ' />
-            <img src='/images/logo-dark.png' width='142' height='70px' alt='logo' className='hidden dark:block' />
+            <NavLink
+              to={'/'}
+              className='text-basicColor dark:text-primaryColor drop-shadow-sm hover:text-accentColor dark:hover:text-accentColor active:scale-95 transition'
+            >
+              <ShopLogo></ShopLogo>
+            </NavLink>
           </div>
 
           <div className='hidden md:block'>

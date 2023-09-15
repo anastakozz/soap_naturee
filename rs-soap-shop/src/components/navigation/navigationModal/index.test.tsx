@@ -14,12 +14,10 @@ describe('NavigationModal', () => {
     const homeLink = getByText('Home');
     const productsLink = getByText('Our products');
     const aboutUsLink = getByText('About us');
-    const cartLink = getByText('My cart');
 
     expect(homeLink).toBeInTheDocument();
     expect(productsLink).toBeInTheDocument();
     expect(aboutUsLink).toBeInTheDocument();
-    expect(cartLink).toBeInTheDocument();
   });
 
   it('should call onClose when a navigation link is clicked', () => {

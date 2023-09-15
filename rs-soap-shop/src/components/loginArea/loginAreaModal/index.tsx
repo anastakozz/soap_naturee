@@ -1,9 +1,11 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import { tokenNames } from '../../../lib/enums';
+const { userToken } = tokenNames;
 
 function LoginAreaModal({ isLoggedIn, onClose }: { isLoggedIn: boolean; onClose: () => void }) {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem(`${userToken}`);
     navigate('/sign-in');
   };
   return (

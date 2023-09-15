@@ -6,27 +6,44 @@ import shuffleProducts from '../../../lib/utils/shuffleCards';
 import { Product, ProductCardProps } from '../../../lib/interfaces';
 import { getProductsList } from '../../../services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
+import { getProductsInCart } from '../../../services/handleCart';
 
-async function getCardsData(): Promise<ProductCardProps[]> {
+async function getRandomCardsData(): Promise<ProductCardProps[]> {
+  const cartProducts = await getProductsInCart();
   const data: Product[] = await getProductsList();
+
   if (data) {
     const shuffledData = shuffleProducts(data).slice(0, 6);
-    const dataAdapted = shuffledData.map((product: Product) => toCardAdapter(product));
+    const dataAdapted = shuffledData.map((product: Product) => {
+      const isInCart = cartProducts ? cartProducts.includes(product.id) : false;
+      return toCardAdapter(product, isInCart);
+    });
     return dataAdapted;
   }
 }
 
 export default function RandomCardsSection() {
   const [items, setItems] = useState<ProductCardProps[] | undefined>(undefined);
+  const [isDataLoading, setDataLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getCardsData();
-      setItems(data);
+      const data = await getRandomCardsData();
+      return data;
     };
-    fetchData().catch(e => {
-      console.log(e);
-    });
+
+    if (!items && !isDataLoading) {
+      setDataLoading(true);
+
+      fetchData()
+        .then(data => setItems(data))
+        .catch(e => {
+          console.log(e);
+        })
+        .finally(() => {
+          setDataLoading(false);
+        });
+    }
   }, []);
 
   return (

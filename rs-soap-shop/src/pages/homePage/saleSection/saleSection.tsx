@@ -9,7 +9,7 @@ export default function SaleSection() {
           title: 'Take a Look at Our Big Sale',
           description: 'Massage soap with loofah',
           buttonText: 'BUY NOW',
-          linkAdress: '/our-products'
+          linkAdress: '/our-products/sale'
         }}
       />
     </div>

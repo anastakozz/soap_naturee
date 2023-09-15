@@ -3,11 +3,13 @@ import ProfileIcon from '../../../icons/profileIcon';
 import ProfileIconDark from '../../../icons/profileIconDark';
 import LogoutIcon from '../../../icons/logoutIcon';
 import LogoutIconDark from '../../../icons/logoutIconDark';
+import { tokenNames } from '../../../lib/enums';
+const { userToken } = tokenNames;
 
 function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem(`${userToken}`);
     navigate('/sign-in');
   };
   return (

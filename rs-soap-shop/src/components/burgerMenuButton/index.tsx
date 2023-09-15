@@ -1,8 +1,16 @@
 // const isMenuOpen = true
-function BurgerMenuButton({ isMenuOpen, onClick }: { isMenuOpen: boolean; onClick: () => void }) {
+function BurgerMenuButton({
+  isMenuOpen,
+  onClick,
+  onCloseMenu
+}: {
+  isMenuOpen: boolean;
+  onClick: () => void;
+  onCloseMenu: () => void;
+}) {
   return isMenuOpen ? (
     <>
-      <div onClick={onClick}>
+      <div onClick={onCloseMenu}>
         <svg
           className='h-8 w-8 stroke-current text-grayLColor hover:text-accentColor dark:text-primaryColor dark:hover:text-accentColor transition cursor-pointer'
           viewBox='0 0 24 24'
