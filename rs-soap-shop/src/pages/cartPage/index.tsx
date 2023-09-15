@@ -22,7 +22,7 @@ function CartPage() {
     });
   }, []);
 
-  async function updateCart() {
+  async function refreshCart() {
     getCart()
       .then(response => {
         setCart(response.data);
@@ -50,7 +50,7 @@ function CartPage() {
     scrollToTop();
     setLoading(true);
 
-    updateCart()
+    refreshCart()
       .then(() => {
         setLoading(false);
       })
@@ -97,7 +97,7 @@ function CartPage() {
                     key={el.id}
                     el={el}
                     version={cart.version}
-                    onUpdate={updateCart}
+                    onUpdate={refreshCart}
                   />
                 ))}
               </div>
