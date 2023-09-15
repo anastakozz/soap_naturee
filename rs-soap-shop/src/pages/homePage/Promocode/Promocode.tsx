@@ -1,11 +1,18 @@
 import { Link } from 'react-router-dom';
 import SaleIcon from '../../../icons/saleIcon';
 import ArrowSmallIcon from '../../../icons/arrowSmallIcon';
+import classNames from 'classnames';
 
 export default function Promocode() {
   return (
     <Link to={'/our-products'}>
-      <div className='flex items-center justify-center transition p-sm bg-accentColor dark:bg-accentDarkColor text-center text-greyLColor dark:text-basicColor hover:text-secondaryColor dark:hover:text-secondaryColor'>
+      <div
+        className={classNames(
+          'flex items-center justify-center p-sm text-center transition',
+          ' bg-accentColor  text-greyLColor hover:text-secondaryColor',
+          'dark:bg-accentDarkColor dark:text-basicColor dark:hover:text-secondaryColor'
+        )}
+      >
         <div className='mr-sm'>
           <SaleIcon></SaleIcon>
         </div>

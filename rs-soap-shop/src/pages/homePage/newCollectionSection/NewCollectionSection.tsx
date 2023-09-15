@@ -1,8 +1,15 @@
+import classNames from 'classnames';
 import Banner from '../../../components/banner';
 
 export default function NewCollectionSection() {
   return (
-    <div className='bg-new-collection xxl:min-h-[746px] bg-no-repeat bg-left bg-cover p-sm md:p-big flex flex-row-reverse relative'>
+    <div
+      className={classNames(
+        'xxl:min-h-[746px] p-sm md:p-big relative',
+        'bg-new-collection bg-no-repeat bg-left bg-cover',
+        'flex flex-row-reverse'
+      )}
+    >
       <Banner
         {...{
           label: 'New Arrival',

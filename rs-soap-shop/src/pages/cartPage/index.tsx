@@ -15,7 +15,7 @@ function CartPage() {
   const [cart, setCart] = useContext(CartContext);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [cofirmation, setConfirmation] = useState(false);
+  const [confirmation, setConfirmation] = useState(false);
   useEffect(() => {
     getTokenFromStorage().then(res => {
       setToken(res);
@@ -62,7 +62,7 @@ function CartPage() {
   return (
     <>
       <div className='bg-secondaryColor dark:bg-grayMColor flex-1'>
-        {cofirmation && (
+        {confirmation && (
           <div data-testid='confirmation-prompt'>
             <div
               onClick={handleCloseConfirmation}
