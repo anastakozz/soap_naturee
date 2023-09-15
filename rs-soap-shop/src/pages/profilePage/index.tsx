@@ -148,7 +148,7 @@ function ProfilePage() {
 
   useEffect(() => {
     scrollToTop();
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('userToken')) {
       navigate('/sign-in');
     } else {
       refreshAccount();
