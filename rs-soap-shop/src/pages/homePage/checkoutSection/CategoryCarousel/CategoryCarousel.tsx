@@ -51,10 +51,10 @@ export default function CategoryCarousel() {
         <ArrowIcon />
       </button>
       <div className='overflow-hidden w-[350px] xl:w-[1050px] order-first pt:order-none'>
-        <div className={`${animation} flex justify-around w-full`}>
+        <div className={`${animation} flex justify-around w-full py-4`}>
           {itemsToShow.map((elem, index): ReactNode => {
             return (
-              <div key={`category-card ${index}`}>
+              <div className='hover:scale-105' key={`category-card ${index}`}>
                 <CategoryCard {...items[elem]} />
               </div>
             );
