@@ -9,12 +9,13 @@ export async function getCart() {
     const cart = await getActiveCart(token);
     return cart;
   } catch (e) {
+    console.error(e);
     try {
       const cart = await createCart(token);
       updateCart(token, cart.data.id, cart.data.version);
       return cart;
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 }
@@ -22,8 +23,10 @@ export async function clearCart(id: string, version: number) {
   const token = await getTokenFromStorage();
 
   try {
-    const cart = await deleteCart(token, id, version);
-    return cart;
+    deleteCart(token, id, version).then(cart => {
+      createCart(token);
+      return cart;
+    });
   } catch (e) {
     console.log(e);
     try {

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import scrollToTop from '../../lib/utils/scrollToTop';
 import BannerPageName from '../../components/bannerPageName';
 import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
-import { deleteCart } from '../../services/cart.service';
 import { Product } from '../../lib/interfaces';
 
 import AdditionalButton from '../../components/buttons/additionalButton';
@@ -10,7 +9,7 @@ import { CartListItem } from './CartListItem';
 import { EmptyCart } from './EmptyCart';
 import { CartContext } from '../../App';
 import { Spinner } from '@material-tailwind/react';
-import { getCart } from '../../services/handleCart';
+import { clearCart, getCart } from '../../services/handleCart';
 
 function CartPage() {
   const [cart, setCart] = useContext(CartContext);
@@ -40,8 +39,8 @@ function CartPage() {
   const handleOpenConfirmation = () => {
     setConfirmation(true);
   };
-  const handleCleanCart = () => {
-    deleteCart(token, cart.id, cart.version).then(cart => {
+  const handleClearCart = () => {
+    clearCart(cart.id, cart.version).then(cart => {
       setCart({ ...cart, lineItems: [] });
       setConfirmation(false);
     });
@@ -74,7 +73,7 @@ function CartPage() {
                 You are about to clear your Cart. Continue?
               </h4>
               <div className='flex flex-col items-center justify-center md:flex-row'>
-                <AdditionalButton onClick={handleCleanCart}>Yes</AdditionalButton>
+                <AdditionalButton onClick={handleClearCart}>Yes</AdditionalButton>
                 <AdditionalButton onClick={handleCloseConfirmation}>No</AdditionalButton>
               </div>
             </div>
