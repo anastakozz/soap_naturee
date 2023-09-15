@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import scrollToTop from '../../lib/utils/scrollToTop';
-import { AbutUsType } from '../../lib/types';
+import { AboutUsType } from '../../lib/types';
 import BannerPageName from '../../components/bannerPageName';
 import MarkIcon from '../../icons/markIcon';
 
-const ABOUT_US: AbutUsType[] = [
+const ABOUT_US: AboutUsType[] = [
   {
     fullName: 'Kozlova Anastasiya',
     role: 'Team Lead software engineer',
