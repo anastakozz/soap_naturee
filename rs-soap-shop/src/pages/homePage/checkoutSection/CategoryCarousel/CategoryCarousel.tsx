@@ -1,4 +1,4 @@
-import React, { useState, ReactNode, useEffect } from 'react';
+import React, { useState, ReactNode } from 'react';
 import ArrowIcon from '../../../../icons/arrowIcon';
 import { CategoryCardProps } from '../../../../lib/interfaces';
 import CategoryCard from './CategoryCard';
@@ -10,8 +10,8 @@ const items: CategoryCardProps[] = [
   { name: 'Aroma sachet', path: './images/sachet.png', link: '/our-products/decor/aroma-sachet' },
   { name: 'Bath bombs', path: './images/bombs.png', link: '/our-products/self-care/bath-bomb' }
 ];
-const moveForward = 'animate-[slide_0.5s_linear]';
-const moveBackwards = 'animate-[slideBack_0.5s_linear]';
+const moveForward = 'animate-[slide_0.5s_linear_both]';
+const moveBackwards = 'animate-[slideBack_0.5s_linear_both]';
 
 export default function CategoryCarousel() {
   const length = 5;
@@ -31,8 +31,8 @@ export default function CategoryCarousel() {
     setAnimation(moveBackwards);
     setTimeout(() => {
       const newIndex = index - 1;
+      setAnimation('');
       setIndex(newIndex < 0 ? length - 1 : newIndex);
-      setAnimation('')
     }, 500);
   };
 
@@ -40,17 +40,17 @@ export default function CategoryCarousel() {
     setAnimation(moveForward);
     setTimeout(() => {
       const newIndex = index + 1;
+      setAnimation('');
       setIndex(newIndex >= length ? 0 : newIndex);
-      setAnimation('')
     }, 500);
   };
 
   return (
-    <div data-testid='carousel' className='flex justify-center md:m-esm mt-4 flex-nowrap'>
+    <div data-testid='carousel' className='flex justify-center md:m-esm mt-4 flex-wrap gap-4 pt:flex-nowrap'>
       <button data-testid='prev-button' onClick={handlePrevious} className='mr-4'>
         <ArrowIcon />
       </button>
-      <div className='overflow-hidden w-[370px] lg:w-[1110px]'>
+      <div className='overflow-hidden w-[350px] xl:w-[1050px] order-first pt:order-none'>
         <div className={`${animation} flex justify-around w-full`}>
           {itemsToShow.map((elem, index): ReactNode => {
             return (
