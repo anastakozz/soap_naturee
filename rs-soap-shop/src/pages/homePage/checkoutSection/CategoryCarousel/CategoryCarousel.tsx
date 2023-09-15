@@ -54,7 +54,7 @@ export default function CategoryCarousel() {
         <div className={`${animation} flex justify-around w-full py-4`}>
           {itemsToShow.map((elem, index): ReactNode => {
             return (
-              <div className='hover:scale-105' key={`category-card ${index}`}>
+              <div className='hover:scale-105 transition' key={`category-card ${index}`}>
                 <CategoryCard {...items[elem]} />
               </div>
             );
