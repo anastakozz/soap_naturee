@@ -6,30 +6,33 @@ import MarkIcon from '../../icons/markIcon';
 
 const ABOUT_US: AbutUsType[] = [
   {
+    fullName: 'Kozlova Anastasiya',
+    role: 'Team Lead software engineer',
+    bio: 'Having architectural education and long experience in digital fabrication I started coding from writing JS scripts for Adobe Illustrator and fell in love with the process. I decided to change a career and dove into JS with help of Rolling Scopes School. I believe, that every specialist unique combination of skills and experience may shine bright in its place, and hope to find my place in IT sphere',
+    img: '/images/anastasia_photo.jpg',
+    contributions: [
+      'organized team work processes (repository, task tracking, styleguide, team wiki)',
+      'implemented home page, detailed product page, took part in other pages',
+      'integrated registration, token handling, product parsing with CommerceTools',
+      'battled with React testing library'
+    ],
+    github: 'https://github.com/anastakozz'
+  },
+  {
     fullName: 'Kuzich Yulia',
     role: 'Software engineer',
     bio: 'First and foremost I need to say that I have not spatial education in the IT field, but I am passing the best courses ever right now. I graduated from The Brest Technical University as a specialist in logistics. Also got a Master degree in World Economics. And I was working as a logistician for 3 years. Now my goal is to become a cool front-end developer and get a good job. My strengths include responsibility, perseverance, purposefulness and efficiency. At the moment I have not work experience in the IT sphere, but I really want to get it.',
     img: '/images/yulia_photo.jpg',
     contributions: [
       'wrote functional structure of our project (like BA)',
-      'created logo for the site',
-      'found prototype design for site',
+      'created logo and found prototype design for site',
       'created base variables for Tailwind',
       'implemented routing',
       'implemented layout of header and footer',
-      'realized Login Page implementation',
-      'realized Profile Page implementation',
+      'realized Login, Profile, Cart and About Us pages implementation',
       'implemented breadcrumb navigation for Catalog Page'
     ],
     github: 'https://github.com/yulyakuzich'
-  },
-  {
-    fullName: 'Kozlova Anastasiya',
-    role: 'Team Lead software engineer',
-    bio: 'Having architectural education and long experience in digital fabrication I started coding from writing JS scripts for Adobe Illustrator and fell in love with the process. I decided to change a career and dove into JS with help of Rolling Scopes School. I believe, that every specialist unique combination of skills and experience may shine bright in its place, and hope to find my place in IT sphere',
-    img: '/images/anastasia_photo.jpg',
-    contributions: [],
-    github: 'https://github.com/anastakozz'
   },
   {
     fullName: 'Ryshkov Vyacheslav',
@@ -85,7 +88,7 @@ function AboutPage() {
                     GitHub link
                   </a>
                 </div>
-                <div className='flex flex-col'>
+                <div className='flex flex-col w-[80%]'>
                   <h4 className='text-h4 font-bold text-accentColor dark:text-basicColor mb-2 text-center md:text-start'>
                     About me
                   </h4>
