@@ -36,8 +36,8 @@ function CartPage() {
         setTotalCost(response.data.totalPrice.centAmount);
         setCartId(response.data.id)
         setCartVersion(response.data.version)
-        setTotalPriceWithoutPromo(response.data.lineItems.reduce((sum: number, item) => {
-          return sum + item.variant.prices[0].value.centAmount * 100;
+        setTotalPriceWithoutPromo(response.data.lineItems.reduce((sum: number, item:Product) => {
+          return sum + item.variant.prices[0].value.centAmount * item.quantity * 100;
         }, 0));
         console.log('price', totalPriceWithoutPromo);
         console.log(response.data);
@@ -76,7 +76,6 @@ function CartPage() {
     await updateCart();
   }
 
-
   return (
     <>
       <div className='bg-secondaryColor dark:bg-grayMColor flex-1'>
@@ -102,8 +101,8 @@ function CartPage() {
                   />
                 ))}
               </div>
-              <div className='flex flex-col md:flex-row items-center justify-center md:justify-end p-4 border-b-2 border-accentColor dark:border-basicColor'>
-                <p className='text-center md:text-start mb-2 md:mr-4 md:mb-0'>
+              <div className='flex flex-col md:flex-row items-start justify-center md:justify-end p-4 border-b-2 border-accentColor dark:border-basicColor'>
+                <p className='text-center md:text-start mt-4 md:mr-4 md:mb-0'>
                   Do you have a promo code? Enter it here:
                 </p>
                 <div>
@@ -123,21 +122,21 @@ function CartPage() {
                     if (input instanceof HTMLInputElement) applyPromoCode(input);
                   }}
                   className={
-                    'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 py-[5px] mb-2 md:mr-2  md:mb-0'
+                    'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 py-[5px] mt-2 md:mr-2  md:mb-0'
                   }
                 >
                   Apply
                 </button>
               </div>
-              <div className='flex justify-end items-center p-2'>
-                <p className='text-h3 text-accentColor dark:text-basicColor font-bold mr-4'>Total cost:</p>
+              <div className='flex justify-end items-end p-2'>
+                <div className='text-h3 text-accentColor dark:text-basicColor font-bold mr-4'>Total cost:</div>
                 {isPromoCodeActive ? (
-                  <>
-                    <p className='text-h3 font-bold'>€ {totalPriceWithoutPromo / 10000}</p>
-                    <p className='text-h3 font-bold'>€ {totalCost / 100}</p>
-                  </>
+                  <div>
+                    <div className='flex justify-between text-graySColor dark:accent-accentColor text-h3 font-bold'><div>€</div><div className={'line-through'}>{totalPriceWithoutPromo && totalPriceWithoutPromo / 10000}</div></div>
+                    <div className='flex justify-between text-h3 font-bold'><div>€</div><div>{totalCost / 100}</div></div>
+                  </div>
                   ) : (
-                  <p className='text-h3 font-bold'>€ {totalCost / 100}</p>
+                  <div className='flex text-h3 font-bold'><div>€</div><div>{totalCost / 100}</div></div>
                 )}
 
               </div>
