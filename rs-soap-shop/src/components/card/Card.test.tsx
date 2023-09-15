@@ -60,22 +60,22 @@ it('navigates on click', () => {
   expect(mockedUsedNavigate).toBeCalled();
 });
 
-// it('does not navigate on click on button Add to Cart', () => {
-//   act(() => {
-//     render(
-//       <CartContext.Provider value={[null]}>
-//         <BrowserRouter>
-//           <Card {...propsData} />
-//         </BrowserRouter>
-//       </CartContext.Provider>
-//     );
-//   });
-//   act(() => {
-//     fireEvent.click(screen.getByRole('button'));
-//   });
+it('does not navigate on click on button Add to Cart', () => {
+  act(() => {
+    render(
+      <CartContext.Provider value={[null]}>
+        <BrowserRouter>
+          <Card {...propsData} />
+        </BrowserRouter>
+      </CartContext.Provider>
+    );
+  });
+  act(() => {
+    fireEvent.click(screen.getByRole('button'));
+  });
 
-//   expect(mockedUsedNavigate).not.toBeCalled();
-// });
+  expect(mockedUsedNavigate).not.toBeCalled();
+});
 
 it('renders no sale info if !isOnSale', () => {
   act(() => {
