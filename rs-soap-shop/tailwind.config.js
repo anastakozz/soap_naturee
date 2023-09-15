@@ -10,6 +10,7 @@ module.exports = withMT({
       stroke: ['hover', 'focus'],
       screens: {
         sm: '320px',
+        pt: '480px',
         add: '610px',
         md: '768px',
         lg: '1024px',
@@ -70,11 +71,11 @@ module.exports = withMT({
       keyframes: {
         slide: {
           '0%': { transform: 'none' },
-          '100%': { transform: 'translate(-380px)' }
+          '100%': { transform: 'translate(-350px)' }
         },
         slideBack: {
           '0%': { transform: 'none' },
-          '100%': { transform: 'translate(380px)' }
+          '100%': { transform: 'translate(350px)' }
         }
       }
     }
