@@ -1,4 +1,4 @@
-import { getActiveCart, createCart, updateCart, addLineItem, removeLineItem } from './cart.service';
+import { getActiveCart, createCart, updateCart, addLineItem, removeLineItem, deleteCart } from './cart.service';
 import { getTokenFromStorage } from '../lib/utils/getLocalStorageToken';
 import { ProductListItem } from '../lib/types';
 
@@ -7,6 +7,22 @@ export async function getCart() {
 
   try {
     const cart = await getActiveCart(token);
+    return cart;
+  } catch (e) {
+    try {
+      const cart = await createCart(token);
+      updateCart(token, cart.data.id, cart.data.version);
+      return cart;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+export async function clearCart(id: string, version: number) {
+  const token = await getTokenFromStorage();
+
+  try {
+    const cart = await deleteCart(token, id, version);
     return cart;
   } catch (e) {
     console.log(e);

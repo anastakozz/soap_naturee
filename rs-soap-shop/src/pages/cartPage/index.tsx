@@ -24,16 +24,13 @@ function CartPage() {
   }, []);
 
   async function updateCart() {
-    setLoading(true);
     getCart()
       .then(response => {
         setCart(response.data);
         console.log(response.data);
-        setLoading(false);
       })
       .catch(err => {
         console.error(err);
-        setLoading(false);
       });
   }
 
@@ -52,9 +49,15 @@ function CartPage() {
 
   useEffect(() => {
     scrollToTop();
-    if (token) {
-      updateCart();
-    }
+    setLoading(true);
+
+    updateCart()
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }, [token]);
 
   return (
