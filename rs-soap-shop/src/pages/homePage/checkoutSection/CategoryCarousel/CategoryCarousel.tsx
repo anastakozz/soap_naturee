@@ -10,8 +10,8 @@ const items: CategoryCardProps[] = [
   { name: 'Aroma sachet', path: './images/sachet.png', link: '/our-products/decor/aroma-sachet' },
   { name: 'Bath bombs', path: './images/bombs.png', link: '/our-products/self-care/bath-bomb' }
 ];
-const moveForward = 'animate-[slide_0.5s_linear_both]';
-const moveBackwards = 'animate-[slideBack_0.5s_linear_both]';
+const moveForward = 'animate-[slide_0.3s_linear_both]';
+const moveBackwards = 'animate-[slideBack_0.3s_linear_both]';
 
 export default function CategoryCarousel() {
   const length = 5;
@@ -33,7 +33,7 @@ export default function CategoryCarousel() {
       const newIndex = index - 1;
       setAnimation('');
       setIndex(newIndex < 0 ? length - 1 : newIndex);
-    }, 500);
+    }, 300);
   };
 
   const handleNext = () => {
@@ -42,7 +42,7 @@ export default function CategoryCarousel() {
       const newIndex = index + 1;
       setAnimation('');
       setIndex(newIndex >= length ? 0 : newIndex);
-    }, 500);
+    }, 300);
   };
 
   return (
