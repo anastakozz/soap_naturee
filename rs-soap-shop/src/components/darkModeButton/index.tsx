@@ -1,7 +1,7 @@
 export function DarkModeButton({ onChange }: { onChange: () => void }) {
   return (
     <div onClick={onChange} className='change-mode-button cursor-pointer hover:scale-110 transition mr-4'>
-      <svg className='block dark:hidden' width='20' height='20' viewBox='0 0 32 32' fill='none'>
+      <svg className='block dark:hidden' width='24px' height='24px' viewBox='0 0 32 32' fill='none'>
         <path
           d='M1 15.5748C1 24.2472 8.02973 31.2774 16.7013 31.2774C23.3084 31.2774 28.9623 27.1961 31.28 21.417C29.4716 22.1439 27.4927 22.5536 25.4243 22.5536C16.7526 22.5536 9.72296 15.5233 9.72296 6.85092C9.72296 4.79206 10.1266 2.80167 10.8469 1C5.07491 3.32106 1 8.972 1 15.5748Z'
           stroke='black'

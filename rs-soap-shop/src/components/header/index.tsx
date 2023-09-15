@@ -46,7 +46,7 @@ function Header() {
   useEffect(() => {
     const changeWidth = () => {
       if (window.innerWidth > 768) {
-        setIsMenuOpen(false);
+        handleCloseMenu();
       }
     };
 
@@ -79,8 +79,17 @@ function Header() {
 
   const isLoggedIn = !!localStorage.getItem(`${userToken}`);
 
+  const handleOpenMenu = () => {
+    document.body.classList.add('overflow-hidden');
+    setIsMenuOpen(true);
+  };
+  const handleCloseMenu = () => {
+    document.body.classList.remove('overflow-hidden');
+    setIsMenuOpen(false);
+  };
+
   return (
-    <header data-testid='header' className='bg-primaryColor dark:bg-grayLColor transition relative'>
+    <header data-tested='header' className='bg-primaryColor dark:bg-grayLColor transition relative'>
       <div className='max-w-[1440px] mx-auto px-4 flex justify-between items-center h-24 lg:px-big'>
         <NavLink
           to={'/'}
@@ -89,11 +98,11 @@ function Header() {
           <ShopLogo></ShopLogo>
         </NavLink>
         <Navigation />
-        <NavigationModal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} isLoggedIn={isLoggedIn} />
+        {isMenuOpen && <NavigationModal isOpen={isMenuOpen} onClose={handleCloseMenu} isLoggedIn={isLoggedIn} />}
         <div className='flex items-center'>
           <DarkModeButton onChange={handleChangeMode} />
           <NavLink
-            className='text-basicColor mr-4 hover:scale-110 transition dark:text-primaryColor transition'
+            className='text-basicColor mr-8 hover:scale-110 transition dark:text-primaryColor transition'
             to={'/cart'}
           >
             <div className='relative'>
@@ -107,7 +116,7 @@ function Header() {
           <div className='flex items-center hidden md:flex'>
             <LoginArea isLoggedIn={isLoggedIn} />
           </div>
-          <BurgerMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} isMenuOpen={isMenuOpen} />
+          <BurgerMenuButton onCloseMenu={handleCloseMenu} onClick={handleOpenMenu} isMenuOpen={isMenuOpen} />
         </div>
       </div>
     </header>
