@@ -3,6 +3,7 @@ import scrollToTop from '../../lib/utils/scrollToTop';
 import { AboutUsType } from '../../lib/types';
 import BannerPageName from '../../components/bannerPageName';
 import MarkIcon from '../../icons/markIcon';
+import classNames from 'classnames';
 
 const ABOUT_US: AboutUsType[] = [
   {
@@ -61,23 +62,50 @@ function AboutPage() {
     <>
       <div className='bg-secondaryColor dark:bg-grayMColor'>
         <BannerPageName>ABOUT US</BannerPageName>
-        <div className='py-sm px-sm max-w-[1440px] mx-auto lg:px-big'>
+        <div className={classNames('py-sm px-sm max-w-[1440px] mx-auto', 'lg:px-big')}>
           <div>
-            <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-center md:justify-between items-center mb-4'>
-              <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold text-center md:text-start'>
+            <div
+              className={classNames(
+                'border-b-2 border-accentColor dark:border-basicColor',
+                'p-2 mb-4',
+                'flex justify-center md:justify-between items-centers'
+              )}
+            >
+              <h3
+                className={classNames(
+                  'text-h3 text-accentColor font-bold dark:text-basicColor',
+                  'text-center md:text-start'
+                )}
+              >
                 Team Members:
               </h3>
             </div>
             {ABOUT_US.map(person => (
               <div
                 key={person.fullName}
-                className='flex flex-col md:flex-row justify-between items-center w-full mb-4 p-4 m4 border-2 border-dotted border-accentColor dark:border-basicColor rounded-normal w-full relative mb-4'
+                className={classNames(
+                  'flex flex-col md:flex-row justify-between items-center',
+                  'w-full mb-4 p-4',
+                  'border-2 border-dotted border-accentColor dark:border-basicColor',
+                  'rounded-normal relative'
+                )}
               >
-                <div className='flex flex-col justify-center items-center w-full md:w-[20%] mr-6'>
-                  <div className='flex justify-center items-center rounded-full w-[150px] h-[150px] overflow-hidden border-4 border-accentColor dark:border-basicColor'>
+                <div className={classNames('flex flex-col justify-center items-center', 'w-full md:w-[20%] mr-6')}>
+                  <div
+                    className={classNames(
+                      'flex justify-center items-center',
+                      'w-[150px] h-[150px] overflow-hidden',
+                      'rounded-full border-4 border-accentColor dark:border-basicColor'
+                    )}
+                  >
                     <img src={person.img} alt='photo' />
                   </div>
-                  <h3 className='text-h3 font-bold text-accentColor dark:text-basicColor mb-2 text-center'>
+                  <h3
+                    className={classNames(
+                      'text-h3 font-bold text-accentColor dark:text-basicColor',
+                      'mb-2 text-center'
+                    )}
+                  >
                     {person.fullName}
                   </h3>
                   <p className='mb-1 text-grayLColor text-center'>{person.role}</p>
@@ -89,11 +117,23 @@ function AboutPage() {
                   </a>
                 </div>
                 <div className='flex flex-col w-[80%]'>
-                  <h4 className='text-h4 font-bold text-accentColor dark:text-basicColor mb-2 text-center md:text-start'>
+                  <h4
+                    className={classNames(
+                      'text-h4 font-bold text-accentColor dark:text-basicColor',
+                      'mb-2',
+                      'text-center md:text-start'
+                    )}
+                  >
                     About me
                   </h4>
                   <p className='text-justify'>{person.bio}</p>
-                  <h4 className='text-h4 font-bold text-accentColor dark:text-basicColor mb-2 text-center md:text-start'>
+                  <h4
+                    className={classNames(
+                      'text-h4 font-bold text-accentColor dark:text-basicColor',
+                      'mb-2',
+                      'text-center md:text-start'
+                    )}
+                  >
                     My contributions
                   </h4>
                   <div>
@@ -111,8 +151,19 @@ function AboutPage() {
             ))}
           </div>
           <div>
-            <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-center md:justify-between items-center mb-4'>
-              <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold text-center md:text-start'>
+            <div
+              className={classNames(
+                'border-b-2 border-accentColor dark:border-basicColor',
+                'p-2 mb-4',
+                'flex justify-center md:justify-between items-center '
+              )}
+            >
+              <h3
+                className={classNames(
+                  'text-h3 text-accentColor dark:text-basicColor font-bold',
+                  'text-center md:text-start'
+                )}
+              >
                 Collaboration:
               </h3>
             </div>
@@ -140,12 +191,23 @@ function AboutPage() {
             </p>
           </div>
           <div>
-            <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-center md:justify-between items-center mb-4'>
-              <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold text-center md:text-start'>
+            <div
+              className={classNames(
+                'border-b-2 border-accentColor dark:border-basicColor',
+                'p-2 mb-4',
+                'flex justify-center md:justify-between items-center '
+              )}
+            >
+              <h3
+                className={classNames(
+                  'text-h3 text-accentColor dark:text-basicColor font-bold',
+                  'text-center md:text-start'
+                )}
+              >
                 Gratitude:
               </h3>
             </div>
-            <div className='flex justify-center items-center p-4'>
+            <div className={classNames('flex justify-center items-center', 'p-4')}>
               <p className='mr-4'>Thank you for our new usefull skills</p>
               <a href='https://rs.school/index.html' target='blanc'>
                 <img
