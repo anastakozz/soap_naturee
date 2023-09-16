@@ -154,8 +154,37 @@ export async function getCartWithPromoCode(inputValue: string, cartId:string, to
     } else {
       console.error(e);
     }
-
   }
 }
 
+export async function removeDiscountCode(cartId:string, token: string, cartVersion:string, promocodeId: string) {
+  const requestBody = {
+    version: cartVersion,
+    actions: [
+      {
+        action: 'removeDiscountCode',
+        discountCode: {
+          typeId: 'discount-code',
+          id: `${promocodeId}`,
+        }
+      }]
+  };
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${apiUrl}/${projectKey}/me/carts/${cartId}`,
+      data: requestBody,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.status === 200) {
+      return 'success';
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
 

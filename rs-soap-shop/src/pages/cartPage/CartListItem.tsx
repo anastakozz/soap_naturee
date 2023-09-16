@@ -21,8 +21,6 @@ export function CartListItem({
   const [amount, setAmount] = useState(el.quantity);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
 
-  console.log('el: ', el);
-
   const onDelete = (lineItemId: string) => {
     const actions = [
       {
@@ -65,7 +63,7 @@ export function CartListItem({
             {el.name.en}
           </h3>
           {el.price.discounted && (
-            <div className={'text-errorColor font-bold rounded w-[60px] mt-2 px-2 py-1 border-2 border-errorColor'}>SALE</div>
+            <div className={'mt-2 px-2 py-1 h-min bg-red-500/90 text-primaryColor font-bold inline-block'}>SALE</div>
           )}
         </NavLink>
       </div>
