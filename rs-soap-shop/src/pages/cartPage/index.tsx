@@ -37,11 +37,13 @@ function CartPage() {
       .then(response => {
         setCart(response.data);
         setTotalCost(response.data.totalPrice.centAmount);
-        setCartId(response.data.id)
-        setCartVersion(response.data.version)
-        setTotalPriceWithoutPromo(response.data.lineItems.reduce((sum: number, item:Product) => {
-          return sum + item.variant.prices[0].value.centAmount * item.quantity * 100;
-        }, 0));
+        setCartId(response.data.id);
+        setCartVersion(response.data.version);
+        setTotalPriceWithoutPromo(
+          response.data.lineItems.reduce((sum: number, item: Product) => {
+            return sum + item.variant.prices[0].value.centAmount * item.quantity * 100;
+          }, 0)
+        );
       })
       .catch(err => {
         console.error(err);
@@ -88,7 +90,7 @@ function CartPage() {
       promoCodeInput.setAttribute('disabled', 'true');
       localStorage.setItem('promoCodeActivationMessage', 'Promo code applied');
       setIsPromoCodeActive(true);
-      localStorage.setItem('promoCodeId', response.discountCodes[0].discountCode.id)
+      localStorage.setItem('promoCodeId', response.discountCodes[0].discountCode.id);
     }
     await refreshCart();
   }
@@ -119,10 +121,14 @@ function CartPage() {
                 You are about to clear your Cart. Continue?
               </h4>
               <div className='flex flex-col items-center justify-center md:flex-row'>
-                <AdditionalButton onClick={async () => {
-                  await removePromoCode(true);
-                  handleClearCart();
-                }}>Yes</AdditionalButton>
+                <AdditionalButton
+                  onClick={async () => {
+                    await removePromoCode(true);
+                    handleClearCart();
+                  }}
+                >
+                  Yes
+                </AdditionalButton>
                 <AdditionalButton onClick={handleCloseConfirmation}>No</AdditionalButton>
               </div>
             </div>
@@ -161,20 +167,25 @@ function CartPage() {
                     type='text'
                     placeholder={isPromoCodeActive ? 'NATURE' : 'Enter promo code'}
                     disabled={isPromoCodeActive}
-                    onKeyDown={(e) => {
+                    onKeyDown={e => {
                       if (e.key === 'Enter') {
                         !isPromoCodeActive ? applyPromoCode() : removePromoCode();
-                      }}}
+                      }
+                    }}
                   />
-                  <p className={isPromoCodeActive ? 'text-green-700' : 'text-errorColor'}>{localStorage.getItem('promoCodeActivationMessage')}</p>
+                  <p className={isPromoCodeActive ? 'text-green-700' : 'text-errorColor'}>
+                    {localStorage.getItem('promoCodeActivationMessage')}
+                  </p>
                 </div>
                 <button
-                  onClick={()=> { !isPromoCodeActive ? applyPromoCode() : removePromoCode() }}
+                  onClick={() => {
+                    !isPromoCodeActive ? applyPromoCode() : removePromoCode();
+                  }}
                   className={
                     'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 py-[5px] mt-2 md:mr-2  md:mb-0'
                   }
                 >
-                  {isPromoCodeActive ? ('Reset') : ('Apply')}
+                  {isPromoCodeActive ? 'Reset' : 'Apply'}
                 </button>
               </div>
               <div className='flex justify-end items-end p-2'>
@@ -182,18 +193,20 @@ function CartPage() {
                 {isPromoCodeActive ? (
                   <div>
                     <div className='flex justify-between text-graySColor dark:accent-accentColor text-h3 font-bold line-through'>
-                      {totalPriceWithoutPromo && (totalPriceWithoutPromo / 10000).toLocaleString('en-US', {
+                      {totalPriceWithoutPromo &&
+                        (totalPriceWithoutPromo / 10000).toLocaleString('en-US', {
+                          style: 'currency',
+                          currency: `${cart.lineItems[0].variant.prices[0].value.currencyCode}`
+                        })}
+                    </div>
+                    <div className='flex justify-between text-h3 font-bold'>
+                      {(totalCost / 100).toLocaleString('en-US', {
                         style: 'currency',
                         currency: `${cart.lineItems[0].variant.prices[0].value.currencyCode}`
                       })}
                     </div>
-                    <div className='flex justify-between text-h3 font-bold'>
-                      {(totalCost / 100).toLocaleString('en-US', {
-                      style: 'currency',
-                      currency: `${cart.lineItems[0].variant.prices[0].value.currencyCode}`
-                    })}</div>
                   </div>
-                  ) : (
+                ) : (
                   <div className='flex text-h3 font-bold'>
                     {(totalCost / 100).toLocaleString('en-US', {
                       style: 'currency',
@@ -201,7 +214,6 @@ function CartPage() {
                     })}
                   </div>
                 )}
-
               </div>
             </div>
           )}
