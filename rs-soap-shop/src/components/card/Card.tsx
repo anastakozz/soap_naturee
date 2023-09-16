@@ -19,7 +19,11 @@ export default function Card(item: ProductCardProps) {
       try {
         setIsSending(true);
         sendToCart(item.productId).then(res => {
-          setCart({ ...cart, ...res.data });
+          try {
+            setCart({ ...cart, ...res.data });
+          } catch (err) {
+            console.log(err);
+          }
         });
       } catch (err) {
         console.log(err);
