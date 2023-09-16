@@ -35,7 +35,6 @@ function Header() {
       getActiveCart(token)
         .then(response => {
           setCart(response.data);
-          console.log(response.data);
         })
         .catch(err => {
           console.error(err);

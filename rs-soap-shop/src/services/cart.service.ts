@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { apiUrl, projectKey } from '../lib/constants';
 import { CartActionType } from '../lib/types';
 
@@ -124,3 +124,67 @@ export function deleteCart(token: string, id: string, version: number) {
     console.log(e);
   }
 }
+
+export async function getCartWithPromoCode(inputValue: string, cartId:string, token: string, cartVersion:string) {
+  const requestBody = {
+    version: cartVersion,
+    actions: [
+      {
+        action: 'addDiscountCode',
+        code: inputValue,
+      }]
+  };
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${apiUrl}/${projectKey}/me/carts/${cartId}`,
+      data: requestBody,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (e) {
+    if (e instanceof AxiosError && e.response.status === 400) {
+      return 'Нет такого промокода';
+    } else {
+      console.error(e);
+    }
+  }
+}
+
+export async function removeDiscountCode(cartId:string, token: string, cartVersion:string, promocodeId: string) {
+  const requestBody = {
+    version: cartVersion,
+    actions: [
+      {
+        action: 'removeDiscountCode',
+        discountCode: {
+          typeId: 'discount-code',
+          id: `${promocodeId}`,
+        }
+      }]
+  };
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${apiUrl}/${projectKey}/me/carts/${cartId}`,
+      data: requestBody,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.status === 200) {
+      return 'success';
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+

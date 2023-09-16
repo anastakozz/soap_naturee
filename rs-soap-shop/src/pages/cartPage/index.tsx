@@ -2,31 +2,46 @@ import React, { useContext, useEffect, useState } from 'react';
 import scrollToTop from '../../lib/utils/scrollToTop';
 import BannerPageName from '../../components/bannerPageName';
 import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
+import { getCartWithPromoCode, removeDiscountCode } from '../../services/cart.service';
 import { Product } from '../../lib/interfaces';
-
 import AdditionalButton from '../../components/buttons/additionalButton';
 import { CartListItem } from './CartListItem';
 import { EmptyCart } from './EmptyCart';
 import { CartContext } from '../../App';
-import { Spinner } from '@material-tailwind/react';
 import { clearCart, getCart } from '../../services/handleCart';
 
 function CartPage() {
   const [cart, setCart] = useContext(CartContext);
   const [token, setToken] = useState(null);
+  const [totalCost, setTotalCost] = useState(0);
+  const [cartId, setCartId] = useState();
+  const [cartVersion, setCartVersion] = useState();
+  const [isPromoCodeActive, setIsPromoCodeActive] = useState(false);
+  const [totalPriceWithoutPromo, setTotalPriceWithoutPromo] = useState();
+  const promoCodeInput: HTMLInputElement = document.querySelector('#promoCodeInput');
+
   const [loading, setLoading] = useState(false);
   const [cofirmation, setConfirmation] = useState(false);
   useEffect(() => {
     getTokenFromStorage().then(res => {
       setToken(res);
     });
+    const storedIsPromoCodeActive = localStorage.getItem('isPromoCodeActive');
+    if (storedIsPromoCodeActive === 'true') {
+      setIsPromoCodeActive(true);
+    }
   }, []);
 
   async function refreshCart() {
     getCart()
       .then(response => {
         setCart(response.data);
-        console.log(response.data);
+        setTotalCost(response.data.totalPrice.centAmount);
+        setCartId(response.data.id)
+        setCartVersion(response.data.version)
+        setTotalPriceWithoutPromo(response.data.lineItems.reduce((sum: number, item:Product) => {
+          return sum + item.variant.prices[0].value.centAmount * item.quantity * 100;
+        }, 0));
       })
       .catch(err => {
         console.error(err);
@@ -40,9 +55,10 @@ function CartPage() {
     setConfirmation(true);
   };
   const handleClearCart = () => {
-    clearCart(cart.id, cart.version).then(cart => {
+    clearCart(cart.id, cart.version).then(async cart => {
       setCart({ ...cart, lineItems: [] });
       setConfirmation(false);
+      await refreshCart();
     });
   };
 
@@ -59,6 +75,36 @@ function CartPage() {
       });
   }, [token]);
 
+  async function applyPromoCode() {
+    const response = await getCartWithPromoCode(promoCodeInput.value, cartId, token, cartVersion);
+    if (typeof response === 'string') {
+      promoCodeInput.classList.add('border');
+      promoCodeInput.classList.add('border-red-500');
+      localStorage.setItem('promoCodeActivationMessage', 'Promo code does not exist!');
+    } else {
+      localStorage.setItem('isPromoCodeActive', 'true');
+      promoCodeInput.classList.remove('border-2');
+      promoCodeInput.classList.remove('border-red-500');
+      promoCodeInput.setAttribute('disabled', 'true');
+      localStorage.setItem('promoCodeActivationMessage', 'Promo code applied');
+      setIsPromoCodeActive(true);
+      localStorage.setItem('promoCodeId', response.discountCodes[0].discountCode.id)
+    }
+    await refreshCart();
+  }
+
+  async function removePromoCode(withoutRequests = false) {
+    if (!withoutRequests) {
+      const response = await removeDiscountCode(cartId, token, cartVersion, localStorage.getItem('promoCodeId'));
+      if (response !== 'success') return;
+    }
+    localStorage.setItem('isPromoCodeActive', 'false');
+    promoCodeInput.setAttribute('disabled', 'false');
+    localStorage.setItem('promoCodeActivationMessage', '');
+    setIsPromoCodeActive(false);
+    if (!withoutRequests) await refreshCart();
+  }
+
   return (
     <>
       <div className='bg-secondaryColor dark:bg-grayMColor flex-1'>
@@ -73,7 +119,10 @@ function CartPage() {
                 You are about to clear your Cart. Continue?
               </h4>
               <div className='flex flex-col items-center justify-center md:flex-row'>
-                <AdditionalButton onClick={handleClearCart}>Yes</AdditionalButton>
+                <AdditionalButton onClick={async () => {
+                  await removePromoCode(true);
+                  handleClearCart();
+                }}>Yes</AdditionalButton>
                 <AdditionalButton onClick={handleCloseConfirmation}>No</AdditionalButton>
               </div>
             </div>
@@ -101,31 +150,64 @@ function CartPage() {
                   />
                 ))}
               </div>
-              <div className='flex flex-col md:flex-row items-center justify-center md:justify-end p-4 border-b-2 border-accentColor dark:border-basicColor'>
-                <p className='text-center md:text-start mb-2 md:mr-4 md:mb-0'>
-                  Do you have a promocode? Enter it here:
+              <div className='flex flex-col md:flex-row items-start justify-center md:justify-end p-4 border-b-2 border-accentColor dark:border-basicColor'>
+                <p className='text-center md:text-start mt-4 md:mr-4 md:mb-0'>
+                  Do you have a promo code? Enter it here:
                 </p>
-                <input
-                  className='p-2 font-medium rounded-md border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black md:mr-2 mb-2 md:mb-0'
-                  type='text'
-                  placeholder='Enter promocode'
-                />
-                <AdditionalButton>Apply</AdditionalButton>
+                <div>
+                  <input
+                    className='p-2 font-medium rounded-md border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black md:mr-2 mb-2 md:mb-0'
+                    id='promoCodeInput'
+                    type='text'
+                    placeholder={isPromoCodeActive ? 'NATURE' : 'Enter promo code'}
+                    disabled={isPromoCodeActive}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        !isPromoCodeActive ? applyPromoCode() : removePromoCode();
+                      }}}
+                  />
+                  <p className={isPromoCodeActive ? 'text-green-700' : 'text-errorColor'}>{localStorage.getItem('promoCodeActivationMessage')}</p>
+                </div>
+                <button
+                  onClick={()=> { !isPromoCodeActive ? applyPromoCode() : removePromoCode() }}
+                  className={
+                    'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 py-[5px] mt-2 md:mr-2  md:mb-0'
+                  }
+                >
+                  {isPromoCodeActive ? ('Reset') : ('Apply')}
+                </button>
               </div>
-              <div className='flex justify-end items-center p-2'>
-                <p className='text-h3 text-accentColor dark:text-basicColor font-bold mr-4'>Total cost:</p>
-                <p className='text-h3 font-bold'>132400</p>
+              <div className='flex justify-end items-end p-2'>
+                <div className='text-h3 text-accentColor dark:text-basicColor font-bold mr-4'>Total cost:</div>
+                {isPromoCodeActive ? (
+                  <div>
+                    <div className='flex justify-between text-graySColor dark:accent-accentColor text-h3 font-bold line-through'>
+                      {totalPriceWithoutPromo && (totalPriceWithoutPromo / 10000).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: `${cart.lineItems[0].variant.prices[0].value.currencyCode}`
+                      })}
+                    </div>
+                    <div className='flex justify-between text-h3 font-bold'>
+                      {(totalCost / 100).toLocaleString('en-US', {
+                      style: 'currency',
+                      currency: `${cart.lineItems[0].variant.prices[0].value.currencyCode}`
+                    })}</div>
+                  </div>
+                  ) : (
+                  <div className='flex text-h3 font-bold'>
+                    {(totalCost / 100).toLocaleString('en-US', {
+                      style: 'currency',
+                      currency: `${cart.lineItems[0].variant.prices[0].value.currencyCode}`
+                    })}
+                  </div>
+                )}
+
               </div>
             </div>
           )}
           {!loading && cart?.lineItems.length == 0 && (
             <div>
               <EmptyCart />
-            </div>
-          )}
-          {loading && (
-            <div className='flex items-center justify-center'>
-              <Spinner />
             </div>
           )}
         </div>

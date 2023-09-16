@@ -105,6 +105,14 @@ export interface BannerProps {
 }
 
 export interface Product {
+  discountedPrice: {
+    value: {
+      type: string;
+      currencyCode: string;
+      centAmount: number;
+      fractionDigits: number;
+    }
+  }
   id: string;
   productKey?: string;
   version: string;
@@ -232,4 +240,8 @@ export interface NavigationViewProps {
   };
   changeQuery?: (options: string) => void;
   updateSearchedProducts?: (products: Product[]) => void;
+}
+
+export interface CartProduct {
+  discountCodes?: object[]
 }
