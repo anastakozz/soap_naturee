@@ -14,7 +14,7 @@ const moveForward = 'animate-[slide_0.3s_linear_both]';
 const moveBackwards = 'animate-[slideBack_0.3s_linear_both]';
 
 export default function CategoryCarousel() {
-  const length = 5;
+  const length = items.length;
   const [index, setIndex] = useState(0);
   const [animation, setAnimation] = useState<string>('');
   const itemsToShow = Array(length)
@@ -54,7 +54,7 @@ export default function CategoryCarousel() {
         <div className={`${animation} flex justify-around w-full py-4`}>
           {itemsToShow.map((elem, index): ReactNode => {
             return (
-              <div className='hover:scale-105' key={`category-card ${index}`}>
+              <div className='hover:scale-105 transition' key={`category-card ${index}`}>
                 <CategoryCard {...items[elem]} />
               </div>
             );

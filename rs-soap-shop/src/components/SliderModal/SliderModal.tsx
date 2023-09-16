@@ -1,6 +1,7 @@
 import CarouselDefault from '../carousel';
 import { useEffect } from 'react';
 import scrollToTop from '../../lib/utils/scrollToTop';
+import classNames from 'classnames';
 
 export default function SliderModal(modal: { paths: string[] }) {
   useEffect(() => {
@@ -20,7 +21,12 @@ export default function SliderModal(modal: { paths: string[] }) {
           <CarouselDefault {...{ paths: modal.paths, classes: 'object-contain h-full w-full' }}></CarouselDefault>
         )}
       </div>
-      <div className='transition closing-icon absolute top-5 right-5 font-bold text-primaryColor hover:text-accentColor cursor-pointer z-[80]'>
+      <div
+        className={classNames(
+          'transition closing-icon absolute top-5 right-5 z-[80]',
+          'font-bold text-primaryColor hover:text-accentColor cursor-pointer'
+        )}
+      >
         CLOSE
       </div>
     </>

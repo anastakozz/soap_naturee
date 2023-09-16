@@ -4,6 +4,7 @@ import { MouseEvent, useContext, useState } from 'react';
 import { sendToCart } from '../../services/handleCart';
 import SendButton from './SendButton';
 import { CartContext } from '../../App';
+import classNames from 'classnames';
 
 export default function Card(item: ProductCardProps) {
   const [isInCart, setIsInCart] = useState<boolean>(item.isInCart);
@@ -36,7 +37,10 @@ export default function Card(item: ProductCardProps) {
     <div
       onClick={handleClick}
       role='product-card'
-      className='cursor-pointer relative transition w-[280px] hover:scale-[1.02] hover:drop-shadow-lg active:scale-100 active:drop-shadow-none'
+      className={classNames(
+        'cursor-pointer relative transition w-[280px]',
+        'hover:scale-[1.02] hover:drop-shadow-lg active:scale-100 active:drop-shadow-none'
+      )}
     >
       <img className='object-cover h-[300px] w-full ' src={item.imgSrc} alt=''></img>
       <div className='z-20 w-full absolute -translate-y-[30px]'>

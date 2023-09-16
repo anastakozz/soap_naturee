@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import DeleteIcon from '../../icons/deleteIcon';
 import EditIcon from '../../icons/editIcon';
 import { AddressCardI } from '../../lib/interfaces';
@@ -23,14 +24,30 @@ function AddressCard({ address, account, onDelete, onEdit }: AddressCardProps): 
     onDelete();
   };
   return (
-    <div className='p-4 m4 border-2 border-dotted border-accentColor dark:border-basicColor flex flex-col rounded-normal w-full relative md:w-[45%] mb-4'>
+    <div
+      className={classNames(
+        'p-4 m4 md:w-[45%] mb-4 rounded-normal w-full',
+        'border-2 border-dotted border-accentColor dark:border-basicColor',
+        'flex flex-col relative'
+      )}
+    >
       {account?.defaultBillingAddressId?.includes(address.id) && (
-        <div className='flex justify-center items-center p-2 bg-accentColor dark:bg-basicColor rounded-full absolute z-10 top-[10px] right-[5px] opacity-70'>
+        <div
+          className={classNames(
+            'p-2 absolute z-10 top-[10px] right-[5px]',
+            'flex justify-center items-center',
+            'bg-accentColor dark:bg-basicColor rounded-full opacity-70'
+          )}
+        >
           <p className='text-basic text-primaryColor text-[8px]'>Default</p>
         </div>
       )}
       {account?.defaultShippingAddressId?.includes(address.id) && (
-        <div className='flex justify-center itens-center p-2 bg-accentColor dark:bg-basicColor rounded-full absolute z-10 top-[10px] right-[5px] opacity-70'>
+        <div
+          className={classNames(
+            'flex justify-center items-center p-2 bg-accentColor dark:bg-basicColor rounded-full absolute z-10 top-[10px] right-[5px] opacity-70'
+          )}
+        >
           <p className='text-basic text-primaryColor text-[8px]'>Default</p>
         </div>
       )}
