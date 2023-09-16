@@ -58,7 +58,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <form className='bg-secondaryColor dark:bg-grayMColor flex-1'>
+    <form className='bg-secondaryColor dark:bg-grayMColor flex-1' action='' method='POST' onSubmit={onSubmit}>
       <div className='container px-sm py-sm md:px-big md:py-bigY max-w-[1440px] mx-auto lg:px-big'>
         <h3 className={'text-accentColor dark:text-primaryColor text-h3 font-bold pb-bigY'}>Sign In form:</h3>
         {error && (

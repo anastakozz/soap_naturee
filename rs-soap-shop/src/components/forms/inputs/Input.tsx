@@ -108,6 +108,7 @@ export const Input = ({ label, type, placeholder, isSubmitted, onChange, val, di
             value={val}
             onChange={handleInputChange}
             disabled={disabled}
+            autoComplete={'on'}
           />
           {type === 'password' && (
             <button
