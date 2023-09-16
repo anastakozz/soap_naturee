@@ -4,6 +4,7 @@ import BannerPageName from '../../components/bannerPageName';
 import MarkIcon from '../../icons/markIcon';
 import classNames from 'classnames';
 import { ABOUT_US } from '../../lib/constants';
+import GitHubIcon from '../../icons/gitHubIcon';
 
 export function AboutPage() {
   useEffect(() => {
@@ -64,7 +65,7 @@ export function AboutPage() {
                     className='mb-1 text-graySColor hover:text-grayMColor dark:hover:text-grayLColor transition'
                     href={person.github}
                   >
-                    GitHub link
+                    <GitHubIcon />
                   </a>
                 </div>
                 <div className='flex flex-col w-[80%]'>
@@ -119,26 +120,17 @@ export function AboutPage() {
               </h3>
             </div>
             <p className='text-justify'>
-              In our recent study task to implement an e-shop for handmade candles and soaps, our team of front-end
-              developers effectively collaborated to achieve a successful outcome. To begin, we assigned clear roles and
-              responsibilities within our team. Each team member had a specific area of focus. This division of labor
-              ensured that every aspect of the e-shop received the attention it needed. Effective communication was key
-              throughout the study task. We held regular meetings to discuss our progress, share ideas, and address any
-              challenges that arose. This open and collaborative approach allowed us to make improvements and
-              adjustments as needed. Our front-end developers worked closely with our designers to bring the e-shop to
-              life. They skillfully translated the design concepts into a functional website that not only looked great
-              but also provided an easy and enjoyable user experience. Our technical expertise played a crucial role in
-              implementing essential features, including product catalog organization, shopping cart functionality, and
-              user account management. We applied best practices in front-end development to ensure the website
-              performance and compatibility. We also conducted user testing and gathered feedback from classmates to
-              refine our e-shop. This iterative process allowed us to make user-centered improvements and ensure that
-              the website met the needs of our target audience. Throughout the study task, our team remained adaptable.
-              We were open to making changes based on feedback and addressing unexpected technical challenges, ensuring
-              that we stayed on track to meet our study objectives. In the end, our collaborative efforts resulted in a
-              well-executed e-shop for handmade candles and soaps, which met the study requirements. The effective
-              collaboration, technical skills, and commitment of our front-end development team were instrumental in
-              achieving this success. This experience highlights the importance of teamwork and collaboration in
-              accomplishing study tasks and real-world projects alike
+              Our team work is based on the Agile methodology, enforced with a lot of energy and responsible
+              collaboration. The project was split into sprints, each of which was divided into cyclical stages of
+              planning, implementing, testing, and upgrading. Every sprint began with task analysis and role
+              distribution. We used the Trello platform to monitor and update task statuses. Additionally, we had online
+              meetings three times a week and additional calls based on the team demand. Throughout the project, we
+              stayed in touch on Discord. Every member of the team took part in bug searching, problem-solving, adding
+              features, and contributed to improving code quality. After every sprint, we analyzed the pros and cons of
+              our decisions and set team goals for the next sprint. We also tried to minimize repetitive tasks and
+              streamline the debugging process with the help of Vercel automatic deployment and code quality instruments
+              like Husky, Eslint, and Prettier. In conclusion, we enjoyed the process and are happy to present the
+              results of this adventurous journey into the depths of the frontend world!
             </p>
           </div>
           <div>
@@ -164,12 +156,12 @@ export function AboutPage() {
                 <img
                   src='/images/RSS-logo-light.png'
                   alt='RSS logo'
-                  className='block dark:hidden w-[200px] hover:scale-110 transition'
+                  className='block dark:hidden w-[100px] hover:scale-110 transition'
                 />
                 <img
                   src='/images/RSS-logo-dark.png'
                   alt='RSS logo'
-                  className='hidden dark:block w-[200px] hover:scale-110 transition'
+                  className='hidden dark:block w-[100px] hover:scale-110 transition'
                 />
               </a>
             </div>

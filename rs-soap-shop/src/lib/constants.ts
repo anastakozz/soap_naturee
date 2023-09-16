@@ -72,7 +72,8 @@ export const ABOUT_US: AboutUsType[] = [
       'created information about all categories and products in Commercetools',
       'implemented sorting products',
       'implemented products search',
-      'implemented a change of categories and subcategories of goods'
+      'implemented a change of categories and subcategories of goods',
+      'implemented applying promo code and displaying updated prices'
     ],
     github: 'https://github.com/SlaVR7'
   }
