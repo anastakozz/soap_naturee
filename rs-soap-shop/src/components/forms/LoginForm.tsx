@@ -70,6 +70,7 @@ export const LoginForm = () => {
         <div className={'md:w-form'}>
           <Input
             {...emailValidation}
+            autoComplete={'email'}
             isSubmitted={isSubmitted}
             onChange={(newValue: string) => {
               setEmail(newValue);
@@ -78,6 +79,7 @@ export const LoginForm = () => {
           />
           <Input
             {...passwordValidation}
+            autoComplete={'current-password'}
             isSubmitted={isSubmitted}
             onChange={(newValue: string) => {
               setPassword(newValue);
