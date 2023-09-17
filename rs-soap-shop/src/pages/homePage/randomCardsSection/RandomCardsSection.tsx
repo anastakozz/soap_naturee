@@ -50,7 +50,7 @@ export default function RandomCardsSection() {
     <div role='random-section'>
       {items ? (
         <div className='bg-primaryColor dark:bg-grayMColor h-auto p-sm text-center px-big flex flex-col items-center'>
-          <h3 className='text-basicColor dark:text-secondaryColor text-h3 text-center font-bold'>You may like it</h3>
+          <h3 className='text-basicColor dark:text-secondaryColor text-h3 text-center font-bold whitespace-nowrap'>You may like it</h3>
           <div className='flex flex-wrap justify-around mt-sm max-w-[1245px] pb-sm '>
             {items.map((item, index): ReactNode => {
               return (
