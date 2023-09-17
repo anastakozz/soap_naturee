@@ -10,6 +10,7 @@ import { EmptyCart } from './EmptyCart';
 import { CartContext } from '../../App';
 import { clearCart, getCart } from '../../services/handleCart';
 import { Spinner } from '@material-tailwind/react';
+import classNames from 'classnames';
 
 function CartPage() {
   const [cart, setCart] = useContext(CartContext);
@@ -82,12 +83,12 @@ function CartPage() {
     const response = await getCartWithPromoCode(promoCodeInput.value, cartId, token, cartVersion);
     if (typeof response === 'string') {
       promoCodeInput.classList.add('border');
-      promoCodeInput.classList.add('border-red-500');
+      promoCodeInput.classList.add('border-errorColor');
       localStorage.setItem('promoCodeActivationMessage', 'Promo code does not exist!');
     } else {
       localStorage.setItem('isPromoCodeActive', 'true');
       promoCodeInput.classList.remove('border-2');
-      promoCodeInput.classList.remove('border-red-500');
+      promoCodeInput.classList.remove('border-errorColor');
       promoCodeInput.setAttribute('disabled', 'true');
       localStorage.setItem('promoCodeActivationMessage', 'Promo code applied');
       setIsPromoCodeActive(true);
@@ -110,14 +111,21 @@ function CartPage() {
 
   return (
     <>
-      <div className='bg-secondaryColor dark:bg-grayMColor flex-1'>
+      <div className='bg-secondaryColor dark:bg-graySColor flex-1'>
         {confirmation && (
           <div data-testid='confirmation-prompt'>
             <div
               onClick={handleCloseConfirmation}
               className='w-full h-full bg-grayLColor opacity-50 fixed z-10 top-0 left-0'
             ></div>
-            <div className='z-20 bg-secondaryColor dark:bg-grayLColor dark:text-secondaryColor fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-normal p-2 md:px-sm md:py-sm border-accentColor dark:border-secondaryColor border-8 flex flex-col justify-center'>
+            <div
+              className={classNames(
+                'bg-secondaryColor dark:bg-graySColor dark:text-secondaryColor',
+                'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-normal p-2 md:px-sm md:py-sm',
+                'border-accentColor dark:border-secondaryColor border-8',
+                'flex flex-col justify-center z-20 '
+              )}
+            >
               <h4 className='text-h4 text-center text-accentColor dark:text-basicColor mb-4'>
                 You are about to clear your Cart. Continue?
               </h4>
@@ -140,7 +148,7 @@ function CartPage() {
           {!loading && cart?.lineItems && cart?.lineItems.length > 0 && (
             <div className='flex flex-col'>
               <div className='flex flex-col border-b-2 border-accentColor dark:border-basicColor'>
-                <div className='border-b-2 border-accentColor dark:border-basicColor p-2 flex justify-between items-center mb-4'>
+                <div className='border-b-2 border-accentColor dark:border-basicColor p-2 py-4 flex justify-between items-center mb-4'>
                   <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold  md:text-start'>
                     My list of products
                   </h3>
@@ -174,7 +182,7 @@ function CartPage() {
                       }
                     }}
                   />
-                  <p className={isPromoCodeActive ? 'text-green-700' : 'text-errorColor'}>
+                  <p className={`${isPromoCodeActive ? 'text-green-700' : 'text-errorColor'} absolute`}>
                     {localStorage.getItem('promoCodeActivationMessage')}
                   </p>
                 </div>
@@ -193,7 +201,7 @@ function CartPage() {
                 <div className='text-h3 text-accentColor dark:text-basicColor font-bold mr-4'>Total cost:</div>
                 {isPromoCodeActive ? (
                   <div>
-                    <div className='flex justify-between text-graySColor dark:accent-accentColor text-h3 font-bold line-through'>
+                    <div className='flex justify-between text-grayMColor dark:accent-accentColor text-h3 font-bold line-through'>
                       {totalPriceWithoutPromo &&
                         (totalPriceWithoutPromo / 10000).toLocaleString('en-US', {
                           style: 'currency',
