@@ -63,11 +63,10 @@ function DetailedProductPage() {
       } catch (error) {
         console.log(error);
       }
+      setIsInCart(true);
     } catch (err) {
       console.log(err);
-      setIsSending(false);
     } finally {
-      setIsInCart(true);
       setIsSending(false);
     }
   }
@@ -88,6 +87,7 @@ function DetailedProductPage() {
         message: 'Product has been removed from cart',
         isVisible: true
       });
+      setIsInCart(false);
     } catch (err) {
       setSubmitResult({
         isSuccess: false,
@@ -95,9 +95,7 @@ function DetailedProductPage() {
         isVisible: true
       });
       console.log(err);
-      setIsSending(false);
     } finally {
-      setIsInCart(false);
       setIsSending(false);
     }
   }
