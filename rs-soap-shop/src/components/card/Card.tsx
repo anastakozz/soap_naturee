@@ -18,13 +18,13 @@ export default function Card(item: ProductCardProps) {
     if (target.classList.contains('cart-button')) {
       try {
         setIsSending(true);
-        sendToCart(item.productId).then(res => {
-          try {
-            setCart({ ...cart, ...res.data });
-          } catch (err) {
-            console.log(err);
-          }
-        });
+        const res = await sendToCart(item.productId);
+
+        try {
+          setCart({ ...cart, ...res.data });
+        } catch (err) {
+          console.log(err);
+        }
       } catch (err) {
         console.log(err);
         setIsSending(false);
