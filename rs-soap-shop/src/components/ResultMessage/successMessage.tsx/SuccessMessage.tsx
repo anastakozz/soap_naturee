@@ -12,7 +12,9 @@ export default function SuccessMessage({
   const navigate = useNavigate();
 
   const handleKeyPress = () => {
-    navigate('/');
+    if (!disableRedirect) {
+      navigate('/');
+    }
   };
 
   useEffect(() => {
@@ -23,14 +25,7 @@ export default function SuccessMessage({
   }, []);
 
   return (
-    <div
-      data-testid='reg-success-message'
-      onClick={() => {
-        if (!disableRedirect) {
-          navigate('/');
-        }
-      }}
-    >
+    <div data-testid='reg-success-message' onClick={handleKeyPress}>
       <div className='w-full h-full bg-grayLColor opacity-30 fixed z-10 top-0 left-0'></div>
       <div
         className={classNames(
