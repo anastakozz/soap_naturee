@@ -149,7 +149,7 @@ function ProductsPage() {
         changeQuery={changeQuery}
         updateSearchedProducts={updateSearchedProducts}
       />
-      {!isUpdatingProducts ? <OurProductsCards {...{ products }} /> : <LoadingSpinner marginTop={0} />}
+      {!isUpdatingProducts ? <OurProductsCards {...{ products }} /> : <LoadingSpinner marginTop={'60'} />}
       {isLoadingNewProducts && !isEndOfPage && <LoadingSpinner />}
     </>
   );

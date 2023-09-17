@@ -22,6 +22,8 @@ function CartPage() {
 
   const [loading, setLoading] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
+  const [promoCodeActivationMessage, setPromoCodeActivationMessage] = useState(localStorage.getItem('promoCodeActivationMessage'));
+
   useEffect(() => {
     getTokenFromStorage().then(res => {
       setToken(res);
@@ -82,7 +84,7 @@ function CartPage() {
     if (typeof response === 'string') {
       promoCodeInput.classList.add('border');
       promoCodeInput.classList.add('border-red-500');
-      localStorage.setItem('promoCodeActivationMessage', 'Promo code does not exist!');
+      setPromoCodeActivationMessage('Promo code does not exist!')
     } else {
       localStorage.setItem('isPromoCodeActive', 'true');
       promoCodeInput.classList.remove('border-2');
@@ -174,7 +176,7 @@ function CartPage() {
                     }}
                   />
                   <p className={isPromoCodeActive ? 'text-green-700' : 'text-errorColor'}>
-                    {localStorage.getItem('promoCodeActivationMessage')}
+                    {promoCodeActivationMessage || localStorage.getItem('promoCodeActivationMessage')}
                   </p>
                 </div>
                 <button
