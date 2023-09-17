@@ -57,13 +57,12 @@ function DetailedProductPage() {
   async function handleAddClick() {
     try {
       setIsSending(true);
-      sendToCart(data.productId).then(res => {
-        try {
-          setCart({ ...cart, ...res.data });
-        } catch (error) {
-          console.log(error);
-        }
-      });
+      const res = await sendToCart(data.productId);
+      try {
+        setCart({ ...cart, ...res.data });
+      } catch (error) {
+        console.log(error);
+      }
     } catch (err) {
       console.log(err);
       setIsSending(false);
@@ -76,10 +75,14 @@ function DetailedProductPage() {
   async function handleRemoveClick() {
     try {
       setIsSending(true);
-      console.log('remove from cart');
-      removeFromCart(data.productId).then(res => {
+      const res = await removeFromCart(data.productId);
+
+      try {
         setCart({ ...cart, ...res.data });
-      });
+      } catch (err) {
+        console.log(err);
+      }
+
       setSubmitResult({
         isSuccess: true,
         message: 'Product has been removed from cart',
