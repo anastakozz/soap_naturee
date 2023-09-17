@@ -23,19 +23,17 @@ export async function clearCart(id: string, version: number) {
   const token = await getTokenFromStorage();
 
   try {
-    deleteCart(token, id, version).then(cart => {
-      createCart(token);
-      return cart;
-    });
-  } catch (e) {
-    console.log(e);
-    try {
-      const cart = await createCart(token);
-      updateCart(token, cart.data.id, cart.data.version);
-      return cart;
-    } catch (err) {
-      console.log(err);
-    }
+    await deleteCart(token, id, version);
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+    const cart = await createCart(token);
+    updateCart(token, cart.data.id, cart.data.version);
+    return cart;
+  } catch (err) {
+    console.log(err);
   }
 }
 
