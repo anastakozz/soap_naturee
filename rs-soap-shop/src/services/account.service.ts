@@ -22,7 +22,7 @@ export function updateAccountData(id: string, version: string, actions: IAction[
       { version, actions },
       {
         headers: {
-          Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token,
+          Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('userToken')).access_token,
           'Content-Type': 'application/json'
         }
       }
@@ -39,7 +39,7 @@ export function changePassword(id: string, version: string, currentPassword: str
       { id, version, currentPassword, newPassword },
       {
         headers: {
-          Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token')).access_token,
+          Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('userToken')).access_token,
           'Content-Type': 'application/json'
         }
       }
