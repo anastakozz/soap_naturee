@@ -17,7 +17,6 @@ export async function handleLogin(email: string, password: string) {
   }
 }
 
-
 export async function handleRelogin(email: string, password: string) {
   try {
     const resp = await getToken(email, password);
