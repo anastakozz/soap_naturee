@@ -52,7 +52,6 @@ export async function addLineItem(productId: string, token: string, cartId: stri
 }
 
 export async function removeLineItem(lineItemId: string, token: string, cartId: string, cartVersion: number) {
-  console.log(lineItemId);
   try {
     const response = await axios({
       method: 'post',
@@ -125,14 +124,15 @@ export function deleteCart(token: string, id: string, version: number) {
   }
 }
 
-export async function getCartWithPromoCode(inputValue: string, cartId:string, token: string, cartVersion:string) {
+export async function getCartWithPromoCode(inputValue: string, cartId: string, token: string, cartVersion: string) {
   const requestBody = {
     version: cartVersion,
     actions: [
       {
         action: 'addDiscountCode',
-        code: inputValue,
-      }]
+        code: inputValue
+      }
+    ]
   };
 
   try {
@@ -141,8 +141,8 @@ export async function getCartWithPromoCode(inputValue: string, cartId:string, to
       url: `${apiUrl}/${projectKey}/me/carts/${cartId}`,
       data: requestBody,
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        Authorization: `Bearer ${token}`
+      }
     });
 
     if (response.status === 200) {
@@ -157,7 +157,7 @@ export async function getCartWithPromoCode(inputValue: string, cartId:string, to
   }
 }
 
-export async function removeDiscountCode(cartId:string, token: string, cartVersion:string, promocodeId: string) {
+export async function removeDiscountCode(cartId: string, token: string, cartVersion: string, promocodeId: string) {
   const requestBody = {
     version: cartVersion,
     actions: [
@@ -165,9 +165,10 @@ export async function removeDiscountCode(cartId:string, token: string, cartVersi
         action: 'removeDiscountCode',
         discountCode: {
           typeId: 'discount-code',
-          id: `${promocodeId}`,
+          id: `${promocodeId}`
         }
-      }]
+      }
+    ]
   };
 
   try {
@@ -176,15 +177,14 @@ export async function removeDiscountCode(cartId:string, token: string, cartVersi
       url: `${apiUrl}/${projectKey}/me/carts/${cartId}`,
       data: requestBody,
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        Authorization: `Bearer ${token}`
+      }
     });
 
     if (response.status === 200) {
       return 'success';
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }
-

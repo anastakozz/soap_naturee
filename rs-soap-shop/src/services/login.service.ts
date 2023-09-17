@@ -40,3 +40,21 @@ export async function login(email: string, password: string) {
     console.log(error);
   }
 }
+
+export async function relogin(email: string, password: string) {
+  try {
+    const token = JSON.parse(localStorage.getItem(`${userToken}`)).access_token;
+    return axios.post(
+      `${apiUrl}/${projectKey}/login`,
+      { email, password },
+      {
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}

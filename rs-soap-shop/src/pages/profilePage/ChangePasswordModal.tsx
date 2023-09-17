@@ -3,7 +3,7 @@ import { Input } from '../../components/forms/inputs/Input';
 import { passwordValidation } from '../../lib/utils/inputValidations';
 import AdditionalButton from '../../components/buttons/additionalButton';
 import { changePassword } from '../../services/account.service';
-import handleLogin from '../../services/handleLogin';
+import { handleRelogin } from '../../services/handleLogin';
 
 type ChangePasswordModalProps = {
   email: string;
@@ -26,7 +26,7 @@ export default function ChangePasswordModal({ email, id, version, onClose, onSuc
     if (newPassword == confirmPassword) {
       changePassword(id, version, currentPassword, newPassword)
         .then(() => {
-          handleLogin(email, newPassword).then(() => {
+          handleRelogin(email, newPassword).then(() => {
             onClose();
             onSuccess();
           });
