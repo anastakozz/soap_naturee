@@ -45,11 +45,13 @@ export const LoginForm = () => {
               const userData = resp?.data;
               if (userData) {
                 localStorage.setItem('user', JSON.stringify(userData));
-                navigate('/');
               }
             })
             .catch(err => {
               console.log(err);
+            })
+            .finally(() => {
+              navigate('/');
             });
         })
         .catch(err => {
