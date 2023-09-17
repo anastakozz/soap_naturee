@@ -5,6 +5,7 @@ import MarkIcon from '../../icons/markIcon';
 import classNames from 'classnames';
 import { ABOUT_US } from '../../lib/constants';
 import GitHubIcon from '../../icons/gitHubIcon';
+import RSSLogoIcon from '../../icons/RSSLogoIcon';
 
 export function AboutPage() {
   useEffect(() => {
@@ -119,18 +120,29 @@ export function AboutPage() {
                 Collaboration:
               </h3>
             </div>
-            <p className='text-justify'>
+            <p className='text-justify mb-4'>
               Our team work is based on the Agile methodology, enforced with a lot of energy and responsible
-              collaboration. The project was split into sprints, each of which was divided into cyclical stages of
-              planning, implementing, testing, and upgrading. Every sprint began with task analysis and role
-              distribution. We used the Trello platform to monitor and update task statuses. Additionally, we had online
-              meetings three times a week and additional calls based on the team demand. Throughout the project, we
-              stayed in touch on Discord. Every member of the team took part in bug searching, problem-solving, adding
-              features, and contributed to improving code quality. After every sprint, we analyzed the pros and cons of
-              our decisions and set team goals for the next sprint. We also tried to minimize repetitive tasks and
-              streamline the debugging process with the help of Vercel automatic deployment and code quality instruments
-              like Husky, Eslint, and Prettier. In conclusion, we enjoyed the process and are happy to present the
-              results of this adventurous journey into the depths of the frontend world!
+              collaboration.
+            </p>
+            <p className='text-justify mb-4'>
+              The project was split into sprints, each of which was divided into cyclical stages of planning,
+              implementing, testing, and upgrading. Every sprint began with task analysis and role distribution.
+            </p>
+            <p className='text-justify mb-4'>
+              We used the Trello platform to monitor and update task statuses. Additionally, we had online meetings
+              three times a week and additional calls based on the team demand. Throughout the project, we stayed in
+              touch on Discord.
+            </p>
+            <p className='text-justify mb-4'>
+              Every member of the team took part in bug searching, problem-solving, adding features, and contributed to
+              improving code quality. After every sprint, we analyzed the pros and cons of our decisions and set team
+              goals for the next sprint. We also tried to minimize repetitive tasks and streamline the debugging process
+              with the help of Vercel automatic deployment and code quality instruments like Husky, Eslint, and
+              Prettier.
+            </p>
+            <p className='text-justify'>
+              In conclusion, we enjoyed the process and are happy to present the results of this adventurous journey
+              into the depths of the frontend world!
             </p>
           </div>
           <div>
@@ -150,19 +162,10 @@ export function AboutPage() {
                 Gratitude:
               </h3>
             </div>
-            <div className={classNames('flex justify-center items-center', 'p-4')}>
-              <p className='mr-4'>Thank you for our new usefull skills</p>
-              <a href='https://rs.school/index.html' target='blanc'>
-                <img
-                  src='/images/RSS-logo-light.png'
-                  alt='RSS logo'
-                  className='block dark:hidden w-[100px] hover:scale-110 transition'
-                />
-                <img
-                  src='/images/RSS-logo-dark.png'
-                  alt='RSS logo'
-                  className='hidden dark:block w-[100px] hover:scale-110 transition'
-                />
+            <div className={classNames('flex flex-col md:flex-row justify-center items-center', 'p-4')}>
+              <p className='mb-2 md:mr-4'>Thank you for our new usefull skills</p>
+              <a className='hover:scale-110 transition' href='https://rs.school/index.html' target='blanc'>
+                <RSSLogoIcon />
               </a>
             </div>
           </div>
