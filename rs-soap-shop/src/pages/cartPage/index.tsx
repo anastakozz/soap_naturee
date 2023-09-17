@@ -121,7 +121,7 @@ function CartPage() {
             <div
               className={classNames(
                 'bg-secondaryColor dark:bg-graySColor dark:text-secondaryColor',
-                'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-normal p-2 md:px-sm md:py-sm',
+                'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-normal p-4 md:px-sm md:py-sm',
                 'border-accentColor dark:border-secondaryColor border-8',
                 'flex flex-col justify-center z-20 '
               )}
@@ -148,7 +148,7 @@ function CartPage() {
           {!loading && cart?.lineItems && cart?.lineItems.length > 0 && (
             <div className='flex flex-col'>
               <div className='flex flex-col border-b-2 border-accentColor dark:border-basicColor'>
-                <div className='border-b-2 border-accentColor dark:border-basicColor p-2 py-4 flex justify-between items-center mb-4'>
+                <div className='border-b-2 border-accentColor dark:border-basicColor p-4 flex justify-between items-center mb-4'>
                   <h3 className='text-h3 text-accentColor dark:text-basicColor font-bold  md:text-start'>
                     My list of products
                   </h3>
@@ -165,13 +165,17 @@ function CartPage() {
                   />
                 ))}
               </div>
-              <div className='flex flex-col md:flex-row items-center justify-center md:justify-end p-4 border-b-2 border-accentColor dark:border-basicColor'>
-                <p className='text-center md:text-start mb-4 md:mr-4 md:mb-0'>
-                  Do you have a promo code? Enter it here:
-                </p>
+              <div
+                className={classNames(
+                  'flex flex-col md:flex-row justify-center md:justify-end gap-[25px]',
+                  'p-4 py-8',
+                  'border-b-2 border-accentColor dark:border-basicColor'
+                )}
+              >
+                <p className='text-h5'>Do you have a promo code? Enter it here:</p>
                 <div>
                   <input
-                    className='p-2 font-medium rounded-md border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black md:mr-2 mb-4 md:mb-0'
+                    className='p-2 font-medium rounded-md border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black'
                     id='promoCodeInput'
                     type='text'
                     placeholder={isPromoCodeActive ? 'NATURE' : 'Enter promo code'}
@@ -182,7 +186,7 @@ function CartPage() {
                       }
                     }}
                   />
-                  <p className={`${isPromoCodeActive ? 'text-green-700' : 'text-errorColor'} absolute`}>
+                  <p className={`${isPromoCodeActive ? 'text-green-700' : 'text-errorColor'} absolute text-xs`}>
                     {localStorage.getItem('promoCodeActivationMessage')}
                   </p>
                 </div>
@@ -191,7 +195,7 @@ function CartPage() {
                     !isPromoCodeActive ? applyPromoCode() : removePromoCode();
                   }}
                   className={
-                    'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 py-[5px] md:mr-2'
+                    'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 h-[34px] md:mr-2'
                   }
                 >
                   {isPromoCodeActive ? 'Reset' : 'Apply'}
