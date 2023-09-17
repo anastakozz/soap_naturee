@@ -46,7 +46,6 @@ function DetailedProductPage() {
 
   function toggleModal(event: React.MouseEvent) {
     const target = event.target as HTMLElement;
-    console.log(target);
     const list = target.classList;
     if (!isModalVisible && target.tagName === 'IMG') {
       setModalVisibility(!isModalVisible);
@@ -59,7 +58,11 @@ function DetailedProductPage() {
     try {
       setIsSending(true);
       sendToCart(data.productId).then(res => {
-        setCart({ ...cart, ...res.data });
+        try {
+          setCart({ ...cart, ...res.data });
+        } catch (error) {
+          console.log(error);
+        }
       });
     } catch (err) {
       console.log(err);
