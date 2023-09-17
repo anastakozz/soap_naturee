@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Product } from '../../lib/interfaces';
 import DeleteIcon from '../../icons/deleteIcon';
@@ -18,10 +18,16 @@ export function CartListItem({
   version: number;
   onUpdate: () => Promise<void>;
 }) {
-  const [amount, setAmount] = useState(el.quantity);
-  const [buttonsDisabled, setButtonsDisabled] = useState(false);
+  const [item, setItem] = useState({
+    quantity: el.quantity,
+    disabled: false
+  });
 
   const onDelete = (lineItemId: string) => {
+    setItem({
+      ...item,
+      disabled: true
+    });
     const actions = [
       {
         action: 'changeLineItemQuantity',
@@ -34,8 +40,19 @@ export function CartListItem({
     });
   };
 
+  useEffect(() => {
+    setItem({
+      quantity: el.quantity,
+      disabled: false
+    });
+  }, [version]);
+
   const onChangeAmount = (lineItemId: string, quantity: number) => {
-    setButtonsDisabled(true);
+    setItem(() => ({
+      quantity: quantity,
+      disabled: true
+    }));
+
     const actions = [
       {
         action: 'changeLineItemQuantity',
@@ -43,14 +60,11 @@ export function CartListItem({
         quantity: quantity
       }
     ];
+
     updateProductInCart(token, cartId, actions, version).then(() => {
-      onUpdate().then(() => {
-        setButtonsDisabled(false);
-      });
+      onUpdate();
     });
   };
-
-
 
   return (
     <div className='p-4 border-2 border-dotted border-accentColor dark:border-basicColor rounded-normal w-full mb-4 flex flex-col md:flex-row items-start md:items-center justify-between'>
@@ -95,36 +109,33 @@ export function CartListItem({
           )}
         </div>
         <div className='flex mr-4'>
-          <div
+          <button
+            disabled={item.disabled}
             onClick={() => {
-              if (amount > 1 && !buttonsDisabled) {
-                setAmount(amount - 1);
-                onChangeAmount(el.id, amount - 1);
-              }
+              onChangeAmount(el.id, item.quantity > 1 ? item.quantity - 1 : item.quantity);
             }}
             className='cursor-pointer flex justify-center items-center w-[20px] bg-graySColor hover:bg-grayMColor transition'
           >
             -
-          </div>
+          </button>
           <input
             onChange={e => {
               console.log(e.target.value);
             }}
             className='w-[30px] text-center'
             type='text'
-            value={amount}
+            value={item.quantity}
           />
-          <div
+
+          <button
+            disabled={item.disabled}
             onClick={() => {
-              if (!buttonsDisabled) {
-                setAmount(amount + 1);
-                onChangeAmount(el.id, amount + 1);
-              }
+              onChangeAmount(el.id, item.quantity + 1);
             }}
             className='cursor-pointer flex justify-center items-center w-[20px] bg-graySColor hover:bg-grayMColor transition'
           >
             +
-          </div>
+          </button>
         </div>
         <p className='font-bold mr-2'>
           {(el.totalPrice.centAmount / 100).toLocaleString('en-US', {
@@ -133,7 +144,7 @@ export function CartListItem({
           })}
         </p>
 
-        <button onClick={() => onDelete(el.id)}>
+        <button disabled={item.disabled} onClick={() => onDelete(el.id)}>
           <DeleteIcon />
         </button>
       </div>

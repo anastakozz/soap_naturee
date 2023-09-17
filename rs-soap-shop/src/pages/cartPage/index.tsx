@@ -9,6 +9,7 @@ import { CartListItem } from './CartListItem';
 import { EmptyCart } from './EmptyCart';
 import { CartContext } from '../../App';
 import { clearCart, getCart } from '../../services/handleCart';
+import { Spinner } from '@material-tailwind/react';
 
 function CartPage() {
   const [cart, setCart] = useContext(CartContext);
@@ -156,13 +157,13 @@ function CartPage() {
                   />
                 ))}
               </div>
-              <div className='flex flex-col md:flex-row items-start justify-center md:justify-end p-4 border-b-2 border-accentColor dark:border-basicColor'>
-                <p className='text-center md:text-start mt-4 md:mr-4 md:mb-0'>
+              <div className='flex flex-col md:flex-row items-center justify-center md:justify-end p-4 border-b-2 border-accentColor dark:border-basicColor'>
+                <p className='text-center md:text-start mb-4 md:mr-4 md:mb-0'>
                   Do you have a promo code? Enter it here:
                 </p>
                 <div>
                   <input
-                    className='p-2 font-medium rounded-md border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black md:mr-2 mb-2 md:mb-0'
+                    className='p-2 font-medium rounded-md border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black md:mr-2 mb-4 md:mb-0'
                     id='promoCodeInput'
                     type='text'
                     placeholder={isPromoCodeActive ? 'NATURE' : 'Enter promo code'}
@@ -182,7 +183,7 @@ function CartPage() {
                     !isPromoCodeActive ? applyPromoCode() : removePromoCode();
                   }}
                   className={
-                    'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 py-[5px] mt-2 md:mr-2  md:mb-0'
+                    'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 py-[5px] md:mr-2'
                   }
                 >
                   {isPromoCodeActive ? 'Reset' : 'Apply'}
@@ -220,6 +221,11 @@ function CartPage() {
           {!loading && cart?.lineItems.length == 0 && (
             <div>
               <EmptyCart />
+            </div>
+          )}
+          {loading && (
+            <div className='flex items-center justify-center'>
+              <Spinner />
             </div>
           )}
         </div>
