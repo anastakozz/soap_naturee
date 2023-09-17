@@ -6,6 +6,7 @@ function LoginAreaModal({ isLoggedIn, onClose }: { isLoggedIn: boolean; onClose:
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem(`${userToken}`);
+    localStorage.removeItem(`${userToken}Refresh`);
     navigate('/sign-in');
   };
   return (

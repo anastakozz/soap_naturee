@@ -10,6 +10,7 @@ function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem(`${userToken}`);
+    localStorage.removeItem(`${userToken}Refresh`);
     navigate('/sign-in');
   };
   return (
