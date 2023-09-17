@@ -58,7 +58,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <form className='bg-secondaryColor dark:bg-grayMColor flex-1'>
+    <form className='bg-secondaryColor dark:bg-grayMColor flex-1' action='' method='POST' onSubmit={onSubmit}>
       <div className='container px-sm py-sm md:px-big md:py-bigY max-w-[1440px] mx-auto lg:px-big'>
         <h3 className={'text-accentColor dark:text-primaryColor text-h3 font-bold pb-bigY'}>Sign In form:</h3>
         {error && (
@@ -70,6 +70,7 @@ export const LoginForm = () => {
         <div className={'md:w-form'}>
           <Input
             {...emailValidation}
+            autoComplete={'email'}
             isSubmitted={isSubmitted}
             onChange={(newValue: string) => {
               setEmail(newValue);
@@ -78,6 +79,7 @@ export const LoginForm = () => {
           />
           <Input
             {...passwordValidation}
+            autoComplete={'current-password'}
             isSubmitted={isSubmitted}
             onChange={(newValue: string) => {
               setPassword(newValue);

@@ -16,6 +16,7 @@ export interface LoginData {
 }
 
 export interface InputProps {
+  name?: string;
   label: string;
   type: string;
   val?: string;
@@ -24,6 +25,7 @@ export interface InputProps {
   isSubmitted?: boolean;
   onChange?: (value: string) => void;
   disabled?: boolean;
+  autoComplete?: string;
 }
 
 export interface OurProductsCardsProps {

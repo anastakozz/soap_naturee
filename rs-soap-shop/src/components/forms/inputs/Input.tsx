@@ -11,7 +11,7 @@ import { validateCity } from '../validateFunctions/city';
 import { validatePostalCode } from '../validateFunctions/postalCode';
 import { validateName } from '../validateFunctions/name';
 
-export const Input = ({ label, type, placeholder, isSubmitted, onChange, val, disabled, isColumn }: InputProps) => {
+export const Input = ({ name, label, type, placeholder, isSubmitted, onChange, val, disabled, isColumn, autoComplete }: InputProps) => {
   const inputTailwind =
     'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
 
@@ -108,6 +108,8 @@ export const Input = ({ label, type, placeholder, isSubmitted, onChange, val, di
             value={val}
             onChange={handleInputChange}
             disabled={disabled}
+            autoComplete={autoComplete}
+            name={name}
           />
           {type === 'password' && (
             <button
