@@ -25,6 +25,7 @@ export async function login(email: string, password: string) {
     const cart = await getSpecificCart(anonymousToken);
     const anonymousCart = { id: cart.data.id, typeId: 'cart' };
     localStorage.removeItem(`${anonymousToken}`);
+    localStorage.removeItem(`${anonymousToken}Refresh`);
 
     return axios.post(
       `${apiUrl}/${projectKey}/login`,
