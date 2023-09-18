@@ -22,7 +22,9 @@ function Header() {
   const amount = cart ? cart?.lineItems.length : 0;
 
   useEffect(() => {
-    getCart().then(res => setCart(res.data));
+    getCart()
+      .then(res => setCart(res.data))
+      .catch(e => console.log(e));
   }, []);
 
   useEffect(() => {

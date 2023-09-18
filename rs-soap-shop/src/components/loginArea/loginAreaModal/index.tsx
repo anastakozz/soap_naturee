@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { tokenNames } from '../../../lib/enums';
+import { setAnonymousToken } from '../../../services/registration.service';
 const { userToken } = tokenNames;
 
 function LoginAreaModal({
@@ -15,8 +16,10 @@ function LoginAreaModal({
   const handleLogout = () => {
     localStorage.removeItem(`${userToken}`);
     localStorage.removeItem(`${userToken}Refresh`);
-    onLogout();
-    navigate('/sign-in');
+    setAnonymousToken().then(() => {
+      onLogout();
+      navigate('/sign-in');
+    });
   };
   return (
     <>

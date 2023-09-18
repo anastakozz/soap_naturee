@@ -4,6 +4,7 @@ import ProfileIconDark from '../../../icons/profileIconDark';
 import LogoutIcon from '../../../icons/logoutIcon';
 import LogoutIconDark from '../../../icons/logoutIconDark';
 import { tokenNames } from '../../../lib/enums';
+import { setAnonymousToken } from '../../../services/registration.service';
 const { userToken } = tokenNames;
 
 function LoginArea({ isLoggedIn, onLogout }: { isLoggedIn: boolean; onLogout: () => void }) {
@@ -11,8 +12,10 @@ function LoginArea({ isLoggedIn, onLogout }: { isLoggedIn: boolean; onLogout: ()
   const handleLogout = () => {
     localStorage.removeItem(`${userToken}`);
     localStorage.removeItem(`${userToken}Refresh`);
-    onLogout();
-    navigate('/sign-in');
+    setAnonymousToken().then(() => {
+      onLogout();
+      navigate('/sign-in');
+    });
   };
   return (
     <>
