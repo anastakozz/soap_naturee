@@ -13,9 +13,9 @@ import ProfilePage from './pages/profilePage';
 import Footer from './components/footer';
 import PageNotFound from './pages/pageNotFound';
 import DetailedProductPage from './pages/detailedProductPage';
-import { getAnonymousToken } from './services/registration.service';
+import { setAnonymousToken } from './services/registration.service';
 import { tokenNames } from './lib/enums';
-const { userToken, anonymous, anonymousRefresh } = tokenNames;
+const { userToken, anonymous } = tokenNames;
 
 export const CartContext = createContext(null);
 
@@ -37,16 +37,14 @@ function App() {
   const isLoggedIn = !!localStorage.getItem(`${userToken}`);
   const isSeenBefore = !!localStorage.getItem(`${anonymous}`);
 
-  const setAnonymousToken = async () => {
-    const id = await getAnonymousToken();
-    localStorage.setItem(`${anonymous}`, JSON.stringify(id.data));
-    localStorage.setItem(`${anonymousRefresh}`, id.data.refresh_token);
+  const setAnonymous = async () => {
+    await setAnonymousToken()
     setHasToken(true);
   };
 
   useEffect(() => {
     if (!isLoggedIn && !isSeenBefore) {
-      setAnonymousToken();
+      setAnonymous();
     } else {
       setHasToken(true);
     }

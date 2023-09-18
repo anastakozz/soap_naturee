@@ -29,7 +29,7 @@ function CartPage() {
   useEffect(() => {
     getTokenFromStorage().then(res => {
       setToken(res);
-    });
+    }).catch(err => console.log(err));
     const storedIsPromoCodeActive = localStorage.getItem('isPromoCodeActive');
     if (storedIsPromoCodeActive === 'true') {
       setIsPromoCodeActive(true);

@@ -1,6 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { RegistrationData, ResultProps } from '../lib/interfaces';
 import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants';
+import { tokenNames } from '../lib/enums';
+const { anonymous, anonymousRefresh } = tokenNames;
 
 export async function getBasicToken() {
   try {
@@ -31,6 +33,12 @@ export async function getAnonymousToken() {
     console.log(e);
   }
 }
+
+export const setAnonymousToken = async () => {
+  const id = await getAnonymousToken();
+  localStorage.setItem(`${anonymous}`, JSON.stringify(id.data));
+  localStorage.setItem(`${anonymousRefresh}`, id.data.refresh_token);
+};
 
 export async function introspectToken(token: string) {
   try {
