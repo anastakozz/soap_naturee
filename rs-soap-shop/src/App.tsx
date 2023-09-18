@@ -37,14 +37,9 @@ function App() {
   const isLoggedIn = !!localStorage.getItem(`${userToken}`);
   const isSeenBefore = !!localStorage.getItem(`${anonymous}`);
 
-  const setAnonymous = async () => {
-    await setAnonymousToken()
-    setHasToken(true);
-  };
-
   useEffect(() => {
     if (!isLoggedIn && !isSeenBefore) {
-      setAnonymous();
+      setAnonymousToken().then(() => setHasToken(true))
     } else {
       setHasToken(true);
     }
