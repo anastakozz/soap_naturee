@@ -13,7 +13,6 @@ function ProductsPage() {
   const [products, setProducts] = useState<Product[]>();
   const { category, subcategory } = useParams();
   const [query, setQuery] = useState(sessionStorage.getItem('query'));
-  const [isLoadingNewProducts, setIsLoadingNewProducts] = useState(false);
   const [isEndOfPage, setIsEndOfPage] = useState(false);
   const [isUpdatingProducts, setIsUpdatingProducts] = useState(false);
   if (!sessionStorage.getItem('isLoading')) sessionStorage.setItem('isLoading', 'false');
@@ -51,12 +50,12 @@ function ProductsPage() {
       getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, 1)
         .then(products => {
         setProducts(products);
-      });
+      })
+        .then(() => {
+          setIsUpdatingProducts(false);
+          sessionStorage.setItem('isLoading', 'false');
+        });
     })
-      .then(() => {
-        setIsUpdatingProducts(false);
-        sessionStorage.setItem('isLoading', 'false');
-      });
   }
 
   useEffect(() => {
@@ -102,7 +101,6 @@ function ProductsPage() {
   function loadNextPage() {
     if (sessionStorage.getItem('isLoading') === 'true') return;
     sessionStorage.setItem('isLoading', 'true');
-    setIsLoadingNewProducts(true);
     sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1));
 
     getFiltered(`?${sessionStorage.getItem('query')}`, +sessionStorage.getItem('currentPage'))
@@ -113,7 +111,6 @@ function ProductsPage() {
       })
       .then(() => {
         sessionStorage.setItem('isLoading', 'false');
-        setIsLoadingNewProducts(false);
       })
       .catch(error => {
         console.error(error);
@@ -123,7 +120,6 @@ function ProductsPage() {
   function loadNextPageWithCategory() {
     if (sessionStorage.getItem('isLoading') === 'true') return;
     sessionStorage.setItem('isLoading', 'true');
-    setIsLoadingNewProducts(true);
     sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1));
     getCategoryId(
       subcategory
@@ -141,7 +137,6 @@ function ProductsPage() {
         })
         .then(() => {
           sessionStorage.setItem('isLoading', 'false');
-          setIsLoadingNewProducts(false);
         })
         .catch(error => {
           console.error(error);
@@ -157,8 +152,7 @@ function ProductsPage() {
         changeQuery={changeQuery}
         updateSearchedProducts={updateSearchedProducts}
       />
-      {!isUpdatingProducts ? <OurProductsCards {...{ products }} /> : <LoadingSpinner marginTop={'60'} />}
-      {isLoadingNewProducts && !isEndOfPage && <LoadingSpinner />}
+      {isUpdatingProducts ? <LoadingSpinner marginTop={'60'} /> : <><OurProductsCards {...{ products }} />{!isEndOfPage && <LoadingSpinner marginTop={'10'} />}</>}
     </>
   );
 }
