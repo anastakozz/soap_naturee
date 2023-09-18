@@ -33,7 +33,7 @@ export const ABOUT_US: AboutUsType[] = [
   {
     fullName: 'Kozlova Anastasiya',
     role: 'Team Lead software engineer',
-    bio: 'Having architectural education and long experience in digital fabrication I started coding from writing JS scripts for Adobe Illustrator and fell in love with the process. I decided to change a career and dove into JS with help of Rolling Scopes School. I believe, that every specialist unique combination of skills and experience may shine bright in its place, and hope to find my place in IT sphere',
+    bio: 'Having an architectural education and extensive experience in digital fabrication, I started coding by writing JavaScript (JS) scripts for Adobe Illustrator and fell in love with the process. I decided to change my career and immersed myself in JS with the help of Rolling Scopes School. I believe that the unique combination of skills and experience possessed by every specialist can shine brightly in its own place, and I hope to find my place in the IT sphere.',
     img: '/images/anastasia_photo.jpg',
     contributions: [
       'organized team work processes (repository, task tracking, styleguide, team wiki)',
@@ -46,7 +46,7 @@ export const ABOUT_US: AboutUsType[] = [
   {
     fullName: 'Kuzich Yulia',
     role: 'Software engineer',
-    bio: 'First and foremost I need to say that I have not spatial education in the IT field, but I am passing the best courses ever right now. I graduated from The Brest Technical University as a specialist in logistics. Also got a Master degree in World Economics. And I was working as a logistician for 3 years. Now my goal is to become a cool front-end developer and get a good job. My strengths include responsibility, perseverance, purposefulness and efficiency. At the moment I have not work experience in the IT sphere, but I really want to get it.',
+    bio: 'First and foremost, I need to say that I do not have a formal education in the IT field, but I am currently taking some of the best courses available. I graduated from Brest Technical University as a specialist in logistics and also earned a Master degree in World Economics. I worked as a logistician for three years. Now, my goal is to become a skilled front-end developer and secure a good job. My strengths include responsibility, perseverance, determination, and efficiency. At the moment, I do not have any work experience in the IT sphere, but I am very eager to gain it.',
     img: '/images/yulia_photo.jpg',
     contributions: [
       'wrote functional structure of our project (like BA)',
@@ -62,7 +62,7 @@ export const ABOUT_US: AboutUsType[] = [
   {
     fullName: 'Ryshkov Vyacheslav',
     role: 'Software engineer',
-    bio: 'My previous place of work was a Mining and processing plant, where I worked as an electrician on duty for the last 7 years. I received a higher education in the specialty "Automation of technological processes and production". For many reasons, I decided to change my job and chose the IT path. Since I already had experience in website administration and promotion, I liked Frontend development the most. I like it and I hope to become a good specialist.',
+    bio: 'My previous place of work was a mining and processing plant, where I worked as an electrician on duty for the last seven years. I have a higher education in the specialty of "Automation of Technological Processes and Production." For various reasons, I decided to change my job and chose the IT path. Since I already had experience in website administration and promotion, I found Frontend development to be the most appealing. I enjoy it, and I hope to become a skilled specialist.',
     img: '/images/slava_photo.jpg',
     contributions: [
       'made a basic configuration of Commercetools',
