@@ -69,7 +69,7 @@ export function AboutPage() {
                     <GitHubIcon />
                   </a>
                 </div>
-                <div className='flex flex-col w-[80%]'>
+                <div className='flex flex-col w-full md:w-[80%]'>
                   <h4
                     className={classNames(
                       'text-h4 font-bold text-accentColor dark:text-basicColor',
