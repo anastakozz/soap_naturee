@@ -1,7 +1,8 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { tokenNames } from '../../../lib/enums';
 import { setAnonymousToken } from '../../../services/registration.service';
-const { userToken } = tokenNames;
+const { userToken, anonymous } = tokenNames;
+import { getSpecificCart } from '../../../services/handleCart';
 
 function LoginAreaModal({
   isLoggedIn,
@@ -16,7 +17,9 @@ function LoginAreaModal({
   const handleLogout = () => {
     localStorage.removeItem(`${userToken}`);
     localStorage.removeItem(`${userToken}Refresh`);
-    setAnonymousToken().then(() => {
+    setAnonymousToken().then(async () => {
+      const anonymousToken = JSON.parse(localStorage.getItem(`${anonymous}`)).access_token;
+      await getSpecificCart(anonymousToken);
       onLogout();
       navigate('/sign-in');
     });

@@ -5,14 +5,17 @@ import LogoutIcon from '../../../icons/logoutIcon';
 import LogoutIconDark from '../../../icons/logoutIconDark';
 import { tokenNames } from '../../../lib/enums';
 import { setAnonymousToken } from '../../../services/registration.service';
-const { userToken } = tokenNames;
+import { getSpecificCart } from '../../../services/handleCart';
+const { userToken, anonymous } = tokenNames;
 
 function LoginArea({ isLoggedIn, onLogout }: { isLoggedIn: boolean; onLogout: () => void }) {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem(`${userToken}`);
     localStorage.removeItem(`${userToken}Refresh`);
-    setAnonymousToken().then(() => {
+    setAnonymousToken().then(async () => {
+      const anonymousToken = JSON.parse(localStorage.getItem(`${anonymous}`)).access_token;
+      await getSpecificCart(anonymousToken);
       onLogout();
       navigate('/sign-in');
     });

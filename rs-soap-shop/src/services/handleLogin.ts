@@ -10,9 +10,11 @@ export async function handleLogin(email: string, password: string) {
     localStorage.setItem(`${userToken}`, JSON.stringify(authData));
     localStorage.setItem(`${userTokenRefresh}`, authData.refresh_token);
     login(email, password).then(response => {
-      const userData = response.data;
-      localStorage.setItem('user', JSON.stringify(userData));
-    });
+      const userData = response?.data;
+      if (userData) {
+        localStorage.setItem('user', JSON.stringify(userData));
+      }
+    }).catch(e => console.log(e));
   } catch (err) {
     console.error(err);
   }
