@@ -24,12 +24,16 @@ function CartPage() {
 
   const [loading, setLoading] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
-  const [promoCodeActivationMessage, setPromoCodeActivationMessage] = useState(localStorage.getItem('promoCodeActivationMessage'));
+  const [promoCodeActivationMessage, setPromoCodeActivationMessage] = useState(
+    localStorage.getItem('promoCodeActivationMessage')
+  );
 
   useEffect(() => {
-    getTokenFromStorage().then(res => {
-      setToken(res);
-    }).catch(err => console.log(err));
+    getTokenFromStorage()
+      .then(res => {
+        setToken(res);
+      })
+      .catch(err => console.log(err));
     const storedIsPromoCodeActive = localStorage.getItem('isPromoCodeActive');
     if (storedIsPromoCodeActive === 'true') {
       setIsPromoCodeActive(true);
@@ -90,7 +94,7 @@ function CartPage() {
     if (typeof response === 'string') {
       promoCodeInput.classList.add('border');
       promoCodeInput.classList.add('border-errorColor');
-      setPromoCodeActivationMessage('Promo code does not exist!')
+      setPromoCodeActivationMessage('Promo code does not exist!');
     } else {
       localStorage.setItem('isPromoCodeActive', 'true');
       promoCodeInput.classList.remove('border-2');
@@ -194,7 +198,8 @@ function CartPage() {
                         !isPromoCodeActive ? applyPromoCode() : resetPromoCode();
                       } else {
                         setPromoCodeActivationMessage('');
-                    }}}
+                      }
+                    }}
                   />
                   <p className={`${isPromoCodeActive ? 'text-green-700' : 'text-errorColor'} absolute text-xs`}>
                     {promoCodeActivationMessage || localStorage.getItem('promoCodeActivationMessage')}

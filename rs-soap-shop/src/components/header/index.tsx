@@ -12,35 +12,18 @@ import { tokenNames } from '../../lib/enums';
 const { userToken } = tokenNames;
 
 import { CartContext } from '../../App';
-import { getActiveCart } from '../../services/cart.service';
-import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
 import ShopLogo from '../../icons/shopLogo';
+import { getCart } from '../../services/handleCart';
 
 function Header() {
   const [cart, setCart] = useContext(CartContext);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [token, setToken] = useState(null);
+  const amount = cart ? cart?.lineItems.length : 0;
 
   useEffect(() => {
-    getTokenFromStorage().then(res => {
-      setToken(res);
-    });
+    getCart().then(res => setCart(res.data));
   }, []);
-
-  const amount = cart ? cart.lineItems.length : 0;
-
-  useEffect(() => {
-    if (token) {
-      getActiveCart(token)
-        .then(response => {
-          setCart(response.data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  }, [token]);
 
   useEffect(() => {
     const changeWidth = () => {
@@ -87,6 +70,10 @@ function Header() {
     setIsMenuOpen(false);
   };
 
+  const onLogout = () => {
+    setCart({ ...cart, lineItems: [] });
+  };
+
   return (
     <header data-tested='header' className='bg-primaryColor dark:bg-grayLColor transition relative'>
       <div className='max-w-[1440px] mx-auto px-4 flex justify-between items-center h-24 lg:px-big'>
@@ -97,7 +84,9 @@ function Header() {
           <ShopLogo></ShopLogo>
         </NavLink>
         <Navigation />
-        {isMenuOpen && <NavigationModal isOpen={isMenuOpen} onClose={handleCloseMenu} isLoggedIn={isLoggedIn} />}
+        {isMenuOpen && (
+          <NavigationModal onLogout={onLogout} isOpen={isMenuOpen} onClose={handleCloseMenu} isLoggedIn={isLoggedIn} />
+        )}
         <div className='flex items-center'>
           <DarkModeButton onChange={handleChangeMode} />
           <NavLink
@@ -113,7 +102,7 @@ function Header() {
             </div>
           </NavLink>
           <div className='flex items-center hidden md:flex'>
-            <LoginArea isLoggedIn={isLoggedIn} />
+            <LoginArea onLogout={onLogout} isLoggedIn={isLoggedIn} />
           </div>
           <BurgerMenuButton onCloseMenu={handleCloseMenu} onClick={handleOpenMenu} isMenuOpen={isMenuOpen} />
         </div>

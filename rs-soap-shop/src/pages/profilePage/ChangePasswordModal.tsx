@@ -4,6 +4,7 @@ import { passwordValidation } from '../../lib/utils/inputValidations';
 import AdditionalButton from '../../components/buttons/additionalButton';
 import { changePassword } from '../../services/account.service';
 import { handleRelogin } from '../../services/handleLogin';
+import { validatePassword } from '../../components/forms/validateFunctions/password';
 
 type ChangePasswordModalProps = {
   email: string;
@@ -18,12 +19,16 @@ export default function ChangePasswordModal({ email, id, version, onClose, onSuc
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleCancel = () => {
     onClose();
   };
   const handleSave = () => {
-    if (newPassword == confirmPassword) {
+    setIsSubmitted(true);
+    const passwordValidationResult: string | undefined = validatePassword(newPassword);
+
+    if (!passwordValidationResult && newPassword == confirmPassword) {
       changePassword(id, version, currentPassword, newPassword)
         .then(() => {
           handleRelogin(email, newPassword).then(() => {
@@ -46,6 +51,7 @@ export default function ChangePasswordModal({ email, id, version, onClose, onSuc
         <h4 className='text-h4 text-accentColor dark:text-basicColor'>Enter your current password:</h4>
         <Input
           {...passwordValidation}
+          isSubmitted={isSubmitted}
           label=''
           isColumn={true}
           onChange={(newValue: string) => setCurrentPassword(newValue)}
@@ -53,6 +59,7 @@ export default function ChangePasswordModal({ email, id, version, onClose, onSuc
         <h4 className='text-h4 text-accentColor dark:text-basicColor'>Enter your new password:</h4>
         <Input
           {...passwordValidation}
+          isSubmitted={isSubmitted}
           label=''
           isColumn={true}
           onChange={(newValue: string) => setNewPassword(newValue)}
@@ -60,6 +67,7 @@ export default function ChangePasswordModal({ email, id, version, onClose, onSuc
         <h4 className='text-h4 text-accentColor dark:text-basicColor'>Confirm new password:</h4>
         <Input
           {...passwordValidation}
+          isSubmitted={isSubmitted}
           label=''
           isColumn={true}
           onChange={(newValue: string) => setConfirmPassword(newValue)}

@@ -7,7 +7,8 @@ import LoginAreaModal from './index';
 describe('LoginAreaModal', () => {
   it('should render the logged in user interface correctly', () => {
     const onCloseMock = jest.fn();
-    const { getByText } = render(<LoginAreaModal isLoggedIn={true} onClose={onCloseMock} />, {
+    const onLogout = jest.fn();
+    const { getByText } = render(<LoginAreaModal isLoggedIn={true} onClose={onCloseMock} onLogout={onLogout} />, {
       wrapper: MemoryRouter
     });
 
@@ -18,8 +19,9 @@ describe('LoginAreaModal', () => {
   });
 
   it('should call onClose and handleLogout when the "Log Out" link is clicked', () => {
+    const onLogout = jest.fn();
     const onCloseMock = jest.fn();
-    const { getByText } = render(<LoginAreaModal isLoggedIn={true} onClose={onCloseMock} />, {
+    const { getByText } = render(<LoginAreaModal isLoggedIn={true} onClose={onCloseMock} onLogout={onLogout} />, {
       wrapper: MemoryRouter
     });
 
@@ -27,11 +29,13 @@ describe('LoginAreaModal', () => {
     fireEvent.click(logOutLink);
 
     expect(onCloseMock).toHaveBeenCalled();
+    expect(onLogout).toHaveBeenCalled();
   });
 
   it('should call onClose when a navigation link is clicked', () => {
     const onCloseMock = jest.fn();
-    const { getByText } = render(<LoginAreaModal isLoggedIn={false} onClose={onCloseMock} />, {
+    const onLogout = jest.fn();
+    const { getByText } = render(<LoginAreaModal isLoggedIn={false} onClose={onCloseMock} onLogout={onLogout} />, {
       wrapper: MemoryRouter
     });
 

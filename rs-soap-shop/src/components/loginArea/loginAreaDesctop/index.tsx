@@ -6,11 +6,12 @@ import LogoutIconDark from '../../../icons/logoutIconDark';
 import { tokenNames } from '../../../lib/enums';
 const { userToken } = tokenNames;
 
-function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
+function LoginArea({ isLoggedIn, onLogout }: { isLoggedIn: boolean; onLogout: () => void }) {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem(`${userToken}`);
     localStorage.removeItem(`${userToken}Refresh`);
+    onLogout();
     navigate('/sign-in');
   };
   return (

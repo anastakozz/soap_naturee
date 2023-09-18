@@ -5,6 +5,8 @@ const { userToken, userTokenRefresh } = tokenNames;
 export async function handleLogin(email: string, password: string) {
   try {
     const resp = await getToken(email, password);
+    console.log(resp);
+
     const authData = resp.data;
     localStorage.setItem(`${userToken}`, JSON.stringify(authData));
     localStorage.setItem(`${userTokenRefresh}`, authData.refresh_token);
