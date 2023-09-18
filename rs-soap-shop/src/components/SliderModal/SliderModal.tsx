@@ -14,9 +14,9 @@ export default function SliderModal(modal: { paths: string[] }) {
   return (
     <>
       <div className='bg-grayLColor/90 h-full w-full z-[60] absolute top-0 left-0 back'></div>
-      <div className='absolute z-[70] top-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+      <div className='absolute z-[70] top-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[90%]'>
         {modal.paths.length === 1 ? (
-          <img src={modal.paths[0]} className='object-contain'></img>
+          <img src={modal.paths[0]} className='object-contain h-full w-full'></img>
         ) : (
           <CarouselDefault {...{ paths: modal.paths, classes: 'object-contain h-full w-full' }}></CarouselDefault>
         )}

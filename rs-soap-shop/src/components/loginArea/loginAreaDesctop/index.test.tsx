@@ -6,7 +6,9 @@ import LoginArea from './index';
 
 describe('LoginArea', () => {
   it('should render the logged out user interface correctly', () => {
-    const { getByText, container } = render(<LoginArea isLoggedIn={false} />, {
+    const onLogoutMock = jest.fn();
+
+    const { getByText, container } = render(<LoginArea onLogout={onLogoutMock} isLoggedIn={false} />, {
       wrapper: MemoryRouter
     });
 

@@ -37,7 +37,7 @@ export const ABOUT_US: AboutUsType[] = [
     img: '/images/anastasia_photo.jpg',
     contributions: [
       'organized team work processes (repository, task tracking, styleguide, team wiki)',
-      'implemented home page, detailed product page, took part in other pages',
+      'implemented home page, detailed product page, product Card and took part in other pages',
       'integrated registration, token handling, product parsing with CommerceTools',
       'battled with React testing library'
     ],

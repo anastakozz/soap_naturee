@@ -13,9 +13,10 @@ import ProfilePage from './pages/profilePage';
 import Footer from './components/footer';
 import PageNotFound from './pages/pageNotFound';
 import DetailedProductPage from './pages/detailedProductPage';
-import { getAnonymousToken } from './services/registration.service';
+import { setAnonymousToken } from './services/registration.service';
+import { getCart } from './services/handleCart';
 import { tokenNames } from './lib/enums';
-const { userToken, anonymous, anonymousRefresh } = tokenNames;
+const { userToken, anonymous } = tokenNames;
 
 export const CartContext = createContext(null);
 
@@ -37,18 +38,19 @@ function App() {
   const isLoggedIn = !!localStorage.getItem(`${userToken}`);
   const isSeenBefore = !!localStorage.getItem(`${anonymous}`);
 
-  const setAnonymousToken = async () => {
-    const id = await getAnonymousToken();
-    localStorage.setItem(`${anonymous}`, JSON.stringify(id.data));
-    localStorage.setItem(`${anonymousRefresh}`, id.data.refresh_token);
-    setHasToken(true);
-  };
-
   useEffect(() => {
     if (!isLoggedIn && !isSeenBefore) {
-      setAnonymousToken();
+      setAnonymousToken()
+        .then(() =>
+          getCart()
+            .then(() => setHasToken(true))
+            .catch(err => console.log(err))
+        )
+        .catch(err => console.log(err));
     } else {
-      setHasToken(true);
+      getCart()
+        .then(() => setHasToken(true))
+        .catch(err => console.log(err));
     }
   }, []);
 

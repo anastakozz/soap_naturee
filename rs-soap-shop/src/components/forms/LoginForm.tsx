@@ -39,13 +39,20 @@ export const LoginForm = () => {
           const authData = resp.data;
           localStorage.setItem(`${userToken}`, JSON.stringify(authData));
           localStorage.setItem(`${userTokenRefresh}`, authData.refresh_token);
-          login(email, password).then(resp => {
-            const userData = resp?.data;
-            if (userData) {
-              localStorage.setItem('user', JSON.stringify(userData));
+          login(email, password)
+            .then(resp => {
+              const userData = resp?.data;
+              if (userData) {
+                localStorage.setItem('user', JSON.stringify(userData));
+                localStorage.setItem('isUser', 'true');
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            })
+            .finally(() => {
               navigate('/');
-            }
-          });
+            });
         })
         .catch(err => {
           console.error(err);

@@ -1,17 +1,25 @@
-import { introspectToken, refreshToken } from '../../services/registration.service';
+import { introspectToken, refreshToken, setAnonymousToken } from '../../services/registration.service';
 import { tokenNames } from '../enums';
 const { userToken, anonymous } = tokenNames;
 
 async function setRefreshedToken(storageKey: string) {
-  const refresh = localStorage.getItem(`${storageKey}Refresh`);
-  const newToken = await refreshToken(refresh);
-  const dataToSet = JSON.stringify(newToken.data);
-  localStorage.setItem(`${storageKey}`, dataToSet);
-  return newToken.data.access_token;
+  try {
+    const refresh = localStorage.getItem(`${storageKey}Refresh`);
+    const newToken = await refreshToken(refresh);
+    const dataToSet = JSON.stringify(newToken.data);
+    localStorage.setItem(`${storageKey}`, dataToSet);
+    return newToken.data.access_token;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export async function getTokenFromStorage() {
   const isLoggedIn = !!localStorage.getItem(`${userToken}`);
+  const isSeenBefore = !!localStorage.getItem(`${anonymous}`);
+  if (!isLoggedIn && !isSeenBefore) {
+    await setAnonymousToken();
+  }
 
   const token = isLoggedIn
     ? JSON.parse(localStorage.getItem(`${userToken}`)).access_token

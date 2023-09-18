@@ -8,14 +8,13 @@ export async function getCart() {
   try {
     const cart = await getActiveCart(token);
     return cart;
-  } catch (e) {
-    console.error(e);
+  } catch {
     try {
       const cart = await createCart(token);
       updateCart(token, cart.data.id, cart.data.version);
       return cart;
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }
 }
@@ -41,8 +40,7 @@ export async function getSpecificCart(token: string) {
   try {
     const cart = await getActiveCart(token);
     return cart;
-  } catch (e) {
-    console.log(e);
+  } catch {
     try {
       const cart = await createCart(token);
       updateCart(token, cart.data.id, cart.data.version);

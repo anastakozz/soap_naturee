@@ -85,7 +85,7 @@ export function CartListItem({
         <div>
           {el.discountedPrice ? (
             <>
-              <p className='line-through text-graySColor dark:accent-accentColor mr-4'>
+              <p className='line-through text-grayMColor dark:accent-accentColor mr-4'>
                 {(el.price.value.centAmount / 100).toLocaleString('en-US', {
                   style: 'currency',
                   currency: el.price.value.currencyCode

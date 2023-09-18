@@ -10,7 +10,7 @@ export const CarouselTheme: carouselTheme = {
       prevArrow: ({ handlePrev }) => {
         return (
           <IconButton
-            variant='filled'
+            variant='text'
             color='white'
             size='md'
             onClick={handlePrev}
@@ -31,7 +31,7 @@ export const CarouselTheme: carouselTheme = {
       },
       nextArrow: ({ handleNext }) => (
         <IconButton
-          variant='filled'
+          variant='text'
           color='white'
           size='md'
           onClick={handleNext}
