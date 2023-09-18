@@ -7,9 +7,13 @@ import NavigationModal from './index';
 describe('NavigationModal', () => {
   it('should render the navigation links when isOpen is true', () => {
     const onCloseMock = jest.fn();
-    const { getByText } = render(<NavigationModal isOpen={true} isLoggedIn={true} onClose={onCloseMock} />, {
-      wrapper: MemoryRouter
-    });
+    const onLogoutMock = jest.fn();
+    const { getByText } = render(
+      <NavigationModal onLogout={onLogoutMock} isOpen={true} isLoggedIn={true} onClose={onCloseMock} />,
+      {
+        wrapper: MemoryRouter
+      }
+    );
 
     const homeLink = getByText('Home');
     const productsLink = getByText('Our products');
@@ -22,9 +26,14 @@ describe('NavigationModal', () => {
 
   it('should call onClose when a navigation link is clicked', () => {
     const onCloseMock = jest.fn();
-    const { getByText } = render(<NavigationModal isOpen={true} isLoggedIn={true} onClose={onCloseMock} />, {
-      wrapper: MemoryRouter
-    });
+    const onLogoutMock = jest.fn();
+
+    const { getByText } = render(
+      <NavigationModal onLogout={onLogoutMock} isOpen={true} isLoggedIn={true} onClose={onCloseMock} />,
+      {
+        wrapper: MemoryRouter
+      }
+    );
 
     const homeLink = getByText('Home');
     fireEvent.click(homeLink);

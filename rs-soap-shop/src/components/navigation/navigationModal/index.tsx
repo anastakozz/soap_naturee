@@ -4,11 +4,13 @@ import LoginAreaModal from '../../loginArea/loginAreaModal';
 function NavigationModal({
   isOpen,
   isLoggedIn,
-  onClose
+  onClose,
+  onLogout
 }: {
   isOpen: boolean;
   isLoggedIn: boolean;
   onClose: () => void;
+  onLogout: () => void;
 }) {
   return (
     <>
@@ -42,7 +44,7 @@ function NavigationModal({
         >
           <div className='border-b border-solid border-primaryColor w-full text-2xl py-4'>About us</div>
         </NavLink>
-        <LoginAreaModal onClose={onClose} isLoggedIn={isLoggedIn} />
+        <LoginAreaModal onLogout={onLogout} onClose={onClose} isLoggedIn={isLoggedIn} />
       </div>
     </>
   );
