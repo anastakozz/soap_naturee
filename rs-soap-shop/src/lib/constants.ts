@@ -37,7 +37,7 @@ export const ABOUT_US: AboutUsType[] = [
     img: '/images/anastasia_photo.jpg',
     contributions: [
       'organized team work processes (repository, task tracking, styleguide, team wiki)',
-      'implemented home page, detailed product page, took part in other pages',
+      'implemented home page, detailed product page, product Card and took part in other pages',
       'integrated registration, token handling, product parsing with CommerceTools',
       'battled with React testing library'
     ],
@@ -46,7 +46,7 @@ export const ABOUT_US: AboutUsType[] = [
   {
     fullName: 'Kuzich Yulia',
     role: 'Software engineer',
-    bio: 'First and foremost I need to say that I have not spatial education in the IT field, but I am passing the best courses ever right now. I graduated from The Brest Technical University as a specialist in logistics. Also got a Master degree in World Economics. And I was working as a logistician for 3 years. Now my goal is to become a cool front-end developer and get a good job. My strengths include responsibility, perseverance, purposefulness and efficiency. At the moment I have not work experience in the IT sphere, but I really want to get it.',
+    bio: 'First and foremost I need to say that I have not spatial education in the IT field, but I am passing the best courses ever right now. I graduated from The Brest Technical University as a specialist in logistics. Also got a Master degree in World Economics. And I was working as a logistician for 3 years. Now my goal is to become a cool front-end developer and get a good job. My strengths include responsibility, perseverance, purposefulness and efficiency. At the moment I have no work experience in the IT sphere, but I really want to get it.',
     img: '/images/yulia_photo.jpg',
     contributions: [
       'wrote functional structure of our project (like BA)',
