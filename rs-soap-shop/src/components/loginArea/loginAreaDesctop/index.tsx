@@ -13,6 +13,9 @@ function LoginArea({ isLoggedIn, onLogout }: { isLoggedIn: boolean; onLogout: ()
   const handleLogout = () => {
     localStorage.removeItem(`${userToken}`);
     localStorage.removeItem(`${userToken}Refresh`);
+    localStorage.setItem('isUser', 'false');
+    localStorage.setItem('isPromoCodeActive', 'false');
+    localStorage.setItem('promoCodeActivationMessage', '');
     setAnonymousToken().then(async () => {
       const anonymousToken = JSON.parse(localStorage.getItem(`${anonymous}`)).access_token;
       await getSpecificCart(anonymousToken);

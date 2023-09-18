@@ -28,15 +28,27 @@ function CartPage() {
     localStorage.getItem('promoCodeActivationMessage')
   );
 
+  const [isPromoCodeActiveUser, setIsPromoCodeActiveUser] = useState(false);
+  const [promoCodeActivationMessageUser, setPromoCodeActivationMessageUser] = useState(
+    localStorage.getItem('promoCodeActivationMessageUser')
+  );
+
   useEffect(() => {
     getTokenFromStorage()
       .then(res => {
         setToken(res);
       })
       .catch(err => console.log(err));
-    const storedIsPromoCodeActive = localStorage.getItem('isPromoCodeActive');
-    if (storedIsPromoCodeActive === 'true') {
-      setIsPromoCodeActive(true);
+    if (localStorage.getItem('isUser') === 'true') {
+      const storedIsPromoCodeActive = localStorage.getItem('isPromoCodeActiveUser');
+      if (storedIsPromoCodeActive === 'true') {
+        setIsPromoCodeActiveUser(true);
+      }
+    } else {
+      const storedIsPromoCodeActive = localStorage.getItem('isPromoCodeActive');
+      if (storedIsPromoCodeActive === 'true') {
+        setIsPromoCodeActive(true);
+      }
     }
   }, []);
 
@@ -94,15 +106,33 @@ function CartPage() {
     if (typeof response === 'string') {
       promoCodeInput.classList.add('border');
       promoCodeInput.classList.add('border-errorColor');
-      setPromoCodeActivationMessage('Promo code does not exist!');
+
+      if (localStorage.getItem('isUser') === 'true') {
+        setPromoCodeActivationMessageUser('Promo code does not exist!');
+      } else setPromoCodeActivationMessage('Promo code does not exist!');
     } else {
-      localStorage.setItem('isPromoCodeActive', 'true');
+      if (localStorage.getItem('isUser') === 'true') {
+        localStorage.setItem('isPromoCodeActiveUser', 'true');
+      } else {
+        localStorage.setItem('isPromoCodeActive', 'true');
+        localStorage.setItem('isPromoCodeActiveUser', 'true');
+      }
       promoCodeInput.classList.remove('border-2');
       promoCodeInput.classList.remove('border-errorColor');
       promoCodeInput.setAttribute('disabled', 'true');
-      localStorage.setItem('promoCodeActivationMessage', 'Promo code applied');
-      setPromoCodeActivationMessage('Promo code applied');
-      setIsPromoCodeActive(true);
+
+      if (localStorage.getItem('isUser') === 'true') {
+        localStorage.setItem('promoCodeActivationMessageUser', 'Promo code applied');
+        setPromoCodeActivationMessageUser('Promo code applied');
+        setIsPromoCodeActiveUser(true);
+      } else {
+        localStorage.setItem('promoCodeActivationMessage', 'Promo code applied');
+        setPromoCodeActivationMessage('Promo code applied');
+        setIsPromoCodeActive(true);
+        localStorage.setItem('promoCodeActivationMessageUser', 'Promo code applied');
+        setPromoCodeActivationMessageUser('Promo code applied');
+        setIsPromoCodeActiveUser(true);
+      }
       localStorage.setItem('promoCodeId', response.discountCodes[0].discountCode.id);
     }
     await refreshCart();
@@ -113,12 +143,21 @@ function CartPage() {
       const response = await removeDiscountCode(cartId, token, cartVersion, localStorage.getItem('promoCodeId'));
       if (response !== 'success') return;
     }
-    localStorage.setItem('isPromoCodeActive', 'false');
+
+    if (localStorage.getItem('isUser') === 'true') {
+      localStorage.setItem('isPromoCodeActiveUser', 'false');
+      localStorage.setItem('promoCodeActivationMessageUser', '');
+      setPromoCodeActivationMessageUser('');
+      setIsPromoCodeActiveUser(false);
+    } else {
+      localStorage.setItem('isPromoCodeActive', 'false');
+      localStorage.setItem('promoCodeActivationMessage', '');
+      setPromoCodeActivationMessage('');
+      setIsPromoCodeActive(false);
+    }
+
     promoCodeInput.setAttribute('disabled', 'false');
-    localStorage.setItem('promoCodeActivationMessage', '');
-    setPromoCodeActivationMessage('');
     promoCodeInput.value = '';
-    setIsPromoCodeActive(false);
     if (!withoutRequests) await refreshCart();
   }
 
@@ -187,34 +226,73 @@ function CartPage() {
               >
                 <p className='text-h5'>Do you have a promo code? Enter it here:</p>
                 <div>
-                  <input
-                    className='p-2 font-medium rounded-md border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black'
-                    id='promoCodeInput'
-                    type='text'
-                    placeholder={isPromoCodeActive ? 'NATURE' : 'Enter promo code'}
-                    disabled={isPromoCodeActive}
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') {
-                        !isPromoCodeActive ? applyPromoCode() : resetPromoCode();
-                      } else {
-                        setPromoCodeActivationMessage('');
-                      }
-                    }}
-                  />
-                  <p className={`${isPromoCodeActive ? 'text-green-700' : 'text-errorColor'} absolute text-xs`}>
-                    {promoCodeActivationMessage || localStorage.getItem('promoCodeActivationMessage')}
-                  </p>
+
+                  {localStorage.getItem('isUser') === 'true' ? (
+                    <>
+                      <input
+                        className='p-2 font-medium rounded-md border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black'
+                        id='promoCodeInput'
+                        type='text'
+                        placeholder={isPromoCodeActiveUser ? 'NATURE' : 'Enter promo code'}
+                        disabled={isPromoCodeActiveUser}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') {
+                            !isPromoCodeActive ? applyPromoCode() : resetPromoCode();
+                          } else {
+                            setPromoCodeActivationMessageUser('');
+                          }
+                        }}
+                      />
+                      <p className={`${isPromoCodeActiveUser ? 'text-green-700' : 'text-errorColor'} absolute text-xs`}>
+                        {promoCodeActivationMessageUser || localStorage.getItem('promoCodeActivationMessageUser')}
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        className='p-2 font-medium rounded-md border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black'
+                        id='promoCodeInput'
+                        type='text'
+                        placeholder={isPromoCodeActive ? 'NATURE' : 'Enter promo code'}
+                        disabled={isPromoCodeActive}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') {
+                            !isPromoCodeActive ? applyPromoCode() : resetPromoCode();
+                          } else {
+                            setPromoCodeActivationMessage('');
+                          }
+                        }}
+                      />
+                      <p className={`${isPromoCodeActive ? 'text-green-700' : 'text-errorColor'} absolute text-xs`}>
+                        {promoCodeActivationMessage || localStorage.getItem('promoCodeActivationMessage')}
+                      </p>
+                    </>
+
+                  )}
                 </div>
-                <button
-                  onClick={() => {
-                    !isPromoCodeActive ? applyPromoCode() : resetPromoCode();
-                  }}
-                  className={
-                    'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 h-[34px] md:mr-2'
-                  }
-                >
-                  {isPromoCodeActive ? 'Reset' : 'Apply'}
-                </button>
+                {localStorage.getItem('isUser') === 'true' ? (
+                  <button
+                    onClick={() => {
+                      !isPromoCodeActiveUser ? applyPromoCode() : resetPromoCode();
+                    }}
+                    className={
+                      'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 h-[34px] md:mr-2'
+                    }
+                  >
+                    {isPromoCodeActiveUser ? 'Reset' : 'Apply'}
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      !isPromoCodeActive ? applyPromoCode() : resetPromoCode();
+                    }}
+                    className={
+                      'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 h-[34px] md:mr-2'
+                    }
+                  >
+                    {isPromoCodeActive ? 'Reset' : 'Apply'}
+                  </button>
+                )}
               </div>
               <div className='flex justify-end items-end p-2'>
                 <div className='text-h3 text-accentColor dark:text-basicColor font-bold mr-4'>Total cost:</div>

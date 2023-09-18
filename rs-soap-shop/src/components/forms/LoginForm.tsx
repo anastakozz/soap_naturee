@@ -44,6 +44,7 @@ export const LoginForm = () => {
               const userData = resp?.data;
               if (userData) {
                 localStorage.setItem('user', JSON.stringify(userData));
+                localStorage.setItem('isUser', 'true');
               }
             })
             .catch(err => {
