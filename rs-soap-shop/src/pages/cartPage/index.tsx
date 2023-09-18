@@ -23,6 +23,8 @@ function CartPage() {
 
   const [loading, setLoading] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
+  const [promoCodeActivationMessage, setPromoCodeActivationMessage] = useState(localStorage.getItem('promoCodeActivationMessage'));
+
   useEffect(() => {
     getTokenFromStorage().then(res => {
       setToken(res);
@@ -83,20 +85,21 @@ function CartPage() {
     if (typeof response === 'string') {
       promoCodeInput.classList.add('border');
       promoCodeInput.classList.add('border-red-500');
-      localStorage.setItem('promoCodeActivationMessage', 'Promo code does not exist!');
+      setPromoCodeActivationMessage('Promo code does not exist!')
     } else {
       localStorage.setItem('isPromoCodeActive', 'true');
       promoCodeInput.classList.remove('border-2');
       promoCodeInput.classList.remove('border-red-500');
       promoCodeInput.setAttribute('disabled', 'true');
       localStorage.setItem('promoCodeActivationMessage', 'Promo code applied');
+      setPromoCodeActivationMessage('Promo code applied');
       setIsPromoCodeActive(true);
       localStorage.setItem('promoCodeId', response.discountCodes[0].discountCode.id);
     }
     await refreshCart();
   }
 
-  async function removePromoCode(withoutRequests = false) {
+  async function resetPromoCode(withoutRequests = false) {
     if (!withoutRequests) {
       const response = await removeDiscountCode(cartId, token, cartVersion, localStorage.getItem('promoCodeId'));
       if (response !== 'success') return;
@@ -104,6 +107,8 @@ function CartPage() {
     localStorage.setItem('isPromoCodeActive', 'false');
     promoCodeInput.setAttribute('disabled', 'false');
     localStorage.setItem('promoCodeActivationMessage', '');
+    setPromoCodeActivationMessage('');
+    promoCodeInput.value = '';
     setIsPromoCodeActive(false);
     if (!withoutRequests) await refreshCart();
   }
@@ -124,7 +129,7 @@ function CartPage() {
               <div className='flex flex-col items-center justify-center md:flex-row'>
                 <AdditionalButton
                   onClick={async () => {
-                    await removePromoCode(true);
+                    await resetPromoCode(true);
                     handleClearCart();
                   }}
                 >
@@ -170,17 +175,18 @@ function CartPage() {
                     disabled={isPromoCodeActive}
                     onKeyDown={e => {
                       if (e.key === 'Enter') {
-                        !isPromoCodeActive ? applyPromoCode() : removePromoCode();
-                      }
-                    }}
+                        !isPromoCodeActive ? applyPromoCode() : resetPromoCode();
+                      } else {
+                        setPromoCodeActivationMessage('');
+                    }}}
                   />
                   <p className={isPromoCodeActive ? 'text-green-700' : 'text-errorColor'}>
-                    {localStorage.getItem('promoCodeActivationMessage')}
+                    {promoCodeActivationMessage || localStorage.getItem('promoCodeActivationMessage')}
                   </p>
                 </div>
                 <button
                   onClick={() => {
-                    !isPromoCodeActive ? applyPromoCode() : removePromoCode();
+                    !isPromoCodeActive ? applyPromoCode() : resetPromoCode();
                   }}
                   className={
                     'rounded transition text-secondaryColor font-bold bg-accentColor/80 hover:bg-accentDarkColor/80 dark:hover:bg-grayLColor w-[70px] px-0 py-[5px] md:mr-2'

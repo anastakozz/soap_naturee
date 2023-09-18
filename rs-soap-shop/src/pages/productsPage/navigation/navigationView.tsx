@@ -12,13 +12,11 @@ export function NavigationView({ nav, changeQuery, updateSearchedProducts }: Nav
 
   function updateFilterQuery(options: string) {
     setFilterQuery(options);
-    console.log('filter query updated');
     changeQuery(`${options}&${sortQuery}`);
   }
 
   function updateSortQuery(options: string) {
     setSortQuery(options);
-    console.log('sort query updated');
     changeQuery(`${filterQuery}&${options}`);
   }
 

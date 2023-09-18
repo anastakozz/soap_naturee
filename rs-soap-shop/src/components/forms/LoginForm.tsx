@@ -36,7 +36,6 @@ export const LoginForm = () => {
       const { email, password } = validateAllInputs();
       getToken(email, password)
         .then(resp => {
-          console.log(resp.data);
           const authData = resp.data;
           localStorage.setItem(`${userToken}`, JSON.stringify(authData));
           localStorage.setItem(`${userTokenRefresh}`, authData.refresh_token);
