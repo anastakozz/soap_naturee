@@ -31,7 +31,7 @@ export default function RandomCardsSection() {
   useEffect(() => {
     getCart().then(resp => {
       setCart({ ...cart, ...resp.data });
-    });
+    }).catch(err => console.log(err));
     const fetchData = async () => {
       const data = await getRandomCardsData();
       return data;
