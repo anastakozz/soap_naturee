@@ -140,8 +140,6 @@ export default function CreateNewAddressModal({
       setSelectedCountryError(true);
     }
 
-    console.log(validatePostalCode(postalCode));
-
     return !validateCity(city) && !validateStreet(street) && !!house && !validatePostalCode(postalCode);
   };
 

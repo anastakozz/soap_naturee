@@ -52,7 +52,6 @@ export async function addLineItem(productId: string, token: string, cartId: stri
 }
 
 export async function removeLineItem(lineItemId: string, token: string, cartId: string, cartVersion: number) {
-  console.log(lineItemId);
   try {
     const response = await axios({
       method: 'post',

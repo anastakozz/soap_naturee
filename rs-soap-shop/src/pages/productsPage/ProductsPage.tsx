@@ -48,12 +48,15 @@ function ProductsPage() {
         ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
         : category.charAt(0).toUpperCase() + category.slice(1)
     ).then(categoryId => {
-      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, 1).then(products => {
+      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, 1)
+        .then(products => {
         setProducts(products);
+      });
+    })
+      .then(() => {
         setIsUpdatingProducts(false);
         sessionStorage.setItem('isLoading', 'false');
       });
-    });
   }
 
   useEffect(() => {
@@ -69,11 +72,14 @@ function ProductsPage() {
     if (category || subcategory) {
       updateProductsInCategories();
     } else {
-      getFiltered(`?${sessionStorage.getItem('query')}`, 1).then(items => {
+      getFiltered(`?${sessionStorage.getItem('query')}`, 1)
+        .then(items => {
         setProducts(items);
-        setIsUpdatingProducts(false);
-        sessionStorage.setItem('isLoading', 'false');
-      });
+      })
+        .then(() => {
+            setIsUpdatingProducts(false);
+            sessionStorage.setItem('isLoading', 'false');
+        });
     }
   }, [category, subcategory, query]);
 
@@ -101,12 +107,13 @@ function ProductsPage() {
 
     getFiltered(`?${sessionStorage.getItem('query')}`, +sessionStorage.getItem('currentPage'))
       .then(nextPageProducts => {
-        console.log('page main ' + sessionStorage.getItem('currentPage'));
-        sessionStorage.setItem('isLoading', 'false');
-        setIsLoadingNewProducts(false);
         if (nextPageProducts.length > 0) {
           setProducts(prevProducts => [...prevProducts, ...nextPageProducts]);
         } else setIsEndOfPage(true);
+      })
+      .then(() => {
+        sessionStorage.setItem('isLoading', 'false');
+        setIsLoadingNewProducts(false);
       })
       .catch(error => {
         console.error(error);
@@ -118,7 +125,6 @@ function ProductsPage() {
     sessionStorage.setItem('isLoading', 'true');
     setIsLoadingNewProducts(true);
     sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1));
-    console.log('должно смениться на 2', sessionStorage.getItem('currentPage'));
     getCategoryId(
       subcategory
         ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
@@ -129,11 +135,13 @@ function ProductsPage() {
         +sessionStorage.getItem('currentPage')
       )
         .then(nextPageProducts => {
-          sessionStorage.setItem('isLoading', 'false');
-          setIsLoadingNewProducts(false);
           if (nextPageProducts.length > 0) {
             setProducts(prevProducts => [...prevProducts, ...nextPageProducts]);
           } else setIsEndOfPage(true);
+        })
+        .then(() => {
+          sessionStorage.setItem('isLoading', 'false');
+          setIsLoadingNewProducts(false);
         })
         .catch(error => {
           console.error(error);
