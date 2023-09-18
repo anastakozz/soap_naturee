@@ -296,7 +296,7 @@ function CartPage() {
               </div>
               <div className='flex justify-end items-end p-2'>
                 <div className='text-h3 text-accentColor dark:text-basicColor font-bold mr-4'>Total cost:</div>
-                {isPromoCodeActive ? (
+                {isPromoCodeActive || isPromoCodeActiveUser ? (
                   <div>
                     <div className='flex justify-between text-grayMColor dark:accent-accentColor text-h3 font-bold line-through'>
                       {totalPriceWithoutPromo &&
@@ -318,6 +318,7 @@ function CartPage() {
                       style: 'currency',
                       currency: `${cart.lineItems[0].variant.prices[0].value.currencyCode}`
                     })}
+
                   </div>
                 )}
               </div>
