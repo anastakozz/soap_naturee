@@ -13,7 +13,7 @@ export async function getBasicToken() {
     });
     return response.data.access_token;
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 }
 
@@ -58,7 +58,7 @@ export async function refreshToken(refreshToken: string) {
     });
     return response;
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 }
 

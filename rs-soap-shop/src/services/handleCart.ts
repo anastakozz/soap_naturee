@@ -9,13 +9,13 @@ export async function getCart() {
     const cart = await getActiveCart(token);
     return cart;
   } catch (e) {
-    console.error(e);
+    console.log(e);
     try {
       const cart = await createCart(token);
       updateCart(token, cart.data.id, cart.data.version);
       return cart;
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }
 }

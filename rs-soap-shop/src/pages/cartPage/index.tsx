@@ -48,7 +48,7 @@ function CartPage() {
         );
       })
       .catch(err => {
-        console.error(err);
+        console.log(err);
       });
   }
 
@@ -59,11 +59,15 @@ function CartPage() {
     setConfirmation(true);
   };
   const handleClearCart = () => {
-    clearCart(cart.id, cart.version).then(async cart => {
-      setCart({ ...cart, lineItems: [] });
-      setConfirmation(false);
-      await refreshCart();
-    });
+    clearCart(cart.id, cart.version)
+      .then(async cart => {
+        setCart({ ...cart, lineItems: [] });
+        setConfirmation(false);
+        await refreshCart();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {

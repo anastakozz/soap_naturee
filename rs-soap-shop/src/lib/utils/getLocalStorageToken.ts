@@ -3,11 +3,15 @@ import { tokenNames } from '../enums';
 const { userToken, anonymous } = tokenNames;
 
 async function setRefreshedToken(storageKey: string) {
-  const refresh = localStorage.getItem(`${storageKey}Refresh`);
-  const newToken = await refreshToken(refresh);
-  const dataToSet = JSON.stringify(newToken.data);
-  localStorage.setItem(`${storageKey}`, dataToSet);
-  return newToken.data.access_token;
+  try {
+    const refresh = localStorage.getItem(`${storageKey}Refresh`);
+    const newToken = await refreshToken(refresh);
+    const dataToSet = JSON.stringify(newToken.data);
+    localStorage.setItem(`${storageKey}`, dataToSet);
+    return newToken.data.access_token;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export async function getTokenFromStorage() {
