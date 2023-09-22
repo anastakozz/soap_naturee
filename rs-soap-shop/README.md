@@ -11,6 +11,7 @@ Technology Stack:
 - [x] Axios
 - [x] GitHub
 - [x] Eslint, Prettier
+- [x] Material Tailwind library
 
 ## Local Installation
 
@@ -60,15 +61,19 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## 'npm run lint'
 
-Launches Eslint for [js,jsx,ts,tsx,json] files
+Launches Eslint for [ts,tsx] files
 
 ## 'npm run lint:fix'
 
-Launches Eslint fix for [js,jsx,ts,tsx,json] files
+Launches Eslint fix for [ts,tsx] files
 
 ## 'npm run format'
 
 Runs prettier and shows warning in CLI 
+
+## 'npm run win-format'
+
+Runs prettier and shows warning in CLI for Bash client
 
 ## 'npm run prepare'
 
