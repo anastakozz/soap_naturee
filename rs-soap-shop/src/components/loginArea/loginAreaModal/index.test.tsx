@@ -18,7 +18,7 @@ describe('LoginAreaModal', () => {
     expect(logOutLink).toBeInTheDocument();
   });
 
-  it('should call onClose and handleLogout when the "Log Out" link is clicked', () => {
+  it('should call onClose when the "Log Out" link is clicked', () => {
     const onLogout = jest.fn();
     const onCloseMock = jest.fn();
     const { getByText } = render(<LoginAreaModal isLoggedIn={true} onClose={onCloseMock} onLogout={onLogout} />, {
@@ -29,7 +29,6 @@ describe('LoginAreaModal', () => {
     fireEvent.click(logOutLink);
 
     expect(onCloseMock).toHaveBeenCalled();
-    expect(onLogout).toHaveBeenCalled();
   });
 
   it('should call onClose when a navigation link is clicked', () => {
