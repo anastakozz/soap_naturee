@@ -1,7 +1,8 @@
 import { ProductCardProps } from '../../lib/interfaces';
 import Card from './Card';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { CartContext } from '../../App';
 
 const mockedUsedNavigate = jest.fn();
 
@@ -33,39 +34,59 @@ const propsDataNoSale: ProductCardProps = {
 };
 
 it('renders a card in DOM', () => {
-  const component = render(
-    <BrowserRouter>
-      <Card {...propsData} />
-    </BrowserRouter>
-  );
-  expect(component.getByTestId('card')).toBeInTheDocument();
+  act(() => {
+    render(
+      <CartContext.Provider value={[null]}>
+        <BrowserRouter>
+          <Card {...propsData} />
+        </BrowserRouter>
+      </CartContext.Provider>
+    );
+  });
+  expect(screen.getByRole('product-card')).toBeInTheDocument();
 });
 
 it('navigates on click', () => {
-  const component = render(
-    <BrowserRouter>
-      <Card {...propsData} />
-    </BrowserRouter>
-  );
-  fireEvent.click(component.getByTestId('card'));
-  expect(mockedUsedNavigate).toBeCalled;
+  act(() => {
+    render(
+      <CartContext.Provider value={[null]}>
+        <BrowserRouter>
+          <Card {...propsData} />
+        </BrowserRouter>
+      </CartContext.Provider>
+    );
+  });
+  fireEvent.click(screen.getByRole('product-card'));
+  expect(mockedUsedNavigate).toBeCalled();
 });
 
 it('does not navigate on click on button Add to Cart', () => {
-  const component = render(
-    <BrowserRouter>
-      <Card {...propsData} />
-    </BrowserRouter>
-  );
-  fireEvent.click(component.getByRole('button'));
-  expect(mockedUsedNavigate).not.toBeCalled;
+  act(() => {
+    render(
+      <CartContext.Provider value={[null]}>
+        <BrowserRouter>
+          <Card {...propsData} />
+        </BrowserRouter>
+      </CartContext.Provider>
+    );
+  });
+  act(() => {
+    fireEvent.click(screen.getByRole('button'));
+  });
+
+  expect(mockedUsedNavigate).not.toBeCalled();
 });
 
 it('renders no sale info if !isOnSale', () => {
-  render(
-    <BrowserRouter>
-      <Card {...propsDataNoSale} />
-    </BrowserRouter>
-  );
+  act(() => {
+    render(
+      <CartContext.Provider value={[null]}>
+        <BrowserRouter>
+          <Card {...propsDataNoSale} />
+        </BrowserRouter>
+      </CartContext.Provider>
+    );
+  });
+
   expect(screen.queryByText('SALE')).not.toBeInTheDocument();
 });

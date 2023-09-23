@@ -7,6 +7,8 @@ import { validatePassword } from './validateFunctions/password';
 import { LoginData } from '../../lib/interfaces';
 import { useNavigate } from 'react-router-dom';
 import { getToken, login } from '../../services/login.service';
+import { tokenNames } from '../../lib/enums';
+const { userToken, userTokenRefresh } = tokenNames;
 
 export const LoginForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -34,14 +36,23 @@ export const LoginForm = () => {
       const { email, password } = validateAllInputs();
       getToken(email, password)
         .then(resp => {
-          console.log(resp.data);
           const authData = resp.data;
-          localStorage.setItem('token', JSON.stringify(authData));
-          login(email, password).then(resp => {
-            const userData = resp.data;
-            localStorage.setItem('user', JSON.stringify(userData));
-            navigate('/');
-          });
+          localStorage.setItem(`${userToken}`, JSON.stringify(authData));
+          localStorage.setItem(`${userTokenRefresh}`, authData.refresh_token);
+          login(email, password)
+            .then(resp => {
+              const userData = resp?.data;
+              if (userData) {
+                localStorage.setItem('user', JSON.stringify(userData));
+                localStorage.setItem('isUser', 'true');
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            })
+            .finally(() => {
+              navigate('/');
+            });
         })
         .catch(err => {
           console.error(err);
@@ -53,7 +64,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <form className='bg-secondaryColor dark:bg-grayMColor'>
+    <form className='bg-secondaryColor dark:bg-grayMColor flex-1' action='' method='POST' onSubmit={onSubmit}>
       <div className='container px-sm py-sm md:px-big md:py-bigY max-w-[1440px] mx-auto lg:px-big'>
         <h3 className={'text-accentColor dark:text-primaryColor text-h3 font-bold pb-bigY'}>Sign In form:</h3>
         {error && (
@@ -65,6 +76,7 @@ export const LoginForm = () => {
         <div className={'md:w-form'}>
           <Input
             {...emailValidation}
+            autoComplete={'email'}
             isSubmitted={isSubmitted}
             onChange={(newValue: string) => {
               setEmail(newValue);
@@ -73,6 +85,7 @@ export const LoginForm = () => {
           />
           <Input
             {...passwordValidation}
+            autoComplete={'current-password'}
             isSubmitted={isSubmitted}
             onChange={(newValue: string) => {
               setPassword(newValue);

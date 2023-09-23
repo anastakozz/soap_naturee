@@ -43,3 +43,25 @@ export type Price = {
     };
   };
 };
+
+export type AboutUsType = {
+  fullName: string;
+  role: string;
+  bio: string;
+  img: string;
+  contributions: string[];
+  github: string;
+};
+export type responseObject = {
+  [key: string]: responseObject;
+};
+
+export type ProductListItem = {
+  [key: string]: string | responseObject;
+};
+
+export type CartActionType = {
+  action: string;
+  lineItemId: string;
+  quantity: number;
+};

@@ -1,14 +1,26 @@
 import { useParams } from 'react-router-dom';
 import { getProductByKey } from '../../services/product.service';
-import React, { useEffect, useState } from 'react';
-import { DetailsProps } from '../../lib/interfaces';
+import React, { useContext, useEffect, useState } from 'react';
+import { DetailsProps, ResultProps } from '../../lib/interfaces';
 import CarouselDefault from '../../components/carousel';
 import toDetailsAdapter from '../../lib/utils/productDataAdapters.ts/toDetailsAdapter';
-import EmptyButton from '../../components/buttons/emptyButton';
 import SliderModal from '../../components/SliderModal';
 import scrollToTop from '../../lib/utils/scrollToTop';
+import AddButton from './addButton';
+import RemoveButton from './removeButton';
+import { sendToCart, getProductsInCart, removeFromCart } from '../../services/handleCart';
+import ResultMessage from '../../components/ResultMessage';
+import { CartContext } from '../../App';
 
 function DetailedProductPage() {
+  const [submitResult, setSubmitResult] = useState<ResultProps>({
+    isSuccess: false,
+    message: '',
+    isVisible: false
+  });
+  const [isInCart, setIsInCart] = useState<boolean>(false);
+  const [isSending, setIsSending] = useState<boolean>(false);
+  const [cart, setCart] = useContext(CartContext);
   const [isModalVisible, setModalVisibility] = useState(false);
   const [data, initProductData] = useState<DetailsProps | null>(null);
   const { key } = useParams();
@@ -19,7 +31,11 @@ function DetailedProductPage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const cartProducts = await getProductsInCart();
       const product = await getProductByKey(key);
+      if (cartProducts.includes(product.id)) {
+        setIsInCart(true);
+      }
       const adaptedProduct = toDetailsAdapter(product);
       initProductData(adaptedProduct);
     };
@@ -30,15 +46,62 @@ function DetailedProductPage() {
 
   function toggleModal(event: React.MouseEvent) {
     const target = event.target as HTMLElement;
+    const list = target.classList;
     if (!isModalVisible && target.tagName === 'IMG') {
       setModalVisibility(!isModalVisible);
-    } else if (isModalVisible && target.classList.contains('closing-icon')) {
+    } else if (isModalVisible && (list.contains('closing-icon') || list.contains('back'))) {
       setModalVisibility(!isModalVisible);
     }
   }
 
+  async function handleAddClick() {
+    try {
+      setIsSending(true);
+      const res = await sendToCart(data.productId);
+      try {
+        setCart({ ...cart, ...res.data });
+      } catch (error) {
+        console.log(error);
+      }
+      setIsInCart(true);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsSending(false);
+    }
+  }
+
+  async function handleRemoveClick() {
+    try {
+      setIsSending(true);
+      const res = await removeFromCart(data.productId);
+
+      try {
+        setCart({ ...cart, ...res.data });
+      } catch (err) {
+        console.log(err);
+      }
+
+      setSubmitResult({
+        isSuccess: true,
+        message: 'Product has been removed from cart',
+        isVisible: true
+      });
+      setIsInCart(false);
+    } catch (err) {
+      setSubmitResult({
+        isSuccess: false,
+        message: 'Ooops. Something went wrong.',
+        isVisible: true
+      });
+      console.log(err);
+    } finally {
+      setIsSending(false);
+    }
+  }
+
   return (
-    <div className='bg-primaryColor dark:bg-grayMColor'>
+    <div className='bg-primaryColor dark:bg-grayMColor flex-1'>
       {data ? (
         <div className='max-w-[1440px] mx-auto px-8 lg:px-big py-4'>
           <h1 className='text-h2 py-4 text-center md:text-left text-accentColor dark:text-primaryColor'>{data.name}</h1>
@@ -69,7 +132,22 @@ function DetailedProductPage() {
                   <div className='text-h2 whitespace-nowrap'>{data.price}</div>
                 )}
               </div>
-              <EmptyButton {...{ children: 'Add to Cart' }}></EmptyButton>
+              <div className='flex gap-[15px] flex-wrap'>
+                <AddButton isInCart={isInCart} isSending={isSending} onClick={handleAddClick}></AddButton>
+                <RemoveButton isInCart={isInCart} isSending={isSending} onClick={handleRemoveClick}></RemoveButton>
+                <div
+                  onClick={() => {
+                    setSubmitResult({
+                      isSuccess: false,
+                      message: '',
+                      isVisible: false
+                    });
+                  }}
+                >
+                  <ResultMessage {...submitResult}></ResultMessage>
+                </div>
+              </div>
+
               <div className='flex my-sm'>
                 <div className='mr-sm'>Tags:</div>
                 <div>

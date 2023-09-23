@@ -5,7 +5,7 @@ import { CarouselTheme } from './sliderModal.theme';
 export default function CarouselDefault(prop: { paths: string[]; classes: string }) {
   return (
     <ThemeProvider value={CarouselTheme}>
-      <Carousel className='rounded-xl'>
+      <Carousel className=''>
         {prop.paths.map((item, index): ReactNode => {
           return <img key={`carousel-item-${index}`} src={item} alt='' className={prop.classes} />;
         })}

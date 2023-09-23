@@ -10,7 +10,8 @@ module.exports = withMT({
       stroke: ['hover', 'focus'],
       screens: {
         sm: '320px',
-        add: '610px',
+        pt: '480px',
+        add: '600px',
         md: '768px',
         lg: '1024px',
         xl: '1280px',
@@ -66,6 +67,16 @@ module.exports = withMT({
       backgroundImage: {
         'new-collection': "url('./pages/homePage/assets/candle_masked.png')",
         'sale-section': "url('./pages/homePage/assets/massage_soap.png')"
+      },
+      keyframes: {
+        slide: {
+          '0%': { transform: 'none' },
+          '100%': { transform: 'translate(-350px)' }
+        },
+        slideBack: {
+          '0%': { transform: 'none' },
+          '100%': { transform: 'translate(350px)' }
+        }
       }
     }
   },

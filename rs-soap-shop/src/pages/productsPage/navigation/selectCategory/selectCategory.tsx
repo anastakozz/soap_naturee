@@ -82,7 +82,7 @@ export const SelectCategory = ({ nav }: NavigationViewProps) => {
                 return (
                   <button
                     key={option}
-                    className='relative block px-4 py-2 text-sm text-grayMColor w-full text-left hover:bg-gray-200'
+                    className='relative block text-sm text-grayMColor w-full text-left hover:bg-gray-200'
                     role='menuitem'
                   >
                     <>

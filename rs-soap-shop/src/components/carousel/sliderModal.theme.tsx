@@ -12,9 +12,9 @@ export const CarouselTheme: carouselTheme = {
           <IconButton
             variant='text'
             color='white'
-            size='lg'
+            size='md'
             onClick={handlePrev}
-            className='!absolute top-2/4 left-4 -translate-y-2/4'
+            className='!absolute top-2/4 left-4 -translate-y-2/4 hover:scale-105 active:scale-95'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -33,9 +33,9 @@ export const CarouselTheme: carouselTheme = {
         <IconButton
           variant='text'
           color='white'
-          size='lg'
+          size='md'
           onClick={handleNext}
-          className='!absolute top-2/4 !right-4 -translate-y-2/4'
+          className='!absolute top-2/4 !right-4 -translate-y-2/4 hover:scale-105 active:scale-95 '
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -77,7 +77,7 @@ export const CarouselTheme: carouselTheme = {
           position: 'relative',
           width: 'w-full',
           height: 'h-full',
-          overflowX: 'overflow-x-hidden',
+          overflowX: 'overflow-hidden ',
           display: 'flex'
         },
 

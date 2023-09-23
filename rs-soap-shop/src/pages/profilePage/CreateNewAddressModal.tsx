@@ -71,12 +71,11 @@ export default function CreateNewAddressModal({
   const [isBillingAddress, setIsBillingAddress] = useState(
     address ? account.billingAddressIds.includes(address.id) : false
   );
-  const [isDefaultAddress, setIsDefaultAddress] = useState(
-    address
-      ? (account.shippingAddressIds.includes(address.id) && account.defaultShippingAddressId == address.id) ||
-          (account.billingAddressIds.includes(address.id) && account.defaultBillingAddressId == address.id)
-      : false
-  );
+  const isDefaultAddressInitial = address
+    ? (account.shippingAddressIds.includes(address.id) && account.defaultShippingAddressId == address.id) ||
+      (account.billingAddressIds.includes(address.id) && account.defaultBillingAddressId == address.id)
+    : false;
+  const [isDefaultAddress, setIsDefaultAddress] = useState(isDefaultAddressInitial);
 
   const actions = address
     ? [
@@ -139,8 +138,6 @@ export default function CreateNewAddressModal({
     if (!selectedCountry) {
       setSelectedCountryError(true);
     }
-
-    console.log(validatePostalCode(postalCode));
 
     return !validateCity(city) && !validateStreet(street) && !!house && !validatePostalCode(postalCode);
   };
@@ -302,6 +299,7 @@ export default function CreateNewAddressModal({
 
         <div className={'flex'}>
           <input
+            disabled={!!address && isDefaultAddressInitial}
             checked={isDefaultAddress}
             id={'setAsDefAddress'}
             type={'checkbox'}

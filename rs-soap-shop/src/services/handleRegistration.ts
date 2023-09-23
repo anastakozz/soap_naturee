@@ -1,5 +1,5 @@
 import { RegistrationData, ResultProps } from '../lib/interfaces';
-import handleLogin from './handleLogin';
+import { handleLogin } from './handleLogin';
 import { createCustomer } from './registration.service';
 
 export const countryId = {

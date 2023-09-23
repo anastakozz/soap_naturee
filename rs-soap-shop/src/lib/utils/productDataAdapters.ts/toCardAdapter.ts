@@ -1,8 +1,9 @@
 import { Product, ProductCardProps } from '../../interfaces';
-// num.toLocaleString("en-US", {style:"currency", currency:"USD"});
-export default function toCardAdapter(data: Product): ProductCardProps {
+
+export default function toCardAdapter(data: Product, isInCart?: boolean): ProductCardProps {
   const variant = data.masterVariant;
   const dataForCard: ProductCardProps = {
+    isInCart,
     productId: data.id,
     label: data.name['en'],
     description: `Natural ${data.searchKeywords['en'][0].text}`,

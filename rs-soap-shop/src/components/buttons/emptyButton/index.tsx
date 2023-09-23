@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { ButtonProps } from '../../../lib/interfaces';
 
 export default function EmptyButton({ children, onClick }: ButtonProps): JSX.Element {
@@ -5,7 +6,12 @@ export default function EmptyButton({ children, onClick }: ButtonProps): JSX.Ele
     <button
       data-testid='empty-button'
       onClick={onClick}
-      className='transition text-accentColor dark:text-secondaryColor border-2 border-accentColor dark:border-secondaryColor hover:text-secondaryColor dark:hover:text-grayLColor font-bold bg-none hover:bg-accentColor dark:hover:bg-secondaryColor rounded-normal h-[74px] px-12 active:scale-95 w-min whitespace-nowrap'
+      className={classNames(
+        'text-accentColor dark:text-secondaryColor hover:text-secondaryColor dark:hover:text-grayLColor',
+        'transition border-2 border-accentColor dark:border-secondaryColor',
+        'font-bold bg-none hover:bg-accentColor dark:hover:bg-secondaryColor rounded-normal',
+        'h-[74px] px-12 active:scale-95 w-min whitespace-nowrap'
+      )}
     >
       {children}
     </button>

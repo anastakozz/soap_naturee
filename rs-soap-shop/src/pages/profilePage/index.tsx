@@ -148,7 +148,7 @@ function ProfilePage() {
 
   useEffect(() => {
     scrollToTop();
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('userToken')) {
       navigate('/sign-in');
     } else {
       refreshAccount();
@@ -160,7 +160,7 @@ function ProfilePage() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className='bg-secondaryColor dark:bg-grayMColor'>
+        <div className='bg-secondaryColor dark:bg-graySColor'>
           <BannerPageName>My Profile</BannerPageName>
           <div onClick={() => setDataUpdated(false)} data-testid='reg-result-message'>
             {dataUpdated && <SuccessMessage disableRedirect={true} text={'Account data has been updated'} />}

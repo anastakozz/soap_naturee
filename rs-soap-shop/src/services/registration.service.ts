@@ -1,6 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { RegistrationData, ResultProps } from '../lib/interfaces';
 import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants';
+import { tokenNames } from '../lib/enums';
+const { anonymous, anonymousRefresh } = tokenNames;
 
 export async function getBasicToken() {
   try {
@@ -13,7 +15,58 @@ export async function getBasicToken() {
     });
     return response.data.access_token;
   } catch (error) {
-    console.error(error);
+    console.log(error);
+  }
+}
+
+export async function getAnonymousToken() {
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${authUrl}/oauth/${projectKey}/anonymous/token?grant_type=client_credentials`,
+      headers: {
+        Authorization: 'Basic ' + btoa(`${clientId}:${secret}`)
+      }
+    });
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export const setAnonymousToken = async () => {
+  const id = await getAnonymousToken();
+  localStorage.setItem(`${anonymous}`, JSON.stringify(id.data));
+  localStorage.setItem(`${anonymousRefresh}`, id.data.refresh_token);
+};
+
+export async function introspectToken(token: string) {
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${authUrl}/oauth/introspect?token=${token}`,
+      headers: {
+        Authorization: 'Basic ' + btoa(`${clientId}:${secret}`)
+      }
+    });
+    return response.data.active;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function refreshToken(refreshToken: string) {
+  try {
+    const response = await axios({
+      method: 'post',
+      url: `${authUrl}/oauth/token?grant_type=refresh_token&refresh_token=${refreshToken}`,
+      headers: {
+        Authorization: 'Basic ' + btoa(`${clientId}:${secret}`)
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -55,7 +108,7 @@ export async function createCustomer(data: Partial<RegistrationData>): Promise<R
       },
       headers: { Authorization: `Bearer ${accessKey}` }
     });
-    return { isSuccess: true, message: response.data.customer.id };
+    return { isSuccess: true, data: response.data.customer.id, message: 'Account has been succefully created' };
   } catch (error) {
     console.log(error);
     if (error instanceof AxiosError) {

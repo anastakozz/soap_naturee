@@ -8,11 +8,11 @@ import FacebookIconDark from '../../icons/facebookIconDark';
 function SocialMediaLinks() {
   return (
     <div className='flex items-center mb-4'>
-      <a className='mr-sm' href='#'>
+      <a rel='noreferrer' target='_blank' className='mr-sm' href='https://vk.com/soap_naturee'>
         <VkIcon />
         <VkIconDark />
       </a>
-      <a className='mr-sm' href='#'>
+      <a rel='noreferrer' target='_blank' className='mr-sm' href='https://instagram.com/soap_naturee'>
         <InstagramIcon />
         <InstagramIconDark />
       </a>

@@ -1,17 +1,25 @@
 import { apiUrl, projectKey } from '../lib/constants';
 import { getBasicToken } from './registration.service';
 import axios from 'axios';
-import { cardsPerPage } from '../lib/enums';
+import { CardsPerPage } from '../lib/enums';
 
-export async function getProductsList(limit?: cardsPerPage) {
+export async function getProductsList(isCatalogCalling?: boolean, page = 1) {
   const accessToken = await getBasicToken();
-  const Params = limit ? { limit: limit } : {};
+  let queryParms;
+  if (isCatalogCalling) {
+    queryParms = {
+      limit: CardsPerPage.limit,
+      offset: (page - 1) * CardsPerPage.limit
+    };
+  } else {
+    queryParms = {};
+  }
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/search`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       },
-      params: Params
+      params: queryParms
     });
     return response.data.results;
   } catch (error) {
@@ -53,12 +61,16 @@ export async function findProducts(inputProductName: string) {
   }
 }
 
-export async function getFiltered(options: string) {
+export async function getFiltered(options: string, page = 1) {
   const accessToken = await getBasicToken();
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/search${options}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
+      },
+      params: {
+        limit: CardsPerPage.limit,
+        offset: (page - 1) * CardsPerPage.limit
       }
     });
     return response.data.results;

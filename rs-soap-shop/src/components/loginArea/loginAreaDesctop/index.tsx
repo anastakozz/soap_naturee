@@ -3,12 +3,25 @@ import ProfileIcon from '../../../icons/profileIcon';
 import ProfileIconDark from '../../../icons/profileIconDark';
 import LogoutIcon from '../../../icons/logoutIcon';
 import LogoutIconDark from '../../../icons/logoutIconDark';
+import { tokenNames } from '../../../lib/enums';
+import { setAnonymousToken } from '../../../services/registration.service';
+import { getSpecificCart } from '../../../services/handleCart';
+const { userToken, anonymous } = tokenNames;
 
-function LoginArea({ isLoggedIn }: { isLoggedIn: boolean }) {
+function LoginArea({ isLoggedIn, onLogout }: { isLoggedIn: boolean; onLogout: () => void }) {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.clear();
-    navigate('/sign-in');
+    localStorage.removeItem(`${userToken}`);
+    localStorage.removeItem(`${userToken}Refresh`);
+    localStorage.setItem('isUser', 'false');
+    localStorage.setItem('isPromoCodeActive', 'false');
+    localStorage.setItem('promoCodeActivationMessage', '');
+    setAnonymousToken().then(async () => {
+      const anonymousToken = JSON.parse(localStorage.getItem(`${anonymous}`)).access_token;
+      await getSpecificCart(anonymousToken);
+      onLogout();
+      navigate('/sign-in');
+    });
   };
   return (
     <>

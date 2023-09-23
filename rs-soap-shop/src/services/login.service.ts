@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants';
+import { getSpecificCart } from './handleCart';
+import { tokenNames } from '../lib/enums';
+const { userToken, anonymous, anonymousRefresh } = tokenNames;
 
 const HEADERS = {
   Authorization: 'Basic ' + btoa(`${clientId}:${secret}`),
@@ -14,26 +17,45 @@ export function getToken(username: string, password: string) {
   );
 }
 
-export function login(email: string, password: string) {
-  const token = JSON.parse(localStorage.getItem('token')).access_token;
+export async function login(email: string, password: string) {
+  try {
+    const token = JSON.parse(localStorage.getItem(`${userToken}`)).access_token;
+    const anonymousToken = JSON.parse(localStorage.getItem(`${anonymous}`)).access_token;
 
-  return axios.post(
-    `${apiUrl}/${projectKey}/login`,
-    { email, password },
-    {
-      headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json'
+    const cart = await getSpecificCart(anonymousToken);
+    const anonymousCart = { id: cart.data.id, typeId: 'cart' };
+    localStorage.removeItem(`${anonymous}`);
+    localStorage.removeItem(`${anonymousRefresh}`);
+
+    return axios.post(
+      `${apiUrl}/${projectKey}/login`,
+      { email, password, anonymousCart },
+      {
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
       }
-    }
-  );
+    );
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export function refreshToken() {
-  const refreshToken = JSON.parse(localStorage.getItem('token')).refresh_token;
-  return axios.post(
-    `${authUrl}/oauth/${projectKey}/customers/token?grant_type=refresh_token&refresh_token=${refreshToken}`,
-    {},
-    { headers: HEADERS }
-  );
+export async function relogin(email: string, password: string) {
+  try {
+    const token = JSON.parse(localStorage.getItem(`${userToken}`)).access_token;
+    return axios.post(
+      `${apiUrl}/${projectKey}/login`,
+      { email, password },
+      {
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
 }
