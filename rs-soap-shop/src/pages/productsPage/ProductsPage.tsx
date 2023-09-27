@@ -17,6 +17,7 @@ function ProductsPage() {
   const [isUpdatingProducts, setIsUpdatingProducts] = useState(false);
   if (!sessionStorage.getItem('isLoading')) sessionStorage.setItem('isLoading', 'false');
   if (!sessionStorage.getItem('currentPage')) sessionStorage.setItem('currentPage', '1');
+  const searchInput: HTMLInputElement = document.querySelector('#searchInput');
 
   useEffect(() => {
     return () => {
@@ -34,6 +35,7 @@ function ProductsPage() {
 
   function updateSearchedProducts(products: Product[]) {
     setProducts(products);
+    setIsEndOfPage(true);
   }
 
   function changeQuery(options: string): void {
@@ -65,7 +67,7 @@ function ProductsPage() {
   useEffect(() => {
     sessionStorage.setItem('isLoading', 'true');
     sessionStorage.setItem('currentPage', '1');
-
+    if (searchInput) searchInput.value = '';
     setIsUpdatingProducts(true);
     setIsEndOfPage(false);
     if (category || subcategory) {
@@ -152,7 +154,11 @@ function ProductsPage() {
         changeQuery={changeQuery}
         updateSearchedProducts={updateSearchedProducts}
       />
-      {isUpdatingProducts ? <LoadingSpinner marginTop={'60'} /> : <><OurProductsCards {...{ products }} />{!isEndOfPage && <LoadingSpinner marginTop={'10'} />}</>}
+      {isUpdatingProducts ?
+        <LoadingSpinner marginTop={'60'} /> :
+        <><OurProductsCards {...{ products }} />
+          {!isEndOfPage && <LoadingSpinner marginTop={'10'} />}
+        </>}
     </>
   );
 }
