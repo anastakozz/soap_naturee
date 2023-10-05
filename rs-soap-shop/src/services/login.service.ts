@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants';
+import { apiUrl, authUrl, projectKey, clientId, secret } from '@constants';
 import { getSpecificCart } from './handleCart';
-import { tokenNames } from '../lib/enums';
+import { tokenNames } from '@enums';
 const { userToken, anonymous, anonymousRefresh } = tokenNames;
 
 const HEADERS = {

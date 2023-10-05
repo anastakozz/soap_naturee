@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
-import { RegistrationData, ResultProps } from '../lib/interfaces';
-import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants';
-import { tokenNames } from '../lib/enums';
+import { RegistrationData, ResultProps } from '@interfaces';
+import { apiUrl, authUrl, projectKey, clientId, secret } from '@constants';
+import { tokenNames } from '@enums';
 const { anonymous, anonymousRefresh } = tokenNames;
 
 export async function getBasicToken() {

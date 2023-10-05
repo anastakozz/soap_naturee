@@ -15,7 +15,7 @@ module.exports = {
     tsconfigRootDir: __dirname
   },
   plugins: ['react', '@typescript-eslint', 'react-hooks', 'prettier'],
-  ignorePatterns: ['tailwind.config.js', '.eslintrc.js', '/coverage/*', '/build/*'],
+  ignorePatterns: ['tailwind.config.js', '.eslintrc.js', '/coverage/*', '/build/*', 'craco.config.js'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',
     'react/react-in-jsx-scope': 'off',

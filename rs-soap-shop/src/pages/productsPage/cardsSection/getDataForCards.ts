@@ -1,6 +1,6 @@
-import { Product, ProductCardProps } from '../../../lib/interfaces';
-import { getProductsInCart } from '../../../services/handleCart';
-import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
+import { Product, ProductCardProps } from '@interfaces';
+import { getProductsInCart } from '@services/handleCart';
+import toCardAdapter from '@utils/productDataAdapters.ts/toCardAdapter';
 
 export async function adaptCardsData(data: Product[]): Promise<ProductCardProps[]> {
   const cartProducts = await getProductsInCart();

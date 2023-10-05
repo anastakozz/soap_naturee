@@ -1,13 +1,13 @@
-import { emailValidation, passwordValidation } from '../../lib/utils/inputValidations';
+import { emailValidation, passwordValidation } from '@utils/inputValidations';
 import React, { useState } from 'react';
 import ButtonForm from './buttonForm';
 import { Input } from './inputs/Input';
 import { validateEmail } from './validateFunctions/e-mail';
 import { validatePassword } from './validateFunctions/password';
-import { LoginData } from '../../lib/interfaces';
+import { LoginData } from '@interfaces';
 import { useNavigate } from 'react-router-dom';
-import { getToken, login } from '../../services/login.service';
-import { tokenNames } from '../../lib/enums';
+import { getToken, login } from '@services/login.service';
+import { tokenNames } from '@enums';
 const { userToken, userTokenRefresh } = tokenNames;
 
 export const LoginForm = () => {

@@ -1,7 +1,7 @@
 import { getBasicToken } from './registration.service';
 import axios from 'axios';
-import { apiUrl, projectKey } from '../lib/constants';
-import { CategoryData } from '../lib/interfaces';
+import { apiUrl, projectKey } from '@constants';
+import { CategoryData } from '@interfaces';
 
 export async function getCategoryId(key: string) {
   const accessToken = await getBasicToken();

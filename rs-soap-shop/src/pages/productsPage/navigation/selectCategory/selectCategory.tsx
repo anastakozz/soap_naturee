@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { DropdownIcon } from '../../../../icons/dropdownIcon';
+import { DropdownIcon } from '@icons/dropdownIcon';
 import classNames from 'classnames';
-import { getCategoriesNames } from '../../../../services/category.service';
+import { getCategoriesNames } from '@services/category.service';
 import SubCategory from './dropdownMenu';
 import ParentCategory from './parentCategory';
-import { NavigationViewProps } from '../../../../lib/interfaces';
+import { NavigationViewProps } from '@interfaces';
 
 export const SelectCategory = ({ nav }: NavigationViewProps) => {
   const [isOpen, setIsOpen] = useState(false);

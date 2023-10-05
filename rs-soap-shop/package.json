@@ -25,10 +25,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "set GENERATE_SOURCEMAP=false && react-scripts build",
-    "test": "react-scripts test --coverage --watchAll",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "set GENERATE_SOURCEMAP=false && craco build",
+    "test": "craco test --coverage --watchAll",
+    "eject": "craco eject",
     "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint --fix 'src/**/*.{ts,tsx}'",
     "format": "prettier --log-level warn --write 'src/**/*.{ts,tsx,json}'",
@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.0",
+    "@craco/craco": "^7.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^13.5.0",
@@ -68,6 +69,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.3.0",
     "prettier": "^3.0.1",
+    "react-app-alias": "^2.2.2",
     "react-test-renderer": "^18.2.0",
     "tailwindcss": "^3.3.3"
   },

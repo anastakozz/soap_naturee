@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { InputProps } from '../../../lib/interfaces';
+import { InputProps } from '@interfaces';
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { validateEmail } from '../validateFunctions/e-mail';
 import { validatePassword } from '../validateFunctions/password';

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import SearchButton from '../../../../icons/searchButton';
-import { findProducts } from '../../../../services/product.service';
+import SearchButton from '@icons/searchButton';
+import { findProducts } from '@services/product.service';
 import React, { useRef } from 'react';
-import { NavigationViewProps } from '../../../../lib/interfaces';
+import { NavigationViewProps } from '@interfaces';
 
 export default function SearchView({ updateSearchedProducts }: NavigationViewProps) {
   const inputRef = useRef(null);
