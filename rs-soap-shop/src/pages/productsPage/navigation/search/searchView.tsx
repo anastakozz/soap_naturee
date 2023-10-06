@@ -22,6 +22,7 @@ export default function SearchView({ updateSearchedProducts }: NavigationViewPro
     <div className={'flex'}>
       <div className={'relative flex items-stretch flex-grow'}>
         <input
+          id='searchInput'
           ref={inputRef}
           placeholder='Search...'
           className={classNames(
