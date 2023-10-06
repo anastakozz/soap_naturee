@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import Card from '../../../components/card';
-import { OurProductsCardsProps, ProductCardProps } from '../../../lib/interfaces';
+import Card from '@components/card';
+import { OurProductsCardsProps, ProductCardProps } from '@interfaces';
 import { adaptCardsData } from './getDataForCards';
 
 export default function OurProductsCards({ products }: OurProductsCardsProps) {

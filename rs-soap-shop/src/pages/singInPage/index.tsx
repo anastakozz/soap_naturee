@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { LoginForm } from '../../components/forms/LoginForm';
+import { LoginForm } from '@components/forms/LoginForm';
 import { useNavigate } from 'react-router-dom';
-import scrollToTop from '../../lib/utils/scrollToTop';
-import { tokenNames } from '../../lib/enums';
+import scrollToTop from '@utils/scrollToTop';
+import { tokenNames } from '@enums';
 
 
 function SingInPage() {

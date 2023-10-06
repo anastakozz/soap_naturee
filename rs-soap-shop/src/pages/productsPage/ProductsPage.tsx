@@ -1,13 +1,13 @@
 import OurProductsCards from './cardsSection/OurProductsCards';
 import { NavigationView } from './navigation/navigationView';
 import { useEffect, useState } from 'react';
-import BannerPageName from '../../components/bannerPageName';
+import BannerPageName from '@components/bannerPageName';
 import { useParams } from 'react-router-dom';
-import { getCategoryId } from '../../services/category.service';
-import { getFiltered } from '../../services/product.service';
-import { Product } from '../../lib/interfaces';
-import scrollToTop from '../../lib/utils/scrollToTop';
-import LoadingSpinner from '../../components/loading/loading';
+import { getCategoryId } from '@services/category.service';
+import { getFiltered } from '@services/product.service';
+import { Product } from '@interfaces';
+import scrollToTop from '@utils/scrollToTop';
+import LoadingSpinner from '@components/loading/loading';
 
 function ProductsPage() {
   const [products, setProducts] = useState<Product[]>();

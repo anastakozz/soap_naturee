@@ -1,6 +1,6 @@
 import { getActiveCart, createCart, updateCart, addLineItem, removeLineItem, deleteCart } from './cart.service';
-import { getTokenFromStorage } from '../lib/utils/getLocalStorageToken';
-import { ProductListItem } from '../lib/types';
+import { getTokenFromStorage } from '@utils/getLocalStorageToken';
+import { ProductListItem } from '@types';
 
 export async function getCart() {
   const token = await getTokenFromStorage();

@@ -7,7 +7,7 @@ import {
   passwordValidation,
   postalCodeValidation,
   streetValidation
-} from '../../lib/utils/inputValidations';
+} from '@utils/inputValidations';
 import React, { useState } from 'react';
 import { InputColumn } from './inputs/inputColumn';
 import ButtonForm from './buttonForm';
@@ -19,8 +19,8 @@ import { validateCity } from './validateFunctions/city';
 import { validateStreet } from './validateFunctions/street';
 import { validatePostalCode } from './validateFunctions/postalCode';
 import { validateName } from './validateFunctions/name';
-import { RegistrationData, ResultProps } from '../../lib/interfaces';
-import { handleRegistration } from '../../services/handleRegistration';
+import { RegistrationData, ResultProps } from '@interfaces';
+import { handleRegistration } from '@services/handleRegistration';
 import ResultMessage from '../ResultMessage';
 
 export const RegistrationForm = () => {

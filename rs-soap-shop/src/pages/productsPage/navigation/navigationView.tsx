@@ -2,9 +2,9 @@ import { SelectCategory } from './selectCategory/selectCategory';
 import SortingView from './sorting/sortingView';
 import FilterView from './filter/filterView';
 import SearchView from './search/searchView';
-import Breadcrumb from '../../../components/BasicBreadcrumbs';
+import Breadcrumb from '@components/BasicBreadcrumbs';
 import React, { useState } from 'react';
-import { NavigationViewProps } from '../../../lib/interfaces';
+import { NavigationViewProps } from '@interfaces';
 
 export function NavigationView({ nav, changeQuery, updateSearchedProducts }: NavigationViewProps) {
   const [filterQuery, setFilterQuery] = useState('');

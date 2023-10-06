@@ -1,21 +1,21 @@
 import React, { ReactElement, useEffect, useState, createContext } from 'react';
 
 import './App.css';
-import Header from './components/header';
+import Header from '@components/header';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './pages/homePage';
-import ProductsPage from './pages/productsPage';
-import AboutPage from './pages/aboutPage';
-import CartPage from './pages/cartPage';
-import SingInPage from './pages/singInPage';
-import SignUpPage from './pages/singnUpPage';
-import ProfilePage from './pages/profilePage';
-import Footer from './components/footer';
-import PageNotFound from './pages/pageNotFound';
-import DetailedProductPage from './pages/detailedProductPage';
-import { setAnonymousToken } from './services/registration.service';
-import { getCart } from './services/handleCart';
-import { tokenNames } from './lib/enums';
+import HomePage from '@pages/homePage';
+import ProductsPage from '@pages/productsPage';
+import AboutPage from '@pages/aboutPage';
+import CartPage from '@pages/cartPage';
+import SingInPage from '@pages/singInPage';
+import SignUpPage from '@pages/singnUpPage';
+import ProfilePage from '@pages/profilePage';
+import Footer from '@components/footer';
+import PageNotFound from '@pages/pageNotFound';
+import DetailedProductPage from '@pages/detailedProductPage';
+import { setAnonymousToken } from '@services/registration.service';
+import { getCart } from '@services/handleCart';
+import { tokenNames } from '@enums';
 const { userToken, anonymous } = tokenNames;
 
 export const CartContext = createContext(null);

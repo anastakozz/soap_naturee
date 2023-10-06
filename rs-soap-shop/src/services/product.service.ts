@@ -1,7 +1,7 @@
-import { apiUrl, projectKey } from '../lib/constants';
+import { apiUrl, projectKey } from '@constants';
 import { getBasicToken } from './registration.service';
 import axios from 'axios';
-import { CardsPerPage } from '../lib/enums';
+import { CardsPerPage } from '@enums';
 
 export async function getProductsList(isCatalogCalling?: boolean, page = 1) {
   const accessToken = await getBasicToken();

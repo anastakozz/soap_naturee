@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { RegistrationForm } from '../../components/forms/RegistrationForm';
+import { RegistrationForm } from '@components/forms/RegistrationForm';
 import { useNavigate } from 'react-router-dom';
-import scrollToTop from '../../lib/utils/scrollToTop';
-import { tokenNames } from '../../lib/enums';
+import scrollToTop from '@utils/scrollToTop';
+import { tokenNames } from '@enums';
 
 function SignUpPage() {
   const navigate = useNavigate();
