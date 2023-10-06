@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "diagnostics": true,
+    "target": "es2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "noImplicitAny": true,
+    "pretty": true,
+    "removeComments": true,
+    "strictNullChecks": false,
+    "noUnusedParameters": true,
+    "types": ["node"]
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "src/**/*.spec.*",
+    "node_modules",
+    "**/__tests__/*",
+    "**/__mocks__/*"
+  ],
+  "extends": "./tsconfig.paths.json"
+}
